@@ -1,0 +1,184 @@
+\name{dcc}
+\alias{dcc}
+\title{Dendroclimatic calibration: response and correlation function
+analysis}
+\usage{
+dcc(chrono, climate, selection = -6:9, method = "response",
+  moving = FALSE, win_size = 25, win_offset = 1, start_last = TRUE,
+  timespan = NULL, var_names = NULL, ci = 0.05, sb = TRUE,
+  boot = TRUE)
+}
+\arguments{
+  \item{chrono}{\code{data.frame} containing a tree-ring
+  chronologies, e.g. as obtained by \code{chron} of package
+  dplR.}
+
+  \item{climate}{\code{data.frame} with climatic data in
+  monthly resolution, with year, month and climate
+  parameters in columns. All columns except year and month
+  will be recognized as parameters for response or
+  correlation function.}
+
+  \item{selection}{either a numeric vector, a modifier, or
+  a chain of modifiers specifying the parameter selection
+  for the model (see Details)}
+
+  \item{method}{\code{character} string specifying the
+  calculation method. Possible values are \dQuote{response}
+  and \dQuote{correlation}. Partial strings are ok.}
+
+  \item{moving}{\code{logical}; should the analyis be
+  carried out in moving windows. Defaults to \code{FALSE}.}
+
+  \item{win_size}{integer giving the window size for each
+  recalculation in years.}
+
+  \item{win_offset}{integer giving the number of years
+  between each window start in years.}
+
+  \item{start_last}{\code{logical} flag indicating whether
+  the first window should start at the rear end (youngest
+  part of the series) or not.}
+
+  \item{timespan}{\code{integer} vector of length 2
+  specifying the time interval (in years) to be considered
+  for analysis. Defaults to the maximum possible interval.}
+
+  \item{var_names}{\code{character} vector with variable
+  names. Defaults to corresponding column names of
+  \code{data.frame} clim.}
+
+  \item{ci}{\code{numerical} value to set the test level
+  for significance test (values 0.01, 0.05 and 0.1 are
+  allowed); the confidence intervals are adapted
+  accordingly.}
+
+  \item{sb}{\code{logical} flag indicating whether textual
+  status bar should be suppressed. Suppression is
+  recommended for e.g. Sweave files.}
+
+  \item{boot}{\code{logical} flag indicating whether
+  bootstrap resampling is to be performed.}
+}
+\value{
+an object of class `br_dcc`.
+}
+\description{
+This function calculates (potentially moving) response and
+correlation functions from tree-ring chronologies and
+monthly climatic data. For the moving case, the calculation
+is performed repeatedly for consecutive time windows.
+Function parameters may be bootstrapped to calculate their
+significance and confidence intervals.
+}
+\details{
+This function builds upon and extents the functionality of
+programme DENDROCLIM2002 (Biondi and Waikul, 2004), and
+will calculate bootstrapped (and non-bootstrapped) moving
+and static response and correlation functions in a similar
+fashion as described in the above mentioned paper.
+Important extensions include a very flexible parameter
+selection model (see below), the possibility to use an
+unlimited number of climate parameters, and the option to
+use exact bootstrapping.
+
+Input chronology data can be a \code{data.frame} such as
+produced by function \code{chron} of package dplR. It has
+to be a \code{data.frame} with at least one column
+containing the tree-ring indices, and the corresponding
+years as \code{rownames}.
+
+For climatic input data, there are three possibilities:
+Firstly, input climatic data can be a \code{data.frame} or
+\code{matrix} consisting of at least 3 rows for years,
+months and at least one climate parameter in the given
+order. Secondly, input climatic data can be a single
+\code{data.frame} or \code{matrix} in the style of the
+original DENDROCLIM2002 input data, i.e. one parameter with
+12 months in one row, where the first column represents the
+year. Or thirdly, input climatic data can be a list of
+several of the latter described \code{data.frame} or
+\code{matrices}. As an internal format dispatcher checks
+the format automatically, it is absolutely necessary that
+in all three cases, only complete years (months 1-12) are
+provided. It is not possible to mix different formats in
+one go.
+
+Parameters can be selected with the `selection` parameter
+in two different ways. The default value is -6:9. This is
+equivalent to the standard settings in DENDROCLIM2002 and
+bootRes 1.X, and selects from all climate variables all
+months from previous year's June (-6, previous year's
+months are specified as negative integers) to current years
+September (9, months of the current year are specified as
+positive integers) as model parameters.
+
+More complex parameter selections can be obtained by the
+\emph{modifiers} provided in bootres2: \code{.range},
+\code{.mean}, and \code{.sum}. \code{.range} corresponds
+the example above, where all specified months are used,
+while \code{.sum} and \code{.mean} will use the sums and
+means of the specified months. These modifiers also allow
+to select specific climatic variables, addressed by name.
+Thus, \code{.mean(4:8, "temp")} will select the mean for
+climate parameter "temp" for the months April to August.
+Not only ranges, but also individual vectors can be used
+for month specification, like e.g., \code{.range(c(1, 3, 4,
+5)}.
+
+The modifiers can be chained together using the `+` symbol,
+which makes it possible to create arbitrarily complex
+selections of climate parameters for calibration.  E.g.,
+\code{.mean(2:5, "temp") + .sum(2:5, "prec")} will yield
+the February-to-May mean for the variable "temp" and the
+sum of the variable "prec" for the same time. While there
+is no limitation for number of lists that can be chained
+together, bootres2 will not check for meaningful
+specifications. Testing smart hypotheses is up the
+researcher.
+
+For the exclusion of months, the convenience function
+\code{excludefrom()} (or short \code{exfr()}) is provided.
+E.g., \code{.range(excludefrom(-6:10, -11:3))} will yield
+the monthly values of all parameters for the months
+previous June (-6) to current October (10), but without the
+months previous November (-11) to current March (3) in
+between. While it is also possible to supply arbitrary
+vectors as month specification, and not only ranges as
+shown in most of the examples here, this way of excluding
+e.g. the dormant season is far more convenient.
+
+In case of response function analysis 1000 bootstrap
+samples are taken from the original distribution and an
+eigen decomposition of the standardized predictor matrix is
+performed. Nonrelevant eigenvectors are removed using the
+PVP criterion (Guiot, 1990), principal component scores are
+then calculated from the matrices of reduced eigenvectors
+and standardized climatic predictors. Response coefficients
+are found via singular value decomposition, and tested for
+significance using the 95\% percentile range method (Dixon,
+2001). In case of correlation function analysis, the
+coefficients are Pearson's correlation coefficients. The
+same method for significance testing is applied.
+}
+\examples{
+\dontrun{
+data(muc.clim) # climatic data
+data(muc.spruce) # spruce data
+dc.resp <- dcc(muc.spruce, muc.clim)
+}
+}
+\references{
+Biondi, F. & Waikul, K. (2004) DENDROCLIM2002: A C++
+program for statistical calibration of climate signals in
+tree-ring chronologies. \emph{Computers & Geosciences}
+30:303-311
+
+Dixon, P.M. (2001) Bootstrap resampling. In: El-Shaarawi,
+A.H., Piegorsch, W.W. (Eds.), \emph{The Encyclopedia of
+Environmetrics}. Wiley, New York.
+
+Guiot, J. (1991) The boostrapped response function.
+\emph{Tree-Ring Bulletin} 51:39-41
+}
+

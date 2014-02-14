@@ -1,0 +1,24 @@
+\docType{data}
+\name{muc.fake}
+\alias{muc.fake}
+\title{Modeled Tree-Ring Chronology of a Spruce Population near Munich}
+\format{A \code{data.frame} containing tree-ring indices and
+replication depth with respective years as \code{rownames}.}
+\source{
+Zang C, Pretzsch H, Rothe A (2012) Size-dependent responses
+to summer drought in Scots pine, Norway spruce and common
+oak. Trees -- Structure and Function, 26, 557–569.
+}
+\usage{
+data(muc.fake)
+}
+\description{
+This dataset gives the modelled tree-ring widths for
+\emph{Picea abies} at Forstenrieder Park, Munich, Bavaria,
+Germany. Tree growth was modeled as a response of low
+temperatures in previous and current July and August, high
+temperatures in current February and March, and high
+precipitation amounts in current July and August.
+}
+\keyword{datasets}
+

@@ -1,0 +1,30 @@
+\name{exclude_from}
+\alias{exclude_from}
+\alias{exfr}
+\title{Exclude months from analysis}
+\usage{
+exclude_from(month, exclude)
+
+exfr(month, exclude)
+}
+\arguments{
+  \item{month}{range of numeric month ids}
+
+  \item{exclude}{range or set of months to exclude}
+}
+\value{
+a reduced set of numeric month ids
+}
+\description{
+Single months or ranges of months can be excluded from
+analysis. This is helpful for e.g. excluding winter months
+without cambial activity.
+}
+\examples{
+exfr(-5:10, -10:3)
+}
+\seealso{
+\code{link{.range}}, \code{link{.mean}}, \code{link{.sum}}
+}
+\keyword{manip}
+

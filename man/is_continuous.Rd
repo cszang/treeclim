@@ -1,0 +1,19 @@
+\name{is_continuous}
+\alias{is_continuous}
+\title{Check if month specification is continuous}
+\usage{
+is_continuous(x)
+}
+\arguments{
+  \item{x}{a numeric month id specification}
+}
+\value{
+TRUE or FALSE
+}
+\description{
+If month specification is continuous, this function will
+return TRUE, and FALSE if not.
+}
+\keyword{internal}
+\keyword{manip}
+

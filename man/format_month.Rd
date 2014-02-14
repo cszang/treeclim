@@ -1,0 +1,20 @@
+\name{format_month}
+\alias{format_month}
+\title{Get positions and names for months}
+\usage{
+format_month(month)
+}
+\arguments{
+  \item{month}{range or set of numeric month ids}
+}
+\value{
+a list of positions and names
+}
+\description{
+Get positions for supplied numeric month ids in the 2-year
+span under consideration, and connect to abbreviated month
+names for previous and current year.
+}
+\keyword{internal}
+\keyword{manip}
+

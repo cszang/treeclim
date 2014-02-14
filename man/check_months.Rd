@@ -1,0 +1,23 @@
+\name{check_months}
+\alias{check_months}
+\title{Check if all months are between -12 and 12 (previous and current december)}
+\usage{
+check_months(selection)
+}
+\arguments{
+  \item{selection}{the month selection as vector, list, or
+  nested list}
+}
+\value{
+a list with the earliest month and the result of the check
+(logical)
+}
+\description{
+Make sure that all the months specified in the (probably
+complex) month specification to dcc are correct months, in
+the sense that they range between -12 and 12. Further,
+return the earliest month in the complete selection to
+decide if we need previous year climate later on.
+}
+\keyword{internal}
+

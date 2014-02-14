@@ -1,0 +1,13 @@
+\name{make_range_list}
+\alias{make_range_list}
+\title{deconstruct call to modifier into list}
+\usage{
+make_range_list(call, method)
+}
+\description{
+deconstructs the call to a modifier into a list for further
+processing with the list-based parameter selection
+functions
+}
+\keyword{internal}
+

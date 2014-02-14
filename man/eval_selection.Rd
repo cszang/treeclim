@@ -1,0 +1,23 @@
+\name{eval_selection}
+\alias{eval_selection}
+\title{Eval a single list of specifications}
+\usage{
+eval_selection(clim, sel)
+}
+\arguments{
+  \item{clim}{climate data as returned from make_pmat}
+
+  \item{sel}{single list of parameter specifications}
+}
+\value{
+a list
+}
+\description{
+Evaluate a single list of specifications. Climate
+parameters are selected from the parameter matrix by name,
+then the appropriate function is applied to the correct
+month subset.
+}
+\keyword{internal}
+\keyword{manip}
+

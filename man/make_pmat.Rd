@@ -1,0 +1,25 @@
+\name{make_pmat}
+\alias{make_pmat}
+\title{Make list of parameter matrices from climate input data}
+\usage{
+make_pmat(x)
+}
+\arguments{
+  \item{x}{climate data as returned from as_brclimate}
+}
+\value{
+a list of matrices
+}
+\description{
+Reformat climate input data into separate lists
+}
+\details{
+Make separate lists for each parameter in the climate data
+input, and make them accessible by the parameter names. The
+single lists correspond to the scheme years in rows,
+observations from previous december to current december in
+columns.
+}
+\keyword{internal}
+\keyword{manip}
+

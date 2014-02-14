@@ -1,0 +1,19 @@
+citEntry(entry="Article",
+	title="Dendroclimatic calibration in R: The bootRes package for response and correlation function analysis",
+	author=personList(as.person("Christian Zang"),
+		as.person("Franco Biondi")),
+	journal="Dendrochronologia",
+	year="2012",
+	volume="",
+	number="",
+	pages="",
+        doi="10.1016/j.dendro.2012.08.001",
+	url="http://www.sciencedirect.com/science/article/pii/S1125786512000586",
+
+	header="To cite package archetypes in publications use:",
+	
+	textVersion=paste("Christian Zang and Franco Biondi",
+		"Dendroclimatic calibration in R: The bootRes package for response and correlation function analysis",
+		"Dendrochronologia doi:10.1016/j.dendro.2012.08.001",
+		"http://www.sciencedirect.com/science/article/pii/S1125786512000586")
+)

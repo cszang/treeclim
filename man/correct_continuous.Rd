@@ -1,0 +1,20 @@
+\name{correct_continuous}
+\alias{correct_continuous}
+\title{Correct continuous month specifications}
+\usage{
+correct_continuous(month)
+}
+\arguments{
+  \item{x}{a numeric month id specification}
+}
+\value{
+a numeric vector with the corrected month id specification
+}
+\description{
+If month specification is continuous, it must be
+interpreted differently if it contains 0. E.g., -5:8 must
+be translated to c(-5:-12, 1:8).
+}
+\keyword{internal}
+\keyword{manip}
+

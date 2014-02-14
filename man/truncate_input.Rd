@@ -1,0 +1,33 @@
+\name{truncate_input}
+\alias{truncate_input}
+\title{Truncate climate and tree data to common interval}
+\usage{
+truncate_input(chrono, climate, timespan = NULL, minmonth, moving)
+}
+\arguments{
+  \item{chrono}{a tree-ring chronology}
+
+  \item{climate}{the climate data as returned by
+  as_brclimate}
+
+  \item{timespan}{the timespan for truncating as vector
+  with min and max year}
+
+  \item{minmonth}{the earliest month used for the
+  calibration, as returned by check_months}
+
+  \item{moving}{moving or not? (logical)}
+}
+\value{
+a list of truncated data.frames for climate and tree data
+}
+\description{
+Truncate climate and tree data either to common shared
+interval (default) or to specified range of years.
+Depending on minmonth, the climate data will need to start
+one year earlier than the tree data, if data from the
+previous year should be used.
+}
+\keyword{internal}
+\keyword{manip}
+

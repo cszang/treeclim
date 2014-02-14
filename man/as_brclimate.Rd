@@ -1,0 +1,23 @@
+\name{as_brclimate}
+\alias{as_brclimate}
+\title{Create the correct data format for variable selection}
+\usage{
+as_brclimate(x, varnames = NULL)
+}
+\arguments{
+  \item{x}{the supplied climate data}
+
+  \item{varnames}{optionally supplied variable names}
+}
+\value{
+a data.frame with years in rows and monthly observations in
+columns
+}
+\description{
+Check the climate data that is either supplied as a matrix,
+a data.frame, or a list of data.frames. Reformat the data
+for further usage into the internal format.
+}
+\keyword{internal}
+\keyword{manip,}
+
