@@ -144,12 +144,12 @@ br_design <- function(selection, climate) {
   }
 
   pretty_names <- data.frame(
-    month = .months,
+    month_no = .months,
     varname = vars,
-    label = labels
+    month_label = labels
     )
 
-  pretty_order <- with(pretty_names, order(varname, month))
+  pretty_order <- with(pretty_names, order(varname, month_no))
   
   out$aggregate <- out$aggregate[,pretty_order]
   names(out$aggregate) <- paste("X", 1:dim(out$aggregate)[2],
