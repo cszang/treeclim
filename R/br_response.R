@@ -111,6 +111,17 @@ br_response <- function(chrono, climate, boot, sb, ci) {
     attributes(out)$npar <- attributes(.climate)$npar
     attributes(out)$vnames <- vnames
   }
+
+  ## include information for pretty printing and assemble output
+  ## data.frame
+  
+  out <- data.frame(
+    id = climate$pretty_names$id,
+    varname = climate$pretty_names$varname,
+    month = climate$pretty_names$month_label,
+    out
+    )
+  
   class(out) <- c("br_coef", "data.frame")
   out
 }
