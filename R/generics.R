@@ -97,11 +97,19 @@ plot.br_dcc <- function(x) {
 
   if (any(class(data) == "br_coef")) {
 
-    ggplot(odata, aes(x = id, y = coef)) +
-      geom_pointrange(aes(ymin = ci_lower, ymax = ci_upper, color =
-                          varname, pch = significant)) + 
-                            scale_x_discrete(labels = odata$month)
-    
+
+    ggplot(data, aes(x = id, y = coef)) +
+      geom_line(data = line0, aes(x, y), color = "grey") +
+      geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper, color =
+                        varname, lty = significant), size = 1) +
+      scale_linetype_manual(values = c("dotted", "solid")) +
+      geom_point(aes(color = varname), size = 3) +
+      scale_x_continuous(breaks = data$id, labels = data$month) +
+      ylab("Coefficients") +
+      xlab("Months") +  
+      theme_minimal() +
+      theme(axis.title.x = element_blank())
+
   } else {
 
     ## mdcc case
