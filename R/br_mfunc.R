@@ -17,6 +17,7 @@ br_mfunc <- function(chrono, climate, boot, sb, start_last,
                          win_size, win_offset, ci, method) {
 
   vnames <- climate$names
+  pretty_names <- climate$pretty_names
   ## number of windows
   years <- as.numeric(rownames(climate$aggregate))
   nyears <- length(years)
@@ -36,7 +37,6 @@ br_mfunc <- function(chrono, climate, boot, sb, start_last,
 
   if (sb)  # initialize status bar (if TRUE)
     mpb <- txtProgressBar(min = 1,  max = win_num, style = 3)
-  
 
   for (k in 1:win_num) {
     if (start_last) {
@@ -54,7 +54,8 @@ br_mfunc <- function(chrono, climate, boot, sb, start_last,
       aggregate = climate_win,
       names = climate$names,
       param = climate$param,
-      months = climate$month
+      months = climate$month,
+      pretty_names = climate$pretty_names
       )
     chrono_win <- chrono[series_subset_index]
 
@@ -99,6 +100,7 @@ br_mfunc <- function(chrono, climate, boot, sb, start_last,
   out$significant <- data.frame(result_matrix_significant)
   colnames(out$significant) <- win_years_string
   rownames(out$significant) <- vnames
+  out$pretty_names <- pretty_names
   if (sb) # close status bar (if TRUE)
     close(mpb)
   class(out) <- c("br_mcoef", "list")
