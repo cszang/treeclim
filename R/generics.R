@@ -89,3 +89,22 @@ summary.br_dcc <- function(x) {
   }
   param_list
 }
+
+##' @import ggplot2
+##' @S3method plot br_dcc
+plot.br_dcc <- function(x) {
+  data <- x$coef
+
+  if (any(class(data) == "br_coef")) {
+
+    ggplot(odata, aes(x = id, y = coef)) +
+      geom_pointrange(aes(ymin = ci_lower, ymax = ci_upper, color =
+                          varname, pch = significant)) + 
+                            scale_x_discrete(labels = odata$month)
+    
+  } else {
+
+    ## mdcc case
+    
+  }
+}
