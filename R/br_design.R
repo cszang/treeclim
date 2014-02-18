@@ -77,6 +77,88 @@ br_design <- function(selection, climate) {
     out$aggregate <- out$aggregate[,!dupes]
     out$names <- out$names[!dupes]
   }
+
+  ## reorder and add pretty names for plotting required: months as
+  ## numeric values from 1:25 (25 is for month aggregations); we do
+  ## this _after_ removing the potential duplicates, which is safer,
+  ## but also results in a somewhat lengthy code...
+
+  get_month_numeric <- function(m) {
+    switch(m,
+           "jan" = 1,
+           "feb" = 2,
+           "mar" = 3,
+           "apr" = 4,
+           "may" = 5,
+           "jun" = 6,
+           "jul" = 7,
+           "aug" = 8,
+           "sep" = 9,
+           "oct" = 10,
+           "nov" = 11,
+           "dec" = 12)
+  }
+  
+  labels <- vars <- out$names
+  .months <- numeric(length(labels))
+  n <- length(out$names)
+  for (i in 1:n) {
+    split <- strsplit(out$names[i], "\\.")[[1]]
+    mmatches <- !is.na((match(split, c("curr", "prev"))))
+    fmatch <- which(mmatches)[1] - 1
+    vars[i] <- paste(split[1:fmatch], collapse = ".")
+    if (sum(mmatches) > 1) {
+      .months[i] <- 25
+      ## long variable name
+      season <- split[mmatches]
+      smatches <- c(FALSE, mmatches[-length(mmatches)])
+      months <- split[smatches]
+      ## get first and last month and season
+      fseason <- season[1]
+      fmonth <- months[1]
+      if (fseason == "prev") {
+        fmonth <- tolower(fmonth)
+      } else {
+        fmonth <- toupper(fmonth)
+      }
+      lseason <- tail(season, 1)
+      lmonth <- tail(months, 1)
+      if (lseason == "prev") {
+        lmonth <- tolower(lmonth)
+      } else {
+        lmonth <- toupper(lmonth)
+      }
+      labels[i] <- paste(fmonth, "...", lmonth, sep = "")
+    } else {
+      .months[i] <- get_month_numeric(split[3])
+      ## short variable name
+      tseason <- split[mmatches]
+      tmonth <- split[fmatch + 2]
+      if (tseason == "prev") {
+        labels[i] <- tolower(tmonth)
+      } else {
+        labels[i] <- toupper(tmonth)
+        .months[i] <- .months[i] + 12
+      }
+    }
+  }
+
+  pretty_names <- data.frame(
+    month = .months,
+    varname = vars,
+    label = labels
+    )
+
+  pretty_order <- with(pretty_names, order(varname, month))
+  
+  out$aggregate <- out$aggregate[,pretty_order]
+  names(out$aggregate) <- paste("X", 1:dim(out$aggregate)[2],
+                                sep = "")
+  
+  out$names <- out$names[pretty_order]
+
+  out$pretty_names <- pretty_names[pretty_order,]
+  out$pretty_names$id <- rownames(out$pretty_names) <- 1:dim(out$pretty_names)[1]
   
   class(out) <- list("list", "br_design")
   out
