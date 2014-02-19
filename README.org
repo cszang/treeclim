@@ -1,0 +1,14 @@
+* bootres2
+
+An R package for dendroclimatic calibration.
+
+** Installation
+
+#+begin_src R
+library(devtools)
+install_github("bootres2", "znag")
+#+end_src
+
+** Usage
+
+see the [[https://github.com/znag/bootres2/wiki][Wiki]] for details.
