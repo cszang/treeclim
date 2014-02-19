@@ -91,12 +91,17 @@ summary.br_dcc <- function(x) {
 }
 
 ##' @import ggplot2
+##' @import plyr
 ##' @S3method plot br_dcc
 plot.br_dcc <- function(x) {
   data <- x$coef
 
   if (any(class(data) == "br_coef")) {
 
+    line0 <- data.frame(
+      x = c(0.5, data$id, max(data$id) + 0.5),
+      y = rep(0, length(x))
+      )
 
     ggplot(data, aes(x = id, y = coef)) +
       geom_line(data = line0, aes(x, y), color = "grey") +
@@ -113,6 +118,71 @@ plot.br_dcc <- function(x) {
   } else {
 
     ## mdcc case
+
+    ## bootstrapped or not?
+
+    if(!is.null(x$call$boot)) {
+      if (x$call$boot) {
+        boot <- TRUE
+      } else {
+        boot <- FALSE
+      }
+    } else {
+      boot <- TRUE
+    }
     
+    coef <- data$coef
+    n <- dim(coef)[2]
+    m <- dim(coef)[1]
+
+    ## reformat into ggplot compatible data.frame
+
+    pdata <- data.frame(
+      varname = abbrev_name(rep(rownames(coef), n)),
+      window = rep(names(coef), each = m),
+      coef = as.vector(as.matrix(coef)),
+      significant = as.vector(as.matrix(data$significant))
+      )
+
+    pdata$wid <- rep(1:n, each = m)
+    pdata$vid <- rep(1:m, n)
+
+    pdata$pid <- factor(paste(pdata$wid, pdata$vid, sep = "."))
+
+    create_grid <- function(x) {
+      w <- x$wid
+      v <- x$vid
+      data.frame(
+        pid = factor(rep(paste(w, v, sep = "."), 4)),
+        x = c(w - 1, w, w, w - 1),
+        y = c(v - 1, v - 1, v, v)
+        )
+    }
+
+    idgrid <- ddply(pdata, .variables = c("wid", "vid"), create_grid)
+
+    idpgrid <- merge(pdata, idgrid, by = c("pid"))
+
+    gg <- ggplot(idpgrid, aes(x = window, y = varname)) +
+      geom_polygon(aes(x, y, fill = coef, group = pid)) +
+      scale_fill_gradient2() +
+      theme_minimal() +
+      scale_x_continuous(breaks = seq(0.5, by = 1, length.out = n),
+                         labels = names(coef)) +
+      scale_y_continuous(breaks = seq(0.5, by = 1, length.out = m), labels = abbrev_name(rownames(coef))) +
+      theme(axis.text.x = element_text(angle = 90, vjust = 0),
+            axis.title.x = element_blank(),
+            axis.title.y = element_blank())
+    
+    if (boot) {
+
+      gg + geom_point(data = subset(pdata, significant), aes(x = wid -
+                        0.5, y = vid - 0.5), pch = 8, color = "grey")
+      
+    } else {
+
+      gg
+  
+    }
   }
 }
