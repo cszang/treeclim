@@ -100,7 +100,7 @@ plot.br_dcc <- function(x) {
 
     line0 <- data.frame(
       x = c(0.5, data$id, max(data$id) + 0.5),
-      y = rep(0, length(x))
+      y = rep(0, dim(data)[1] + 2)
       )
 
     ggplot(data, aes(x = id, y = coef)) +
