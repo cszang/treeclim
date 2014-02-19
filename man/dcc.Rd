@@ -13,15 +13,17 @@ dcc(chrono, climate, selection = -6:9, method = "response",
   chronologies, e.g. as obtained by \code{chron} of package
   dplR.}
 
-  \item{climate}{\code{data.frame} with climatic data in
-  monthly resolution, with year, month and climate
-  parameters in columns. All columns except year and month
-  will be recognized as parameters for response or
-  correlation function.}
+  \item{climate}{either a \code{data.frame} or
+  \code{matrix} with climatic data in monthly resolution,
+  with year, month and climate parameters in columns (all
+  columns except year and month will be recognized as
+  parameters for response or correlation function), or a
+  single \code{data.frame} or \code{matrix} in 13-column
+  format (see below), or list of several of the latter.}
 
   \item{selection}{either a numeric vector, a modifier, or
   a chain of modifiers specifying the parameter selection
-  for the model (see Details)}
+  for the model (see Details).}
 
   \item{method}{\code{character} string specifying the
   calculation method. Possible values are \dQuote{response}
@@ -160,6 +162,28 @@ significance using the 95\% percentile range method (Dixon,
 2001). In case of correlation function analysis, the
 coefficients are Pearson's correlation coefficients. The
 same method for significance testing is applied.
+
+Input chronology data can be a \code{data.frame} such as
+produced by function \code{chron} of package dplR. It has
+to be a \code{data.frame} with at least one column
+containing the tree-ring indices, and the corresponding
+years as \code{rownames}.
+
+For climatic input data, there are three possibilities:
+Firstly, input climatic data can be a \code{data.frame} or
+\code{matrix} consisting of at least 3 rows for years,
+months and at least one climate parameter in the given
+order. Secondly, input climatic data can be a single
+\code{data.frame} or \code{matrix} in the style of the
+original DENDROCLIM2002 input data, i.e. one parameter with
+12 months in one row, where the first column represents the
+year. Or thirdly, input climatic data can be a list of
+several of the latter described \code{data.frame} or
+\code{matrices}. As an internal format dispatcher checks
+the format automatically, it is absolutely necessary that
+in all three cases, only complete years (months 1-12) are
+provided. It is not possible to mix different formats in
+one go.
 }
 \examples{
 \dontrun{

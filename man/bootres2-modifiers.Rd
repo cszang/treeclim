@@ -11,9 +11,12 @@
 .sum(.months = NULL, .variables = NULL)
 }
 \arguments{
-  \item{.months}{}
+  \item{.months}{numeric identifiers for the months (-1 for
+  previous January until 12 for current December, with -6
+  for previous June, etc.)}
 
-  \item{.variables}{}
+  \item{.variables}{names of the variables the modifier
+  shall be applied to}
 }
 \description{
 These modifiers are used to select specific months from
