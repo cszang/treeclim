@@ -30,7 +30,7 @@ br_response <- function(chrono, climate, boot, sb, ci) {
     ## matrix of reduced eigenvectors (q*m)
     reduced_eigenvectors <- eigenvectors[, cumprods > 1]
     ## calculate princ comp scores (n*m)
-    pc_scores <- boot_climate %*% reduced_eigenvectors
+    pc_scores <- climate_s %*% reduced_eigenvectors
     ## calculate solution for Z*K = Y (coefficients) (m*1)
     k <- qr.solve(pc_scores, chrono_s)
     ## pad K with zero so that Kq*1
