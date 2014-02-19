@@ -25,8 +25,10 @@ make_range_list <- function(call, method) {
 ##' their respective sums or means. The modifiers can be chained
 ##' together using `+`.
 ##' @rdname bootres2-modifiers
-##' @param .months 
-##' @param .variables
+##' @param .months numeric identifiers for the months (-1 for previous
+##' January until 12 for current December, with -6 for previous June, etc.)
+##' @param .variables names of the variables the modifier shall be
+##' applied to
 ##' @export
 .range <- function(.months = NULL, .variables = NULL) {
   make_range_list(match.call(), "full")
