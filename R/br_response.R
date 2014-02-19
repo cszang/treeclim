@@ -14,6 +14,34 @@ br_response <- function(chrono, climate, boot, sb, ci) {
   n <- length(chrono)
   m <- dim(climate$aggregate)[2]
 
+  respo <- function(chrono, climate) {
+    ## standardize
+    chrono_s <- scale(chrono)
+    climate_s <- scale(climate)
+    ## correlation matrix X'X (q*q)
+    cor_mat <- cor(climate_s)
+    ## eigenvector decomposition
+    eigen_decomp <- eigen(cor_mat)
+    ## normalized eigenvectors
+    eigenvectors <- eigen_decomp$vectors 
+    eigenvalues <- eigen_decomp$values
+    ## PVP criterion: calculate cumulative eigenvalues until value < 1
+    cumprods <- cumprod(eigenvalues)
+    ## matrix of reduced eigenvectors (q*m)
+    reduced_eigenvectors <- eigenvectors[, cumprods > 1]
+    ## calculate princ comp scores (n*m)
+    pc_scores <- boot_climate %*% reduced_eigenvectors
+    ## calculate solution for Z*K = Y (coefficients) (m*1)
+    k <- qr.solve(pc_scores, chrono_s)
+    ## pad K with zero so that Kq*1
+    zeros <- rep(0, length(which(cumprods < 1)))
+    ## (q*1)
+    k <- c(k, zeros)
+    ## response coefficients (q*1)
+    b <- eigenvectors %*% k
+    b
+  }
+
   if (boot) {
     param_matrix <- matrix(NA, nrow = m, ncol = 1000)
     if (sb) { # initialize status bar (if TRUE)
@@ -24,30 +52,8 @@ br_response <- function(chrono, climate, boot, sb, ci) {
       ## sample
       boot_chrono <- chrono[boot_sample]
       boot_climate <- climate$aggregate[boot_sample, ]
-      ## standardize
-      boot_chrono <- scale(boot_chrono)
-      boot_climate <- scale(boot_climate)
-      ## correlation matrix X'X (q*q)
-      cor_mat <- cor(boot_climate)
-      ## eigenvector decomposition
-      eigen_decomp <- eigen(cor_mat)
-      ## normalized eigenvectors
-      eigenvectors <- eigen_decomp$vectors 
-      eigenvalues <- eigen_decomp$values
-      ## PVP criterion: calculate cumulative eigenvalues until value < 1
-      cumprods <- cumprod(eigenvalues)
-      ## matrix of reduced eigenvectors (q*m)
-      reduced_eigenvectors <- eigenvectors[, cumprods > 1]
-      ## calculate princ comp scores (n*m)
-      pc_scores <- boot_climate %*% reduced_eigenvectors
-      ## calculate solution for Z*K = Y (coefficients) (m*1)
-      k <- qr.solve(pc_scores, boot_chrono)
-      ## pad K with zero so that Kq*1
-      zeros <- rep(0, length(which(cumprods < 1)))
-      ## (q*1)
-      k <- c(k, zeros)
-      ## response coefficients (q*1)
-      b <- eigenvectors %*% k 
+      ## calculate
+      b <- respo(boot_chrono, boot_climate)
       param_matrix[, i] <- b
       if (sb)                           # update status bar (if TRUE)
         setTxtProgressBar(pb, i)
@@ -89,19 +95,7 @@ br_response <- function(chrono, climate, boot, sb, ci) {
     
   } else {                              # no bootstrapping
 
-    .chrono <- scale(chrono)
-    .climate <- scale(climate$aggregate)
-    cor_mat <- cor(.climate)
-    eigen_decomp <- eigen(cor_mat)
-    eigenvectors <- eigen_decomp$vectors
-    eigenvalues <- eigen_decomp$values
-    cumprods <- cumprod(eigenvalues)
-    reduced_eigenvectors <- eigenvectors[, cumprods > 1]
-    pc_scores <- .climate %*% reduced_eigenvectors
-    k <- qr.solve(pc_scores, .chrono)
-    zeros <- rep(0, length(which(cumprods < 1)))
-    k <- c(k, zeros)
-    b <- eigenvectors %*% k
+    b <- respo(chrono, climate$aggregate)
     rf_coef <- b
     ci_lower <- NA
     ci_upper <- NA
