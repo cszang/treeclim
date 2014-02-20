@@ -5,7 +5,7 @@
 ##' precipitation at Forstenrieder Park, Munich, Bavaria, Germany.
 ##' @source Zang C, Pretzsch H, Rothe A (2012) Size-dependent responses
 ##' to summer drought in Scots pine, Norway spruce and common
-##' oak. Trees -- Structure and Function, 26, 557–569.
+##' oak. Trees - Structure and Function, 26, 557-569.
 ##' @docType data
 ##' @keywords datasets
 ##' @name muc.clim
@@ -25,7 +25,7 @@ NULL
 ##' robust mean \code{\link[dplR]{chron}}.
 ##' @source Zang C, Pretzsch H, Rothe A (2012) Size-dependent responses
 ##' to summer drought in Scots pine, Norway spruce and common
-##' oak. Trees -- Structure and Function, 26, 557–569.
+##' oak. Trees - Structure and Function, 26, 557-569.
 ##' @docType data
 ##' @keywords datasets
 ##' @name muc.spruce
