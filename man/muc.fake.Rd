@@ -7,7 +7,7 @@ replication depth with respective years as \code{rownames}.}
 \source{
 Zang C, Pretzsch H, Rothe A (2012) Size-dependent responses
 to summer drought in Scots pine, Norway spruce and common
-oak. Trees -- Structure and Function, 26, 557–569.
+oak. Trees - Structure and Function, 26, 557-569.
 }
 \usage{
 data(muc.fake)

@@ -9,7 +9,7 @@ Zang C, Rothe A, Weis W, Pretzsch H (2011) Zur
 Baumarteneignung bei Klimawandel: Ableitung der
 Trockenstress-Anfälligkeit wichtiger Waldbaumarten aus
 Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182,
-98–112.
+98-112.
 }
 \usage{
 data(rt.temp)
