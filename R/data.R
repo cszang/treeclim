@@ -44,7 +44,7 @@ NULL
 ##' current July and August.
 ##' @source Zang C, Pretzsch H, Rothe A (2012) Size-dependent responses
 ##' to summer drought in Scots pine, Norway spruce and common
-##' oak. Trees -- Structure and Function, 26, 557–569.
+##' oak. Trees - Structure and Function, 26, 557-569.
 ##' @docType data
 ##' @keywords datasets
 ##' @name muc.fake
@@ -61,7 +61,7 @@ NULL
 ##' @source Zang C, Rothe A, Weis W, Pretzsch H (2011) Zur
 ##' Baumarteneignung bei Klimawandel: Ableitung der
 ##' Trockenstress-Anfälligkeit wichtiger Waldbaumarten aus
-##' Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182, 98–112.
+##' Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182, 98-112.
 ##' @docType data
 ##' @keywords datasets
 ##' @name rt.prec
@@ -78,7 +78,7 @@ NULL
 ##' @source Zang C, Rothe A, Weis W, Pretzsch H (2011) Zur
 ##' Baumarteneignung bei Klimawandel: Ableitung der
 ##' Trockenstress-Anfälligkeit wichtiger Waldbaumarten aus
-##' Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182, 98–112.
+##' Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182, 98-112.
 ##' @docType data
 ##' @keywords datasets
 ##' @name rt.temp
@@ -100,7 +100,7 @@ NULL
 ##' @source Zang C, Rothe A, Weis W, Pretzsch H (2011) Zur
 ##' Baumarteneignung bei Klimawandel: Ableitung der
 ##' Trockenstress-Anfälligkeit wichtiger Waldbaumarten aus
-##' Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182, 98–112.
+##' Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182, 98-112.
 ##' @docType data
 ##' @keywords datasets
 ##' @name rt.spruce
