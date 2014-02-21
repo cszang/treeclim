@@ -102,7 +102,7 @@ br_response <- function(chrono, climate, boot, sb, ci) {
     is_sig <- NA
     out <- data.frame(coef = rf_coef, significant = is_sig, ci_lower = ci_lower, ci_upper = ci_upper)
     rownames(out) <- vnames
-    attributes(out)$npar <- attributes(.climate)$npar
+    attributes(out)$npar <- attributes(climate)$npar
     attributes(out)$vnames <- vnames
   }
 
