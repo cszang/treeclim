@@ -80,9 +80,8 @@ br_design <- function(selection, climate) {
 
   ## throw error when we have only one variable left; point the user
   ## to using lm() instead
-
-  if (is.null(dim(out$aggregate)))
-    stop("You supplied one climate variable for calibration. bootres2 needs at least two. Consider using lm() in this case. Thanks.")
+  if (dim(out$aggregate)[2] < 2)
+    stop("You supplied only one climate variable for calibration. bootres2 needs at least two. Consider using lm() in this case. Thanks.")
 
   ## reorder and add pretty names for plotting required: months as
   ## numeric values from 1:25 (25 is for month aggregations); we do
