@@ -78,6 +78,12 @@ br_design <- function(selection, climate) {
     out$names <- out$names[!dupes]
   }
 
+  ## throw error when we have only one variable left; point the user
+  ## to using lm() instead
+
+  if (is.null(dim(out$aggregate)))
+    stop("You supplied one climate variable for calibration. bootres2 needs at least two. Consider using lm() in this case. Thanks.")
+
   ## reorder and add pretty names for plotting required: months as
   ## numeric values from 1:25 (25 is for month aggregations); we do
   ## this _after_ removing the potential duplicates, which is safer,
@@ -152,10 +158,8 @@ br_design <- function(selection, climate) {
   pretty_order <- with(pretty_names, order(varname, month_no))
   
   out$aggregate <- out$aggregate[,pretty_order]
-  if (!is.null(dim(out$aggregate))) {
-    names(out$aggregate) <- paste("X", 1:dim(out$aggregate)[2],
-                                  sep = "")
-  }
+  names(out$aggregate) <- paste("X", 1:dim(out$aggregate)[2],
+                                sep = "")
   
   out$names <- out$names[pretty_order]
 
