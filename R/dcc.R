@@ -263,7 +263,6 @@ dcc <- function(chrono,
   if (!moving) {
     if (.method == "response") {
       dc <- br_response(truncated_input$chrono, design,
-                        boot = boot,
                         ci = ci,
                         sb = sb)
     }
