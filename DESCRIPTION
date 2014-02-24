@@ -1,7 +1,7 @@
 Package: bootres2
 Type: Package
 Title: Bootstrapped Response and Correlation Functions
-Version: 0.1
+Version: 0.1.2
 Date: 2014-02-19
 Author: Christian Zang
 Maintainer: Christian Zang <christian.zang@wzw.tum.de>
@@ -9,7 +9,14 @@ Depends:
     base,
     stats,
     utils,
-    abind
+    abind,
+    Rcpp (>= 0.10.6),
+    RcppArmadillo (>= 0.4.000.2),
+    plyr,
+    ggplot2
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
 Suggests:
     dplR
 Description: Calculation of Bootstrapped Response and Correlation Functions for
