@@ -1,5 +1,3 @@
-useDynLib(bootres2)
-importFrom(Rcpp, evalCpp)
 S3method("+",br_paramlist)
 S3method(coef,br_coef)
 S3method(coef,br_dcc)
