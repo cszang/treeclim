@@ -20,18 +20,18 @@ br_response <- function(chrono, climate, sb, ci) {
                         boot_data$chrono, PACKAGE = "bootres2")$coef
   
   brf_coef <- apply(param_matrix, 1, median)
-    if (ci == 0.05) {
-      ci_lower <- apply(param_matrix, 1, function(x) { sort(x)[25] })
-      ci_upper <- apply(param_matrix, 1, function(x) { sort(x)[975] })
+  if (ci == 0.05) {
+    ci_lower <- apply(param_matrix, 1, function(x) { sort(x)[25] })
+    ci_upper <- apply(param_matrix, 1, function(x) { sort(x)[975] })
+  } else {
+    if (ci == 0.01) {
+      ci_lower <- apply(param_matrix, 1, function(x) { sort(x)[5] })
+      ci_upper <- apply(param_matrix, 1, function(x) { sort(x)[995] })
     } else {
-      if (ci == 0.01) {
-        ci_lower <- apply(param_matrix, 1, function(x) { sort(x)[5] })
-        ci_upper <- apply(param_matrix, 1, function(x) { sort(x)[995] })
-      } else {
-        ci_lower <- apply(param_matrix, 1, function(x) { sort(x)[50] })
-        ci_upper <- apply(param_matrix, 1, function(x) { sort(x)[950] })
-      }
+      ci_lower <- apply(param_matrix, 1, function(x) { sort(x)[50] })
+      ci_upper <- apply(param_matrix, 1, function(x) { sort(x)[950] })
     }
+  }
 
   ## Significance test
   is_sig <- logical(m)
