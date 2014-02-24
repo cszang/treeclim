@@ -4,6 +4,8 @@ An R package for dendroclimatic calibration.
 
 ** Installation
 
+On Windows, you need [[Rtools][http://cran.r-project.org/bin/windows/Rtools/]] to be installed to install the package from source. Then do:
+
 #+begin_src R
 library(devtools)
 install_github("bootres2", "znag")
