@@ -6,6 +6,22 @@
 
 using namespace Rcpp;
 
+// corfun
+SEXP corfun(SEXP x, SEXP y);
+RcppExport SEXP bootres2_corfun(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< SEXP >::type x(xSEXP );
+        Rcpp::traits::input_parameter< SEXP >::type y(ySEXP );
+        SEXP __result = corfun(x, y);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // respo
 SEXP respo(SEXP x, SEXP y);
 RcppExport SEXP bootres2_respo(SEXP xSEXP, SEXP ySEXP) {
