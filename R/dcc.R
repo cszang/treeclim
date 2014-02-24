@@ -144,8 +144,6 @@
 ##' @param sb \code{logical} flag indicating whether textual status
 ##' bar should be suppressed. Suppression is recommended for
 ##' e.g. Sweave files.
-##' @param boot \code{logical} flag indicating whether bootstrap
-##' resampling is to be performed.
 ##' @return an object of class `br_dcc`.
 ##' @references Biondi, F. & Waikul, K. (2004) DENDROCLIM2002: A C++
 ##' program for statistical calibration of climate signals in
@@ -269,7 +267,6 @@ dcc <- function(chrono,
     
     if (.method == "correlation") {
       dc <- br_correlation(truncated_input$chrono, design,
-                           boot = boot,
                            ci = ci,
                            sb = sb)
     }

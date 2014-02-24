@@ -3,7 +3,6 @@
 ##' see doc for dcc for details.
 ##' @param chrono tree-ring chronology
 ##' @param climate data.frame with climate parameters
-##' @param boot logical: bootstrap or not?
 ##' @param sb logical: draw statusbar or not?
 ##' @param start_last logical: start with last (oldest) window?
 ##' @param win_size numeric: size of the moving in years
@@ -60,10 +59,10 @@ br_mfunc <- function(chrono, climate, boot, sb, start_last,
     chrono_win <- chrono[series_subset_index]
 
     if (method == "response") {
-      window <- br_response(chrono_win, climate_win_list, boot = boot,
+      window <- br_response(chrono_win, climate_win_list,
                             ci = ci, sb = FALSE)
     } else {
-      window <- br_correlation(chrono_win, climate_win_list, boot = boot,
+      window <- br_correlation(chrono_win, climate_win_list,
                                ci = ci, sb = FALSE)
     }
 
