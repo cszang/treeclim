@@ -2,14 +2,12 @@
 \alias{br_correlation}
 \title{(bootstrapped) correlation function}
 \usage{
-br_correlation(chrono, climate, boot, sb, ci)
+br_correlation(chrono, climate, sb, ci)
 }
 \arguments{
   \item{chrono}{a tree-ring chronology}
 
   \item{climate}{data.frame with climate parameters}
-
-  \item{boot}{logical: bootstrapping or not?}
 
   \item{sb}{logical: draw a statusbar or not?}
 

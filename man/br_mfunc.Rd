@@ -10,8 +10,6 @@ br_mfunc(chrono, climate, boot, sb, start_last, win_size, win_offset, ci,
 
   \item{climate}{data.frame with climate parameters}
 
-  \item{boot}{logical: bootstrap or not?}
-
   \item{sb}{logical: draw statusbar or not?}
 
   \item{start_last}{logical: start with last (oldest)

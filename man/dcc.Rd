@@ -58,9 +58,6 @@ dcc(chrono, climate, selection = -6:9, method = "response",
   \item{sb}{\code{logical} flag indicating whether textual
   status bar should be suppressed. Suppression is
   recommended for e.g. Sweave files.}
-
-  \item{boot}{\code{logical} flag indicating whether
-  bootstrap resampling is to be performed.}
 }
 \value{
 an object of class `br_dcc`.
