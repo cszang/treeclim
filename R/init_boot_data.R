@@ -13,14 +13,85 @@
 init_boot_data <- function(u, g, n, bootmethod) {
   m <- length(g)
   k <- dim(u)[2]
-  out_u <- array(dim = c(m, k, n))
-  out_g <- matrix(nrow = m, ncol = n)
-  if (bootmethod == "std") {
+  if (bootmethod %in% c("std", "dendroclim")) {
+    out_u <- array(dim = c(m, k, n))
+    out_g <- matrix(nrow = m, ncol = n)
     for (i in 1:n) {
       .sample <- sample(1:m, m, replace = TRUE)
       out_u[, ,i] <- u[.sample, ]
       out_g[, i] <- g[.sample]
     }
+  }
+  if (bootmethod == "exact") {
+    # gaussian simulation of tree-ring data with circulant embedding; this code
+    # is adapted from Dave Meko's seascorr MATLAB source
+    
+    # climate data remains unchanged
+    out_u <- u
+    
+    ## subtract series mean
+    trm <- g - mean(g)
+    
+    ## store original variance and sd
+    varo <- var(g)
+    xsd <- sd(g)
+    
+    ## taper with cosine bell
+    trt <- spec.taper(trm, 0.05)
+    
+    ## rescale so that mean is exactly zero
+    trt <- trt - mean(trt)
+    
+    ## find power of 2 greater than double length of data
+    ll <- length(trt)
+    pow2 <- 2^c(1:12)
+    pow <- pow2[which(pow2 > 2 * ll)[1]]
+    
+    ## pad data with 0 to length of next power of 2
+    padlen <- pow - ll
+    trp <- c(trt, rep(0, padlen))
+    
+    ## scale variance of trp to original variance of u
+    sdx <- sd(g)
+    sdp <- sd(trp)
+    meanp <- mean(trp)
+    trtemp <- trp - meanp
+    trtemp <- trtemp * (sdx / sdp)
+    trp <- trtemp + meanp
+    
+    ## compute discrete fourier transform on tapered and padded series
+    z <- fft(trp)
+    
+    ## compute periodogram
+    Pyy  <- Re(z * Conj(z))/padlen
+    
+    ## sample Gaussian noise and compute mu for 1000 simulation runs
+    M <- length(trp)/2
+    Z <- matrix(rnorm(500 * length(trp) * 2), ncol = 500)
+    k <- t(1:length(trp))
+    i1 <- 2 * k - 1
+    i2 <- 2 * k
+    
+    term1 <- matrix(complex(pow, Z[i1,], Z[i2,]), ncol = 500)
+    term2 <- sqrt(Pyy/length(trp))
+    term2 <- matrix(rep(Pyy, 500), ncol = 500)
+    mu <- term1 * term2
+    
+    V <- fft(mu)
+    
+    Vr <- Re(V)
+    Vi <- Im(V)
+    D1 <- Vr[1:M,]
+    D2 <- Vi[1:M,]
+    D <- cbind(D1, D2)
+    D <- D[1:ll, 1:1000]
+    
+    ## scale to original mean and variance
+    Dmean <- matrix(rep(colMeans(D), each = ll), ncol = 1000)
+    Dsd <- matrix(rep(apply(D, 2, sd), each = ll), ncol = 1000)
+    Dz <- (D - Dmean) / Dsd
+    out_g <- Dz * matrix(xsd, nrow = ll, ncol = 1000) + mean(g)
+    
   }
   list(climate = out_u, chrono = out_g)
 }
