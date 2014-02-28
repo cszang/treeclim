@@ -1,12 +1,11 @@
 \name{dcc}
 \alias{dcc}
-\title{Dendroclimatic calibration: response and correlation function
-analysis}
+\title{Dendroclimatic calibration: response and correlation function analysis}
 \usage{
 dcc(chrono, climate, selection = -6:9, method = "response",
   moving = FALSE, win_size = 25, win_offset = 1, start_last = TRUE,
-  timespan = NULL, var_names = NULL, ci = 0.05, sb = TRUE,
-  boot = TRUE)
+  timespan = NULL, var_names = NULL, ci = 0.05, boot = "std",
+  sb = TRUE)
 }
 \arguments{
   \item{chrono}{\code{data.frame} containing a tree-ring
@@ -26,8 +25,9 @@ dcc(chrono, climate, selection = -6:9, method = "response",
   for the model (see Details).}
 
   \item{method}{\code{character} string specifying the
-  calculation method. Possible values are \dQuote{response}
-  and \dQuote{correlation}. Partial strings are ok.}
+  calculation method.  Possible values are
+  \dQuote{response} and \dQuote{correlation}. Partial
+  strings are ok.}
 
   \item{moving}{\code{logical}; should the analyis be
   carried out in moving windows. Defaults to \code{FALSE}.}
@@ -55,9 +55,12 @@ dcc(chrono, climate, selection = -6:9, method = "response",
   allowed); the confidence intervals are adapted
   accordingly.}
 
+  \item{boot}{\code{character} indicating which bootstrap
+  method should be used, one of \code{c("std", "exact")}}
+
   \item{sb}{\code{logical} flag indicating whether textual
-  status bar should be suppressed. Suppression is
-  recommended for e.g. Sweave files.}
+  status bar for moving case should be suppressed.
+  Suppression is recommended for e.g.  Sweave files.}
 }
 \value{
 an object of class `br_dcc`.
@@ -114,7 +117,7 @@ positive integers) as model parameters.
 
 More complex parameter selections can be obtained by the
 \emph{modifiers} provided in bootres2: \code{.range},
-\code{.mean}, and \code{.sum}. \code{.range} corresponds
+\code{.mean}, and \code{.sum}.  \code{.range} corresponds
 the example above, where all specified months are used,
 while \code{.sum} and \code{.mean} will use the sums and
 means of the specified months. These modifiers also allow
@@ -192,7 +195,7 @@ dc.resp <- dcc(muc.spruce, muc.clim)
 \references{
 Biondi, F. & Waikul, K. (2004) DENDROCLIM2002: A C++
 program for statistical calibration of climate signals in
-tree-ring chronologies. \emph{Computers & Geosciences}
+tree-ring chronologies.  \emph{Computers & Geosciences}
 30:303-311
 
 Dixon, P.M. (2001) Bootstrap resampling. In: El-Shaarawi,

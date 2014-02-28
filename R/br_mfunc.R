@@ -1,17 +1,18 @@
-##' moving (bootstrapped) response and correlation function
-##'
+##' moving response and correlation function
+##' 
 ##' see doc for dcc for details.
 ##' @param chrono tree-ring chronology
 ##' @param climate data.frame with climate parameters
+##' @param boot which bootstrapping method should be used?
 ##' @param sb logical: draw statusbar or not?
 ##' @param start_last logical: start with last (oldest) window?
 ##' @param win_size numeric: size of the moving in years
-##' @param win_offset numeric: size of offset between moving windows
-##' in years
-##' @param ci numeric: p-level for confidence interval (must be in
-##' c(0.1, 0.05, 0.01)
-##' @param method character: method to be used (one of "response" or
-##' "correlation")
+##' @param win_offset numeric: size of offset between moving windows in years
+##' @param ci numeric: p-level for confidence interval (must be in c(0.1, 0.05, 
+##'   0.01)
+##' @param method character: method to be used (one of "response" or 
+##'   "correlation")
+##' @keywords internal
 br_mfunc <- function(chrono, climate, boot, sb, start_last,
                          win_size, win_offset, ci, method) {
 
@@ -60,10 +61,10 @@ br_mfunc <- function(chrono, climate, boot, sb, start_last,
 
     if (method == "response") {
       window <- br_response(chrono_win, climate_win_list,
-                            ci = ci, sb = FALSE)
+                            ci = ci, boot = boot)
     } else {
       window <- br_correlation(chrono_win, climate_win_list,
-                               ci = ci, sb = FALSE)
+                               ci = ci, boot = boot)
     }
 
     result_matrix_coef[,k] <- window$coef

@@ -22,6 +22,23 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// corfunexact
+SEXP corfunexact(SEXP x, SEXP y, SEXP y0);
+RcppExport SEXP bootres2_corfunexact(SEXP xSEXP, SEXP ySEXP, SEXP y0SEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< SEXP >::type x(xSEXP );
+        Rcpp::traits::input_parameter< SEXP >::type y(ySEXP );
+        Rcpp::traits::input_parameter< SEXP >::type y0(y0SEXP );
+        SEXP __result = corfunexact(x, y, y0);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // respo
 SEXP respo(SEXP x, SEXP y);
 RcppExport SEXP bootres2_respo(SEXP xSEXP, SEXP ySEXP) {
@@ -32,6 +49,23 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< SEXP >::type x(xSEXP );
         Rcpp::traits::input_parameter< SEXP >::type y(ySEXP );
         SEXP __result = respo(x, y);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// respoexact
+SEXP respoexact(SEXP x, SEXP y, SEXP y0);
+RcppExport SEXP bootres2_respoexact(SEXP xSEXP, SEXP ySEXP, SEXP y0SEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< SEXP >::type x(xSEXP );
+        Rcpp::traits::input_parameter< SEXP >::type y(ySEXP );
+        Rcpp::traits::input_parameter< SEXP >::type y0(y0SEXP );
+        SEXP __result = respoexact(x, y, y0);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

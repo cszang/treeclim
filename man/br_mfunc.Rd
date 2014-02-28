@@ -1,6 +1,6 @@
 \name{br_mfunc}
 \alias{br_mfunc}
-\title{moving (bootstrapped) response and correlation function}
+\title{moving response and correlation function}
 \usage{
 br_mfunc(chrono, climate, boot, sb, start_last, win_size, win_offset, ci,
   method)
@@ -9,6 +9,8 @@ br_mfunc(chrono, climate, boot, sb, start_last, win_size, win_offset, ci,
   \item{chrono}{tree-ring chronology}
 
   \item{climate}{data.frame with climate parameters}
+
+  \item{boot}{which bootstrapping method should be used?}
 
   \item{sb}{logical: draw statusbar or not?}
 
@@ -29,4 +31,5 @@ br_mfunc(chrono, climate, boot, sb, start_last, win_size, win_offset, ci,
 \description{
 see doc for dcc for details.
 }
+\keyword{internal}
 
