@@ -1,0 +1,26 @@
+\name{ptest}
+\alias{ptest}
+\title{Significance test for bootstrapped coefficients}
+\usage{
+ptest(bc, ci, c0 = NULL, method)
+}
+\arguments{
+  \item{bc}{the parameter matrix as returned from
+  correlation of the bootstapped samples (n * 1000 matrix,
+  with n = number of parameters)}
+
+  \item{ci}{confidence level, one of c(0.01, 0.05, 0.1)}
+
+  \item{c0}{for weibull: correlation vector for original
+  model}
+
+  \item{method}{method for significance test}
+}
+\value{
+a logical vector indicating significance
+}
+\description{
+Significance test for bootstrapped coefficients
+}
+\keyword{internal}
+

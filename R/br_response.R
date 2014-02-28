@@ -19,38 +19,7 @@ br_response <- function(chrono, climate, sb, ci) {
   param_matrix <- .Call("bootres2_respo", boot_data$climate,
                         boot_data$chrono, PACKAGE = "bootres2")$coef
   
-  brf_coef <- apply(param_matrix, 1, median)
-  if (ci == 0.05) {
-    ci_lower <- apply(param_matrix, 1, function(x) { sort(x)[25] })
-    ci_upper <- apply(param_matrix, 1, function(x) { sort(x)[975] })
-  } else {
-    if (ci == 0.01) {
-      ci_lower <- apply(param_matrix, 1, function(x) { sort(x)[5] })
-      ci_upper <- apply(param_matrix, 1, function(x) { sort(x)[995] })
-    } else {
-      ci_lower <- apply(param_matrix, 1, function(x) { sort(x)[50] })
-      ci_upper <- apply(param_matrix, 1, function(x) { sort(x)[950] })
-    }
-  }
-
-  ## Significance test
-  is_sig <- logical(m)
-  for (i in 1:m) {
-    if (sign(ci_upper[i]) != sign(ci_lower[i])) {
-      is_sig[i] <- FALSE
-    } else {
-      if (abs(brf_coef[i]) > abs((abs(ci_upper[i]) - abs(ci_lower[i]))/2)) {
-        is_sig[i] <- TRUE
-      } else {
-        is_sig[i] <- FALSE
-      }
-    }
-  }
-    
-  out <- data.frame(coef = brf_coef,
-                    significant = is_sig,
-                    ci_lower = ci_lower,
-                    ci_upper = ci_upper)
+  out <- ptest(param_matrix, ci, NULL, "range")
   rownames(out) <- abbrev_name(vnames)
   attributes(out)$npar <- attributes(climate$aggregate)$npar
   attributes(out)$vnames <- vnames
