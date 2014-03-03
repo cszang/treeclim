@@ -4,4 +4,5 @@ src/*.o
 src/*.so
 src/*.dll
 .Rproj*
+*.Rproj
 .Rproj.user
