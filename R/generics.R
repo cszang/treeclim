@@ -103,34 +103,27 @@ plot.br_dcc <- function(x, ...) {
       y = rep(0, dim(data)[1] + 2)
       )
 
-    ggplot(data, aes(x = id, y = coef), ...) +
+    gg <- ggplot(data, aes(x = id, y = coef), ...) +
       geom_line(data = line0, aes(x, y), color = "grey") +
-      geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper, color =
-                        varname, lty = significant), size = 1) +
       scale_linetype_manual(values = c("dotted", "solid")) +
       geom_point(aes(color = varname), size = 3) +
       scale_x_continuous(breaks = data$id, labels = data$month) +
       ylab("Coefficients") +
       xlab("Months") +  
       theme_minimal() +
-      theme(axis.title.x = element_blank())
-
+      theme(axis.title.x = element_blank())    
+    
+    if (x$call$boot == "exact") {
+      gg
+    } else {
+      gg + geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper, color =
+                               varname, lty = significant), size = 1)
+    }
+    
   } else {
 
     ## mdcc case
 
-    ## bootstrapped or not?
-
-    if(!is.null(x$call$boot)) {
-      if (x$call$boot) {
-        boot <- TRUE
-      } else {
-        boot <- FALSE
-      }
-    } else {
-      boot <- TRUE
-    }
-    
     coef <- data$coef
     n <- dim(coef)[2]
     m <- dim(coef)[1]
@@ -169,20 +162,15 @@ plot.br_dcc <- function(x, ...) {
       theme_minimal() +
       scale_x_continuous(breaks = seq(0.5, by = 1, length.out = n),
                          labels = names(coef)) +
-      scale_y_continuous(breaks = seq(0.5, by = 1, length.out = m), labels = abbrev_name(rownames(coef))) +
+      scale_y_continuous(breaks = seq(0.5, by = 1, length.out = m),
+                         labels = abbrev_name(rownames(coef))) +
       theme(axis.text.x = element_text(angle = 90, vjust = 0),
             axis.title.x = element_blank(),
-            axis.title.y = element_blank())
+            axis.title.y = element_blank()) + 
+      geom_point(data = subset(pdata, significant),
+                 aes(x = wid - 0.5, y = vid - 0.5), pch = 8,
+                 color = "grey")
     
-    if (boot) {
-
-      gg + geom_point(data = subset(pdata, significant), aes(x = wid -
-                        0.5, y = vid - 0.5), pch = 8, color = "grey")
-      
-    } else {
-
-      gg
-  
-    }
+      gg 
   }
 }
