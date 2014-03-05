@@ -263,7 +263,6 @@ dcc <- function(chrono,
 
   if (moving) {
     dc <- br_mfunc(truncated_input$chrono, design,
-                   boot = boot,
                    ci = ci,
                    sb = sb,
                    method = .method,

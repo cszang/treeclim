@@ -60,7 +60,7 @@ NULL
 ##' (DENDROCLIM2002-style) format)
 ##' @source Zang C, Rothe A, Weis W, Pretzsch H (2011) Zur
 ##' Baumarteneignung bei Klimawandel: Ableitung der
-##' Trockenstress-Anfälligkeit wichtiger Waldbaumarten aus
+##' Trockenstress-Anfaelligkeit wichtiger Waldbaumarten aus
 ##' Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182, 98-112.
 ##' @docType data
 ##' @keywords datasets
@@ -77,7 +77,7 @@ NULL
 ##' (DENDROCLIM2002-style) format)
 ##' @source Zang C, Rothe A, Weis W, Pretzsch H (2011) Zur
 ##' Baumarteneignung bei Klimawandel: Ableitung der
-##' Trockenstress-Anfälligkeit wichtiger Waldbaumarten aus
+##' Trockenstress-Anfaelligkeit wichtiger Waldbaumarten aus
 ##' Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182, 98-112.
 ##' @docType data
 ##' @keywords datasets
@@ -99,7 +99,7 @@ NULL
 ##' robust mean \code{\link[dplR]{chron}}.
 ##' @source Zang C, Rothe A, Weis W, Pretzsch H (2011) Zur
 ##' Baumarteneignung bei Klimawandel: Ableitung der
-##' Trockenstress-Anfälligkeit wichtiger Waldbaumarten aus
+##' Trockenstress-Anfaelligkeit wichtiger Waldbaumarten aus
 ##' Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182, 98-112.
 ##' @docType data
 ##' @keywords datasets

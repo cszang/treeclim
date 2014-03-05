@@ -1,25 +1,25 @@
 ##' @S3method print br_dcc
-print.br_dcc <- function(x) {
+print.br_dcc <- function(x, ...) {
   ci <- x$call$ci
   if (is.null(ci))
     ci <- 0.05
   cat("Coefficients (significance flags correspond to p < ",
       ci, "):\n", sep = "")
-  print(x$coef)
+  print(x$coef, ...)
 }
 
 ##' @S3method print br_coef
-print.br_coef <- function(x) {
+print.br_coef <- function(x, ...) {
   rownames(x) <- abbrev_name(rownames(x))
   x$coef <- round(x$coef, 3)
   x$ci_lower <- round(x$ci_lower, 3)
   x$ci_upper <- round(x$ci_upper, 3)
-  print.data.frame(x)
+  print.data.frame(x, ...)
 }
 
 ##' @importFrom abind abind
 ##' @S3method print br_mcoef
-print.br_mcoef <- function(x) {
+print.br_mcoef <- function(x, ...) {
   mm <- abind(x$coef, x$significant, along = 3)
   ms <- apply(mm, c(1, 2), function(x) {
     if (!is.na(x[2])) {
@@ -34,43 +34,43 @@ print.br_mcoef <- function(x) {
     xc
   })
   rownames(ms) <- abbrev_name(rownames(ms))
-  print(ms)
+  print(ms, ...)
 }
 
 ##' @S3method print br_design
-print.br_design <- function(x) {
+print.br_design <- function(x, ...) {
   pr <- x$aggregate
   names(pr) <- abbrev_name(x$names)
   years <- as.numeric(rownames(pr))
   cat(length(years), "observations of", dim(pr)[2],
       "variables.\nObserved years:", min(years), "-", max(years),
       "\nUsed (potentially aggregated) variables:\n")
-  cat(paste(names(pr), collapse = "\n"), "\n")
+  print(paste(names(pr), collapse = "\n"), ...)
 }
 
 ##' @S3method coef br_dcc
-coef.br_dcc <- function(x) {
-  coef(x$coef)
+coef.br_dcc <- function(object, ...) {
+  coef(object$coef, ...)
 }
 
 ##' @S3method coef br_coef
-coef.br_coef <- function(x) {
-  data.frame(x)
+coef.br_coef <- function(object, ...) {
+  print(data.frame(object), ...)
 }
 
 ##' @S3method coef br_mcoef
-coef.br_mcoef <- function(x) {
-  data.frame(x$coef)
+coef.br_mcoef <- function(object, ...) {
+  print(data.frame(object$coef), ...)
 }
 
 ##' @S3method summary br_dcc
-summary.br_dcc <- function(x) {
+summary.br_dcc <- function(object, ...) {
   cat("Call:\n")
-  print(x$call)
-  cat("\nDesign matrix:\n")
-  print(x$design)
+  print(object$call)
+  cat("\nDesign matriobject:\n")
+  print(object$design)
   cat("\nCoefficients:\n")
-  print(x$coef)
+  print(object$coef, ...)
 }
 
 ##' @S3method + br_paramlist
@@ -93,7 +93,7 @@ summary.br_dcc <- function(x) {
 ##' @import ggplot2
 ##' @import plyr
 ##' @S3method plot br_dcc
-plot.br_dcc <- function(x) {
+plot.br_dcc <- function(x, ...) {
   data <- x$coef
 
   if (any(class(data) == "br_coef")) {
@@ -103,7 +103,7 @@ plot.br_dcc <- function(x) {
       y = rep(0, dim(data)[1] + 2)
       )
 
-    ggplot(data, aes(x = id, y = coef)) +
+    ggplot(data, aes(x = id, y = coef), ...) +
       geom_line(data = line0, aes(x, y), color = "grey") +
       geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper, color =
                         varname, lty = significant), size = 1) +
@@ -163,7 +163,7 @@ plot.br_dcc <- function(x) {
 
     idpgrid <- merge(pdata, idgrid, by = c("pid"))
 
-    gg <- ggplot(idpgrid, aes(x = window, y = varname)) +
+    gg <- ggplot(idpgrid, aes(x = window, y = varname), ...) +
       geom_polygon(aes(x, y, fill = coef, group = pid)) +
       scale_fill_gradient2() +
       theme_minimal() +

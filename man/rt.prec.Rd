@@ -7,7 +7,7 @@ and twelve months of precipitation data in mm rainfall.}
 \source{
 Zang C, Rothe A, Weis W, Pretzsch H (2011) Zur
 Baumarteneignung bei Klimawandel: Ableitung der
-Trockenstress-Anfälligkeit wichtiger Waldbaumarten aus
+Trockenstress-Anfaelligkeit wichtiger Waldbaumarten aus
 Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182,
 98-112.
 }
