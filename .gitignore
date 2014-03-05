@@ -6,3 +6,4 @@ src/*.dll
 .Rproj*
 *.Rproj
 .Rproj.user
+R/RcppExports.R
