@@ -271,6 +271,7 @@ dcc <- function(chrono,
   dcc_out$call <- match.call()
   dcc_out$coef <- dc
   dcc_out$design <- design
+  dcc_out$tree <- truncated_input$chrono
 
   class(dcc_out) <- c("br_dcc", "list")
 
