@@ -1,13 +1,13 @@
-##' Check if month specification is continuous
-##'
-##' If month specification is continuous, this function will return
-##' TRUE, and FALSE if not.
-##' 
-##' @param x a numeric month id specification
-##' @return TRUE or FALSE
-##' @keywords manip internal
+#' Check if month specification is continuous
+#'
+#' If month specification is continuous, this function will return
+#' TRUE, and FALSE if not.
+#' 
+#' @param x a numeric month id specification
+#' @return TRUE or FALSE
+#' @keywords manip internal
 is_continuous <- function(x) {
-  ## check if x is one-decreasing or one-increasing
+  # check if x is one-decreasing or one-increasing
   n <- length(x)
   checks <- logical(n - 1)
   if (n > 1) {

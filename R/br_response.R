@@ -1,12 +1,12 @@
-##' (bootstrapped) response function
-##'
-##' See documentation of dcc for details.
-##' @param chrono a tree-ring chronology
-##' @param climate data.frame with climate parameters
-##' @param ci numeric: p-level for confidence interval (must be in
-##' c(0.1, 0.05, 0.01)
-##' @param boot string: which bootstrapping method?
-##' @keywords internal
+#' (bootstrapped) response function
+#' 
+#' See documentation of dcc for details.
+#' @param chrono a tree-ring chronology
+#' @param climate data.frame with climate parameters
+#' @param ci numeric: p-level for confidence interval (must be in c(0.1, 0.05,
+#'   0.01)
+#' @param boot string: which bootstrapping method?
+#' @keywords internal
 br_response <- function(chrono, climate, ci, boot) {
   
   vnames <- climate$names
@@ -34,8 +34,7 @@ br_response <- function(chrono, climate, ci, boot) {
   attributes(out)$npar <- attributes(climate$aggregate)$npar
   attributes(out)$vnames <- vnames
     
-  ## include information for pretty printing and assemble output
-  ## data.frame
+  # include information for pretty printing and assemble output data.frame
   
   out <- data.frame(
     id = climate$pretty_names$id,

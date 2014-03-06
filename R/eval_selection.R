@@ -1,19 +1,18 @@
-##' Eval a single list of specifications
-##'
-##' Evaluate a single list of specifications. Climate parameters are
-##' selected from the parameter matrix by name, then the appropriate
-##' function is applied to the correct month subset.
-##' @param clim climate data as returned from make_pmat
-##' @param sel single list of parameter specifications
-##' @return a list
-##' @keywords internal manip
+#' Eval a single list of specifications
+#' 
+#' Evaluate a single list of specifications. Climate parameters are selected
+#' from the parameter matrix by name, then the appropriate function is applied
+#' to the correct month subset.
+#' @param clim climate data as returned from make_pmat
+#' @param sel single list of parameter specifications
+#' @return a list
+#' @keywords internal manip
 eval_selection <- function(clim, sel) {
 
   aggregate <- list()
   NAMES <- character(0)
 
-  ## methods for parameter aggregation using .method, .month and
-  ## .param
+  # methods for parameter aggregation using .method, .month and .param
   method_full <- function(x) {
     x
   }
@@ -45,26 +44,26 @@ eval_selection <- function(clim, sel) {
     } 
   }
 
-  ## default values
+  # default values
   month <- format_month(-6:9)
   param <- NULL
   method <- "full"
   if (n > 0) {
     if (any(sapply(sel, is.numeric))) {
-      ## get numeric argument
+      # get numeric argument
       month <- format_month(unlist(sel[sapply(sel, is.numeric)]))
     }
     if (any(sapply(sel, is_method_argument))) {
-      ## method as argument
+      # method as argument
       method <- unlist(sel[sapply(sel, is_method_argument)])
     }
     if (any(sapply(sel, is_param_argument))) {
-      ## param as argument
+      # param as argument
       param <- unlist(sel[sapply(sel, is_param_argument)])
     }
   }
 
-  ## param == NULL means that all parameters are used
+  # param == NULL means that all parameters are used
   if (is.null(param)) {
     param <- names(clim)
   }
@@ -72,7 +71,7 @@ eval_selection <- function(clim, sel) {
   for (i in seq_len(length(param))) {   # do this for all climate
                                         # parameters
 
-    ## select climate element by climate parameter name
+    # select climate element by climate parameter name
     eval(
       substitute(
         this_clim <- clim$name,
@@ -80,10 +79,10 @@ eval_selection <- function(clim, sel) {
         )
       )
     
-    ## and then select only the relevant months
+    # and then select only the relevant months
     selected_clim <- this_clim[,month$match]
 
-    ## switch on method and apply to climate
+    # switch on method and apply to climate
     .method <- switch(method,
                       full = method_full,
                       mean = method_mean,
@@ -91,7 +90,7 @@ eval_selection <- function(clim, sel) {
     
     .clim <- .method(selected_clim)
 
-    ## generate variable names
+    # generate variable names
     .names <- switch(method,
                      full = paste(param[i], month$names, sep = "."),
                      mean = paste(param[i], "mean", paste(month$names,
@@ -102,10 +101,10 @@ eval_selection <- function(clim, sel) {
     NAMES <- c(NAMES, .names)
   }
 
-  ## combine all climate parameters into a flat data.frame
+  # combine all climate parameters into a flat data.frame
   aggregate <- as.data.frame(aggregate)
 
-  ## prepare return value
+  # prepare return value
   ret <- list()
   ret$month <- month                    # the months used
   ret$method <- method                  # the method used

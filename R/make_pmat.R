@@ -1,13 +1,13 @@
-##' Reformat climate input data into separate lists
-##'
-##' Make separate lists for each parameter in the climate data input, and make
-##' them accessible by the parameter names. The single lists correspond to the
-##' scheme years in rows, observations from previous december to current december
-##' in columns.
-##' @title Make list of parameter matrices from climate input data
-##' @param x climate data as returned from as_brclimate
-##' @return a list of matrices
-##' @keywords manip internal
+#' Reformat climate input data into separate lists
+#' 
+#' Make separate lists for each parameter in the climate data input, and make 
+#' them accessible by the parameter names. The single lists correspond to the 
+#' scheme years in rows, observations from previous december to current december
+#' in columns.
+#' @title Make list of parameter matrices from climate input data
+#' @param x climate data as returned from as_brclimate
+#' @return a list of matrices
+#' @keywords manip internal
 make_pmat <- function(x) {
   if (any(names(x) == "year")) {
     years <- x$year
@@ -18,8 +18,8 @@ make_pmat <- function(x) {
   no.vars <- dim(x)[2] - 2
   .names <- names(x)[-c(1:2)]
 
-  ## create a full matrix from -1 to 12 for every parameter, names are
-  ## not needed for this step
+  # create a full matrix from -1 to 12 for every parameter, names are
+  # not needed for this step
 
   m <- list()
 

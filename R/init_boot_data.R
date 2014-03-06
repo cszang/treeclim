@@ -1,15 +1,13 @@
-##' initialize data structure for bootstrapping
-##'
-##' this will create an array for the climate data and corresponding
-##' matrix for the tree-ring data, holding the randomly resampled data
-##' for bootstrapping
-##' @param u climate data (matrix with parameters in columns and years
-##' in rows)
-##' @param g vector with tree-ring data
-##' @param n times for resampling
-##' @param bootmethod one of c("std", "exact")
-##' @return a list
-##' @keywords internal 
+#' initialize data structure for bootstrapping
+#' 
+#' this will create an array for the climate data and corresponding matrix for
+#' the tree-ring data, holding the randomly resampled data for bootstrapping
+#' @param u climate data (matrix with parameters in columns and years in rows)
+#' @param g vector with tree-ring data
+#' @param n times for resampling
+#' @param bootmethod one of c("std", "exact")
+#' @return a list
+#' @keywords internal
 init_boot_data <- function(u, g, n, bootmethod) {
   m <- length(g)
   k <- dim(u)[2]
@@ -23,35 +21,35 @@ init_boot_data <- function(u, g, n, bootmethod) {
     }
   }
   if (bootmethod == "exact") {
-    # gaussian simulation of tree-ring data with circulant embedding; this code
+    # gaussian simulation of tree-ring data with circulant embedding; this code 
     # is adapted from Dave Meko's seascorr MATLAB source
     
     # climate data remains unchanged
     out_u <- u
     
-    ## subtract series mean
+    # subtract series mean
     trm <- g - mean(g)
     
-    ## store original variance and sd
+    # store original variance and sd
     varo <- var(g)
     xsd <- sd(g)
     
-    ## taper with cosine bell
+    # taper with cosine bell
     trt <- spec.taper(trm, 0.05)
     
-    ## rescale so that mean is exactly zero
+    # rescale so that mean is exactly zero
     trt <- trt - mean(trt)
     
-    ## find power of 2 greater than double length of data
+    # find power of 2 greater than double length of data
     ll <- length(trt)
     pow2 <- 2^c(1:12)
     pow <- pow2[which(pow2 > 2 * ll)[1]]
     
-    ## pad data with 0 to length of next power of 2
+    # pad data with 0 to length of next power of 2
     padlen <- pow - ll
     trp <- c(trt, rep(0, padlen))
     
-    ## scale variance of trp to original variance of u
+    # scale variance of trp to original variance of u
     sdx <- sd(g)
     sdp <- sd(trp)
     meanp <- mean(trp)
@@ -59,13 +57,13 @@ init_boot_data <- function(u, g, n, bootmethod) {
     trtemp <- trtemp * (sdx / sdp)
     trp <- trtemp + meanp
     
-    ## compute discrete fourier transform on tapered and padded series
+    # compute discrete fourier transform on tapered and padded series
     z <- fft(trp)
     
-    ## compute periodogram
+    # compute periodogram
     Pyy  <- Re(z * Conj(z))/padlen
     
-    ## sample Gaussian noise and compute mu for 1000 simulation runs
+    # sample Gaussian noise and compute mu for 1000 simulation runs
     M <- length(trp)/2
     Z <- matrix(rnorm(500 * length(trp) * 2), ncol = 500)
     k <- t(1:length(trp))
@@ -86,7 +84,7 @@ init_boot_data <- function(u, g, n, bootmethod) {
     D <- cbind(D1, D2)
     D <- D[1:ll, 1:1000]
     
-    ## scale to original mean and variance
+    # scale to original mean and variance
     Dmean <- matrix(rep(colMeans(D), each = ll), ncol = 1000)
     Dsd <- matrix(rep(apply(D, 2, sd), each = ll), ncol = 1000)
     Dz <- (D - Dmean) / Dsd

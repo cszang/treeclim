@@ -1,43 +1,43 @@
-##' Deparse list structure from month specification and return parameter set
-##'
-##' Deparse list structure from month specification into single calls, call an
-##' aggregating function to collect the data, and return a parameter set for
-##' calibration. In general, the months must be specified as a list or nested
-##' list structure. Possible cases are:
-##' list()
-##' list(...)
-##' list(list(...))
-##' list(list(...), list(...), ...)
-##' @param selection the list structure to specify the month selection
-##' @param climate the climate data as returned by make_pmat
-##' @return a data.frame
+#' Deparse list structure from month specification and return parameter set
+#'
+#' Deparse list structure from month specification into single calls, call an
+#' aggregating function to collect the data, and return a parameter set for
+#' calibration. In general, the months must be specified as a list or nested
+#' list structure. Possible cases are:
+#' list()
+#' list(...)
+#' list(list(...))
+#' list(list(...), list(...), ...)
+#' @param selection the list structure to specify the month selection
+#' @param climate the climate data as returned by make_pmat
+#' @return a data.frame
 br_design <- function(selection, climate) {
-  ## is it a list?
+  # is it a list?
   if (!is.list(selection)) {
     stop("Please supply information about independent variables as list.")
   }
-  ## check for nested list structure
+  # check for nested list structure
   n <- length(as.list(selection))
   if (n == 0) {
     # empty list, default parameters are taken
     out <- eval_selection(climate, selection)
   }
   if (n == 1) {
-    ## could be list("mean") or list(list(...))
+    # could be list("mean") or list(list(...))
     if (is.list(selection[[1]])) {
-      ## list(list(...))
+      # list(list(...))
       out <- eval_selection(climate, selection[[1]])
     } else {
-      ## list("mean")
+      # list("mean")
       out <- eval_selection(climate, selection)
     }
   }
   if (n > 1) {
-    ## list(list(...), list(...), ...) or list("mean", 1:10)
+    # list(list(...), list(...), ...) or list("mean", 1:10)
     if (is.list(selection[[1]])) {
-      ## everything has to be a list
+      # everything has to be a list
       if (all(sapply(selection, is.list))) {
-        ## list(list(...), list(...), ...)
+        # list(list(...), list(...), ...)
         OUT <- list()
         for (i in 1:n) {
           OUT[[i]] <- eval_selection(climate, selection[[i]])
@@ -60,10 +60,10 @@ br_design <- function(selection, climate) {
         stop("You may not mix modifiers/lists and other objects for parameter specifications.")
       }
     } else {
-      ## everything has to be not a list
+      # everything has to be not a list
       if (all(sapply(selection, function(x) { ifelse(is.list(x), FALSE,
                                              TRUE)}))) {
-        ## list("mean", 1:10)
+        # list("mean", 1:10)
         out <- eval_selection(climate, selection)
       } else {
         stop("You may not mix lists and other objects for parameter specifications.")
@@ -71,22 +71,22 @@ br_design <- function(selection, climate) {
     }
   }
 
-  ## avoid duplicate parameters
+  # avoid duplicate parameters
   dupes <- duplicated(out$names)
   if (any(dupes)) {
     out$aggregate <- out$aggregate[,!dupes]
     out$names <- out$names[!dupes]
   }
 
-  ## throw error when we have only one variable left; point the user
-  ## to using lm() instead
+  # throw error when we have only one variable left; point the user to using
+  # lm() instead
   if (dim(out$aggregate)[2] < 2)
     stop("You supplied only one climate variable for calibration. bootres2 needs at least two. Consider using lm() in this case. Thanks.")
 
-  ## reorder and add pretty names for plotting required: months as
-  ## numeric values from 1:25 (25 is for month aggregations); we do
-  ## this _after_ removing the potential duplicates, which is safer,
-  ## but also results in a somewhat lengthy code...
+  # reorder and add pretty names for plotting required: months as numeric values
+  # from 1:25 (25 is for month aggregations); we do this _after_ removing the
+  # potential duplicates, which is safer, but also results in a somewhat lengthy
+  # code...
 
   get_month_numeric <- function(m) {
     switch(m,
@@ -114,11 +114,11 @@ br_design <- function(selection, climate) {
     vars[i] <- paste(split[1:fmatch], collapse = ".")
     if (sum(mmatches) > 1) {
       .months[i] <- 25
-      ## long variable name
+      # long variable name
       season <- split[mmatches]
       smatches <- c(FALSE, mmatches[-length(mmatches)])
       months <- split[smatches]
-      ## get first and last month and season
+      # get first and last month and season
       fseason <- season[1]
       fmonth <- months[1]
       if (fseason == "prev") {
@@ -136,7 +136,7 @@ br_design <- function(selection, climate) {
       labels[i] <- paste(fmonth, "...", lmonth, sep = "")
     } else {
       .months[i] <- get_month_numeric(split[3])
-      ## short variable name
+      # short variable name
       tseason <- split[mmatches]
       tmonth <- split[fmatch + 2]
       if (tseason == "prev") {
