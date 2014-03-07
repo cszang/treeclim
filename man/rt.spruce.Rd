@@ -1,10 +1,9 @@
 \docType{data}
 \name{rt.spruce}
 \alias{rt.spruce}
-\title{Tree-Ring Chronology of a Spruce Population at Rothenburg
-ob der Tauber}
-\format{A \code{data.frame} containing tree-ring indices and
-replication depth with respective years as \code{rownames}.}
+\title{Tree-Ring Chronology of a Spruce Population at Rothenburg ob der Tauber}
+\format{A \code{data.frame} containing tree-ring indices and replication
+  depth with respective years as \code{rownames}.}
 \source{
 Zang C, Rothe A, Weis W, Pretzsch H (2011) Zur
 Baumarteneignung bei Klimawandel: Ableitung der

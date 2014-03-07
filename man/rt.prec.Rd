@@ -2,8 +2,8 @@
 \name{rt.prec}
 \alias{rt.prec}
 \title{Monthly Precipitation Sums for Rothenburg ob der Tauber, Germany}
-\format{A \code{data.frame} containing thirteen columns with year
-and twelve months of precipitation data in mm rainfall.}
+\format{A \code{data.frame} containing thirteen columns with year and twelve
+  months of precipitation data in mm rainfall.}
 \source{
 Zang C, Rothe A, Weis W, Pretzsch H (2011) Zur
 Baumarteneignung bei Klimawandel: Ableitung der

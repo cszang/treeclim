@@ -20,7 +20,6 @@ Suggests:
     dplR
 Description: Calculation of Bootstrapped Response and Correlation Functions for
     Use in Dendroclimatology
-NeedsCompilation:
-    yes
+NeedsCompilation: yes
 License: GPL-3
 LazyLoad: yes
