@@ -11,7 +11,7 @@ ptest <- function(bc, ci, c0 = NULL, method) {
                    "0.01" = c(5, 995),
                    "0.05" = c(25, 975),
                    "0.1" = c(50, 950))
-  m <- dim(bc)[1]
+  m <- dim(as.matrix(bc))[1]
   if (method == "weibull") {
     # estimating p
     # sorting values
@@ -40,7 +40,8 @@ ptest <- function(bc, ci, c0 = NULL, method) {
     ci_lower <- NA
     ci_upper <- NA
     coefs <- c0
-  } else {
+  } 
+  if (method == "range") {
     coefs <- apply(bc, 1, median)
     ci_lower <- apply(bc, 1, function(x) sort(x)[limits[1]])
     ci_upper <- apply(bc, 1, function(x) sort(x)[limits[2]])
@@ -56,6 +57,10 @@ ptest <- function(bc, ci, c0 = NULL, method) {
         }
       }
     }
+  }
+  if (method == "none") {
+    coefs <- bc
+    ci_lower <- ci_upper <- is_sig <- rep(NA, m)
   }
   data.frame(coef = coefs,
              significant = is_sig,

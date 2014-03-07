@@ -3,7 +3,7 @@
 #' see doc for dcc for details.
 #' @param chrono tree-ring chronology
 #' @param climate data.frame with climate parameters
-#' @param boot which bootstrapping method should be used?
+#' @param boot which bootstrapping method should be used? (or "none")
 #' @param sb logical: draw statusbar or not?
 #' @param start_last logical: start with last (oldest) window?
 #' @param win_size numeric: size of the moving in years
@@ -14,7 +14,7 @@
 #'   "correlation")
 #' @keywords internal
 br_mfunc <- function(chrono, climate, boot, sb, start_last,
-                         win_size, win_offset, ci, method) {
+                     win_size, win_offset, ci, method) {
 
   vnames <- climate$names
   pretty_names <- climate$pretty_names
@@ -66,7 +66,7 @@ br_mfunc <- function(chrono, climate, boot, sb, start_last,
       window <- br_correlation(chrono_win, climate_win_list,
                                ci = ci, boot = boot)
     }
-
+    
     result_matrix_coef[,k] <- window$coef
     result_matrix_ci_upper[,k] <- window$ci_upper
     result_matrix_ci_lower[,k] <- window$ci_lower

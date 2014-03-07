@@ -2,7 +2,7 @@
 \alias{init_boot_data}
 \title{initialize data structure for bootstrapping}
 \usage{
-init_boot_data(u, g, n, bootmethod)
+init_boot_data(u, g, n, boot)
 }
 \arguments{
   \item{u}{climate data (matrix with parameters in columns
@@ -12,7 +12,7 @@ init_boot_data(u, g, n, bootmethod)
 
   \item{n}{times for resampling}
 
-  \item{bootmethod}{one of c("std", "exact")}
+  \item{boot}{one of c("std", "exact", "none")}
 }
 \value{
 a list

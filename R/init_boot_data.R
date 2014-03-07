@@ -5,13 +5,17 @@
 #' @param u climate data (matrix with parameters in columns and years in rows)
 #' @param g vector with tree-ring data
 #' @param n times for resampling
-#' @param bootmethod one of c("std", "exact")
+#' @param boot one of c("std", "exact", "none")
 #' @return a list
 #' @keywords internal
-init_boot_data <- function(u, g, n, bootmethod) {
+init_boot_data <- function(u, g, n, boot) {
   m <- length(g)
   k <- dim(u)[2]
-  if (bootmethod %in% c("std", "dendroclim")) {
+  if (boot == "none") {
+    out_u <- u
+    out_g <- g
+  }
+  if (boot %in% c("std", "dendroclim")) {
     out_u <- array(dim = c(m, k, n))
     out_g <- matrix(nrow = m, ncol = n)
     for (i in 1:n) {
@@ -20,7 +24,7 @@ init_boot_data <- function(u, g, n, bootmethod) {
       out_g[, i] <- g[.sample]
     }
   }
-  if (bootmethod == "exact") {
+  if (boot == "exact") {
     # gaussian simulation of tree-ring data with circulant embedding; this code 
     # is adapted from Dave Meko's seascorr MATLAB source
     

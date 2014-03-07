@@ -10,7 +10,8 @@ br_mfunc(chrono, climate, boot, sb, start_last, win_size, win_offset, ci,
 
   \item{climate}{data.frame with climate parameters}
 
-  \item{boot}{which bootstrapping method should be used?}
+  \item{boot}{which bootstrapping method should be used?
+  (or "none")}
 
   \item{sb}{logical: draw statusbar or not?}
 
