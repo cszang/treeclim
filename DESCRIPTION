@@ -1,8 +1,8 @@
 Package: bootres2
 Type: Package
 Title: Bootstrapped Response and Correlation Functions
-Version: 0.3.1
-Date: 2014-02-19
+Version: 0.4
+Date: 2014-03-10
 Author: Christian Zang
 Maintainer: Christian Zang <christian.zang@wzw.tum.de>
 Depends:
