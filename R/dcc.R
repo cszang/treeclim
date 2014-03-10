@@ -6,11 +6,11 @@
 #' windows. Function parameters may be bootstrapped to calculate their 
 #' significance and confidence intervals.
 #' @details This function builds upon and extents the functionality of programme
-#'   DENDROCLIM2002 (Biondi and Waikul, 2004), and will calculate bootstrapped
+#'   DENDROCLIM2002 (Biondi and Waikul, 2004), and will calculate bootstrapped 
 #'   (and non-bootstrapped) moving and static response and correlation functions
-#'   in a similar fashion as described in the above mentioned paper. Important
-#'   extensions include a very flexible parameter selection model (see below),
-#'   the possibility to use an unlimited number of climate parameters, and the
+#'   in a similar fashion as described in the above mentioned paper. Important 
+#'   extensions include a very flexible parameter selection model (see below), 
+#'   the possibility to use an unlimited number of climate parameters, and the 
 #'   option to use exact bootstrapping.
 #'   
 #'   Input chronology data can be a \code{data.frame} such as produced by 
@@ -43,9 +43,9 @@
 #'   provided in bootres2: \code{.range}, \code{.mean}, and \code{.sum}. 
 #'   \code{.range} corresponds the example above, where all specified months are
 #'   used, while \code{.sum} and \code{.mean} will use the sums and means of the
-#'   specified months. These modifiers also allow to select specific climatic
-#'   variables, addressed by name. Thus, \code{.mean(4:8, "temp")} will select
-#'   the mean for climate parameter "temp" for the months April to August. Not
+#'   specified months. These modifiers also allow to select specific climatic 
+#'   variables, addressed by name. Thus, \code{.mean(4:8, "temp")} will select 
+#'   the mean for climate parameter "temp" for the months April to August. Not 
 #'   only ranges, but also individual vectors can be used for month 
 #'   specification, like e.g., \code{.range(c(1, 3, 4, 5)}.
 #'   
@@ -59,23 +59,34 @@
 #'   
 #'   For the exclusion of months, the convenience function \code{excludefrom()} 
 #'   (or short \code{exfr()}) is provided. E.g., \code{.range(excludefrom(-6:10,
-#'   -11:3))} will yield the monthly values of all parameters for the months
+#'   -11:3))} will yield the monthly values of all parameters for the months 
 #'   previous June (-6) to current October (10), but without the months previous
-#'   November (-11) to current March (3) in between. While it is also possible
-#'   to supply arbitrary vectors as month specification, and not only ranges as
-#'   shown in most of the examples here, this way of excluding e.g. the dormant
+#'   November (-11) to current March (3) in between. While it is also possible 
+#'   to supply arbitrary vectors as month specification, and not only ranges as 
+#'   shown in most of the examples here, this way of excluding e.g. the dormant 
 #'   season is far more convenient.
 #'   
-#'   In case of response function analysis 1000 bootstrap samples are taken from
-#'   the original distribution and an eigen decomposition of the standardized
-#'   predictor matrix is performed. Nonrelevant eigenvectors are removed using
-#'   the PVP criterion (Guiot, 1990), principal component scores are then
-#'   calculated from the matrices of reduced eigenvectors and standardized
-#'   climatic predictors. Response coefficients are found via singular value
-#'   decomposition, and tested for significance using the 95\% percentile range
-#'   method (Dixon, 2001). In case of correlation function analysis, the
-#'   coefficients are Pearson's correlation coefficients. The same method for
+#'   In the classical approach to bootstrapping (DENDROCLIM2002-style, 
+#'   \code{boot = "std"}), 1000 bootstrap samples are taken from the original 
+#'   distributions of climate and tree-ring data. In the case of response 
+#'   function analysis, an eigen decomposition of the standardized predictor 
+#'   matrix is performed. Nonrelevant eigenvectors are removed using the PVP 
+#'   criterion (Guiot, 1990), principal component scores are then calculated 
+#'   from the matrices of reduced eigenvectors and standardized climatic 
+#'   predictors. Response coefficients are found via singular value 
+#'   decomposition, and tested for significance using the 95\% percentile range 
+#'   method (Dixon, 2001). In case of correlation function analysis, the 
+#'   coefficients are Pearson's correlation coefficients. The same method for 
 #'   significance testing is applied.
+#'   
+#'   There is also the option to use exact bootstrapping like implemented in 
+#'   seascorr (Meko et al. 2011). In this case, circulant embedding is used to 
+#'   simulate the tree-ring data 1000 times as time series with the same 
+#'   frequency characteristics like the original time-series (Percival & 
+#'   Constantine, 2006). Empirical non-exceedence probabilities are used to test
+#'   the coefficients of the response/correlation function with the original 
+#'   data for significance. For the exact bootstrapping case, no confidence 
+#'   intervals for the response/correlation coefficients can be computed.
 #'   
 #'   Input chronology data can be a \code{data.frame} such as produced by 
 #'   function \code{chron} of package dplR. It has to be a \code{data.frame} 
@@ -97,10 +108,10 @@
 #' @param chrono \code{data.frame} containing a tree-ring chronologies, e.g. as 
 #'   obtained by \code{chron} of package dplR.
 #' @param climate either a \code{data.frame} or \code{matrix} with climatic data
-#'   in monthly resolution, with year, month and climate parameters in columns
-#'   (all columns except year and month will be recognized as parameters for
-#'   response or correlation function), or a single \code{data.frame} or
-#'   \code{matrix} in 13-column format (see below), or list of several of the
+#'   in monthly resolution, with year, month and climate parameters in columns 
+#'   (all columns except year and month will be recognized as parameters for 
+#'   response or correlation function), or a single \code{data.frame} or 
+#'   \code{matrix} in 13-column format (see below), or list of several of the 
 #'   latter.
 #' @param selection either a numeric vector, a modifier, or a chain of modifiers
 #'   specifying the parameter selection for the model (see Details).
@@ -129,21 +140,31 @@
 #'   moving case should be suppressed. Suppression is recommended for e.g. 
 #'   Sweave files.
 #' @return an object of class `br_dcc`.
-#' @references Biondi, F. & Waikul, K. (2004) DENDROCLIM2002: A C++ program for 
+#' @references Biondi, F & Waikul, K (2004) DENDROCLIM2002: A C++ program for 
 #'   statistical calibration of climate signals in tree-ring chronologies. 
 #'   \emph{Computers & Geosciences} 30:303-311
 #'   
-#'   Dixon, P.M. (2001) Bootstrap resampling. In: El-Shaarawi, A.H., Piegorsch, 
-#'   W.W. (Eds.), \emph{The Encyclopedia of Environmetrics}. Wiley, New York.
+#'   Dixon, PM (2001) Bootstrap resampling. In: El-Shaarawi, AH, Piegorsch, WW 
+#'   (Eds.), \emph{The Encyclopedia of Environmetrics}. Wiley, New York.
 #'   
-#'   Guiot, J. (1991) The boostrapped response function. \emph{Tree-Ring 
+#'   Guiot, J (1991) The boostrapped response function. \emph{Tree-Ring 
 #'   Bulletin} 51:39-41
+#'   
+#'   Meko DM, Touchan R, Anchukaitis KJ (2011) Seascorr: A MATLAB program for 
+#'   identifying the seasonal climate signal in an annual tree-ring time series.
+#'   \emph{Computers \& Geosciences} 37:1234-241
+#'   
+#'   Percival DB, Constantine WLB (2006) Exact simulation of Gaussian Time 
+#'   Series from Nonparametric Spectral Estimates with Application to 
+#'   Bootstrapping. \emph{Statistics and Computing} 16:25-35
 #' @examples
 #' \dontrun{
 #' data(muc.clim) # climatic data
 #' data(muc.spruce) # spruce data
 #' dc.resp <- dcc(muc.spruce, muc.clim)
 #' }
+#' @author Christian Zang; the original MATLAB code for exact bootstrapping was
+#'   written by Dave Meko
 #' @export
 dcc <- function(chrono,
                 climate,
