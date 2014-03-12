@@ -35,7 +35,7 @@
 #'   gershunov(dc.cor) }
 #' @keywords test
 #' @export
-gershunov <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
+g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
   if (!any(class(x) != "br_dcc"))
     stop("Please provide output of function `dcc`.")
   
