@@ -1,10 +1,10 @@
 \docType{data}
 \name{muc.clim}
 \alias{muc.clim}
-\title{Monthly Mean Temperature and Total Precipitation for Forstenrieder Park,
-Munich}
-\format{A \code{data.frame} containing four columns with year, month,
-  temperature and precipitation.}
+\title{Monthly Mean Temperature and Total Precipitation for Forstenrieder
+Park, Munich}
+\format{A \code{data.frame} containing four columns with year,
+month, temperature and precipitation.}
 \source{
 Zang C, Pretzsch H, Rothe A (2012) Size-dependent responses
 to summer drought in Scots pine, Norway spruce and common

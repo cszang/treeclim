@@ -52,10 +52,9 @@ data to test for significantly higher or lower
 low-frequency modulations.
 }
 \examples{
-\dontrun{
-  data(muc.clim) # climatic data data(muc.spruce) # spruce data dc.cor <-
-  dcc(muc.spruce, muc.clim, 3:9, method = "cor", moving = TRUE)
-  gershunov(dc.cor) }
+\dontrun{ data(muc.clim) # climatic
+data data(muc.spruce) # spruce data dc.cor <- dcc(muc.spruce,
+muc.clim, 3:9, method = "cor", moving = TRUE) gershunov(dc.cor) }
 }
 \references{
 Gershunov, A., N. Schneider, and T. Barnett. 2001.

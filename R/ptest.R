@@ -1,11 +1,12 @@
-#' @title Significance test for bootstrapped coefficients
-#' @param bc the parameter matrix as returned from correlation of the 
-#'   bootstapped samples (n * 1000 matrix, with n = number of parameters)
-#' @param ci confidence level, one of c(0.01, 0.05, 0.1)
-#' @param c0 for weibull: correlation vector for original model
-#' @param method method for significance test
-#' @return a logical vector indicating significance
-#' @keywords internal
+##' @title Significance test for bootstrapped coefficients
+##' @param bc the parameter matrix as returned from correlation of the
+##' bootstapped samples (n * 1000 matrix, with n = number of
+##' parameters)
+##' @param ci confidence level, one of c(0.01, 0.05, 0.1)
+##' @param c0 for weibull: correlation vector for original model
+##' @param method method for significance test
+##' @return a logical vector indicating significance
+##' @keywords internal
 ptest <- function(bc, ci, c0 = NULL, method) {
   limits <- switch(as.character(ci),
                    "0.01" = c(5, 995),
@@ -13,10 +14,10 @@ ptest <- function(bc, ci, c0 = NULL, method) {
                    "0.1" = c(50, 950))
   m <- dim(as.matrix(bc))[1]
   if (method == "weibull") {
-    # estimating p
-    # sorting values
+    ## estimating p
+    ## sorting values
     s <- t(apply(bc, 1, sort))
-    # matrix of ranks
+    ## matrix of ranks
     j <- matrix(rep(1:1000, m), nrow = 1000)
 
     ps <- numeric(m)
@@ -28,11 +29,11 @@ ptest <- function(bc, ci, c0 = NULL, method) {
         if (c0[i] >= max(bc[,i])) {
           j1 <- 1000
         } else {
-          # interpolate rank if within range of monte-carlo simulations
+          ## interpolate rank if within range of monte-carlo simulations
           j1 <- approx(s[i,], j[,i], c0[i])$y
         }
       }
-      # Weibull formula for n = 1000
+      ## Weibull formula for n = 1000
       ps[i] <- j1 / 1001
     }
     is_sig <- ifelse(ps < limits[1]/1000 | ps > limits[2]/1000, TRUE,

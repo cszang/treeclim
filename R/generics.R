@@ -1,4 +1,4 @@
-#' @S3method print br_dcc
+##' @S3method print br_dcc
 print.br_dcc <- function(x, ...) {
   ci <- x$call$ci
   if (is.null(ci))
@@ -8,7 +8,7 @@ print.br_dcc <- function(x, ...) {
   print(x$coef, ...)
 }
 
-#' @S3method print br_coef
+##' @S3method print br_coef
 print.br_coef <- function(x, ...) {
   rownames(x) <- abbrev_name(rownames(x))
   x$coef <- round(x$coef, 3)
@@ -17,8 +17,8 @@ print.br_coef <- function(x, ...) {
   print.data.frame(x, ...)
 }
 
-#' @importFrom abind abind
-#' @S3method print br_mcoef
+##' @importFrom abind abind
+##' @S3method print br_mcoef
 print.br_mcoef <- function(x, ...) {
   mm <- abind(x$coef, x$significant, along = 3)
   ms <- apply(mm, c(1, 2), function(x) {
@@ -37,7 +37,7 @@ print.br_mcoef <- function(x, ...) {
   print(ms, ...)
 }
 
-#' @S3method print br_design
+##' @S3method print br_design
 print.br_design <- function(x, ...) {
   pr <- x$aggregate
   names(pr) <- abbrev_name(x$names)
@@ -48,22 +48,22 @@ print.br_design <- function(x, ...) {
   print(paste(names(pr), collapse = "\n"), ...)
 }
 
-#' @S3method coef br_dcc
+##' @S3method coef br_dcc
 coef.br_dcc <- function(object, ...) {
   coef(object$coef, ...)
 }
 
-#' @S3method coef br_coef
+##' @S3method coef br_coef
 coef.br_coef <- function(object, ...) {
   print(data.frame(object), ...)
 }
 
-#' @S3method coef br_mcoef
+##' @S3method coef br_mcoef
 coef.br_mcoef <- function(object, ...) {
   print(data.frame(object$coef), ...)
 }
 
-#' @S3method summary br_dcc
+##' @S3method summary br_dcc
 summary.br_dcc <- function(object, ...) {
   cat("Call:\n")
   print(object$call)
@@ -73,16 +73,16 @@ summary.br_dcc <- function(object, ...) {
   print(object$coef, ...)
 }
 
-#' @S3method + br_paramlist
+##' @S3method + br_paramlist
 "+.br_paramlist" <- function(p1, p2) {
-  # check if p1 already is _nested_ list
+  ## check if p1 already is _nested_ list
   if (is.list(p1[[1]])) {
-    # just write to this list
+    ## just write to this list
     param_list <- p1
     i <- length(param_list) + 1
     param_list[[i]] <- p2
   } else {
-    # make a wrapper list
+    ## make a wrapper list
     param_list <- list()
     param_list[[1]] <- p1
     param_list[[2]] <- p2
@@ -90,9 +90,9 @@ summary.br_dcc <- function(object, ...) {
   param_list
 }
 
-#' @import ggplot2
-#' @import plyr
-#' @S3method plot br_dcc
+##' @import ggplot2
+##' @import plyr
+##' @S3method plot br_dcc
 plot.br_dcc <- function(x, ...) {
   data <- x$coef
 
@@ -117,18 +117,18 @@ plot.br_dcc <- function(x, ...) {
       gg
     } else {
       gg + geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper, color =
-                               varname, lty = significant), size = 1)
+                             varname, lty = significant), size = 1)
     }
     
   } else {
 
-    # mdcc case
+## mdcc case
 
     coef <- data$coef
     n <- dim(coef)[2]
     m <- dim(coef)[1]
 
-    # reformat into ggplot compatible data.frame
+## reformat into ggplot compatible data.frame
 
     pdata <- data.frame(
       varname = abbrev_name(rep(rownames(coef), n)),

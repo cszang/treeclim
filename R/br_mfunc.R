@@ -1,41 +1,42 @@
-#' moving response and correlation function
-#' 
-#' see doc for dcc for details.
-#' @param chrono tree-ring chronology
-#' @param climate data.frame with climate parameters
-#' @param boot which bootstrapping method should be used? (or "none")
-#' @param sb logical: draw statusbar or not?
-#' @param start_last logical: start with last (oldest) window?
-#' @param win_size numeric: size of the moving in years
-#' @param win_offset numeric: size of offset between moving windows in years
-#' @param ci numeric: p-level for confidence interval (must be in c(0.1, 0.05, 
-#'   0.01)
-#' @param method character: method to be used (one of "response" or 
-#'   "correlation")
-#' @keywords internal
+##' moving response and correlation function
+##' 
+##' see doc for dcc for details.
+##' @param chrono tree-ring chronology
+##' @param climate data.frame with climate parameters
+##' @param boot which bootstrapping method should be used? (or "none")
+##' @param sb logical: draw statusbar or not?
+##' @param start_last logical: start with last (oldest) window?
+##' @param win_size numeric: size of the moving in years
+##' @param win_offset numeric: size of offset between moving windows
+##' in years
+##' @param ci numeric: p-level for confidence interval (must be in
+##' c(0.1, 0.05, 0.01)
+##' @param method character: method to be used (one of "response" or
+##' "correlation")
+##' @keywords internal
 br_mfunc <- function(chrono, climate, boot, sb, start_last,
                      win_size, win_offset, ci, method) {
 
   vnames <- climate$names
   pretty_names <- climate$pretty_names
-  # number of windows
+  ## number of windows
   years <- as.numeric(rownames(climate$aggregate))
   nyears <- length(years)
   win_num <- (length(chrono) - win_size) %/% win_offset
   if (win_num < 2) {
     stop(paste("Less than 2 windows. Consider a timespan greater than ",
-            nyears, " or a win_size smaller than ", win_size, ".",
-            sep = ""))
+               nyears, " or a win_size smaller than ", win_size, ".",
+               sep = ""))
   }
   win_years_string <- character(win_num)
   windows <- 1:win_num
 
-  # initialize result matrices
+  ## initialize result matrices
   result_matrix_coef <- result_matrix_ci_upper <-
     result_matrix_ci_lower <- result_matrix_significant <-
       matrix(NA, ncol = win_num, nrow = dim(climate$aggregate)[2])
 
-  if (sb)  # initialize status bar (if TRUE)
+  if (sb)                            # initialize status bar (if TRUE)
     mpb <- txtProgressBar(min = 1,  max = win_num, style = 3)
 
   for (k in 1:win_num) {
@@ -47,9 +48,9 @@ br_mfunc <- function(chrono, climate, boot, sb, start_last,
                                                               win_offset) +
                                                          (win_size - 1))
     }
-      
+    
     climate_win <- climate$aggregate[series_subset_index,]
-    # recover the original list structure
+    ## recover the original list structure
     climate_win_list <- list(
       aggregate = climate_win,
       names = climate$names,
@@ -75,12 +76,12 @@ br_mfunc <- function(chrono, climate, boot, sb, start_last,
                                  years[series_subset_index][win_size],
                                  sep = "-")
 
-    if (sb) # update status bar (if TRUE)
+    if (sb)                             # update status bar (if TRUE)
       setTxtProgressBar(mpb, k)
-      
+    
   }
 
-  # reorder output
+  ## reorder output
   result_matrix_coef <- result_matrix_coef[,win_num:1]
   result_matrix_ci_upper <- result_matrix_ci_upper[,win_num:1]
   result_matrix_ci_lower <- result_matrix_ci_lower[,win_num:1]
@@ -101,7 +102,7 @@ br_mfunc <- function(chrono, climate, boot, sb, start_last,
   colnames(out$significant) <- win_years_string
   rownames(out$significant) <- vnames
   out$pretty_names <- pretty_names
-  if (sb) # close status bar (if TRUE)
+  if (sb)                               # close status bar (if TRUE)
     close(mpb)
   class(out) <- c("br_mcoef", "list")
   out

@@ -2,7 +2,7 @@
   library(help=bootres2)$info[[1]] -> version
   version <- version[pmatch("Version",version)]
   um <- strsplit(version," ")[[1]]
-  version <- um[nchar(um)>0][2]
+  version <- um[nchar(um) > 0][2]
   hello <- paste("This is bootres2 version ", version, ".", sep = "")
   afool <- substr(date(), 5, 10) == "Apr 01"
   afoolt <- ifelse(afool,

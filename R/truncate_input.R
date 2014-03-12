@@ -1,32 +1,32 @@
-#' Truncate climate and tree data to common interval
-#' 
-#' Truncate climate and tree data either to common shared interval (default) or
-#' to specified range of years. Depending on minmonth, the climate data will
-#' need to start one year earlier than the tree data, if data from the previous
-#' year should be used.
-#' @param chrono a tree-ring chronology
-#' @param climate the climate data as returned by as_brclimate
-#' @param timespan the timespan for truncating as vector with min and max year
-#' @param minmonth the earliest month used for the calibration, as returned by
-#'   check_months
-#' @param moving moving or not? (logical)
-#' @return a list of truncated data.frames for climate and tree data
-#' @keywords manip internal
+##' Truncate climate and tree data to common interval
+##' 
+##' Truncate climate and tree data either to common shared interval
+##' (default) or to specified range of years. Depending on minmonth,
+##' the climate data will need to start one year earlier than the tree
+##' data, if data from the previous year should be used.
+##' @param chrono a tree-ring chronology
+##' @param climate the climate data as returned by as_brclimate
+##' @param timespan the timespan for truncating as vector with min and max year
+##' @param minmonth the earliest month used for the calibration, as
+##' returned by check_months
+##' @param moving moving or not? (logical)
+##' @return a list of truncated data.frames for climate and tree data
+##' @keywords manip internal
 truncate_input <- function(chrono, climate, timespan = NULL, minmonth,
                            moving) {
 
-  # get time spans of both input data
+  ## get time spans of both input data
   chrono_years <- as.numeric(row.names(chrono))
   climate_years <- sort(unique(climate[, 1]))
 
-  # calculate overlap
+  ## calculate overlap
   if (chrono_years[1] <= climate_years[1]) {
     overlap <- na.omit(climate_years[match(chrono_years, climate_years)])
   } else {
     overlap <- na.omit(chrono_years[match(climate_years, chrono_years)])
   }
 
-  # take maximum overlap, when timespan is not set
+  ## take maximum overlap, when timespan is not set
   if (is.null(timespan)) {
     start_year <- overlap[1]
     end_year <- tail(overlap, 1)
@@ -55,15 +55,15 @@ truncate_input <- function(chrono, climate, timespan = NULL, minmonth,
     }
   }
 
-  # report time span used
-  # calculate timespan for analysis for reporting
+  ## report time span used
+  ## calculate timespan for analysis for reporting
   if (!moving) {
     cat("Running for timespan ", start_year, " - ", end_year, "...\n",
         sep = "")
   }
   
-  # check if a previous year is available in climatic data; otherwise
-  # set start_year + 1
+  ## check if a previous year is available in climatic data; otherwise
+  ## set start_year + 1
   if (minmonth < 0 && is.na(match((start_year - 1), climate_years))) { 
     offset <- 1
     if (is.null(timespan)) {
@@ -83,7 +83,7 @@ truncate_input <- function(chrono, climate, timespan = NULL, minmonth,
     offset <- 0
   }
 
-  # make sure that data get truncated properly	
+  ## make sure that data get truncated properly	
   if (minmonth < 0) { 
     interval_climate <-(start_year - 1 + offset):end_year
     interval_chrono <- (start_year + offset):end_year
@@ -95,7 +95,7 @@ truncate_input <- function(chrono, climate, timespan = NULL, minmonth,
   a <- as.numeric(rownames(chrono)) %in% interval_chrono
   b <- climate[, 1] %in% interval_climate
 
-  # finally truncate data
+  ## finally truncate data
   chrono_trunc <- chrono[a, 1]
   climate_trunc <- climate[b, ]
 
