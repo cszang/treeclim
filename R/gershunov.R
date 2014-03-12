@@ -81,8 +81,8 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
                sb = FALSE,
                ci = 0.05)$coef
     })
-    dur500 <- ceiling(dur[3] * 1000 / 60)
-    cat("Running this test with bootstrapping on the individual correlations enabled will take around", dur500, "minutes.\n")
+    dur1000 <- ceiling(dur[3] * 1000 / 60)
+    cat("Running this test with bootstrapping on the individual correlations enabled will take around", dur1000, "minutes.\n")
     ans <- readline("Do you really want to run this? [Y/n]\n")
     if (ans != "Y")
       stop("Execution interrupted by user.")
@@ -114,10 +114,11 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
     # model tree-ring series (gamma2) as linear combination of climate (gamma1)
     # + error terms representing the variance unexplained by each parameter
     gamma1 <- matrix(rnorm(n * m, 0, 1), nrow = m)
-    gamma2 <- numeric(m)
+    gamma2 <- matrix(NA, ncol = n, nrow = m)
     for (j in 1:n) {
-      gamma2 <- gamma2 + c0[j] * gamma1[,j] + rnorm(m, 0, 1 - c0[j]^2)
+      gamma2[,j] <- c0[j] * gamma1[,j] + rnorm(m, 0, 1 - c0[j]^2)
     }
+    gamma2 <- rowSums(gamma2)
     
     gamma1l <- list(aggregate = gamma1,
                     names = x$design$names,
