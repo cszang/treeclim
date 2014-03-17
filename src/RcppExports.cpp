@@ -55,6 +55,24 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// pcor
+SEXP pcor(SEXP x1, SEXP x2, SEXP y, SEXP y0);
+RcppExport SEXP bootres2_pcor(SEXP x1SEXP, SEXP x2SEXP, SEXP ySEXP, SEXP y0SEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< SEXP >::type x1(x1SEXP );
+        Rcpp::traits::input_parameter< SEXP >::type x2(x2SEXP );
+        Rcpp::traits::input_parameter< SEXP >::type y(ySEXP );
+        Rcpp::traits::input_parameter< SEXP >::type y0(y0SEXP );
+        SEXP __result = pcor(x1, x2, y, y0);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // respoexact
 SEXP respoexact(SEXP x, SEXP y, SEXP y0);
 RcppExport SEXP bootres2_respoexact(SEXP xSEXP, SEXP ySEXP, SEXP y0SEXP) {
