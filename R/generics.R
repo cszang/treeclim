@@ -174,3 +174,64 @@ plot.br_dcc <- function(x, ...) {
       gg 
   }
 }
+
+
+plot.br_seascorr <- function(x, ...) {
+
+  ## how many season lengths do we consider?
+  n <- length(x$coef)
+  ## this *2 corresponds to the number of facets we need
+
+  ## how long are the seasons?
+  if (is.null(x$call$season_lengths)) {
+    season_lengths <- c(1, 3, 6)
+  } else {
+    season_lengths <- eval(x$call$season_lengths)
+  }
+
+  sl_levels <- ifelse(season_lengths == 1,
+                      paste(season_lengths, "month"),
+                      paste(season_lengths, "months"))
+
+  ## what is the end month?
+  if (is.null(x$call$complete)) {
+    end_month <- 9
+  } else {
+    end_month <- x$call$complete
+  }
+
+  ## translate this and the preceeding 14 months in literals
+  lmonths <- c(-1:-12, 1:12)
+  end_month_l <- which(lmonths == end_month)
+  used_months <- lmonths[(end_month_l - 13):end_month_l]
+  used_months_ch <- bootres2:::format_month(used_months)$single
+
+  ## reassemble into single data.frame for plotting
+  gd <- data.frame(
+    season_length = rep(rep(sl_levels, each = 14), 2),
+    end_month = rep(used_months_ch, n * 2),
+    end_month_order = rep(1:14, n * 2),
+    type = c(rep("primary", 14*n), rep("secondary", 14*n)),
+    significant = c(unlist(sapply(sapply(x$coef, "[", 1), "[", 2)),
+      unlist(sapply(sapply(x$coef, "[", 2), "[", 2))),
+    value = c(unlist(sapply(sapply(x$coef, "[", 1), "[", 1)),
+      unlist(sapply(sapply(x$coef, "[", 2), "[", 1)))
+    )
+
+ 
+  
+  ## draw plot
+  gg <- ggplot(gd,
+               aes(x = end_month_order, y = value,
+                   fill = significant), ...)
+
+  gg + facet_grid(type ~ season_length) +
+    geom_bar(stat = "identity", position = "") +
+    scale_fill_manual(values = c("grey75", "grey50")) +
+    theme_minimal() +
+    scale_x_continuous(breaks = 1:14,
+                       labels = substr(used_months_ch, 1, 1)) +
+    xlab("Ending month") +
+    ylab("Correlation coefficient")
+  
+}
