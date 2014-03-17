@@ -27,16 +27,21 @@ format_month <- function(month) {
   if (any(!is.element(month, month_ids))) {
     stop("Month specification must be within previous january (-1) and current december (12).")
   }
+
+  mmonth <- c("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug",
+              "sep", "oct", "nov", "dec")
+  ucmonth <- toupper(mmonth)
   
   two_years <- paste(
     c(
       rep("prev.", 12),
       rep("curr.", 12)),
-    rep(c("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug",
-          "sep", "oct", "nov", "dec"),
+    rep(mmonth,
         2), sep = "")
+  single <- c(mmonth, ucmonth)
   .month <- list()
   .month$match <- match(month, month_ids)
   .month$names <- two_years[.month$match]
+  .month$single <- single[.month$match]
   .month
 }
