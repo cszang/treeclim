@@ -5,7 +5,7 @@
 ##' @keywords internal
 make_range_list <- function(call, method) {
   par_months <- eval(call$.months)
-  par_variables <- call$.variables
+  par_variables <- eval(call$.variables)
   if (is.null(par_months)) {
     par_months <- -6:9
   }

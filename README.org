@@ -1,0 +1,17 @@
+* bootres2
+
+An R package for dendroclimatic calibration.
+
+** Installation
+
+On Windows, you need [[http://cran.r-project.org/bin/windows/Rtools/][Rtools]] to be installed to install the package
+from source (or install a [[https://github.com/znag/bootres2/releases][binary]]). Then do:
+
+begin_src R 
+library(devtools)
+install_github("bootres2", "znag")
+end_src
+
+** Usage
+
+see the [[https://github.com/znag/bootres2/wiki][Wiki]] for details.
