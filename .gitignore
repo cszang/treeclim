@@ -5,3 +5,4 @@ src/*.so
 src/*.dll
 .Rproj*
 R/RcppExports.R
+/TAGS
