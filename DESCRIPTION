@@ -18,7 +18,8 @@ LinkingTo: Rcpp,
     RcppArmadillo
 Suggests:
     dplR
-Description: Calculation of Bootstrapped Response and Correlation Functions and Seasonal Correlation for Use in Dendroclimatology
+Description: Calculation of Bootstrapped Response and Correlation Functions and
+    Seasonal Correlation for Use in Dendroclimatology
 NeedsCompilation: yes
 License: GPL-3
 LazyLoad: yes
