@@ -6,3 +6,4 @@ src/*.dll
 .Rproj*
 R/RcppExports.R
 /TAGS
+/R/TAGS

@@ -8,6 +8,52 @@ print.br_dcc <- function(x, ...) {
   print(x$coef, ...)
 }
 
+##' @S3method print br_seascorr
+print.br_seascorr <- function(x, ...) {
+  n <- length(x$coef)
+  ## pretty season names
+  if (is.null(x$call$season_lengths)) {
+    season_lengths <- c(1, 3, 6)
+  } else {
+    season_lengths <- eval(x$call$season_lengths)
+  }
+
+  sl_levels <- ifelse(season_lengths == 1,
+                      paste(season_lengths, "month"),
+                      paste(season_lengths, "months"))
+  ## what is the end month?
+  if (is.null(x$call$complete)) {
+    end_month <- 9
+  } else {
+    end_month <- x$call$complete
+  }
+  ## translate this and the preceeding 14 months in literals
+  lmonths <- c(-1:-12, 1:12)
+  end_month_l <- which(lmonths == end_month)
+  used_months <- lmonths[(end_month_l - 13):end_month_l]
+  fm <- function(x, single = TRUE) {
+    if (single) {
+      format_month(x)$single
+    } else {
+      format_month(x)$names
+    }
+  }
+  used_months_ch <- fm(used_months, ...)
+  for (i in 1:n) {
+    cat("Results for a season length of ", sl_levels[i],
+        ":\n", sep = "")
+    print(data.frame(
+      month = used_months_ch,
+      type = rep(c("primary", "secondary"), each = 14),
+      coef = c(x$coef[[i]]$primary$coef,
+        x$coef[[i]]$secondary$coef),
+      significant = c(x$coef[[i]]$primary$significant,
+        x$coef[[i]]$secondary$significant)
+      ))
+    cat("\n")
+  }
+}
+
 ##' @S3method print br_coef
 print.br_coef <- function(x, ...) {
   rownames(x) <- abbrev_name(rownames(x))
@@ -204,7 +250,7 @@ plot.br_seascorr <- function(x, ...) {
   lmonths <- c(-1:-12, 1:12)
   end_month_l <- which(lmonths == end_month)
   used_months <- lmonths[(end_month_l - 13):end_month_l]
-  used_months_ch <- bootres2:::format_month(used_months)$single
+  used_months_ch <- format_month(used_months)$single
 
   ## reassemble into single data.frame for plotting
   gd <- data.frame(
