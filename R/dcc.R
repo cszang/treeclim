@@ -306,7 +306,10 @@ dcc <- function(chrono,
   dcc_out$call <- match.call()
   dcc_out$coef <- dc
   dcc_out$design <- design
-  dcc_out$tree <- truncated_input$chrono
+  dcc_out$truncated <- list(tree = truncated_input$chrono,
+                            climate = truncated_input$climate)
+  dcc_out$original <- list(tree = chrono,
+                          climate = climate)
 
   class(dcc_out) <- c("br_dcc", "list")
 
