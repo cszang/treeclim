@@ -1,6 +1,56 @@
-##' TODO
+##' Seasonal (partial) correlation analysis
 ##'
-##' TODO
+##' Calculate seasonal correlation with primary and secondary climate
+##' variables and tree-ring data.
+##' @details This function mimicks the behaviour of the MATLAB
+##' function seascorr (Meko et al. 2011), which calculates partial
+##' correlations of tree-ring data with a primary and a secondary
+##' climatic variable for seasons of different lengths.
+##'
+##' Input chronology data can be a \code{data.frame} such as produced
+##' by function \code{chron} of package dplR. It has to be a
+##' \code{data.frame} with at least one column containing the tree-ring
+##' indices, and the corresponding years as \code{rownames}.
+##'   
+##' For climatic input data, there are three possibilities: Firstly,
+##' input climatic data can be a \code{data.frame} or \code{matrix}
+##' consisting of at least 3 rows for years, months and at least one
+##' climate parameter in the given order. Secondly, input climatic data
+##' can be a single \code{data.frame} or \code{matrix} in the style of
+##' the original DENDROCLIM2002 input data, i.e. one parameter with 12
+##' months in one row, where the first column represents the year. Or
+##' thirdly, input climatic data can be a list of several of the latter
+##' described \code{data.frame} or \code{matrices}. As an internal
+##' format dispatcher checks the format automatically, it is absolutely
+##' necessary that in all three cases, only complete years (months
+##' 1-12) are provided. It is not possible to mix different formats in
+##' one go.
+##'
+##' The `complete` parameter specifies the months of the current year
+##' in which tree-growth is assumed to finish. This month marks the
+##' last month of the first season, and starting from here, 14
+##' different seasons are computed for each specified season length in
+##' one-month steps. E.g., for a starting value of 9 (current
+##' September) and season length of 3 months, the first season
+##' comprises current July to current September, the second season
+##' comprises current June to current August, and the last season
+##' comprises previous June to previous August. This results in 14
+##' seasons for a given season length. An arbitrary number of season
+##' lengths can be specified.
+##'
+##' The choice for primary vs. secondary variable can be made either
+##' via numeric selection (the integer value 1 stands for the first
+##' variable in the supplied climate data set), or by name ("temp",
+##' when one of the variables is named "temp"). The correlation of the
+##' primary variable with tree-growth is computed as the simple
+##' (Pearson) correlation coefficient, while the influence of the
+##' secondary variable on tree-growth is computed with the influence
+##' of the primary variable on tree-growth removed.
+##'
+##' Like in the original seascorr program, the significance of each
+##' (partial) correlation is evaluated using exact bootstrapping by
+##' circulant embedding of the tree-ring data (Percival \& Constantine,
+##' 2006).
 ##' @param chrono \code{data.frame} containing a tree-ring
 ##' chronologies, e.g. as obtained by \code{chron} of package dplR.
 ##' @param climate either a \code{data.frame} or \code{matrix} with
@@ -28,12 +78,20 @@
 ##' confidence intervals are adapted accordingly.
 ##' @return an object of class "br_seascorr"
 ##' @references
-##' TODO
+##' Meko DM, Touchan R, Anchukaitis KJ (2011) Seascorr: A MATLAB
+##' program for identifying the seasonal climate signal in an annual
+##' tree-ring time series. Computers \& Geosciences, 37, 1234-1241.
+##'
+##' Percival DB, Constantine WLB (2006) Exact simulation of Gaussian
+##' Time Series from Nonparametric Spectral Estimates with Application
+##' to Bootstrapping. \emph{Statistics and Computing} 16:25-35
 ##' @examples
-##' \dontrun{
-##' TODO
-##' }
-##' @author Christian Zang; the procedure incl. exact bootstrapping
+##' data(muc.fake)
+##' data(muc.clim)
+##' sc <- seascorr(muc.fake, muc.clim)
+##' sc
+##' plot(sc)
+##' ##' @author Christian Zang; the procedure incl. exact bootstrapping
 ##' was implemented first by Dave Meko in MATLAB
 ##' @export
 seascorr <- function(chrono, climate, var_names = NULL, timespan =
@@ -192,6 +250,10 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
     primary = seasons1,
     secondary = seasons2
     )
+  results$truncated <- list(tree = truncated_input$chrono,
+                            climate = truncated_input$climate)
+  results$original <- list(tree = chrono,
+                           climate = climate)
   class(results) <- c("br_seascorr", "list")
   results
 }
