@@ -7,10 +7,10 @@ An R package for modeling tree/climate relationships.
 On Windows, you need [[http://cran.r-project.org/bin/windows/Rtools/][Rtools]] to be installed to install the package
 from source (or install a [[https://github.com/znag/climtree/releases][binary]]). Then do:
 
-begin_src R 
+#+begin_src R 
 library(devtools)
 install_github("climtree", "znag")
-end_src
+#+end_src
 
 ** Usage
 
