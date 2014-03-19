@@ -81,7 +81,7 @@ skills <- function(object, formula, model = "ols",
   }
   minmonth <- monthcheck$minmonth
   
-  if (any(c("ct_dcc", "ct_seascorr") == class(object))) {
+  if (any(c("ct_dcc", "ct_seascorr") == class(object)[1])) {
     if (is.null(timespan)) {
       climate <- object$truncated$climate
       chrono <- object$truncated$tree
