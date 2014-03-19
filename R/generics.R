@@ -1,5 +1,5 @@
-##' @S3method print br_dcc
-print.br_dcc <- function(x, ...) {
+##' @S3method print ct_dcc
+print.ct_dcc <- function(x, ...) {
   ci <- x$call$ci
   if (is.null(ci))
     ci <- 0.05
@@ -8,8 +8,8 @@ print.br_dcc <- function(x, ...) {
   print(x$coef, ...)
 }
 
-##' @S3method print br_seascorr
-print.br_seascorr <- function(x, ...) {
+##' @S3method print ct_seascorr
+print.ct_seascorr <- function(x, ...) {
   n <- length(x$coef)
   ## pretty season names
   if (is.null(x$call$season_lengths)) {
@@ -54,8 +54,8 @@ print.br_seascorr <- function(x, ...) {
   }
 }
 
-##' @S3method print br_coef
-print.br_coef <- function(x, ...) {
+##' @S3method print ct_coef
+print.ct_coef <- function(x, ...) {
   rownames(x) <- abbrev_name(rownames(x))
   x$coef <- round(x$coef, 3)
   x$ci_lower <- round(x$ci_lower, 3)
@@ -64,8 +64,8 @@ print.br_coef <- function(x, ...) {
 }
 
 ##' @importFrom abind abind
-##' @S3method print br_mcoef
-print.br_mcoef <- function(x, ...) {
+##' @S3method print ct_mcoef
+print.ct_mcoef <- function(x, ...) {
   mm <- abind(x$coef, x$significant, along = 3)
   ms <- apply(mm, c(1, 2), function(x) {
     if (!is.na(x[2])) {
@@ -83,8 +83,8 @@ print.br_mcoef <- function(x, ...) {
   print(ms, ...)
 }
 
-##' @S3method print br_design
-print.br_design <- function(x, ...) {
+##' @S3method print ct_design
+print.ct_design <- function(x, ...) {
   pr <- x$aggregate
   names(pr) <- abbrev_name(x$names)
   years <- as.numeric(rownames(pr))
@@ -94,8 +94,8 @@ print.br_design <- function(x, ...) {
   print(paste(names(pr), collapse = "\n"), ...)
 }
 
-##' @S3method print br_skills
-print.br_skills <- function(x, ...) {
+##' @S3method print ct_skills
+print.ct_skills <- function(x, ...) {
   cat("Call:\n", paste(deparse(x$call), sep = "\n",
                        collapse = "\n"), "\n\n", sep = "")
   cat("Calibration model with", x$cal.str,
@@ -118,8 +118,8 @@ print.br_skills <- function(x, ...) {
                 quote = FALSE, ...)
 }
 
-##' @S3method plot br_skills
-plot.br_skills <- function(x, ...) {
+##' @S3method plot ct_skills
+plot.ct_skills <- function(x, ...) {
   orig <- x
   d <- data.frame(x = orig$years,
                   y = orig$full$x)
@@ -135,23 +135,23 @@ plot.br_skills <- function(x, ...) {
     xlab("years") + ylab("target")
 }
 
-##' @S3method coef br_dcc
-coef.br_dcc <- function(object, ...) {
+##' @S3method coef ct_dcc
+coef.ct_dcc <- function(object, ...) {
   coef(object$coef, ...)
 }
 
-##' @S3method coef br_coef
-coef.br_coef <- function(object, ...) {
+##' @S3method coef ct_coef
+coef.ct_coef <- function(object, ...) {
   print(data.frame(object), ...)
 }
 
-##' @S3method coef br_mcoef
-coef.br_mcoef <- function(object, ...) {
+##' @S3method coef ct_mcoef
+coef.ct_mcoef <- function(object, ...) {
   print(data.frame(object$coef), ...)
 }
 
-##' @S3method summary br_dcc
-summary.br_dcc <- function(object, ...) {
+##' @S3method summary ct_dcc
+summary.ct_dcc <- function(object, ...) {
   cat("Call:\n")
   print(object$call)
   cat("\nDesign matriobject:\n")
@@ -160,8 +160,8 @@ summary.br_dcc <- function(object, ...) {
   print(object$coef, ...)
 }
 
-##' @S3method + br_paramlist
-"+.br_paramlist" <- function(p1, p2) {
+##' @S3method + ct_paramlist
+"+.ct_paramlist" <- function(p1, p2) {
   ## check if p1 already is _nested_ list
   if (is.list(p1[[1]])) {
     ## just write to this list
@@ -179,11 +179,11 @@ summary.br_dcc <- function(object, ...) {
 
 ##' @import ggplot2
 ##' @import plyr
-##' @S3method plot br_dcc
-plot.br_dcc <- function(x, ...) {
+##' @S3method plot ct_dcc
+plot.ct_dcc <- function(x, ...) {
   data <- x$coef
 
-  if (any(class(data) == "br_coef")) {
+  if (any(class(data) == "ct_coef")) {
 
     line0 <- data.frame(
       x = c(0.5, data$id, max(data$id) + 0.5),
@@ -263,7 +263,7 @@ plot.br_dcc <- function(x, ...) {
 }
 
 
-plot.br_seascorr <- function(x, ...) {
+plot.ct_seascorr <- function(x, ...) {
 
   ## how many season lengths do we consider?
   n <- length(x$coef)

@@ -1,4 +1,4 @@
-useDynLib(bootres2)
+useDynLib(climtree)
 import(Rcpp)
 import(RcppArmadillo)
 S3method("+",br_paramlist)

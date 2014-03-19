@@ -14,7 +14,7 @@ make_range_list <- function(call, method) {
   } else {
     selection <- list(method, par_months, par_variables)
   }
-  class(selection) <- c("br_paramlist", "list")
+  class(selection) <- c("ct_paramlist", "list")
   selection
 }
 

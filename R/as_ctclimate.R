@@ -8,7 +8,7 @@
 ##' @return a data.frame with years in rows and monthly observations
 ##' in columns
 ##' @keywords manip, internal
-as_brclimate <- function(x, varnames = NULL) {
+as_ctclimate <- function(x, varnames = NULL) {
   
   ## is it a list?
   if (any(class(x) == "list")) {       
@@ -103,6 +103,6 @@ as_brclimate <- function(x, varnames = NULL) {
     }
   }
 
-  class(output) <- c("brclimate", "data.frame")
+  class(output) <- c("ctclimate", "data.frame")
   output
 }

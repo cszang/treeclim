@@ -38,7 +38,7 @@
 ##' used verification statistics are computed: reduction of error
 ##' (RE), coefficient of efficiency (CE), and the Durban-Watson
 ##' statistic (DW) (Cook et al. 1994, Durbin and Watson, 1951).
-##' @param object an object of class "br_dcc" or "br_seascorr"
+##' @param object an object of class "ct_dcc" or "ct_seascorr"
 ##' @param formula a formula specifying the regressand, optionally
 ##' ommitting the intercept, see details
 ##' @param model one of "ols" or "rma"
@@ -81,7 +81,7 @@ skills <- function(object, formula, model = "ols",
   }
   minmonth <- monthcheck$minmonth
   
-  if (any(c("br_dcc", "br_seascorr") == class(object))) {
+  if (any(c("ct_dcc", "ct_seascorr") == class(object))) {
     if (is.null(timespan)) {
       climate <- object$truncated$climate
       chrono <- object$truncated$tree
@@ -245,6 +245,6 @@ skills <- function(object, formula, model = "ols",
     cal.years = all_years[cal_index],
     ver.years = all_years[ver_index]
     )
-  class(model_lm) <- c("br_skills", "list")
+  class(model_lm) <- c("ct_skills", "list")
   model_lm
 }

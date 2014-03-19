@@ -14,7 +14,7 @@
 ##' @param method character: method to be used (one of "response" or
 ##' "correlation")
 ##' @keywords internal
-br_mfunc <- function(chrono, climate, boot, sb, start_last,
+ct_mfunc <- function(chrono, climate, boot, sb, start_last,
                      win_size, win_offset, ci, method) {
 
   vnames <- climate$names
@@ -61,10 +61,10 @@ br_mfunc <- function(chrono, climate, boot, sb, start_last,
     chrono_win <- chrono[series_subset_index]
 
     if (method == "response") {
-      window <- br_response(chrono_win, climate_win_list,
+      window <- ct_response(chrono_win, climate_win_list,
                             ci = ci, boot = boot)
     } else {
-      window <- br_correlation(chrono_win, climate_win_list,
+      window <- ct_correlation(chrono_win, climate_win_list,
                                ci = ci, boot = boot)
     }
     
@@ -104,6 +104,6 @@ br_mfunc <- function(chrono, climate, boot, sb, start_last,
   out$pretty_names <- pretty_names
   if (sb)                               # close status bar (if TRUE)
     close(mpb)
-  class(out) <- c("br_mcoef", "list")
+  class(out) <- c("ct_mcoef", "list")
   out
 }

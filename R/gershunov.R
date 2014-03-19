@@ -20,7 +20,7 @@
 ##' compared to the bootstrapped distribution of the standard
 ##' deviation of the simulated data to test for significantly higher
 ##' or lower low-frequency modulations.
-##' @param x an object of class "br_dcc" as returned from a call to
+##' @param x an object of class "ct_dcc" as returned from a call to
 ##' \code{\link{dcc}} with moving correlations enabled
 ##' @param boot \code{logical} shall the individual correlation be
 ##' bootstrapped?  (see details)
@@ -41,7 +41,7 @@
 ##' @keywords test
 ##' @export
 g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
-  if (!any(class(x) != "br_dcc"))
+  if (!any(class(x) != "ct_dcc"))
     stop("Please provide output of function `dcc`.")
   
   if (x$call$moving == FALSE)
@@ -51,7 +51,7 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
     stop("Gershunov test is currently only implemented for running correlation functions, not for response function.")
   
   ## calculate null model with full data set to get coefficients
-  c0 <- br_correlation(x$tree, x$design, ci = 0.05, boot = "std")$coef
+  c0 <- ct_correlation(x$tree, x$design, ci = 0.05, boot = "std")$coef
   n <- length(c0)
   m <- length(x$tree)
   
@@ -77,7 +77,7 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
   if (boot) {
     cat("Checking duration...\n")
     dur <- system.time({
-      br_mfunc(x$tree, x$design,
+      ct_mfunc(x$tree, x$design,
                method = "correlation",
                start_last = .start_last,
                win_size = .win_size,
@@ -131,7 +131,7 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
                     pretty_names = x$design$pretty_names)
     
     ## throw data into the _same_ moving correlation function
-    c1 <- br_mfunc(gamma2, gamma1l,
+    c1 <- ct_mfunc(gamma2, gamma1l,
                    method = "correlation",
                    start_last = .start_last,
                    win_size = .win_size,

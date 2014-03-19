@@ -35,22 +35,23 @@
 ##'   
 ##' Parameters can be selected with the `selection` parameter in two
 ##' different ways. The default value is -6:9. This is equivalent to
-##' the standard settings in DENDROCLIM2002 and bootRes 1.X, and
+##' the standard settings in DENDROCLIM2002 and bootRes, and
 ##' selects from all climate variables all months from previous year's
 ##' June (-6, previous year's months are specified as negative
 ##' integers) to current years September (9, months of the current year
 ##' are specified as positive integers) as model parameters.
 ##'   
 ##' More complex parameter selections can be obtained by the
-##' \emph{modifiers} provided in bootres2: \code{.range}, \code{.mean},
-##' and \code{.sum}.  \code{.range} corresponds the example above,
-##' where all specified months are used, while \code{.sum} and
-##' \code{.mean} will use the sums and means of the specified
-##' months. These modifiers also allow to select specific climatic
-##' variables, addressed by name. Thus, \code{.mean(4:8, "temp")} will
-##' select the mean for climate parameter "temp" for the months April
-##' to August. Not only ranges, but also individual vectors can be used
-##' for month specification, like e.g., \code{.range(c(1, 3, 4, 5)}.
+##' \emph{modifiers} provided in climtree: \code{.range},
+##' \code{.mean}, and \code{.sum}.  \code{.range} corresponds the
+##' example above, where all specified months are used, while
+##' \code{.sum} and \code{.mean} will use the sums and means of the
+##' specified months. These modifiers also allow to select specific
+##' climatic variables, addressed by name. Thus, \code{.mean(4:8,
+##' "temp")} will select the mean for climate parameter "temp" for the
+##' months April to August. Not only ranges, but also individual
+##' vectors can be used for month specification, like e.g.,
+##' \code{.range(c(1, 3, 4, 5)}.
 ##'   
 ##' The modifiers can be chained together using the `+` symbol, which
 ##' makes it possible to create arbitrarily complex selections of
@@ -58,7 +59,7 @@
 ##' + .sum(2:5, "prec")} will yield the February-to-May mean for the
 ##' variable "temp" and the sum of the variable "prec" for the same
 ##' time. While there is no limitation for number of lists that can be
-##' chained together, bootres2 will not check for meaningful
+##' chained together, climtree will not check for meaningful
 ##' specifications. Testing smart hypotheses is up the researcher.
 ##'   
 ##' For the exclusion of months, the convenience function
@@ -132,7 +133,7 @@
 ##' @param sb \code{logical} flag indicating whether textual status
 ##' bar for moving case should be suppressed. Suppression is
 ##' recommended for e.g.  Sweave files.
-##' @return an object of class `br_dcc`.
+##' @return an object of class `ct_dcc`.
 ##' @references Biondi, F & Waikul, K (2004) DENDROCLIM2002: A C++
 ##' program for statistical calibration of climate signals in
 ##' tree-ring chronologies.  \emph{Computers & Geosciences} 30:303-311
@@ -178,7 +179,7 @@ dcc <- function(chrono,
 {
 
   ## climate data are correctly formatted
-  climate <- as_brclimate(climate)
+  climate <- as_ctclimate(climate)
   ## when var_names are supplied, apply appropriately
   if (!is.null(var_names)) {
     varno <- dim(climate)[2] - 2
@@ -233,7 +234,7 @@ dcc <- function(chrono,
   climate_pmat <- make_pmat(truncated_input$climate)
 
   ## generate design matrix for calibration by evaluating the selections
-  design <- br_design(selection, climate_pmat)
+  design <- ct_design(selection, climate_pmat)
 
   ## check if number of parameters is smaller than number of observations
   n_params <- dim(design$aggregate)[2]
@@ -256,13 +257,13 @@ dcc <- function(chrono,
 
   if (!moving) {
     if (.method == "response") {
-      dc <- br_response(truncated_input$chrono, design,
+      dc <- ct_response(truncated_input$chrono, design,
                         ci = ci,
                         boot = boot)
     }
     
     if (.method == "correlation") {
-      dc <- br_correlation(truncated_input$chrono, design,
+      dc <- ct_correlation(truncated_input$chrono, design,
                            ci = ci,
                            boot = boot)
     }
@@ -271,7 +272,7 @@ dcc <- function(chrono,
   ## moving functions
 
   if (moving) {
-    dc <- br_mfunc(truncated_input$chrono, design,
+    dc <- ct_mfunc(truncated_input$chrono, design,
                    ci = ci,
                    sb = sb,
                    method = .method,
@@ -292,7 +293,7 @@ dcc <- function(chrono,
   dcc_out$original <- list(tree = chrono,
                            climate = climate)
 
-  class(dcc_out) <- c("br_dcc", "list")
+  class(dcc_out) <- c("ct_dcc", "list")
 
   dcc_out
 }

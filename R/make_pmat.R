@@ -5,7 +5,7 @@
 ##' correspond to the scheme years in rows, observations from previous
 ##' december to current december in columns.
 ##' @title Make list of parameter matrices from climate input data
-##' @param x climate data as returned from as_brclimate
+##' @param x climate data as returned from as_ctclimate
 ##' @return a list of matrices
 ##' @keywords manip internal
 make_pmat <- function(x) {
@@ -36,7 +36,6 @@ make_pmat <- function(x) {
   }
 
   names(m) <- .names
-  class(m) <- list("list", "brpmat")
-  
+  class(m) <- list("ctpmat", "list")
   m
 }

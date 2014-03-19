@@ -8,7 +8,7 @@
 ##' @param boot character, which bootstrapping method should be used
 ##' (or "none")
 ##' @keywords internal
-br_correlation <- function(chrono, climate, ci, boot) {
+ct_correlation <- function(chrono, climate, ci, boot) {
 
   vnames <- climate$names
   n <- length(chrono)
@@ -18,22 +18,22 @@ br_correlation <- function(chrono, climate, ci, boot) {
                               chrono, 1000, boot)
   
   if (boot %in% c("std", "dendroclim")) {
-    param_matrix <- .Call("bootres2_corfun", boot_data$climate,
-                          boot_data$chrono, PACKAGE = "bootres2")$coef
+    param_matrix <- .Call("climtree_corfun", boot_data$climate,
+                          boot_data$chrono, PACKAGE = "climtree")$coef
     
     out <- ptest(param_matrix, ci, NULL, "range")
   }
   
   if (boot == "exact") {
-    param_matrix <- .Call("bootres2_corfunexact", boot_data$climate,
-                          boot_data$chrono, chrono, PACKAGE = "bootres2")$coef
+    param_matrix <- .Call("climtree_corfunexact", boot_data$climate,
+                          boot_data$chrono, chrono, PACKAGE = "climtree")$coef
     
     out <- ptest(param_matrix[,2:1001], ci, param_matrix[,1], "weibull")
   }
   
   if (boot == "none") {
-    param_matrix <- .Call("bootres2_corfunnoboot", boot_data$climate,
-                          boot_data$chrono, PACKAGE = "bootres2")$coef
+    param_matrix <- .Call("climtree_corfunnoboot", boot_data$climate,
+                          boot_data$chrono, PACKAGE = "climtree")$coef
     
     out <- ptest(param_matrix, ci, NULL, "none")  
   }
@@ -51,6 +51,6 @@ br_correlation <- function(chrono, climate, ci, boot) {
     out
     )
   
-  class(out) <- c("br_coef", "data.frame")
+  class(out) <- c("ct_coef", "data.frame")
   out
 }
