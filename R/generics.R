@@ -94,6 +94,47 @@ print.br_design <- function(x, ...) {
   print(paste(names(pr), collapse = "\n"), ...)
 }
 
+##' @S3method print br_skills
+print.br_skills <- function(x, ...) {
+  cat("Call:\n", paste(deparse(x$call), sep = "\n",
+                       collapse = "\n"), "\n\n", sep = "")
+  cat("Calibration model with", x$cal.str,
+      "as calibration period:\n\n")
+  print.default(format(c(r = x$r.cal, "p-value" = x$p.cal)),
+                print.gap = 2L, quote = FALSE)
+  cat("\nCoefficients:\n")
+  print.default(format(x$coef.cal), print.gap = 2L,
+                quote = FALSE, ...)
+  cat("\nVerification statistics:\n")
+  cat("Reduction of Error (RE):\t", round(x$RE, 3), "\n")
+  cat("Coefficient of Efficiency (CE):\t", round(x$CE, 3), "\n")
+  cat("Durbin-Watson Test (DW):\t", round(x$DW$statistic, 3), " (p = ",
+      x$DW$p.value, ")\n\n", sep = "")
+  cat("Model for whole period:\n\n")
+  print.default(format(c(r = x$r.full, "p-value" = x$p.full)),
+                print.gap = 2L, quote = FALSE)
+  cat("\nCoefficients:\n")
+  print.default(format(x$coef.full), print.gap = 2L,
+                quote = FALSE, ...)
+}
+
+##' @S3method plot br_skills
+plot.br_skills <- function(x, ...) {
+  orig <- x
+  d <- data.frame(x = orig$years,
+                  y = orig$full$x)
+  v <- data.frame(x = c(orig$cal.years, orig$ver.years),
+                  y = c(orig$pred.cal, orig$pred.ver),
+                  prediction = c(rep("calibration",
+                    length(orig$pred.cal)),
+                    rep("verification", length(orig$pred.ver))))
+  gg <- ggplot(data = d, aes(x = x, y = y))
+  gg + geom_line(data = d, aes(x = x, y = y)) +
+    geom_line(data = v, aes(x = x, y = y, color = prediction)) +
+    theme_minimal() +
+    xlab("years") + ylab("target")
+}
+
 ##' @S3method coef br_dcc
 coef.br_dcc <- function(object, ...) {
   coef(object$coef, ...)

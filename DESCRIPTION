@@ -13,7 +13,9 @@ Depends:
     Rcpp (>= 0.10.6),
     RcppArmadillo (>= 0.4.000.2),
     plyr,
-    ggplot2
+    ggplot2,
+    lmtest,
+    lmodel2
 LinkingTo: Rcpp,
     RcppArmadillo
 Suggests:

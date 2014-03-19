@@ -1,0 +1,92 @@
+\name{skills}
+\alias{skills}
+\title{Evaluate reconstruction skills using split-calibration}
+\usage{
+skills(object, formula, model = "ols", calibration = "50\%",
+  timespan = NULL)
+}
+\arguments{
+  \item{object}{an object of class "br_dcc" or
+  "br_seascorr"}
+
+  \item{formula}{a formula specifying the regressand,
+  optionally ommitting the intercept, see details}
+
+  \item{model}{one of "ols" or "rma"}
+
+  \item{calibration}{which part of the data shall be used
+  as calibration subset? Given as either a range of years,
+  an integer corresponding to the first or last number of
+  observations, or a percentage as character string
+  corresponding to the part of the data set to be used as
+  calibration subset.}
+
+  \item{timespan}{timespan to be used to truncate the data}
+}
+\description{
+This function allows to evaluate the reconstruction skills
+for a given proxy time series in split-calibration
+approach.
+}
+\details{
+The result of a call to \code{\link{dcc}} or
+\code{\link{seascorr}} can be used as \code{object} for the
+function. The required data is then taken from this object
+and no further processing of the tree and climate variables
+has to be done for by the user. This reflects the flow of
+analysis, where first general climate/growth relations are
+explored, and then the strongest ones are deployed for
+reconstruction purposes.
+
+\code{formula} is a one-sided formula of the form \code{~
+selection}, where `selection` is an aggregation modifier
+(one of \code{\link{.mean}}, \code{\link{.sum}}, and
+\code{\link{.range}}). The user should be aware of the fact
+that in case the aggregation modifier evaluates to more
+than one variable (e.g., summer means for both temperature
+and precipiation), a warning message is issued, and only
+the first variable is taken into consideration for
+evaluating the reconstruction skills.
+
+The type of regression model (ordinary least squares or
+errors-in-variables via reduced major axis regression) can
+be selected.
+
+The part of the data to be used as a calibration subset can
+be specified in three different ways: 1) as a range of
+years, these are then taken as calibration period; 2) as a
+single integer, if positive, this number of observations at
+the recent end of the data set is taken as calibration set,
+if negative, this number of oldest observations is taken;
+and 3) as a character string giving a percentage of values,
+e.g., "-40%" would select the 40% oldest observations,
+while "55%" would select the 55% most recent ones.
+
+The relationship between climate and tree-ring data is
+evaluated for the calibration period and the complete data
+set. Frequently used verification statistics are computed:
+reduction of error (RE), coefficient of efficiency (CE),
+and the Durban-Watson statistic (DW) (Cook et al. 1994,
+Durbin and Watson, 1951).
+}
+\examples{
+\dontrun{
+data(muc.fake)
+data(muc.clim)
+dc <- dcc(muc.fake, muc.clim, .mean(6:9, "temp") + .sum(6:9,
+"prec"))
+sk <- skills(dc)
+sk
+plot(sk)
+}
+}
+\references{
+Cook E, Briffa K, Jones P (1994) Spatial regression methods
+in dendroclimatology: A review and comparison of two
+techniques. International Journal of Climatology, 14,
+379-402.
+
+Durbin, J, Watson, GS (1951) Testing for serial correlation
+in least squares regression. Biometrika 38:159-78.
+}
+
