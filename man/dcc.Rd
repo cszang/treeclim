@@ -177,28 +177,6 @@ response/correlation function with the original data for
 significance. For the exact bootstrapping case, no
 confidence intervals for the response/correlation
 coefficients can be computed.
-
-Input chronology data can be a \code{data.frame} such as
-produced by function \code{chron} of package dplR. It has
-to be a \code{data.frame} with at least one column
-containing the tree-ring indices, and the corresponding
-years as \code{rownames}.
-
-For climatic input data, there are three possibilities:
-Firstly, input climatic data can be a \code{data.frame} or
-\code{matrix} consisting of at least 3 rows for years,
-months and at least one climate parameter in the given
-order. Secondly, input climatic data can be a single
-\code{data.frame} or \code{matrix} in the style of the
-original DENDROCLIM2002 input data, i.e. one parameter with
-12 months in one row, where the first column represents the
-year. Or thirdly, input climatic data can be a list of
-several of the latter described \code{data.frame} or
-\code{matrices}. As an internal format dispatcher checks
-the format automatically, it is absolutely necessary that
-in all three cases, only complete years (months 1-12) are
-provided. It is not possible to mix different formats in
-one go.
 }
 \examples{
 \dontrun{
