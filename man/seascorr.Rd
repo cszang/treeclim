@@ -44,7 +44,7 @@ seascorr(chrono, climate, var_names = NULL, timespan = NULL, complete = 9,
   accordingly.}
 }
 \value{
-an object of class "br_seascorr"
+an object of class "ct_seascorr"
 }
 \description{
 Calculate seasonal correlation with primary and secondary

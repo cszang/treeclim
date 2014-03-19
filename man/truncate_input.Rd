@@ -8,7 +8,7 @@ truncate_input(chrono, climate, timespan = NULL, minmonth, moving)
   \item{chrono}{a tree-ring chronology}
 
   \item{climate}{the climate data as returned by
-  as_brclimate}
+  as_ctclimate}
 
   \item{timespan}{the timespan for truncating as vector
   with min and max year}

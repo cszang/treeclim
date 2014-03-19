@@ -6,8 +6,8 @@ skills(object, formula, model = "ols", calibration = "50\%",
   timespan = NULL)
 }
 \arguments{
-  \item{object}{an object of class "br_dcc" or
-  "br_seascorr"}
+  \item{object}{an object of class "ct_dcc" or
+  "ct_seascorr"}
 
   \item{formula}{a formula specifying the regressand,
   optionally ommitting the intercept, see details}

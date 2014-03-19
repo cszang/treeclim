@@ -5,7 +5,7 @@
 g_test(x, boot = FALSE, ci = 0.05, sb = TRUE)
 }
 \arguments{
-  \item{x}{an object of class "br_dcc" as returned from a
+  \item{x}{an object of class "ct_dcc" as returned from a
   call to \code{\link{dcc}} with moving correlations
   enabled}
 

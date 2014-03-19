@@ -63,7 +63,7 @@ dcc(chrono, climate, selection = -6:9, method = "response",
   Suppression is recommended for e.g.  Sweave files.}
 }
 \value{
-an object of class `br_dcc`.
+an object of class `ct_dcc`.
 }
 \description{
 This function calculates (potentially moving) response and
@@ -109,14 +109,14 @@ one go.
 Parameters can be selected with the `selection` parameter
 in two different ways. The default value is -6:9. This is
 equivalent to the standard settings in DENDROCLIM2002 and
-bootRes 1.X, and selects from all climate variables all
-months from previous year's June (-6, previous year's
-months are specified as negative integers) to current years
-September (9, months of the current year are specified as
-positive integers) as model parameters.
+bootRes, and selects from all climate variables all months
+from previous year's June (-6, previous year's months are
+specified as negative integers) to current years September
+(9, months of the current year are specified as positive
+integers) as model parameters.
 
 More complex parameter selections can be obtained by the
-\emph{modifiers} provided in bootres2: \code{.range},
+\emph{modifiers} provided in climtree: \code{.range},
 \code{.mean}, and \code{.sum}.  \code{.range} corresponds
 the example above, where all specified months are used,
 while \code{.sum} and \code{.mean} will use the sums and
@@ -135,7 +135,7 @@ selections of climate parameters for calibration.  E.g.,
 the February-to-May mean for the variable "temp" and the
 sum of the variable "prec" for the same time. While there
 is no limitation for number of lists that can be chained
-together, bootres2 will not check for meaningful
+together, climtree will not check for meaningful
 specifications. Testing smart hypotheses is up the
 researcher.
 
