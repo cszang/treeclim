@@ -182,6 +182,11 @@ summary.ct_dcc <- function(object, ...) {
 ##' @S3method plot ct_dcc
 plot.ct_dcc <- function(x, ...) {
   data <- x$coef
+  if (is.null(x$call$boot)) {
+    boot <- "std"
+  } else {
+    boot <- x$call$boot
+  }
 
   if (any(class(data) == "ct_coef")) {
 
@@ -200,7 +205,7 @@ plot.ct_dcc <- function(x, ...) {
       theme_minimal() +
       theme(axis.title.x = element_blank())    
     
-    if (x$call$boot == "exact") {
+    if (boot == "exact") {
       gg
     } else {
       gg + geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper, color =
