@@ -33,13 +33,13 @@
 ##' 1-12) are provided. It is not possible to mix different formats in
 ##' one go.
 ##'   
-##' Parameters can be selected with the `selection` parameter in two
+##' Parameters can be selected with the ’selection’ parameter in two
 ##' different ways. The default value is -6:9. This is equivalent to
-##' the standard settings in DENDROCLIM2002 and bootRes, and
-##' selects from all climate variables all months from previous year's
-##' June (-6, previous year's months are specified as negative
-##' integers) to current years September (9, months of the current year
-##' are specified as positive integers) as model parameters.
+##' the standard settings in DENDROCLIM2002 and bootRes, and selects
+##' from all climate variables all months from previous year's June
+##' (-6, previous year's months are specified as negative integers) to
+##' current years September (9, months of the current year are
+##' specified as positive integers) as model parameters.
 ##'   
 ##' More complex parameter selections can be obtained by the
 ##' \emph{modifiers} provided in climtree: \code{.range},
@@ -53,13 +53,13 @@
 ##' vectors can be used for month specification, like e.g.,
 ##' \code{.range(c(1, 3, 4, 5)}.
 ##'   
-##' The modifiers can be chained together using the `+` symbol, which
+##' The modifiers can be chained together using the ’+’ symbol, which
 ##' makes it possible to create arbitrarily complex selections of
-##' climate parameters for calibration.  E.g., \code{.mean(2:5, "temp")
-##' + .sum(2:5, "prec")} will yield the February-to-May mean for the
-##' variable "temp" and the sum of the variable "prec" for the same
-##' time. While there is no limitation for number of lists that can be
-##' chained together, climtree will not check for meaningful
+##' climate parameters for calibration.  E.g., \code{.mean(2:5,
+##' "temp") + .sum(2:5, "prec")} will yield the February-to-May mean
+##' for the variable "temp" and the sum of the variable "prec" for the
+##' same time. While there is no limitation for number of lists that
+##' can be chained together, ’dcc’ will not check for meaningful
 ##' specifications. Testing smart hypotheses is up the researcher.
 ##'   
 ##' For the exclusion of months, the convenience function
@@ -133,7 +133,28 @@
 ##' @param sb \code{logical} flag indicating whether textual status
 ##' bar for moving case should be suppressed. Suppression is
 ##' recommended for e.g.  Sweave files.
-##' @return an object of class `ct_dcc`.
+##' @return ‘dcc’ returns an ’object’ of class ’"ct_dcc"’.
+##'
+##' The functions ’summary’ and ’plot’ are used to obtain and print a
+##' summary of the results, and to create a plot. The function ’coef’
+##' can be used to extract the coefficients.
+##'
+##' An object of class ’"ct_dcc"’ is a list containings at least the
+##' following components:
+##'
+##' \item{call}{the call made to function ’dcc’}
+##' \item{coef}{the coefficients, themselves being an object of class
+##' ’ct_coef’ for the static case, and of class ’ct_mcoef’ for the
+##' moving case. Objects of class ’ct_coef’ are single data.frames,
+##' while objects of class ’ct_mcoef’ are lists of seperate
+##' data.frames for the coefficients ($coef), upper and lower
+##' confidence interval ($ci_upper and $ci_lower), and significance
+##' flags ($significant)}
+##' \item{design}{the design matrix on which this call to ’dcc’ operates}
+##' \item{truncated}{the input data truncated to the common timespan
+##' or the specified timespan}
+##' \item{original}{the original input data, with the climate data
+##' being recast into a single data.frame}
 ##' @references Biondi, F & Waikul, K (2004) DENDROCLIM2002: A C++
 ##' program for statistical calibration of climate signals in
 ##' tree-ring chronologies.  \emph{Computers & Geosciences} 30:303-311
