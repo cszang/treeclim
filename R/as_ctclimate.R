@@ -10,6 +10,8 @@
 ##' @keywords manip, internal
 as_ctclimate <- function(x, varnames = NULL) {
   
+  msg1 <- "Format of climate data was not recognized. It is absolutely necessary that only complete years (months 1-12) are provided."
+  
   ## is it a list?
   if (any(class(x) == "list")) {       
     ## handle list case
@@ -21,9 +23,13 @@ as_ctclimate <- function(x, varnames = NULL) {
       ## shortcut for current list member
       y <- x[[i]]                      
       ## explanation see non-list case
-      if (dim(y)[2] == 13) {        
-        if (!any(y[,1] == seq(y[1,1], y[dim(y)[1],1], 1))) {
-          stop("One member in the list supplied as climate data is not properly formatted.")
+      if (dim(y)[2] == 13) {
+        perf_seq <- seq(y[1,1], y[dim(y)[1],1], 1)
+        if (length(y[,1]) != length(perf_seq)) {
+          stop(msg1)
+        }
+        if (!any(y[,1] == perf_seq)) {
+          stop(msg1)
         } else {
           minyrs[i] <- min(y[,1])
           maxyrs[i] <- max(y[,1])
@@ -54,9 +60,14 @@ as_ctclimate <- function(x, varnames = NULL) {
     ## should have 12 months columns and one year column
     if (dim(x)[2] == 13) {              
       ## check if the first column is perfect sequence of integer years. if
-      ## expression evaluates to FALSE, then this is the case, if TRUE: stop.
-      if (!any(x[,1] == seq(x[1,1], x[dim(x)[1],1], 1))) { 
-        stop("unknown format of climate data")
+      ## expression evaluates to FALSE, then this is the case, if
+      ## TRUE: stop.
+      perf_seq <- seq(x[1,1], x[dim(x)[1],1], 1)
+      if (length(x[,1]) != length(perf_seq)) {
+        stop(msg1)
+      }
+      if (!any(x[,1] == perf_seq)) { 
+        stop(msg1)
       } else {                          
         ## this is most probably a dendroclim-formatted set of climate data
         yrs <- unique(x[,1])
@@ -76,14 +87,18 @@ as_ctclimate <- function(x, varnames = NULL) {
       ## check if the first column is a perfect sequence of integer years, each
       ## repeated 12 times. if expression evaluates to FALSE, then this is the
       ## case, else stop.
-      if (!any(x[,1] == rep(x[1,1]:x[dim(x)[1],1], each = 12))) {
-        stop("unknown format of climate data")
+      perf_seq <- rep(x[1,1]:x[dim(x)[1],1], each = 12)
+      if (length(x[,1]) != length(perf_seq)) {
+        stop(msg1)
+      }
+      if (!any(x[,1] == perf_seq)) {
+        stop(msg1)
       } else {
         if (!(any(x[,2] == rep(1:12, length(unique(x[,1])))))) {
           ## check if the second column is perfect sequence of 1:12 as often as
           ## there are individual years in column 1. if expression evaluates to
           ## FALSE, then this is the case, else stop.
-          stop("unknown format of climate data")
+          stop(msg1)
         } else {
           ## pass data on directly
           output_matrix <- x
