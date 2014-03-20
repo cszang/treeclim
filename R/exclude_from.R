@@ -12,7 +12,11 @@
 ##' @seealso \code{link{.range}}, \code{link{.mean}},
 ##' \code{link{.sum}}
 ##' @export
-exclude_from <- function(month, exclude) {
+exclude_from <- function(month, exclude = NULL) {
+  ## check if exclude is given
+  if (is.null(exclude))
+    return(month)
+
   ## check if exclude is supplied as a range
   if (is_continuous(exclude)) {
     exclude <- correct_continuous(exclude)

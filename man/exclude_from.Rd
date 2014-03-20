@@ -3,9 +3,9 @@
 \alias{exfr}
 \title{Exclude months from analysis}
 \usage{
-exclude_from(month, exclude)
+exclude_from(month, exclude = NULL)
 
-exfr(month, exclude)
+exfr(month, exclude = NULL)
 }
 \arguments{
   \item{month}{range of numeric month ids}
