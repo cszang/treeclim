@@ -1,7 +1,8 @@
 ##' Seasonal (partial) correlation analysis
 ##'
 ##' Calculate seasonal correlation with primary and secondary climate
-##' variables and tree-ring data.
+##' variables and tree-ring data, similar to the seascorr function for
+##' MATLAB.
 ##' @details This function mimicks the behaviour of the MATLAB
 ##' function seascorr (Meko et al. 2011), which calculates partial
 ##' correlations of tree-ring data with a primary and a secondary
@@ -9,22 +10,22 @@
 ##'
 ##' Input chronology data can be a \code{data.frame} such as produced
 ##' by function \code{chron} of package dplR. It has to be a
-##' \code{data.frame} with at least one column containing the tree-ring
-##' indices, and the corresponding years as \code{rownames}.
+##' \code{data.frame} with at least one column containing the
+##' tree-ring indices, and the corresponding years as \code{rownames}.
 ##'   
 ##' For climatic input data, there are three possibilities: Firstly,
 ##' input climatic data can be a \code{data.frame} or \code{matrix}
 ##' consisting of at least 3 rows for years, months and at least one
-##' climate parameter in the given order. Secondly, input climatic data
-##' can be a single \code{data.frame} or \code{matrix} in the style of
-##' the original DENDROCLIM2002 input data, i.e. one parameter with 12
-##' months in one row, where the first column represents the year. Or
-##' thirdly, input climatic data can be a list of several of the latter
-##' described \code{data.frame} or \code{matrices}. As an internal
-##' format dispatcher checks the format automatically, it is absolutely
-##' necessary that in all three cases, only complete years (months
-##' 1-12) are provided. It is not possible to mix different formats in
-##' one go.
+##' climate parameter in the given order. Secondly, input climatic
+##' data can be a single \code{data.frame} or \code{matrix} in the
+##' style of the original DENDROCLIM2002 input data, i.e. one
+##' parameter with 12 months in one row, where the first column
+##' represents the year. Or thirdly, input climatic data can be a list
+##' of several of the latter described \code{data.frame} or
+##' \code{matrices}. As an internal format dispatcher checks the
+##' format automatically, it is absolutely necessary that in all three
+##' cases, only complete years (months 1-12) are provided. It is not
+##' possible to mix different formats in one go.
 ##'
 ##' The `complete` parameter specifies the months of the current year
 ##' in which tree-growth is assumed to finish. This month marks the
@@ -49,8 +50,8 @@
 ##'
 ##' Like in the original seascorr program, the significance of each
 ##' (partial) correlation is evaluated using exact bootstrapping by
-##' circulant embedding of the tree-ring data (Percival \& Constantine,
-##' 2006).
+##' circulant embedding of the tree-ring data (Percival \&
+##' Constantine, 2006).
 ##' @param chrono \code{data.frame} containing a tree-ring
 ##' chronologies, e.g. as obtained by \code{chron} of package dplR.
 ##' @param climate either a \code{data.frame} or \code{matrix} with
@@ -65,22 +66,40 @@
 ##' @param timespan \code{integer} vector of length 2 specifying the
 ##' time interval (in years) to be considered for analysis. Defaults
 ##' to the maximum possible interval.
-##' @param complete \code{numeric) month when tree-ring growth is
-##' expected to have finished.
+##' @param complete \code{integer} scalar, month when tree-ring growth
+##' is expected to have finished.
 ##' @param season_lengths \code{numeric} vector giving the lengths of
 ##' the seasons for variable grouping
-##' @param primary position (numeric) or name (character) of primary
-##' climate variable
-##' @param secondary position (numeric) or name (character) of
-##' secondary climate variable
-##' @param ci \code{numerical} value to set the test level for
+##' @param primary position \code{numeric} or name \code{character} of
+##' primary climate variable
+##' @param secondary position \code{numeric} or name \code{character}
+##' of secondary climate variable
+##' @param ci \code{numeric} scalar to set the test level for
 ##' significance test (values 0.01, 0.05 and 0.1 are allowed); the
 ##' confidence intervals are adapted accordingly.
-##' @return an object of class "ct_seascorr"
+##' @return ’seascorr’ returns an ’object’ of class ’"ct_seascorr"’.
+##'
+##' The ’plot’ function is used to obtain a plot of the results.
+##'
+##' An object of class ’"ct_seascorr"’ is a list containing at least
+##' the following components:
+##'
+##' \item{call}{the call made to ’seascorr’}
+##' 
+##' \item{seasons}{a list of length n, where n is the number of season
+##' lengths provided; each list element consists of a data.frame with
+##' end month, correlation coefficient and significance flag}
+##' 
+##' \item{truncated}{the input data truncated to the common timespan
+##' or the specified timespan}
+##' 
+##' \item{original}{the original input data, with the climate data
+##' being recast into a single data.frame}
 ##' @references
-##' Meko DM, Touchan R, Anchukaitis KJ (2011) Seascorr: A MATLAB
-##' program for identifying the seasonal climate signal in an annual
-##' tree-ring time series. Computers \& Geosciences, 37, 1234-1241.
+##' Meko DM, Touchan R, Anchukaitis KJ (2011) Seascorr: A
+##' MATLAB program for identifying the seasonal climate signal in an
+##' annual tree-ring time series. Computers \& Geosciences, 37,
+##' 1234-1241.
 ##'
 ##' Percival DB, Constantine WLB (2006) Exact simulation of Gaussian
 ##' Time Series from Nonparametric Spectral Estimates with Application
@@ -91,7 +110,7 @@
 ##' sc <- seascorr(muc.fake, muc.clim)
 ##' sc
 ##' plot(sc)
-##' ##' @author Christian Zang; the procedure incl. exact bootstrapping
+##' @author Christian Zang; the procedure incl. exact bootstrapping
 ##' was implemented first by Dave Meko in MATLAB
 ##' @export
 seascorr <- function(chrono, climate, var_names = NULL, timespan =

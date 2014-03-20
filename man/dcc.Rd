@@ -1,6 +1,6 @@
 \name{dcc}
 \alias{dcc}
-\title{Dendroclimatic calibration: response and correlation function analysis}
+\title{Response and correlation function analysis}
 \usage{
 dcc(chrono, climate, selection = -6:9, method = "response",
   moving = FALSE, win_size = 25, win_offset = 1, start_last = TRUE,
@@ -69,10 +69,11 @@ The functions ’summary’ and ’plot’ are used to obtain and
 print a summary of the results, and to create a plot. The
 function ’coef’ can be used to extract the coefficients.
 
-An object of class ’"ct_dcc"’ is a list containings at
-least the following components:
+An object of class ’"ct_dcc"’ is a list containing at least
+the following components:
 
 \item{call}{the call made to function ’dcc’}
+
 \item{coef}{the coefficients, themselves being an object of
 class ’ct_coef’ for the static case, and of class
 ’ct_mcoef’ for the moving case. Objects of class ’ct_coef’
@@ -80,9 +81,13 @@ are single data.frames, while objects of class ’ct_mcoef’
 are lists of seperate data.frames for the coefficients
 ($coef), upper and lower confidence interval ($ci_upper and
 $ci_lower), and significance flags ($significant)}
+
 \item{design}{the design matrix on which this call to ’dcc’
-operates} \item{truncated}{the input data truncated to the
-common timespan or the specified timespan}
+operates}
+
+\item{truncated}{the input data truncated to the common
+timespan or the specified timespan}
+
 \item{original}{the original input data, with the climate
 data being recast into a single data.frame}
 }

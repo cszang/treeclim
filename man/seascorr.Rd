@@ -26,29 +26,49 @@ seascorr(chrono, climate, var_names = NULL, timespan = NULL, complete = 9,
   specifying the time interval (in years) to be considered
   for analysis. Defaults to the maximum possible interval.}
 
-  \item{complete}{\code{numeric) month when tree-ring
-  growth is expected to have finished.}
+  \item{complete}{\code{integer} scalar, month when
+  tree-ring growth is expected to have finished.}
 
   \item{season_lengths}{\code{numeric} vector giving the
   lengths of the seasons for variable grouping}
 
-  \item{primary}{position (numeric) or name (character) of
-  primary climate variable}
+  \item{primary}{position \code{numeric} or name
+  \code{character} of primary climate variable}
 
-  \item{secondary}{position (numeric) or name (character)
-  of secondary climate variable}
+  \item{secondary}{position \code{numeric} or name
+  \code{character} of secondary climate variable}
 
-  \item{ci}{\code{numerical} value to set the test level
-  for significance test (values 0.01, 0.05 and 0.1 are
+  \item{ci}{\code{numeric} scalar to set the test level for
+  significance test (values 0.01, 0.05 and 0.1 are
   allowed); the confidence intervals are adapted
   accordingly.}
 }
 \value{
-an object of class "ct_seascorr"
+’seascorr’ returns an ’object’ of class ’"ct_seascorr"’.
+
+The ’plot’ function is used to obtain a plot of the
+results.
+
+An object of class ’"ct_seascorr"’ is a list containing at
+least the following components:
+
+\item{call}{the call made to ’seascorr’}
+
+\item{seasons}{a list of length n, where n is the number of
+season lengths provided; each list element consists of a
+data.frame with end month, correlation coefficient and
+significance flag}
+
+\item{truncated}{the input data truncated to the common
+timespan or the specified timespan}
+
+\item{original}{the original input data, with the climate
+data being recast into a single data.frame}
 }
 \description{
 Calculate seasonal correlation with primary and secondary
-climate variables and tree-ring data.
+climate variables and tree-ring data, similar to the
+seascorr function for MATLAB.
 }
 \details{
 This function mimicks the behaviour of the MATLAB function
@@ -113,7 +133,6 @@ data(muc.clim)
 sc <- seascorr(muc.fake, muc.clim)
 sc
 plot(sc)
-##'
 }
 \author{
 Christian Zang; the procedure incl. exact bootstrapping was

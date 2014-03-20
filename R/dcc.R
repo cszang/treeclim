@@ -1,12 +1,13 @@
-##' Dendroclimatic calibration: response and correlation function analysis
+##' Response and correlation function analysis
 ##' 
-##' This function calculates (potentially moving) response and correlation 
-##' functions from tree-ring chronologies and monthly climatic data. For the 
-##' moving case, the calculation is performed repeatedly for consecutive time 
-##' windows. Function parameters may be bootstrapped to calculate their 
-##' significance and confidence intervals.
-##' @details This function builds upon and extents the functionality of
-##' programme DENDROCLIM2002 (Biondi and Waikul, 2004), and will
+##' This function calculates (potentially moving) response and
+##' correlation functions from tree-ring chronologies and monthly
+##' climatic data. For the moving case, the calculation is performed
+##' repeatedly for consecutive time windows. Function parameters may
+##' be bootstrapped to calculate their significance and confidence
+##' intervals.
+##' @details This function builds upon and extents the functionality
+##' of programme DENDROCLIM2002 (Biondi and Waikul, 2004), and will
 ##' calculate bootstrapped (and non-bootstrapped) moving and static
 ##' response and correlation functions in a similar fashion as
 ##' described in the above mentioned paper. Important extensions
@@ -22,16 +23,16 @@
 ##' For climatic input data, there are three possibilities: Firstly,
 ##' input climatic data can be a \code{data.frame} or \code{matrix}
 ##' consisting of at least 3 rows for years, months and at least one
-##' climate parameter in the given order. Secondly, input climatic data
-##' can be a single \code{data.frame} or \code{matrix} in the style of
-##' the original DENDROCLIM2002 input data, i.e. one parameter with 12
-##' months in one row, where the first column represents the year. Or
-##' thirdly, input climatic data can be a list of several of the latter
-##' described \code{data.frame} or \code{matrices}. As an internal
-##' format dispatcher checks the format automatically, it is absolutely
-##' necessary that in all three cases, only complete years (months
-##' 1-12) are provided. It is not possible to mix different formats in
-##' one go.
+##' climate parameter in the given order. Secondly, input climatic
+##' data can be a single \code{data.frame} or \code{matrix} in the
+##' style of the original DENDROCLIM2002 input data, i.e. one
+##' parameter with 12 months in one row, where the first column
+##' represents the year. Or thirdly, input climatic data can be a list
+##' of several of the latter described \code{data.frame} or
+##' \code{matrices}. As an internal format dispatcher checks the
+##' format automatically, it is absolutely necessary that in all three
+##' cases, only complete years (months 1-12) are provided. It is not
+##' possible to mix different formats in one go.
 ##'   
 ##' Parameters can be selected with the ’selection’ parameter in two
 ##' different ways. The default value is -6:9. This is equivalent to
@@ -139,10 +140,11 @@
 ##' summary of the results, and to create a plot. The function ’coef’
 ##' can be used to extract the coefficients.
 ##'
-##' An object of class ’"ct_dcc"’ is a list containings at least the
+##' An object of class ’"ct_dcc"’ is a list containing at least the
 ##' following components:
 ##'
 ##' \item{call}{the call made to function ’dcc’}
+##' 
 ##' \item{coef}{the coefficients, themselves being an object of class
 ##' ’ct_coef’ for the static case, and of class ’ct_mcoef’ for the
 ##' moving case. Objects of class ’ct_coef’ are single data.frames,
@@ -150,9 +152,13 @@
 ##' data.frames for the coefficients ($coef), upper and lower
 ##' confidence interval ($ci_upper and $ci_lower), and significance
 ##' flags ($significant)}
-##' \item{design}{the design matrix on which this call to ’dcc’ operates}
+##' 
+##' \item{design}{the design matrix on which this call to ’dcc’
+##' operates}
+##' 
 ##' \item{truncated}{the input data truncated to the common timespan
 ##' or the specified timespan}
+##' 
 ##' \item{original}{the original input data, with the climate data
 ##' being recast into a single data.frame}
 ##' @references Biondi, F & Waikul, K (2004) DENDROCLIM2002: A C++
