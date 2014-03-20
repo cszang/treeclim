@@ -1,6 +1,6 @@
 context("Aggregators")
 
-test_that("’.range’ aggregator returns a correct ’ct_paramlist’") {
+test_that("’.range’ aggregator returns a correct ’ct_paramlist’", {
   expect_that(.range(), is_a("list"))
   expect_that(.range(), is_a("ct_paramlist"))
   expect_that(.range()[[1]], equals("full"))
@@ -33,9 +33,9 @@ test_that("’.range’ aggregator returns a correct ’ct_paramlist’") {
   expect_that(.range(1:12, c("temp", "prec"))[[1]], equals("full"))
   expect_that(.range(1:12, c("temp", "prec"))[[2]], equals(1:12))
   expect_that(.range(1:12, c("temp", "prec"))[[3]], equals(c("temp", "prec")))
-}
+})
 
-test_that("’.mean’ and ’.sum’ aggregators also work correctly") {
+test_that("’.mean’ and ’.sum’ aggregators also work correctly", {
   expect_that(.mean(-2:2), is_a("list"))
   expect_that(.mean(-2:2), is_a("ct_paramlist"))
   expect_that(.mean(-2:2)[[1]], equals("mean"))
@@ -47,9 +47,9 @@ test_that("’.mean’ and ’.sum’ aggregators also work correctly") {
   expect_that(.sum(-2:2)[[1]], equals("sum"))
   expect_that(.sum(-2:2)[[2]], equals(-2:2))
   expect_that(.sum(-2:2, "temp")[[2]], equals(-2:2))
-}
+})
 
-test_that("’exfr’ correctly modifies a numeric vector") {
+test_that("’exfr’ correctly modifies a numeric vector", {
   expect_that(exfr(2), equals(2))
   expect_that(exfr(2:10), equals(c(2:10)))
   expect_that(exfr(2:10, 3), equals(c(2, 4:10)))
@@ -62,4 +62,4 @@ test_that("’exfr’ correctly modifies a numeric vector") {
   expect_that(exfr(-2:10, -3:3), equals(c(-2, 4:10)))
   expect_that(exfr(-2:10, -3:-6), equals(c(-2, -7:-12, 1:10)))
   expect_that(exfr(-2:10, -6:-3), equals(c(-2, -7:-12, 1:10)))
-}  
+})  

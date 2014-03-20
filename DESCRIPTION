@@ -1,7 +1,7 @@
 Package: climtree
 Type: Package
 Title: Modeling of tree/climate relationships
-Version: 0.6.1
+Version: 0.6.2
 Date: 2014-03-20
 Author: Christian Zang
 Maintainer: Christian Zang <christian.zang@wzw.tum.de>
@@ -19,7 +19,8 @@ Depends:
 LinkingTo: Rcpp,
     RcppArmadillo
 Suggests:
-    dplR
+    dplR,
+    testthat (>= 0.7.1.99)
 Description: Bootstrapped response and correlation functions,
     seasonal correlations and evaluation of reconstruction
     skills for use in dendroclimatology and dendroecology

@@ -1,6 +1,6 @@
 context("Selection evaluation")
 
-test_that("a single list of parameter specification is evaluated correctly") {
+test_that("a single list of parameter specification is evaluated correctly", {
     climate <- data.frame(
       year = rep(1950:2009, each = 12),
       month = rep(1:12, 60),
@@ -22,25 +22,23 @@ test_that("a single list of parameter specification is evaluated correctly") {
                 equals(rep(-0.909, 50)))
     expect_that(eval_selection(pmat, .sum(-11:3))$month$single,
                 equals(c("nov", "dec", "JAN", "FEB", "MAR")))
-}
+})
 
-test_that("the design matrix is constructed correctly") {
+test_that("the design matrix is constructed correctly", {
   climate <- data.frame(
-      year = rep(1950:2009, each = 12),
-      month = rep(1:12, 60),
-      temp = rep(-10 * cos(seq(0, 2*pi, length.out = 12)), 60),
-      prec = rep(seq(100, 220, length.out = 12), 60)
-      )
+    year = rep(1950:2009, each = 12),
+    month = rep(1:12, 60),
+    temp = rep(-10 * cos(seq(0, 2*pi, length.out = 12)), 60),
+    prec = rep(seq(100, 220, length.out = 12), 60)
+    )
   class(climate) <- c("ctclimate", "data.frame")
   chrono <- data.frame(rnorm(100))
   rownames(chrono) <- 1901:2000
   truncated_input <- truncate_input(chrono, climate, NULL, 1, FALSE)
   pmat <- make_pmat(truncated_input$climate)
-
+  
   test_that(ct_design(.range(1:3), pmat)$aggregate[,4],
             equals(rep(-10, 50)))
   test_that(ct_design(.mean(1:3), pmat)$names[1],
             equals("prec.curr.jan"))
-  test_that(ct_design(.mean(1:3), pmat)$pretty_names[1,],
-            equals(c(13, "prec.mean", "JAN...MAR", 1)))
-}
+})

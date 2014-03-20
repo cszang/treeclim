@@ -1,6 +1,6 @@
 context("Climate data")
 
-test_that("data.frame input of climate data is processed correctly") {
+test_that("data.frame input of climate data is processed correctly", {
   df <- data.frame(
     year = rep(1950:2009, each = 12),
     month = rep(1:12, 60),
@@ -34,4 +34,4 @@ test_that("data.frame input of climate data is processed correctly") {
   expect_that(as_ctclimate(list(dfp1, dfp2)), is_a("data.frame"))
   expect_that(as_ctclimate(dfpw), throws_error())
   expect_that(as_ctclimate(list(dfp1, dfpw)), throws_error())
-}
+})
