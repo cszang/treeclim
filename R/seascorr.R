@@ -77,14 +77,14 @@
 ##' @param ci \code{numeric} scalar to set the test level for
 ##' significance test (values 0.01, 0.05 and 0.1 are allowed); the
 ##' confidence intervals are adapted accordingly.
-##' @return ’seascorr’ returns an ’object’ of class ’"ct_seascorr"’.
+##' @return 'seascorr' returns an 'object' of class '"ct_seascorr"'.
 ##'
-##' The ’plot’ function is used to obtain a plot of the results.
+##' The 'plot' function is used to obtain a plot of the results.
 ##'
-##' An object of class ’"ct_seascorr"’ is a list containing at least
+##' An object of class '"ct_seascorr"' is a list containing at least
 ##' the following components:
 ##'
-##' \item{call}{the call made to ’seascorr’}
+##' \item{call}{the call made to 'seascorr'}
 ##' 
 ##' \item{seasons}{a list of length n, where n is the number of season
 ##' lengths provided; each list element consists of a data.frame with
@@ -98,12 +98,12 @@
 ##' @references
 ##' Meko DM, Touchan R, Anchukaitis KJ (2011) Seascorr: A
 ##' MATLAB program for identifying the seasonal climate signal in an
-##' annual tree-ring time series. Computers \& Geosciences, 37,
+##' annual tree-ring time series. Computers & Geosciences, 37,
 ##' 1234-1241.
 ##'
 ##' Percival DB, Constantine WLB (2006) Exact simulation of Gaussian
 ##' Time Series from Nonparametric Spectral Estimates with Application
-##' to Bootstrapping. \emph{Statistics and Computing} 16:25-35
+##' to Bootstrapping. Statistics and Computing 16:25-35
 ##' @examples
 ##' data(muc.fake)
 ##' data(muc.clim)

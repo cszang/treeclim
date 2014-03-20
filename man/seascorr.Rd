@@ -44,15 +44,15 @@ seascorr(chrono, climate, var_names = NULL, timespan = NULL, complete = 9,
   accordingly.}
 }
 \value{
-’seascorr’ returns an ’object’ of class ’"ct_seascorr"’.
+'seascorr' returns an 'object' of class '"ct_seascorr"'.
 
-The ’plot’ function is used to obtain a plot of the
+The 'plot' function is used to obtain a plot of the
 results.
 
-An object of class ’"ct_seascorr"’ is a list containing at
+An object of class '"ct_seascorr"' is a list containing at
 least the following components:
 
-\item{call}{the call made to ’seascorr’}
+\item{call}{the call made to 'seascorr'}
 
 \item{seasons}{a list of length n, where n is the number of
 season lengths provided; each list element consists of a
@@ -141,12 +141,12 @@ implemented first by Dave Meko in MATLAB
 \references{
 Meko DM, Touchan R, Anchukaitis KJ (2011) Seascorr: A
 MATLAB program for identifying the seasonal climate signal
-in an annual tree-ring time series. Computers \&
+in an annual tree-ring time series. Computers &
 Geosciences, 37, 1234-1241.
 
 Percival DB, Constantine WLB (2006) Exact simulation of
 Gaussian Time Series from Nonparametric Spectral Estimates
-with Application to Bootstrapping. \emph{Statistics and
-Computing} 16:25-35
+with Application to Bootstrapping. Statistics and Computing
+16:25-35
 }
 

@@ -23,7 +23,7 @@ make_range_list <- function(call, method) {
 ##' These modifiers are used to select specific months from specific
 ##' climate parameters, and potentially transform the selections into
 ##' their respective sums or means. The modifiers can be chained
-##' together using ’+’.
+##' together using '+'.
 ##' @rdname climtree-modifiers
 ##' @param .months numeric identifiers for the months (-1 for previous
 ##' January until 12 for current December, with -6 for previous June,

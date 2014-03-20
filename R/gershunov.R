@@ -20,7 +20,7 @@
 ##' compared to the bootstrapped distribution of the standard
 ##' deviation of the simulated data to test for significantly higher
 ##' or lower low-frequency modulations.
-##' @param x an object of class ’"ct_dcc"’ as returned from a call to
+##' @param x an object of class '"ct_dcc"' as returned from a call to
 ##' \code{\link{dcc}} with moving correlations enabled
 ##' @param boot \code{logical} shall the individual correlation be
 ##' bootstrapped?  (see details)
@@ -35,7 +35,7 @@
 ##' @references Gershunov, A., N. Schneider, and
 ##' T. Barnett. 2001. Low-frequency modulation of the ENSO-Indian
 ##' Monsoon rainfall relationship: Signal or noise? Journal of Climate
-##' 14:2486–2492.
+##' 14:2486-2492.
 ##' @examples
 ##' \dontrun{
 ##' data(muc.clim) # climatic data

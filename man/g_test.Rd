@@ -5,7 +5,7 @@
 g_test(x, boot = FALSE, ci = 0.05, sb = TRUE)
 }
 \arguments{
-  \item{x}{an object of class ’"ct_dcc"’ as returned from a
+  \item{x}{an object of class '"ct_dcc"' as returned from a
   call to \code{\link{dcc}} with moving correlations
   enabled}
 
@@ -63,7 +63,7 @@ gershunov(dc.cor)
 Gershunov, A., N. Schneider, and T. Barnett. 2001.
 Low-frequency modulation of the ENSO-Indian Monsoon
 rainfall relationship: Signal or noise? Journal of Climate
-14:2486–2492.
+14:2486-2492.
 }
 \keyword{test}
 

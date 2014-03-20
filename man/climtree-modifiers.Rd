@@ -22,6 +22,6 @@
 These modifiers are used to select specific months from
 specific climate parameters, and potentially transform the
 selections into their respective sums or means. The
-modifiers can be chained together using ’+’.
+modifiers can be chained together using '+'.
 }
 
