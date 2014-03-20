@@ -1,5 +1,5 @@
 .onAttach <- function(...) {
-  library(help=bootres2)$info[[1]] -> version
+  library(help=climtree)$info[[1]] -> version
   version <- version[pmatch("Version",version)]
   um <- strsplit(version," ")[[1]]
   version <- um[nchar(um) > 0][2]
