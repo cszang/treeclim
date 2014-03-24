@@ -48,6 +48,26 @@
 ##' percentage as character string corresponding to the part of the
 ##' data set to be used as calibration subset.
 ##' @param timespan timespan to be used to truncate the data
+##' @return 'skills' returns an 'object' of class '"ct_skills"'.
+##' 
+##' An object of class '"ct_skills"' is a list containing at least the
+##' following components:
+##' 
+##' \item{call}{the call made to function 'skills'}     
+##' \item{r.cal}{the coefficient of correlation for the calibration
+##' timespan}    
+##' \item{r.full}{the coefficient of correlation for the complete data
+##' set}   
+##' \item{coef.cal}{regression coefficients for the calibration model} 
+##' \item{coef.full}{regression coefficients for the full model}
+##' \item{p.cal}{significance for the calibration model}    
+##' \item{p.full}{significance for the full model}   
+##' \item{RE}{reduction of error statistic}       
+##' \item{CE}{coefficient of efficiency statistic}       
+##' \item{DW}{Durbin-Watson statistic}       
+##' \item{cal.model}{the complete calibration model (an object of
+##' class 'lmodel2')}
+##' \item{full.mode}{the complete full model (an object of class 'lmodel2')}
 ##' @references
 ##' Cook E, Briffa K, Jones P (1994) Spatial regression
 ##' methods in dendroclimatology: A review and comparison of two
@@ -208,12 +228,12 @@ skills <- function(object, formula, model = "ols",
     specs_cal <- subset(lm_cal$regression.results, Method == "RMA")
     specs_full <- subset(lm_full$regression.results, Method == "RMA")
   }
-  intercept_cal <- specs_cal$Intercept
-  slope_cal <- specs_cal$Slope
-  p_cal <- specs_cal$P
-  intercept_full <- specs_full$Intercept
-  slope_full <- specs_full$Slope
-  p_full <- specs_full$P
+  intercept_cal <- specs_cal[[2]]
+  slope_cal <- specs_cal[[3]]
+  p_cal <- specs_cal[[5]]
+  intercept_full <- specs_full[[2]]
+  slope_full <- specs_full[[3]]
+  p_full <- specs_full[[5]]
   
   predict_cal <- intercept_cal + slope_cal * cal$y
   predict_ver <- intercept_cal + slope_cal * ver$y
@@ -223,27 +243,27 @@ skills <- function(object, formula, model = "ols",
   DW <- dwtest(cal$x ~ predict_cal)
   
   model_lm <- list(
-    call = mf,
-    r.cal = r_cal,
-    r.full = r_full,
-    coef.cal = c(intercept = intercept_cal, slope = slope_cal),
-    coef.full = c(intercept = intercept_full, slope = slope_full),
-    p.cal = p_cal,
-    p.full = p_full,
-    RE = RE,
-    CE = CE,
-    DW = DW,
-    cal.model = lm_cal,
+    call       = mf,
+    r.cal      = r_cal,
+    r.full     = r_full,
+    coef.cal   = c(intercept = intercept_cal, slope = slope_cal),
+    coef.full  = c(intercept = intercept_full, slope = slope_full),
+    p.cal      = p_cal,
+    p.full     = p_full,
+    RE         = RE,
+    CE         = CE,
+    DW         = DW,
+    cal.model  = lm_cal,
     full.model = lm_full,
-    cal.str = cal_str,
-    pred.cal = predict_cal,
-    pred.ver = predict_ver,
-    cal = cal,
-    ver = ver,
-    full = full,
-    years = all_years,
-    cal.years = all_years[cal_index],
-    ver.years = all_years[ver_index]
+    cal.str    = cal_str,
+    pred.cal   = predict_cal,
+    pred.ver   = predict_ver,
+    cal        = cal,
+    ver        = ver,
+    full       = full,
+    years      = all_years,
+    cal.years  = all_years[cal_index],
+    ver.years  = all_years[ver_index]
     )
   class(model_lm) <- c("ct_skills", "list")
   model_lm

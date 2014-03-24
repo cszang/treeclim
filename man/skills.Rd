@@ -23,6 +23,27 @@ skills(object, formula, model = "ols", calibration = "50\%",
 
   \item{timespan}{timespan to be used to truncate the data}
 }
+\value{
+'skills' returns an 'object' of class '"ct_skills"'.
+
+An object of class '"ct_skills"' is a list containing at
+least the following components:
+
+\item{call}{the call made to function 'skills'}
+\item{r.cal}{the coefficient of correlation for the
+calibration timespan} \item{r.full}{the coefficient of
+correlation for the complete data set}
+\item{coef.cal}{regression coefficients for the calibration
+model} \item{coef.full}{regression coefficients for the
+full model} \item{p.cal}{significance for the calibration
+model} \item{p.full}{significance for the full model}
+\item{RE}{reduction of error statistic}
+\item{CE}{coefficient of efficiency statistic}
+\item{DW}{Durbin-Watson statistic} \item{cal.model}{the
+complete calibration model (an object of class 'lmodel2')}
+\item{full.mode}{the complete full model (an object of
+class 'lmodel2')}
+}
 \description{
 This function allows to evaluate the reconstruction skills
 for a given proxy time series in split-calibration
