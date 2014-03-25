@@ -3,7 +3,5 @@
 src/*.o
 src/*.so
 src/*.dll
-.Rproj*
 R/RcppExports.R
 /TAGS
-/R/TAGS
