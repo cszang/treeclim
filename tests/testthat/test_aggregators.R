@@ -1,35 +1,35 @@
 context("Aggregators")
 
-test_that("’.range’ aggregator returns a correct ’ct_paramlist’", {
+test_that("’.range’ aggregator returns a correct ’tc_paramlist’", {
   expect_that(.range(), is_a("list"))
-  expect_that(.range(), is_a("ct_paramlist"))
+  expect_that(.range(), is_a("tc_paramlist"))
   expect_that(.range()[[1]], equals("full"))
   expect_that(.range()[[2]], equals(-6:9))
   
   expect_that(.range(1:12), is_a("list"))
-  expect_that(.range(1:12), is_a("ct_paramlist"))
+  expect_that(.range(1:12), is_a("tc_paramlist"))
   expect_that(.range(1:12)[[1]], equals("full"))
   expect_that(.range(1:12)[[2]], equals(1:12))
 
   expect_that(.range("temp"), is_a("list"))
-  expect_that(.range("temp"), is_a("ct_paramlist"))
+  expect_that(.range("temp"), is_a("tc_paramlist"))
   expect_that(.range("temp")[[1]], equals("full"))
   expect_that(.range("temp")[[2]], equals("temp"))
   
   expect_that(.range(1:12, "temp"), is_a("list"))
-  expect_that(.range(1:12, "temp"), is_a("ct_paramlist"))
+  expect_that(.range(1:12, "temp"), is_a("tc_paramlist"))
   expect_that(.range(1:12, "temp")[[1]], equals("full"))
   expect_that(.range(1:12, "temp")[[2]], equals(1:12))
   expect_that(.range(1:12, "temp")[[3]], equals("temp"))
 
   expect_that(.range(1:12, c("temp")), is_a("list"))
-  expect_that(.range(1:12, c("temp")), is_a("ct_paramlist"))
+  expect_that(.range(1:12, c("temp")), is_a("tc_paramlist"))
   expect_that(.range(1:12, c("temp"))[[1]], equals("full"))
   expect_that(.range(1:12, c("temp"))[[2]], equals(1:12))
   expect_that(.range(1:12, c("temp"))[[3]], equals("temp"))
 
   expect_that(.range(1:12, c("temp", "prec")), is_a("list"))
-  expect_that(.range(1:12, c("temp", "prec")), is_a("ct_paramlist"))
+  expect_that(.range(1:12, c("temp", "prec")), is_a("tc_paramlist"))
   expect_that(.range(1:12, c("temp", "prec"))[[1]], equals("full"))
   expect_that(.range(1:12, c("temp", "prec"))[[2]], equals(1:12))
   expect_that(.range(1:12, c("temp", "prec"))[[3]], equals(c("temp", "prec")))
@@ -37,13 +37,13 @@ test_that("’.range’ aggregator returns a correct ’ct_paramlist’", {
 
 test_that("’.mean’ and ’.sum’ aggregators also work correctly", {
   expect_that(.mean(-2:2), is_a("list"))
-  expect_that(.mean(-2:2), is_a("ct_paramlist"))
+  expect_that(.mean(-2:2), is_a("tc_paramlist"))
   expect_that(.mean(-2:2)[[1]], equals("mean"))
   expect_that(.mean(-2:2)[[2]], equals(-2:2))
   expect_that(.mean(-2:2, "temp")[[2]], equals(-2:2))
 
   expect_that(.sum(-2:2), is_a("list"))
-  expect_that(.sum(-2:2), is_a("ct_paramlist"))
+  expect_that(.sum(-2:2), is_a("tc_paramlist"))
   expect_that(.sum(-2:2)[[1]], equals("sum"))
   expect_that(.sum(-2:2)[[2]], equals(-2:2))
   expect_that(.sum(-2:2, "temp")[[2]], equals(-2:2))

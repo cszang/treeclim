@@ -1,8 +1,8 @@
-\name{ct_design}
-\alias{ct_design}
+\name{tc_design}
+\alias{tc_design}
 \title{Deparse list structure from month specification and return parameter set}
 \usage{
-ct_design(selection, climate)
+tc_design(selection, climate)
 }
 \arguments{
   \item{selection}{the list structure to specify the month

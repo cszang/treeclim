@@ -1,0 +1,27 @@
+\name{.range}
+\alias{.mean}
+\alias{.range}
+\alias{.sum}
+\title{Modifiers for climate parameter selection}
+\usage{
+.range(.months = NULL, .variables = NULL)
+
+.mean(.months = NULL, .variables = NULL)
+
+.sum(.months = NULL, .variables = NULL)
+}
+\arguments{
+  \item{.months}{numeric identifiers for the months (-1 for
+  previous January until 12 for current December, with -6
+  for previous June, etc.)}
+
+  \item{.variables}{names of the variables the modifier
+  shall be applied to}
+}
+\description{
+These modifiers are used to select specific months from
+specific climate parameters, and potentially transform the
+selections into their respective sums or means. The
+modifiers can be chained together using '+'.
+}
+

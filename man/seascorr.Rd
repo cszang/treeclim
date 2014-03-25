@@ -44,12 +44,12 @@ seascorr(chrono, climate, var_names = NULL, timespan = NULL, complete = 9,
   accordingly.}
 }
 \value{
-'seascorr' returns an 'object' of class '"ct_seascorr"'.
+'seascorr' returns an 'object' of class '"tc_seascorr"'.
 
 The 'plot' function is used to obtain a plot of the
 results.
 
-An object of class '"ct_seascorr"' is a list containing at
+An object of class '"tc_seascorr"' is a list containing at
 least the following components:
 
 \item{call}{the call made to 'seascorr'}

@@ -43,7 +43,7 @@
 ##' specified as positive integers) as model parameters.
 ##'   
 ##' More complex parameter selections can be obtained by the
-##' \emph{modifiers} provided in climtree: \code{.range},
+##' \emph{modifiers} provided in treeclim: \code{.range},
 ##' \code{.mean}, and \code{.sum}.  \code{.range} corresponds the
 ##' example above, where all specified months are used, while
 ##' \code{.sum} and \code{.mean} will use the sums and means of the
@@ -134,21 +134,21 @@
 ##' @param sb \code{logical} flag indicating whether textual status
 ##' bar for moving case should be suppressed. Suppression is
 ##' recommended for e.g.  Sweave files.
-##' @return 'dcc' returns an 'object' of class '"ct_dcc"'.
+##' @return 'dcc' returns an 'object' of class '"tc_dcc"'.
 ##'
 ##' The functions 'summary' and 'plot' are used to obtain and print a
 ##' summary of the results, and to create a plot. The function 'coef'
 ##' can be used to extract the coefficients.
 ##'
-##' An object of class '"ct_dcc"' is a list containing at least the
+##' An object of class '"tc_dcc"' is a list containing at least the
 ##' following components:
 ##'
 ##' \item{call}{the call made to function 'dcc'}
 ##' 
 ##' \item{coef}{the coefficients, themselves being an object of class
-##' 'ct_coef' for the static case, and of class 'ct_mcoef' for the
-##' moving case. Objects of class 'ct_coef' are single data.frames,
-##' while objects of class 'ct_mcoef' are lists of seperate
+##' 'tc_coef' for the static case, and of class 'tc_mcoef' for the
+##' moving case. Objects of class 'tc_coef' are single data.frames,
+##' while objects of class 'tc_mcoef' are lists of seperate
 ##' data.frames for the coefficients ($coef), upper and lower
 ##' confidence interval ($ci_upper and $ci_lower), and significance
 ##' flags ($significant)}
@@ -206,7 +206,7 @@ dcc <- function(chrono,
 {
 
   ## climate data are correctly formatted
-  climate <- as_ctclimate(climate)
+  climate <- as_tcclimate(climate)
   ## when var_names are supplied, apply appropriately
   if (!is.null(var_names)) {
     varno <- dim(climate)[2] - 2
@@ -261,7 +261,7 @@ dcc <- function(chrono,
   climate_pmat <- make_pmat(truncated_input$climate)
 
   ## generate design matrix for calibration by evaluating the selections
-  design <- ct_design(selection, climate_pmat)
+  design <- tc_design(selection, climate_pmat)
 
   ## check if number of parameters is smaller than number of observations
   n_params <- dim(design$aggregate)[2]
@@ -284,13 +284,13 @@ dcc <- function(chrono,
 
   if (!moving) {
     if (.method == "response") {
-      dc <- ct_response(truncated_input$chrono, design,
+      dc <- tc_response(truncated_input$chrono, design,
                         ci = ci,
                         boot = boot)
     }
     
     if (.method == "correlation") {
-      dc <- ct_correlation(truncated_input$chrono, design,
+      dc <- tc_correlation(truncated_input$chrono, design,
                            ci = ci,
                            boot = boot)
     }
@@ -299,7 +299,7 @@ dcc <- function(chrono,
   ## moving functions
 
   if (moving) {
-    dc <- ct_mfunc(truncated_input$chrono, design,
+    dc <- tc_mfunc(truncated_input$chrono, design,
                    ci = ci,
                    sb = sb,
                    method = .method,
@@ -320,7 +320,7 @@ dcc <- function(chrono,
   dcc_out$original <- list(tree = chrono,
                            climate = climate)
 
-  class(dcc_out) <- c("ct_dcc", "list")
+  class(dcc_out) <- c("tc_dcc", "list")
 
   dcc_out
 }

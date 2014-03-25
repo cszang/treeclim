@@ -1,8 +1,8 @@
-Package: climtree
+Package: treeclim
 Type: Package
 Title: Modeling of tree/climate relationships
-Version: 0.6.2
-Date: 2014-03-20
+Version: 0.6.3.2
+Date: 2014-03-25
 Author: Christian Zang
 Maintainer: Christian Zang <christian.zang@wzw.tum.de>
 Depends:

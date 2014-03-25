@@ -1,8 +1,8 @@
-\name{ct_response}
-\alias{ct_response}
+\name{tc_response}
+\alias{tc_response}
 \title{(bootstrapped) response function}
 \usage{
-ct_response(chrono, climate, ci, boot)
+tc_response(chrono, climate, ci, boot)
 }
 \arguments{
   \item{chrono}{a tree-ring chronology}

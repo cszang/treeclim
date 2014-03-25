@@ -5,7 +5,7 @@
 ##' the climate data will need to start one year earlier than the tree
 ##' data, if data from the previous year should be used.
 ##' @param chrono a tree-ring chronology
-##' @param climate the climate data as returned by as_ctclimate
+##' @param climate the climate data as returned by as_tcclimate
 ##' @param timespan the timespan for truncating as vector with min and max year
 ##' @param minmonth the earliest month used for the calibration, as
 ##' returned by check_months
@@ -67,7 +67,7 @@ truncate_input <- function(chrono, climate, timespan = NULL, minmonth,
   if (minmonth < 0 && is.na(match((start_year - 1), climate_years))) { 
     offset <- 1
     if (is.null(timespan)) {
-      warning(paste("climtree tries to use the maximum overlap in timespan for chronology and climate data. The overlap starts in ",
+      warning(paste("treeclim tries to use the maximum overlap in timespan for chronology and climate data. The overlap starts in ",
                     start_year,
                     ", but to be able to use climate data from the previous year (as you chose by setting 'selection' accordingly), the analysis starts in ",
                     start_year + 1, ".", sep = ""),

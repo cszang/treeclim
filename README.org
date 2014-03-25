@@ -1,4 +1,4 @@
-* climtree
+* treeclim
 
 An R package for modeling tree/climate relationships.
 
@@ -9,9 +9,9 @@ from source (or install a [[https://github.com/znag/climtree/releases][binary]])
 
 #+begin_src R 
 library(devtools)
-install_github("climtree", "znag")
+install_github("treeclim", "znag")
 #+end_src
 
 ** Usage
 
-see the [[https://github.com/znag/climtree/wiki][Wiki]] for details.
+see the [[https://github.com/znag/treeclim/wiki][Wiki]] for details.

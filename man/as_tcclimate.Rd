@@ -1,8 +1,8 @@
-\name{as_ctclimate}
-\alias{as_ctclimate}
+\name{as_tcclimate}
+\alias{as_tcclimate}
 \title{Create the correct data format for variable selection}
 \usage{
-as_ctclimate(x, varnames = NULL)
+as_tcclimate(x, varnames = NULL)
 }
 \arguments{
   \item{x}{the supplied climate data}

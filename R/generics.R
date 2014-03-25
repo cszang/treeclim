@@ -1,5 +1,5 @@
-##' @S3method print ct_dcc
-print.ct_dcc <- function(x, ...) {
+##' @S3method print tc_dcc
+print.tc_dcc <- function(x, ...) {
   ci <- x$call$ci
   if (is.null(ci))
     ci <- 0.05
@@ -8,8 +8,8 @@ print.ct_dcc <- function(x, ...) {
   print(x$coef, ...)
 }
 
-##' @S3method print ct_seascorr
-print.ct_seascorr <- function(x, ...) {
+##' @S3method print tc_seascorr
+print.tc_seascorr <- function(x, ...) {
   n <- length(x$coef)
   ## pretty season names
   if (is.null(x$call$season_lengths)) {
@@ -54,8 +54,8 @@ print.ct_seascorr <- function(x, ...) {
   }
 }
 
-##' @S3method print ct_coef
-print.ct_coef <- function(x, ...) {
+##' @S3method print tc_coef
+print.tc_coef <- function(x, ...) {
   rownames(x) <- abbrev_name(rownames(x))
   x$coef <- round(x$coef, 3)
   x$ci_lower <- round(x$ci_lower, 3)
@@ -64,8 +64,8 @@ print.ct_coef <- function(x, ...) {
 }
 
 ##' @importFrom abind abind
-##' @S3method print ct_mcoef
-print.ct_mcoef <- function(x, ...) {
+##' @S3method print tc_mcoef
+print.tc_mcoef <- function(x, ...) {
   mm <- abind(x$coef, x$significant, along = 3)
   ms <- apply(mm, c(1, 2), function(x) {
     if (!is.na(x[2])) {
@@ -83,8 +83,8 @@ print.ct_mcoef <- function(x, ...) {
   print(ms, ...)
 }
 
-##' @S3method print ct_design
-print.ct_design <- function(x, ...) {
+##' @S3method print tc_design
+print.tc_design <- function(x, ...) {
   pr <- x$aggregate
   names(pr) <- abbrev_name(x$names)
   years <- as.numeric(rownames(pr))
@@ -94,8 +94,8 @@ print.ct_design <- function(x, ...) {
   print(paste(names(pr), collapse = "\n"), ...)
 }
 
-##' @S3method print ct_skills
-print.ct_skills <- function(x, ...) {
+##' @S3method print tc_skills
+print.tc_skills <- function(x, ...) {
   cat("Call:\n", paste(deparse(x$call), sep = "\n",
                        collapse = "\n"), "\n\n", sep = "")
   cat("Calibration model with", x$cal.str,
@@ -120,8 +120,8 @@ print.ct_skills <- function(x, ...) {
                 quote = FALSE, ...)
 }
 
-##' @S3method plot ct_skills
-plot.ct_skills <- function(x, ...) {
+##' @S3method plot tc_skills
+plot.tc_skills <- function(x, ...) {
   orig <- x
   d <- data.frame(x = orig$years,
                   y = orig$full$x)
@@ -137,23 +137,23 @@ plot.ct_skills <- function(x, ...) {
     xlab("years") + ylab("target")
 }
 
-##' @S3method coef ct_dcc
-coef.ct_dcc <- function(object, ...) {
+##' @S3method coef tc_dcc
+coef.tc_dcc <- function(object, ...) {
   coef(object$coef, ...)
 }
 
-##' @S3method coef ct_coef
-coef.ct_coef <- function(object, ...) {
+##' @S3method coef tc_coef
+coef.tc_coef <- function(object, ...) {
   print(data.frame(object), ...)
 }
 
-##' @S3method coef ct_mcoef
-coef.ct_mcoef <- function(object, ...) {
+##' @S3method coef tc_mcoef
+coef.tc_mcoef <- function(object, ...) {
   print(data.frame(object$coef), ...)
 }
 
-##' @S3method summary ct_dcc
-summary.ct_dcc <- function(object, ...) {
+##' @S3method summary tc_dcc
+summary.tc_dcc <- function(object, ...) {
   cat("Call:\n")
   print(object$call)
   cat("\nDesign matriobject:\n")
@@ -162,8 +162,8 @@ summary.ct_dcc <- function(object, ...) {
   print(object$coef, ...)
 }
 
-##' @S3method + ct_paramlist
-"+.ct_paramlist" <- function(p1, p2) {
+##' @S3method + tc_paramlist
+"+.tc_paramlist" <- function(p1, p2) {
   ## check if p1 already is _nested_ list
   if (is.list(p1[[1]])) {
     ## just write to this list
@@ -181,8 +181,8 @@ summary.ct_dcc <- function(object, ...) {
 
 ##' @import ggplot2
 ##' @import plyr
-##' @S3method plot ct_dcc
-plot.ct_dcc <- function(x, ...) {
+##' @S3method plot tc_dcc
+plot.tc_dcc <- function(x, ...) {
   data <- x$coef
   if (is.null(x$call$boot)) {
     boot <- "std"
@@ -190,7 +190,7 @@ plot.ct_dcc <- function(x, ...) {
     boot <- x$call$boot
   }
 
-  if (any(class(data) == "ct_coef")) {
+  if (any(class(data) == "tc_coef")) {
 
     line0 <- data.frame(
       x = c(0.5, data$id, max(data$id) + 0.5),
@@ -270,7 +270,7 @@ plot.ct_dcc <- function(x, ...) {
 }
 
 
-plot.ct_seascorr <- function(x, ...) {
+plot.tc_seascorr <- function(x, ...) {
 
   ## how many season lengths do we consider?
   n <- length(x$coef)

@@ -21,17 +21,17 @@ test_that("data.frame input of climate data is processed correctly", {
                                              = TRUE)))
   dfpw <- rbind(dfp2, c(2008, rep(1, 12)))
   
-  expect_that(as_ctclimate(df), is_a("data.frame"))
-  expect_that(as_ctclimate(df)$temp,
+  expect_that(as_tcclimate(df), is_a("data.frame"))
+  expect_that(as_tcclimate(df)$temp,
               equals(rep(-10 * cos(seq(0, 2*pi, length.out = 12)),
                          60)))
-  expect_that(as_ctclimate(dfw), throws_error())
+  expect_that(as_tcclimate(dfw), throws_error())
 
-  expect_that(as_ctclimate(dfp1), is_a("data.frame"))
-  expect_that(as_ctclimate(dfp2)[,3],
+  expect_that(as_tcclimate(dfp1), is_a("data.frame"))
+  expect_that(as_tcclimate(dfp2)[,3],
               equals(rep(-10 * cos(seq(0, 2*pi, length.out = 12)),
                          60)))
-  expect_that(as_ctclimate(list(dfp1, dfp2)), is_a("data.frame"))
-  expect_that(as_ctclimate(dfpw), throws_error())
-  expect_that(as_ctclimate(list(dfp1, dfpw)), throws_error())
+  expect_that(as_tcclimate(list(dfp1, dfp2)), is_a("data.frame"))
+  expect_that(as_tcclimate(dfpw), throws_error())
+  expect_that(as_tcclimate(list(dfp1, dfpw)), throws_error())
 })

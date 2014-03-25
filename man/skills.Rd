@@ -6,8 +6,8 @@ skills(object, formula, model = "ols", calibration = "50\%",
   timespan = NULL)
 }
 \arguments{
-  \item{object}{an object of class "ct_dcc" or
-  "ct_seascorr"}
+  \item{object}{an object of class "tc_dcc" or
+  "tc_seascorr"}
 
   \item{formula}{a formula specifying the regressand,
   optionally ommitting the intercept, see details}
@@ -24,9 +24,9 @@ skills(object, formula, model = "ols", calibration = "50\%",
   \item{timespan}{timespan to be used to truncate the data}
 }
 \value{
-'skills' returns an 'object' of class '"ct_skills"'.
+'skills' returns an 'object' of class '"tc_skills"'.
 
-An object of class '"ct_skills"' is a list containing at
+An object of class '"tc_skills"' is a list containing at
 least the following components:
 
 \item{call}{the call made to function 'skills'}

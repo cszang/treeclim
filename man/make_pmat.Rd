@@ -5,7 +5,7 @@
 make_pmat(x)
 }
 \arguments{
-  \item{x}{climate data as returned from as_ctclimate}
+  \item{x}{climate data as returned from as_tcclimate}
 }
 \value{
 a list of matrices

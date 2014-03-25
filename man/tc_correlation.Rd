@@ -1,8 +1,8 @@
-\name{ct_correlation}
-\alias{ct_correlation}
+\name{tc_correlation}
+\alias{tc_correlation}
 \title{(bootstrapped) correlation function}
 \usage{
-ct_correlation(chrono, climate, ci, boot)
+tc_correlation(chrono, climate, ci, boot)
 }
 \arguments{
   \item{chrono}{a tree-ring chronology}

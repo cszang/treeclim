@@ -5,7 +5,7 @@
 ##' correspond to the scheme years in rows, observations from previous
 ##' december to current december in columns.
 ##' @title Make list of parameter matrices from climate input data
-##' @param x climate data as returned from as_ctclimate
+##' @param x climate data as returned from as_tcclimate
 ##' @return a list of matrices
 ##' @keywords manip internal
 make_pmat <- function(x) {

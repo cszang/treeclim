@@ -38,7 +38,7 @@
 ##' used verification statistics are computed: reduction of error
 ##' (RE), coefficient of efficiency (CE), and the Durban-Watson
 ##' statistic (DW) (Cook et al. 1994, Durbin and Watson, 1951).
-##' @param object an object of class "ct_dcc" or "ct_seascorr"
+##' @param object an object of class "tc_dcc" or "tc_seascorr"
 ##' @param formula a formula specifying the regressand, optionally
 ##' ommitting the intercept, see details
 ##' @param model one of "ols" or "rma"
@@ -48,9 +48,9 @@
 ##' percentage as character string corresponding to the part of the
 ##' data set to be used as calibration subset.
 ##' @param timespan timespan to be used to truncate the data
-##' @return 'skills' returns an 'object' of class '"ct_skills"'.
+##' @return 'skills' returns an 'object' of class '"tc_skills"'.
 ##' 
-##' An object of class '"ct_skills"' is a list containing at least the
+##' An object of class '"tc_skills"' is a list containing at least the
 ##' following components:
 ##' 
 ##' \item{call}{the call made to function 'skills'}     
@@ -101,7 +101,7 @@ skills <- function(object, formula, model = "ols",
   }
   minmonth <- monthcheck$minmonth
   
-  if (any(c("ct_dcc", "ct_seascorr") == class(object)[1])) {
+  if (any(c("tc_dcc", "tc_seascorr") == class(object)[1])) {
     if (is.null(timespan)) {
       climate <- object$truncated$climate
       chrono <- object$truncated$tree
@@ -265,6 +265,6 @@ skills <- function(object, formula, model = "ols",
     cal.years  = all_years[cal_index],
     ver.years  = all_years[ver_index]
     )
-  class(model_lm) <- c("ct_skills", "list")
+  class(model_lm) <- c("tc_skills", "list")
   model_lm
 }

@@ -1,8 +1,8 @@
-\name{ct_mfunc}
-\alias{ct_mfunc}
+\name{tc_mfunc}
+\alias{tc_mfunc}
 \title{moving response and correlation function}
 \usage{
-ct_mfunc(chrono, climate, boot, sb, start_last, win_size, win_offset, ci,
+tc_mfunc(chrono, climate, boot, sb, start_last, win_size, win_offset, ci,
   method)
 }
 \arguments{

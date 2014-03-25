@@ -7,7 +7,7 @@
 ##' c(0.1, 0.05, 0.01)
 ##' @param boot string: which bootstrapping method?
 ##' @keywords internal
-ct_response <- function(chrono, climate, ci, boot) {
+tc_response <- function(chrono, climate, ci, boot) {
   
   vnames <- climate$names
   n <- length(chrono)
@@ -17,14 +17,14 @@ ct_response <- function(chrono, climate, ci, boot) {
                               chrono, 1000, boot)
   
   if (boot %in% c("std", "dendroclim")) {
-    param_matrix <- .Call("climtree_respo", boot_data$climate,
-                          boot_data$chrono, PACKAGE = "climtree")$coef
+    param_matrix <- .Call("treeclim_respo", boot_data$climate,
+                          boot_data$chrono, PACKAGE = "treeclim")$coef
     
     out <- ptest(param_matrix, ci, NULL, "range")
   } else {
     if (boot == "exact") {
-      param_matrix <- .Call("climtree_respoexact", boot_data$climate,
-                            boot_data$chrono, chrono, PACKAGE = "climtree")$coef
+      param_matrix <- .Call("treeclim_respoexact", boot_data$climate,
+                            boot_data$chrono, chrono, PACKAGE = "treeclim")$coef
       
       out <- ptest(param_matrix[,2:1001], ci, param_matrix[,1], "weibull")
     }
@@ -43,6 +43,6 @@ ct_response <- function(chrono, climate, ci, boot) {
     out
     )
   
-  class(out) <- c("ct_coef", "data.frame")
+  class(out) <- c("tc_coef", "data.frame")
   out
 }

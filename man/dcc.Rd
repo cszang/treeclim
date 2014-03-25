@@ -63,21 +63,21 @@ dcc(chrono, climate, selection = -6:9, method = "response",
   Suppression is recommended for e.g.  Sweave files.}
 }
 \value{
-'dcc' returns an 'object' of class '"ct_dcc"'.
+'dcc' returns an 'object' of class '"tc_dcc"'.
 
 The functions 'summary' and 'plot' are used to obtain and
 print a summary of the results, and to create a plot. The
 function 'coef' can be used to extract the coefficients.
 
-An object of class '"ct_dcc"' is a list containing at least
+An object of class '"tc_dcc"' is a list containing at least
 the following components:
 
 \item{call}{the call made to function 'dcc'}
 
 \item{coef}{the coefficients, themselves being an object of
-class 'ct_coef' for the static case, and of class
-'ct_mcoef' for the moving case. Objects of class 'ct_coef'
-are single data.frames, while objects of class 'ct_mcoef'
+class 'tc_coef' for the static case, and of class
+'tc_mcoef' for the moving case. Objects of class 'tc_coef'
+are single data.frames, while objects of class 'tc_mcoef'
 are lists of seperate data.frames for the coefficients
 ($coef), upper and lower confidence interval ($ci_upper and
 $ci_lower), and significance flags ($significant)}
@@ -142,7 +142,7 @@ specified as negative integers) to current years September
 integers) as model parameters.
 
 More complex parameter selections can be obtained by the
-\emph{modifiers} provided in climtree: \code{.range},
+\emph{modifiers} provided in treeclim: \code{.range},
 \code{.mean}, and \code{.sum}.  \code{.range} corresponds
 the example above, where all specified months are used,
 while \code{.sum} and \code{.mean} will use the sums and

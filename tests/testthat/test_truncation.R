@@ -7,7 +7,7 @@ test_that("climate and tree data are correctly truncated to common timespan", {
     temp = rep(-10 * cos(seq(0, 2*pi, length.out = 12)), 60),
     prec = rep(seq(100, 220, length.out = 12), 60)
     )
-  class(climate) <- c("ctclimate", "data.frame")
+  class(climate) <- c("tcclimate", "data.frame")
   chrono <- data.frame(rnorm(100))
   rownames(chrono) <- 1901:2000
   
@@ -26,7 +26,7 @@ test_that("climate and tree data are correctly truncated to user supplied specs"
     temp = rep(-10 * cos(seq(0, 2*pi, length.out = 12)), 60),
     prec = rep(seq(100, 220, length.out = 12), 60)
     )
-  class(climate) <- c("ctclimate", "data.frame")
+  class(climate) <- c("tcclimate", "data.frame")
   chrono <- data.frame(rnorm(100))
   rownames(chrono) <- 1901:2000
   

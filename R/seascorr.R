@@ -77,11 +77,11 @@
 ##' @param ci \code{numeric} scalar to set the test level for
 ##' significance test (values 0.01, 0.05 and 0.1 are allowed); the
 ##' confidence intervals are adapted accordingly.
-##' @return 'seascorr' returns an 'object' of class '"ct_seascorr"'.
+##' @return 'seascorr' returns an 'object' of class '"tc_seascorr"'.
 ##'
 ##' The 'plot' function is used to obtain a plot of the results.
 ##'
-##' An object of class '"ct_seascorr"' is a list containing at least
+##' An object of class '"tc_seascorr"' is a list containing at least
 ##' the following components:
 ##'
 ##' \item{call}{the call made to 'seascorr'}
@@ -127,7 +127,7 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
   if (!any(c(0.01, 0.05, 0.1) == ci))
     stop("`ci` must be any of 0.01, 0.05, or 0.1.")
   
-  climate <- as_ctclimate(climate)
+  climate <- as_tcclimate(climate)
   ## when var_names are supplied, apply appropriately
   if (!is.null(var_names)) {
     varno <- dim(climate)[2] - 2
@@ -252,7 +252,7 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
 
     results$coef[[i]] <- list()
     
-    params <- .Call("climtree_pcor", PACKAGE = 'climtree',
+    params <- .Call("treeclim_pcor", PACKAGE = 'treeclim',
                     seasons1[[i]], seasons2[[i]],
                     chrono_boot, truncated_input$chrono)
 
@@ -273,6 +273,6 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
                             climate = truncated_input$climate)
   results$original <- list(tree = chrono,
                            climate = climate)
-  class(results) <- c("ct_seascorr", "list")
+  class(results) <- c("tc_seascorr", "list")
   results
 }
