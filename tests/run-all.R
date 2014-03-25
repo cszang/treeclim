@@ -1,4 +1,4 @@
 ## this runs all tests on R CMD CHECK
 
 library(testthat)
-test_check("climtree")
+test_check("treeclim")
