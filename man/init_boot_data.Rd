@@ -2,7 +2,7 @@
 \alias{init_boot_data}
 \title{initialize data structure for bootstrapping}
 \usage{
-init_boot_data(u, g, n, boot, p = 0.5)
+init_boot_data(u, g, n, boot, p = 0.5, check_ac)
 }
 \arguments{
   \item{u}{climate data (matrix with parameters in columns

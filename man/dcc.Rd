@@ -5,7 +5,7 @@
 dcc(chrono, climate, selection = -6:9, method = "response",
   moving = FALSE, win_size = 25, win_offset = 1, start_last = TRUE,
   timespan = NULL, var_names = NULL, ci = 0.05, boot = "stationary",
-  p = 0.5, sb = TRUE)
+  p = 0.5, sb = TRUE, check_ac = FALSE)
 }
 \arguments{
   \item{chrono}{\code{data.frame} containing a tree-ring
@@ -67,6 +67,10 @@ dcc(chrono, climate, selection = -6:9, method = "response",
   \item{sb}{\code{logical} flag indicating whether textual
   status bar for moving case should be suppressed.
   Suppression is recommended for e.g.  Sweave files.}
+
+  \item{check_ac}{\code{logical} should the autocorrelation
+  structure of proxy data and bootstrap samples be
+  checked?}
 }
 \value{
 'dcc' returns an 'object' of class '"tc_dcc"'.

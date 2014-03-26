@@ -3,7 +3,7 @@
 \title{moving response and correlation function}
 \usage{
 tc_mfunc(chrono, climate, boot, sb, start_last, win_size, win_offset, ci,
-  method, p)
+  method, p, check_ac)
 }
 \arguments{
   \item{chrono}{tree-ring chronology}

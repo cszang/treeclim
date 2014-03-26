@@ -11,7 +11,7 @@
 ##' sampling blocks for stationary bootstrap scheme
 ##' @return a list
 ##' @keywords internal
-init_boot_data <- function(u, g, n, boot, p = 0.5) {
+init_boot_data <- function(u, g, n, boot, p = 0.5, check_ac) {
   m <- length(g)
   k <- dim(u)[2]
   
@@ -132,5 +132,34 @@ init_boot_data <- function(u, g, n, boot, p = 0.5) {
     out_g <- Dz * matrix(xsd, nrow = ll, ncol = 1000) + mean(g)
     
   }
-  list(climate = out_u, chrono = out_g)
+  
+  ## record autocorrelation properties of original chronology data and compare
+  ## with sampled data
+  if (check_ac) {
+    ac0 <- ar(g, order.max = 2)$ar
+    acb <- apply(out_g, 2, function(x) {
+      AR <- ar(x, order.max = 2)$ar
+      c(AR[1], AR[2])
+    })
+    acb <- t(acb)
+    acb <- apply(acb, c(1, 2), function(x) {
+      if(is.na(x))
+        0
+      else
+        x
+    })
+    acb1 <- c(mean = mean(acb[,1]), sd = sd(acb[,1]))
+    acb2 <- c(mean = mean(acb[,2]), sd = sd(acb[,2]))
+    ac <- list(
+      ac0 = ac0,
+      acb = list(
+        acb1 = acb1,
+        acb2 = acb2))
+  } else {
+    ac <- NULL
+  } 
+  
+  list(climate = out_u,
+       chrono = out_g,
+       ac = ac)
 }

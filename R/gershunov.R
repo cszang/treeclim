@@ -55,16 +55,19 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
   if (is.na(pmatch(x$call$method, "correlation")))
     stop("Gershunov test is currently only implemented for running correlation functions, not for response function.")
   
-  ## calculate null model with full data set to get coefficients
-  c0 <- tc_correlation(x$tree, x$design, ci = 0.05, boot = "std")$coef
-  n <- length(c0)
-  m <- length(x$tree)
-  
   ## get parameters for moving correlation function from call
   .win_size <- ifelse(is.null(x$call$win_size), 25, x$call$win_size)
   .win_offset <- ifelse(is.null(x$call$win_offset), 1, x$call$win_offset)
   .start_last <- ifelse(is.null(x$call$start_last), TRUE, x$call$start_last)
   .boot <- ifelse(is.null(x$call$boot), "stationary", x$call$boot)
+  .p <- ifelse(is.null(x$call$p), 0.5, x$call$p)
+  .check_ac <- FALSE
+  
+  ## calculate null model with full data set to get coefficients
+  c0 <- tc_correlation(x$truncated$tree, x$design, ci = 0.05, boot = .boot,
+                       p = .p, check_ac = .check_ac)$result$coef
+  n <- length(c0)
+  m <- length(x$truncated$tree)
   
   ## get ci limits
   if (!any(ci == c(0.01, 0.05, 0.1)))
@@ -73,6 +76,7 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
                    "0.01" = c(5, 995),
                    "0.05" = c(25, 975),
                    "0.1" = c(50, 950))
+  
   ## overwrite .boot, if set to FALSE for g-test (default)
   if (!boot)
     .boot <- "none"
@@ -82,14 +86,16 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
   if (boot) {
     cat("Checking duration...\n")
     dur <- system.time({
-      tc_mfunc(x$tree, x$design,
+      tc_mfunc(x$truncated$tree, x$design,
                method = "correlation",
                start_last = .start_last,
                win_size = .win_size,
                win_offset = .win_offset,
                boot = .boot,
                sb = FALSE,
-               ci = 0.05)$coef
+               ci = 0.05,
+               p = .p,
+               check_ac = FALSE)
     })
     dur1000 <- ceiling(dur[3] * 1000 / 60)
     cat("Running this test with bootstrapping on the individual correlations enabled will take around", dur1000, "minutes.\n")
@@ -102,7 +108,7 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
   }
   
   ## test tree-ring data and the columns of the design matrix for normality
-  pn_tree <- shapiro.test(x$tree)$p.value > 0.05
+  pn_tree <- shapiro.test(x$truncated$tree)$p.value > 0.05
   if (!pn_tree)
     warning("Tree-ring data is not normally distributed. Gershunov-Test might yield meaningless results.")
   
@@ -143,7 +149,9 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
                    win_offset = .win_offset,
                    boot = .boot,
                    sb = FALSE,
-                   ci = 0.05)$coef
+                   ci = 0.05,
+                   p = .p,
+                   check_ac = .check_ac)$result$coef
     
     sds[,i] <- apply(c1, 1, sd)
     

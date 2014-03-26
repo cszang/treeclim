@@ -137,6 +137,8 @@
 ##' @param sb \code{logical} flag indicating whether textual status
 ##' bar for moving case should be suppressed. Suppression is
 ##' recommended for e.g.  Sweave files.
+##' @param check_ac \code{logical} should the autocorrelation structure
+##' of proxy data and bootstrap samples be checked?
 ##' @return 'dcc' returns an 'object' of class '"tc_dcc"'.
 ##'
 ##' The functions 'summary' and 'plot' are used to obtain and print a
@@ -205,7 +207,8 @@ dcc <- function(chrono,
                 ci = 0.05,
                 boot = "stationary",
                 p = 0.5,
-                sb = TRUE
+                sb = TRUE,
+                check_ac = FALSE
                 )
 {
 
@@ -292,14 +295,16 @@ dcc <- function(chrono,
       dc <- tc_response(truncated_input$chrono, design,
                         ci = ci,
                         boot = .boot,
-                        p = p)
+                        p = p,
+                        check_ac = check_ac)
     }
     
     if (.method == "correlation") {
       dc <- tc_correlation(truncated_input$chrono, design,
                            ci = ci,
                            boot = .boot,
-                           p = p)
+                           p = p,
+                           check_ac = check_ac)
     }
   }
   
@@ -314,14 +319,16 @@ dcc <- function(chrono,
                    win_size = win_size,
                    win_offset = win_offset,
                    boot = .boot,
-                   p = p)
+                   p = p,
+                   check_ac = check_ac)
   }
 
   ## return everything in a comprehensible manner
   
   dcc_out <- list()
   dcc_out$call <- match.call()
-  dcc_out$coef <- dc
+  dcc_out$coef <- dc$result
+  dcc_out$ac <- dc$ac
   dcc_out$design <- design
   dcc_out$truncated <- list(tree = truncated_input$chrono,
                             climate = truncated_input$climate)
