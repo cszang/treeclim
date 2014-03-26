@@ -4,8 +4,8 @@
 \usage{
 dcc(chrono, climate, selection = -6:9, method = "response",
   moving = FALSE, win_size = 25, win_offset = 1, start_last = TRUE,
-  timespan = NULL, var_names = NULL, ci = 0.05, boot = "std",
-  sb = TRUE)
+  timespan = NULL, var_names = NULL, ci = 0.05, boot = "stationary",
+  p = 0.5, sb = TRUE)
 }
 \arguments{
   \item{chrono}{\code{data.frame} containing a tree-ring
@@ -56,7 +56,13 @@ dcc(chrono, climate, selection = -6:9, method = "response",
   accordingly.}
 
   \item{boot}{\code{character} indicating which bootstrap
-  method should be used, one of \code{c("std", "exact")}}
+  method should be used, one of \code{c("stationary",
+  "std", "exact")}}
+
+  \item{p}{probability for geometric distribution of
+  sampling blocks lengths for stationary bootstrap scheme
+  (between 0 and 1); values closer to 0 result in longer
+  sampling blocks in average}
 
   \item{sb}{\code{logical} flag indicating whether textual
   status bar for moving case should be suppressed.

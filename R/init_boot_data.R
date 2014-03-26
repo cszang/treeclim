@@ -6,25 +6,61 @@
 ##' @param u climate data (matrix with parameters in columns and years in rows)
 ##' @param g vector with tree-ring data
 ##' @param n times for resampling
-##' @param boot one of c("std", "exact", "none")
+##' @param boot one of c("stationary", "std", "exact", "none")
+##' @param p probability for rgeom, that determines distribution of
+##' sampling blocks for stationary bootstrap scheme
 ##' @return a list
 ##' @keywords internal
-init_boot_data <- function(u, g, n, boot) {
+init_boot_data <- function(u, g, n, boot, p = 0.5) {
   m <- length(g)
   k <- dim(u)[2]
+  
   if (boot == "none") {
     out_u <- u
     out_g <- g
   }
+  
+  if (boot == "stationary") {
+    ## following Politis and Romano 1994
+    out_u <- array(dim = c(m, k, n))
+    out_g <- matrix(nrow = m, ncol = n)
+    ind <- 1:m
+    
+    wrap_index <- function(i, l, n) {
+      if (i + l - 1 <= n)
+        i:(i + l - 1)
+      else
+        c(i:n, 1:(l - n + i - 1))
+    }
+    
+    for (i in 1:n) {
+      I <- sample(1:m, m, replace = TRUE)
+      L <- rgeom(m, p) + 1
+      new_ind <- NULL
+      counter <- 1
+      ## create vector of blocks      
+      while (length(new_ind) < m) {
+        counter <- counter + 1
+        block <- wrap_index(I[counter], L[counter], m)
+        new_ind <- c(new_ind, block)
+      }
+      ## truncate and impute      
+      new_ind <- new_ind[1:m]
+      out_u[, , i] <- u[new_ind, ]
+      out_g[, i] <- g[new_ind]
+    }
+  }
+  
   if (boot %in% c("std", "dendroclim")) {
     out_u <- array(dim = c(m, k, n))
     out_g <- matrix(nrow = m, ncol = n)
     for (i in 1:n) {
       .sample <- sample(1:m, m, replace = TRUE)
-      out_u[, ,i] <- u[.sample, ]
+      out_u[, , i] <- u[.sample, ]
       out_g[, i] <- g[.sample]
     }
   }
+  
   if (boot == "exact") {
     ## gaussian simulation of tree-ring data with circulant embedding; this code 
     ## is adapted from Dave Meko's seascorr MATLAB source

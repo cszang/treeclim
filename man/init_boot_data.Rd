@@ -2,7 +2,7 @@
 \alias{init_boot_data}
 \title{initialize data structure for bootstrapping}
 \usage{
-init_boot_data(u, g, n, boot)
+init_boot_data(u, g, n, boot, p = 0.5)
 }
 \arguments{
   \item{u}{climate data (matrix with parameters in columns
@@ -12,7 +12,12 @@ init_boot_data(u, g, n, boot)
 
   \item{n}{times for resampling}
 
-  \item{boot}{one of c("std", "exact", "none")}
+  \item{boot}{one of c("stationary", "std", "exact",
+  "none")}
+
+  \item{p}{probability for rgeom, that determines
+  distribution of sampling blocks for stationary bootstrap
+  scheme}
 }
 \value{
 a list

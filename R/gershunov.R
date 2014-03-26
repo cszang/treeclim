@@ -64,7 +64,7 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
   .win_size <- ifelse(is.null(x$call$win_size), 25, x$call$win_size)
   .win_offset <- ifelse(is.null(x$call$win_offset), 1, x$call$win_offset)
   .start_last <- ifelse(is.null(x$call$start_last), TRUE, x$call$start_last)
-  .boot <- ifelse(is.null(x$call$boot), "std", "exact")
+  .boot <- ifelse(is.null(x$call$boot), "stationary", x$call$boot)
   
   ## get ci limits
   if (!any(ci == c(0.01, 0.05, 0.1)))

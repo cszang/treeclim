@@ -130,7 +130,10 @@
 ##' significance test (values 0.01, 0.05 and 0.1 are allowed); the
 ##' confidence intervals are adapted accordingly.
 ##' @param boot \code{character} indicating which bootstrap method
-##' should be used, one of \code{c("std", "exact")}
+##' should be used, one of \code{c("stationary", "std", "exact")}
+##' @param p probability for geometric distribution of sampling blocks
+##' lengths for stationary bootstrap scheme (between 0 and 1); values
+##' closer to 0 result in longer sampling blocks in average
 ##' @param sb \code{logical} flag indicating whether textual status
 ##' bar for moving case should be suppressed. Suppression is
 ##' recommended for e.g.  Sweave files.
@@ -200,7 +203,8 @@ dcc <- function(chrono,
                 timespan = NULL,
                 var_names = NULL,
                 ci = 0.05,
-                boot = "std",
+                boot = "stationary",
+                p = 0.5,
                 sb = TRUE
                 )
 {
@@ -279,6 +283,7 @@ dcc <- function(chrono,
   ## pass chrono and design matrix to the respective analysis functions
 
   .method <- match.arg(method, c("response", "correlation"))
+  .boot <- match.arg(boot, c("stationary", "std", "exact"))
   
   ## static functions
 
@@ -286,13 +291,15 @@ dcc <- function(chrono,
     if (.method == "response") {
       dc <- tc_response(truncated_input$chrono, design,
                         ci = ci,
-                        boot = boot)
+                        boot = .boot,
+                        p = p)
     }
     
     if (.method == "correlation") {
       dc <- tc_correlation(truncated_input$chrono, design,
                            ci = ci,
-                           boot = boot)
+                           boot = .boot,
+                           p = p)
     }
   }
   
@@ -306,7 +313,8 @@ dcc <- function(chrono,
                    start_last = start_last,
                    win_size = win_size,
                    win_offset = win_offset,
-                   boot = boot)
+                   boot = .boot,
+                   p = p)
   }
 
   ## return everything in a comprehensible manner

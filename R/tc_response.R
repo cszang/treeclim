@@ -6,17 +6,19 @@
 ##' @param ci numeric: p-level for confidence interval (must be in
 ##' c(0.1, 0.05, 0.01)
 ##' @param boot string: which bootstrapping method?
+##' @param p probability for rgeom, that determines distribution of
+##' sampling blocks for stationary bootstrap scheme
 ##' @keywords internal
-tc_response <- function(chrono, climate, ci, boot) {
+tc_response <- function(chrono, climate, ci, boot, p) {
   
   vnames <- climate$names
   n <- length(chrono)
   m <- dim(climate$aggregate)[2]
 
   boot_data <- init_boot_data(as.matrix(climate$aggregate),
-                              chrono, 1000, boot)
+                              chrono, 1000, boot, p = p)
   
-  if (boot %in% c("std", "dendroclim")) {
+  if (boot %in% c("stationary", "std", "dendroclim")) {
     param_matrix <- .Call("treeclim_respo", boot_data$climate,
                           boot_data$chrono, PACKAGE = "treeclim")$coef
     

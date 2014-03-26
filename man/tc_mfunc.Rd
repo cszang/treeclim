@@ -3,7 +3,7 @@
 \title{moving response and correlation function}
 \usage{
 tc_mfunc(chrono, climate, boot, sb, start_last, win_size, win_offset, ci,
-  method)
+  method, p)
 }
 \arguments{
   \item{chrono}{tree-ring chronology}
@@ -28,6 +28,10 @@ tc_mfunc(chrono, climate, boot, sb, start_last, win_size, win_offset, ci,
 
   \item{method}{character: method to be used (one of
   "response" or "correlation")}
+
+  \item{p}{probability for rgeom, that determines
+  distribution of sampling blocks for stationary bootstrap
+  scheme}
 }
 \description{
 see doc for dcc for details.

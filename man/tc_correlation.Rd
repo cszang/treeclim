@@ -14,6 +14,10 @@ tc_correlation(chrono, climate, ci, boot)
 
   \item{boot}{character, which bootstrapping method should
   be used (or "none")}
+
+  \item{p}{probability for rgeom, that determines
+  distribution of sampling blocks for stationary bootstrap
+  scheme}
 }
 \description{
 See documentation of dcc for details.

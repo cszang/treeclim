@@ -2,7 +2,7 @@
 \alias{tc_response}
 \title{(bootstrapped) response function}
 \usage{
-tc_response(chrono, climate, ci, boot)
+tc_response(chrono, climate, ci, boot, p)
 }
 \arguments{
   \item{chrono}{a tree-ring chronology}
@@ -13,6 +13,10 @@ tc_response(chrono, climate, ci, boot)
   be in c(0.1, 0.05, 0.01)}
 
   \item{boot}{string: which bootstrapping method?}
+
+  \item{p}{probability for rgeom, that determines
+  distribution of sampling blocks for stationary bootstrap
+  scheme}
 }
 \description{
 See documentation of dcc for details.

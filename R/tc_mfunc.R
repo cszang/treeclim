@@ -13,9 +13,11 @@
 ##' c(0.1, 0.05, 0.01)
 ##' @param method character: method to be used (one of "response" or
 ##' "correlation")
+##' @param p probability for rgeom, that determines distribution of
+##' sampling blocks for stationary bootstrap scheme
 ##' @keywords internal
 tc_mfunc <- function(chrono, climate, boot, sb, start_last,
-                     win_size, win_offset, ci, method) {
+                     win_size, win_offset, ci, method, p) {
 
   vnames <- climate$names
   pretty_names <- climate$pretty_names
@@ -62,10 +64,10 @@ tc_mfunc <- function(chrono, climate, boot, sb, start_last,
 
     if (method == "response") {
       window <- tc_response(chrono_win, climate_win_list,
-                            ci = ci, boot = boot)
+                            ci = ci, boot = boot, p = p)
     } else {
       window <- tc_correlation(chrono_win, climate_win_list,
-                               ci = ci, boot = boot)
+                               ci = ci, boot = boot, p = p)
     }
     
     result_matrix_coef[,k] <- window$coef
