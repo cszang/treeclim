@@ -56,7 +56,6 @@ print.tc_seascorr <- function(x, ...) {
 
 ##' @S3method print tc_coef
 print.tc_coef <- function(x, ...) {
-  x <- x$result
   rownames(x) <- abbrev_name(rownames(x))
   x$coef <- round(x$coef, 3)
   x$ci_lower <- round(x$ci_lower, 3)
@@ -67,7 +66,6 @@ print.tc_coef <- function(x, ...) {
 ##' @importFrom abind abind
 ##' @S3method print tc_mcoef
 print.tc_mcoef <- function(x, ...) {
-  x <- x$results
   mm <- abind(x$coef, x$significant, along = 3)
   ms <- apply(mm, c(1, 2), function(x) {
     if (!is.na(x[2])) {
