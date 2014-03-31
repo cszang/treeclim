@@ -305,8 +305,8 @@ plot.tc_seascorr <- function(x, ...) {
   ## reassemble into single data.frame for plotting
   gd <- data.frame(
     season_length = rep(rep(sl_levels, each = 14), 2),
-    end_month = rep(used_months_ch, n * 2),
-    end_month_order = rep(1:14, n * 2),
+    end_month = rep(rev(used_months_ch), n * 2),
+    end_month_order = rep(14:1, n * 2),
     type = c(rep("primary", 14*n), rep("secondary", 14*n)),
     significant = c(unlist(sapply(sapply(x$coef, "[", 1), "[", 2)),
       unlist(sapply(sapply(x$coef, "[", 2), "[", 2))),
