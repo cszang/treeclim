@@ -26,4 +26,4 @@ Description: Bootstrapped response and correlation functions,
     skills for use in dendroclimatology and dendroecology
 NeedsCompilation: yes
 License: GPL-3
-LazyLoad: yes
+LazyData: yes
