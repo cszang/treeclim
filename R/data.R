@@ -8,8 +8,8 @@
 ##' common oak. Trees - Structure and Function, 26, 557-569.
 ##' @docType data
 ##' @keywords datasets
-##' @name muc.clim
-##' @usage data(muc.clim)
+##' @name muc_clim
+##' @usage data(muc_clim)
 ##' @format A \code{data.frame} containing four columns with year,
 ##' month, temperature and precipitation.
 NULL
@@ -28,8 +28,8 @@ NULL
 ##' common oak. Trees - Structure and Function, 26, 557-569.
 ##' @docType data
 ##' @keywords datasets
-##' @name muc.spruce
-##' @usage data(muc.spruce)
+##' @name muc_spruce
+##' @usage data(muc_spruce)
 ##' @format A \code{data.frame} containing tree-ring indices and
 ##' replication depth with respective years as \code{rownames}.
 NULL
@@ -47,8 +47,8 @@ NULL
 ##' common oak. Trees - Structure and Function, 26, 557-569.
 ##' @docType data
 ##' @keywords datasets
-##' @name muc.fake
-##' @usage data(muc.fake)
+##' @name muc_fake
+##' @usage data(muc_fake)
 ##' @format A \code{data.frame} containing tree-ring indices and
 ##' replication depth with respective years as \code{rownames}.
 NULL
@@ -63,8 +63,8 @@ NULL
 ##' Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182, 98-112.
 ##' @docType data
 ##' @keywords datasets
-##' @name rt.prec
-##' @usage data(rt.prec)
+##' @name rt_prec
+##' @usage data(rt_prec)
 ##' @format A \code{data.frame} containing thirteen columns with year
 ##' and twelve months of precipitation data in mm rainfall.
 NULL
@@ -79,8 +79,8 @@ NULL
 ##' Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182, 98-112.
 ##' @docType data
 ##' @keywords datasets
-##' @name rt.temp
-##' @usage data(rt.temp)
+##' @name rt_temp
+##' @usage data(rt_temp)
 ##' @format A \code{data.frame} containing thirteen columns with year
 ##' and twelve months of temperature data in degree Celsius.
 NULL
@@ -99,8 +99,8 @@ NULL
 ##' Jahrringbreiten. Allgemeine Forst- und Jagdzeitung, 182, 98-112.
 ##' @docType data
 ##' @keywords datasets
-##' @name rt.spruce
-##' @usage data(rt.spruce)
+##' @name rt_spruce
+##' @usage data(rt_spruce)
 ##' @format A \code{data.frame} containing tree-ring indices and
 ##' replication depth with respective years as \code{rownames}.
 NULL

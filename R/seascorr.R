@@ -105,9 +105,9 @@
 ##' Time Series from Nonparametric Spectral Estimates with Application
 ##' to Bootstrapping. Statistics and Computing 16:25-35
 ##' @examples
-##' data(muc.fake)
-##' data(muc.clim)
-##' sc <- seascorr(muc.fake, muc.clim)
+##' data(muc_fake)
+##' data(muc_clim)
+##' sc <- seascorr(muc_fake, muc_clim)
 ##' sc
 ##' plot(sc)
 ##' @author Christian Zang; the procedure incl. exact bootstrapping

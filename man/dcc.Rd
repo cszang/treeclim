@@ -198,9 +198,9 @@ computed.
 }
 \examples{
 \dontrun{
-data(muc.clim) # climatic data
-data(muc.spruce) # spruce data
-dc.resp <- dcc(muc.spruce, muc.clim)
+data(muc_clim) # climatic data
+data(muc_spruce) # spruce data
+dc_resp <- dcc(muc_spruce, muc_clim)
 }
 }
 \author{

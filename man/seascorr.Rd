@@ -118,9 +118,9 @@ circulant embedding of the tree-ring data (Percival \&
 Constantine, 2006).
 }
 \examples{
-data(muc.fake)
-data(muc.clim)
-sc <- seascorr(muc.fake, muc.clim)
+data(muc_fake)
+data(muc_clim)
+sc <- seascorr(muc_fake, muc_clim)
 sc
 plot(sc)
 }
