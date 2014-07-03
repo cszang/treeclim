@@ -137,8 +137,8 @@ NULL
 ##' Research Working Paper 55, 25.
 ##' @docType data
 ##' @keywords datasets
-##' @name temp_spain
-##' @usage data(temp_spain)
+##' @name spain_temp
+##' @usage data(spain_temp)
 ##' @format A \code{data.frame} containing thirteen columns with year
 ##' and twelve months of temperature data in degree Celsius.
 NULL
@@ -155,8 +155,8 @@ NULL
 ##' Research Working Paper 55, 25.
 ##' @docType data
 ##' @keywords datasets
-##' @name prec_spain
-##' @usage data(prec_spain)
+##' @name spain_prec
+##' @usage data(spain_prec)
 ##' @format A \code{data.frame} containing thirteen columns with year
 ##' and twelve months of temperature data in degree Celsius.
 NULL
@@ -174,8 +174,8 @@ NULL
 ##' Research Working Paper 55, 25.
 ##' @docType data
 ##' @keywords datasets
-##' @name temp_norway
-##' @usage data(temp_norway)
+##' @name norway_temp
+##' @usage data(norway_temp)
 ##' @format A \code{data.frame} containing thirteen columns with year
 ##' and twelve months of temperature data in degree Celsius.
 NULL
@@ -192,8 +192,8 @@ NULL
 ##' Research Working Paper 55, 25.
 ##' @docType data
 ##' @keywords datasets
-##' @name prec_norway
-##' @usage data(prec_norway)
+##' @name norway_prec
+##' @usage data(norway_prec)
 ##' @format A \code{data.frame} containing thirteen columns with year
 ##' and twelve months of temperature data in degree Celsius.
 NULL
