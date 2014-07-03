@@ -91,7 +91,8 @@ print.tc_design <- function(x, ...) {
   cat(length(years), "observations of", dim(pr)[2],
       "variables.\nObserved years:", min(years), "-", max(years),
       "\nUsed (potentially aggregated) variables:\n")
-  print(paste(names(pr), collapse = "\n"), ...)
+  cat(paste(names(pr), collapse = "\n"), ...)
+  cat("\n")
 }
 
 ##' @S3method print tc_skills
@@ -156,7 +157,7 @@ coef.tc_mcoef <- function(object, ...) {
 summary.tc_dcc <- function(object, ...) {
   cat("Call:\n")
   print(object$call)
-  cat("\nDesign matriobject:\n")
+  cat("\nDesign matrix:\n")
   print(object$design)
   cat("\nCoefficients:\n")
   print(object$coef, ...)
