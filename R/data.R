@@ -160,3 +160,62 @@ NULL
 ##' @format A \code{data.frame} containing thirteen columns with year
 ##' and twelve months of temperature data in degree Celsius.
 NULL
+
+
+##' Monthly Temperature Means for Norway
+##' 
+##' This data set gives the monthly temperature means at country level
+##' for Norway in a decadal (DENDROCLIM2002-style) format from the TYN
+##' CY 1.1 data set.
+##' @source Mitchell TD, Carter TR, Jones PD, Hulme M, New M, et
+##' al. (2004) A comprehensive set of high-resolution grids of monthly
+##' climate for Europe and the globe: the observed record (1901–2000)
+##' and 16 scenarios (2001–2100). Tyndall Centre for Climate Change
+##' Research Working Paper 55, 25.
+##' @docType data
+##' @keywords datasets
+##' @name temp_norway
+##' @usage data(temp_norway)
+##' @format A \code{data.frame} containing thirteen columns with year
+##' and twelve months of temperature data in degree Celsius.
+NULL
+
+##' Monthly Precipitation Sums for Norway
+##' 
+##' This data set gives the monthly precipitation sums at country
+##' level for Norway in a decadal (DENDROCLIM2002-style) format from
+##' the TYN CY 1.1 data set.
+##' @source Mitchell TD, Carter TR, Jones PD, Hulme M, New M, et
+##' al. (2004) A comprehensive set of high-resolution grids of monthly
+##' climate for Europe and the globe: the observed record (1901–2000)
+##' and 16 scenarios (2001–2100). Tyndall Centre for Climate Change
+##' Research Working Paper 55, 25.
+##' @docType data
+##' @keywords datasets
+##' @name prec_norway
+##' @usage data(prec_norway)
+##' @format A \code{data.frame} containing thirteen columns with year
+##' and twelve months of temperature data in degree Celsius.
+NULL
+
+##' Tree-Ring Chronology of a Pine Population at Visdalen, Norway
+##'
+##' This dataset gives the tree-ring indices for \emph{Pinus
+##' sylvestris} at a site near Visdalen, Norway. The chronology
+##' represents 34 dated series and spans the period between 1600 and
+##' 1983. The raw measurements were obtained from the ITRDB (see
+##' source), and read in, detrended with cubic splines (frequency
+##' cutoff of 50 percent at two thirds of the series length) and
+##' averaged using \code{\link[dplR]{read.rwl}},
+##' \code{\link[dplR]{detrend}}, and \code{\link[dplR]{chron}} from
+##' package \code{dplR}.
+##' @source Briffa K. Briffa - Visdalen - PISY - ITRDB
+##' NORW015. http://hurricane.ncdc.noaa.gov/pls/paleox/f?p=519:1:::::P1_STUDY_ID:2861. Accessed
+##' 2014/07/03.
+##' @docType data
+##' @keywords datasets
+##' @name norway015
+##' @usage data(norway015)
+##' @format A \code{data.frame} containing tree-ring indices and
+##' replication depth with respective years as \code{rownames}.
+NULL
