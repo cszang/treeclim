@@ -104,3 +104,59 @@ NULL
 ##' @format A \code{data.frame} containing tree-ring indices and
 ##' replication depth with respective years as \code{rownames}.
 NULL
+
+##' Tree-Ring Chronology of a Pine Population at Penota, Spain
+##'
+##' This dataset gives the tree-ring indices for \emph{Pinus
+##' sylvestris} at a site near Penota, Spain. The chronology
+##' represents 18 dated series and spans the period between 1763 and
+##' 1991. The chronology was obtained from the ITRDB (see source), and
+##' read in using \code{\link[dplR]{read.crn}} from package
+##' \code{dplR}.
+##' @source Fernandez-Cancio A, Genova Fuster M: Fernandez-Cancio -
+##' Penota - PISY - ITRDB SPAI020,
+##' http://hurricane.ncdc.noaa.gov/pls/paleox/f?p=519:1:::::P1_STUDY_ID:3255,
+##' accessed 2014/07/03.
+##' @docType data
+##' @keywords datasets
+##' @name spai020
+##' @usage data(spai020)
+##' @format A \code{data.frame} containing tree-ring indices and
+##' replication depth with respective years as \code{rownames}.
+NULL
+
+##' Monthly Temperature Means for Spain
+##' 
+##' This data set gives the monthly temperature means at country level
+##' for Spain in a decadal (DENDROCLIM2002-style) format from the TYN
+##' CY 1.1 data set.
+##' @source Mitchell TD, Carter TR, Jones PD, Hulme M, New M, et
+##' al. (2004) A comprehensive set of high-resolution grids of monthly
+##' climate for Europe and the globe: the observed record (1901–2000)
+##' and 16 scenarios (2001–2100). Tyndall Centre for Climate Change
+##' Research Working Paper 55, 25.
+##' @docType data
+##' @keywords datasets
+##' @name temp_spain
+##' @usage data(temp_spain)
+##' @format A \code{data.frame} containing thirteen columns with year
+##' and twelve months of temperature data in degree Celsius.
+NULL
+
+##' Monthly Precipitation Sums for Spain
+##' 
+##' This data set gives the monthly precipitation sums at country
+##' level for Spain in a decadal (DENDROCLIM2002-style) format from
+##' the TYN CY 1.1 data set.
+##' @source Mitchell TD, Carter TR, Jones PD, Hulme M, New M, et
+##' al. (2004) A comprehensive set of high-resolution grids of monthly
+##' climate for Europe and the globe: the observed record (1901–2000)
+##' and 16 scenarios (2001–2100). Tyndall Centre for Climate Change
+##' Research Working Paper 55, 25.
+##' @docType data
+##' @keywords datasets
+##' @name prec_spain
+##' @usage data(prec_spain)
+##' @format A \code{data.frame} containing thirteen columns with year
+##' and twelve months of temperature data in degree Celsius.
+NULL
