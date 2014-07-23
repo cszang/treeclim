@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 <a href="http://dx.doi.org/10.5281/zenodo.11005"><img src="https://zenodo.org/badge/5272/cszang/treeclim.png"><a>
-=======
-[[https://zenodo.org/badge/5272/cszang/treeclim.png]]
->>>>>>> c5bfc362ac8884c487203f70b35b5522fd4f5d11
 
 * treeclim
 
