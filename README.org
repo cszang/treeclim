@@ -1,3 +1,5 @@
+[[https://zenodo.org/badge/5272/cszang/treeclim.png][DOI]]
+
 * treeclim
 
 An R package for modeling tree/climate relationships.
