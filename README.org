@@ -1,4 +1,7 @@
-<a href="http://dx.doi.org/10.5281/zenodo.11005"><img src="https://zenodo.org/badge/5272/cszang/treeclim.png"><a>
+#+begin_html
+<a href="http://dx.doi.org/10.5281/zenodo.11005"><img
+src="https://zenodo.org/badge/5272/cszang/treeclim.png"><a>
+#+end_html
 
 * treeclim
 
