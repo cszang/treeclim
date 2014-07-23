@@ -8,8 +8,8 @@ and twelve months of temperature data in degree Celsius.}
 \source{
 Mitchell TD, Carter TR, Jones PD, Hulme M, New M, et
 al. (2004) A comprehensive set of high-resolution grids of monthly
-climate for Europe and the globe: the observed record (1901–2000)
-and 16 scenarios (2001–2100). Tyndall Centre for Climate Change
+climate for Europe and the globe: the observed record (1901-2000)
+and 16 scenarios (2001-2100). Tyndall Centre for Climate Change
 Research Working Paper 55, 25.
 }
 \usage{
