@@ -230,12 +230,12 @@ Percival DB, Constantine WLB (2006) Exact simulation of Gaussian
 Time Series from Nonparametric Spectral Estimates with Application
 to Bootstrapping. \emph{Statistics and Computing} 16:25-35
 
-Patton, A. and D.N. Politis and H. White (2009), “CORRECTION TO
+Patton, A. and D.N. Politis and H. White (2009), "CORRECTION TO
 Automatic block-length selection for the dependent bootstrap" by
-D. Politis and H. White”, Econometric Reviews 28(4), 372-375.
+D. Politis and H. White", Econometric Reviews 28(4), 372-375.
 
-Politis, D.N. and H. White (2004), “Automatic block-length
-selection for the dependent bootstrap”, Econometric Reviews 23(1),
+Politis, D.N. and H. White (2004), Automatic block-length
+selection for the dependent bootstrap, Econometric Reviews 23(1),
 53-70.
 }
 
