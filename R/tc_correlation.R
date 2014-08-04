@@ -10,14 +10,14 @@
 ##' @param p probability for rgeom, that determines distribution of
 ##' sampling blocks for stationary bootstrap scheme
 ##' @keywords internal
-tc_correlation <- function(chrono, climate, ci, boot, p = p, check_ac) {
+tc_correlation <- function(chrono, climate, ci, boot) {
 
   vnames <- climate$names
   n <- length(chrono)
   m <- dim(climate$aggregate)[2]
   
   boot_data <- init_boot_data(as.matrix(climate$aggregate),
-                              chrono, 1000, boot, p = p, check_ac = check_ac)
+                              chrono, 1000, boot)
   
   if (boot %in% c("stationary", "std", "dendroclim")) {
     param_matrix <- .Call("treeclim_corfun", boot_data$climate,

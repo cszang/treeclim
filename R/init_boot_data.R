@@ -7,11 +7,11 @@
 ##' @param g vector with tree-ring data
 ##' @param n times for resampling
 ##' @param boot one of c("stationary", "std", "exact", "none")
-##' @param p probability for rgeom, that determines distribution of
-##' sampling blocks for stationary bootstrap scheme
+##' @import np
+##' @import boot
 ##' @return a list
 ##' @keywords internal
-init_boot_data <- function(u, g, n, boot, p = 0.5, check_ac) {
+init_boot_data <- function(u, g, n, boot) {
   m <- length(g)
   k <- dim(u)[2]
   
@@ -21,33 +21,19 @@ init_boot_data <- function(u, g, n, boot, p = 0.5, check_ac) {
   }
   
   if (boot == "stationary") {
-    ## following Politis and Romano 1994
+    ## following Politis and Romano 1994, and especially the automatic
+    ## calculation of the optimal block length
     out_u <- array(dim = c(m, k, n))
     out_g <- matrix(nrow = m, ncol = n)
     ind <- 1:m
-    
-    wrap_index <- function(i, l, n) {
-      if (i + l - 1 <= n)
-        i:(i + l - 1)
-      else
-        c(i:n, 1:(l - n + i - 1))
-    }
-    
+
+    b_star <- round(b.star(g)[1])
+    inx <- tsboot(tseries = ind, statistic = function(x) x,
+                R = n, sim = "geom", l = b_star, orig.t = TRUE)$t
+
     for (i in 1:n) {
-      I <- sample(1:m, m, replace = TRUE)
-      L <- rgeom(m, p) + 1
-      new_ind <- NULL
-      counter <- 1
-      ## create vector of blocks      
-      while (length(new_ind) < m) {
-        counter <- counter + 1
-        block <- wrap_index(I[counter], L[counter], m)
-        new_ind <- c(new_ind, block)
-      }
-      ## truncate and impute      
-      new_ind <- new_ind[1:m]
-      out_u[, , i] <- u[new_ind, ]
-      out_g[, i] <- g[new_ind]
+      out_u[, , i] <- u[inx[i, ], ]
+      out_g[, i] <- g[inx[i, ]]
     }
   }
   
@@ -133,33 +119,6 @@ init_boot_data <- function(u, g, n, boot, p = 0.5, check_ac) {
     
   }
   
-  ## record autocorrelation properties of original chronology data and compare
-  ## with sampled data
-  if (check_ac) {
-    ac0 <- ar(g, order.max = 2)$ar
-    acb <- apply(out_g, 2, function(x) {
-      AR <- ar(x, order.max = 2)$ar
-      c(AR[1], AR[2])
-    })
-    acb <- t(acb)
-    acb <- apply(acb, c(1, 2), function(x) {
-      if(is.na(x))
-        0
-      else
-        x
-    })
-    acb1 <- c(mean = mean(acb[,1]), sd = sd(acb[,1]))
-    acb2 <- c(mean = mean(acb[,2]), sd = sd(acb[,2]))
-    ac <- list(
-      ac0 = ac0,
-      acb = list(
-        acb1 = acb1,
-        acb2 = acb2))
-  } else {
-    ac <- NULL
-  } 
-  
   list(climate = out_u,
-       chrono = out_g,
-       ac = ac)
+       chrono = out_g)
 }

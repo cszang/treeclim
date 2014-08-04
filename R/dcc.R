@@ -73,30 +73,39 @@
 ##' ranges as shown in most of the examples here, this way of
 ##' excluding e.g. the dormant season is far more convenient.
 ##'   
-##' In the classical approach to bootstrapping (DENDROCLIM2002-style,
-##' \code{boot = "std"}), 1000 bootstrap samples are taken from the
-##' original distributions of climate and tree-ring data. In the case
-##' of response function analysis, an eigen decomposition of the
-##' standardized predictor matrix is performed. Nonrelevant
-##' eigenvectors are removed using the PVP criterion (Guiot, 1990),
-##' principal component scores are then calculated from the matrices
-##' of reduced eigenvectors and standardized climatic
-##' predictors. Response coefficients are found via singular value
-##' decomposition, and tested for significance using the 95\%
-##' percentile range method (Dixon, 2001). In case of correlation
-##' function analysis, the coefficients are Pearson's correlation
-##' coefficients. The same method for significance testing is applied.
+##' 1000 bootstrap samples are taken from the original distributions
+##' of climate and tree-ring data, either using the stationary
+##' bootstrap (Politis and Romano 1994, \code{boot = "std"}) or
+##' classical bootstrap (DENDROCLIM2002-style, \code{boot =
+##' "std"}). The stationary bootstrap mimics the stationary properties
+##' of the original time series in the resampled time series by
+##' resampling within blocks. Within each block, the number of
+##' observations is random and has a geometric
+##' distribution. Consequently, the choice of the distribution
+##' parameter will affect the autocorrelation structure of the
+##' resampled time series. Optimal (expected) block length is chosen
+##' according to Politis and White (2004). In the case of response
+##' function analysis, an eigen decomposition of the standardized
+##' predictor matrix is performed. Nonrelevant eigenvectors are
+##' removed using the PVP criterion (Guiot, 1990), principal component
+##' scores are then calculated from the matrices of reduced
+##' eigenvectors and standardized climatic predictors. Response
+##' coefficients are found via singular value decomposition, and
+##' tested for significance using the 95\% percentile range method
+##' (Dixon, 2001). In case of correlation function analysis, the
+##' coefficients are Pearson's correlation coefficients. The same
+##' method for significance testing is applied.
 ##'   
 ##' There is also the option to use exact bootstrapping like
-##' implemented in seascorr (Meko et al. 2011). In this case,
-##' circulant embedding is used to simulate the tree-ring data 1000
-##' times as time series with the same frequency characteristics like
-##' the original time-series (Percival & Constantine, 2006). Empirical
-##' non-exceedence probabilities are used to test the coefficients of
-##' the response/correlation function with the original data for
-##' significance. For the exact bootstrapping case, no confidence
-##' intervals for the response/correlation coefficients can be
-##' computed.
+##' implemented in seascorr (Meko et al. 2011, \code{boot =
+##' "exact"}). In this case, circulant embedding is used to simulate
+##' the tree-ring data 1000 times as time series with the same
+##' frequency characteristics like the original time-series (Percival
+##' & Constantine, 2006). Empirical non-exceedence probabilities are
+##' used to test the coefficients of the response/correlation function
+##' with the original data for significance. For the exact
+##' bootstrapping case, no confidence intervals for the
+##' response/correlation coefficients can be computed.
 ##' @param chrono \code{data.frame} containing a tree-ring
 ##' chronologies, e.g. as obtained by \code{chron} of package dplR.
 ##' @param climate either a \code{data.frame} or \code{matrix} with
@@ -131,14 +140,9 @@
 ##' confidence intervals are adapted accordingly.
 ##' @param boot \code{character} indicating which bootstrap method
 ##' should be used, one of \code{c("stationary", "std", "exact")}
-##' @param p probability for geometric distribution of sampling blocks
-##' lengths for stationary bootstrap scheme (between 0 and 1); values
-##' closer to 0 result in longer sampling blocks in average
 ##' @param sb \code{logical} flag indicating whether textual status
 ##' bar for moving case should be suppressed. Suppression is
 ##' recommended for e.g.  Sweave files.
-##' @param check_ac \code{logical} should the autocorrelation structure
-##' of proxy data and bootstrap samples be checked?
 ##' @return 'dcc' returns an 'object' of class '"tc_dcc"'.
 ##'
 ##' The functions 'summary' and 'plot' are used to obtain and print a
@@ -185,6 +189,14 @@
 ##' Percival DB, Constantine WLB (2006) Exact simulation of Gaussian
 ##' Time Series from Nonparametric Spectral Estimates with Application
 ##' to Bootstrapping. \emph{Statistics and Computing} 16:25-35
+##'
+##' Patton, A. and D.N. Politis and H. White (2009), “CORRECTION TO
+##' Automatic block-length selection for the dependent bootstrap" by
+##' D. Politis and H. White”, Econometric Reviews 28(4), 372-375.
+##' 
+##' Politis, D.N. and H. White (2004), “Automatic block-length
+##' selection for the dependent bootstrap”, Econometric Reviews 23(1),
+##' 53-70.
 ##' @examples
 ##' \dontrun{
 ##' data(muc_clim) # climatic data
@@ -206,9 +218,7 @@ dcc <- function(chrono,
                 var_names = NULL,
                 ci = 0.05,
                 boot = "stationary",
-                p = 0.5,
-                sb = TRUE,
-                check_ac = FALSE
+                sb = TRUE
                 )
 {
 
@@ -294,17 +304,13 @@ dcc <- function(chrono,
     if (.method == "response") {
       dc <- tc_response(truncated_input$chrono, design,
                         ci = ci,
-                        boot = .boot,
-                        p = p,
-                        check_ac = check_ac)
+                        boot = .boot)
     }
     
     if (.method == "correlation") {
       dc <- tc_correlation(truncated_input$chrono, design,
                            ci = ci,
-                           boot = .boot,
-                           p = p,
-                           check_ac = check_ac)
+                           boot = .boot)
     }
   }
   
@@ -318,9 +324,7 @@ dcc <- function(chrono,
                    start_last = start_last,
                    win_size = win_size,
                    win_offset = win_offset,
-                   boot = .boot,
-                   p = p,
-                   check_ac = check_ac)
+                   boot = .boot)
   }
 
   ## return everything in a comprehensible manner

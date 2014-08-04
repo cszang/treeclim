@@ -3,7 +3,7 @@
 \alias{tc_response}
 \title{(bootstrapped) response function}
 \usage{
-tc_response(chrono, climate, ci, boot, p, check_ac)
+tc_response(chrono, climate, ci, boot)
 }
 \arguments{
 \item{chrono}{a tree-ring chronology}

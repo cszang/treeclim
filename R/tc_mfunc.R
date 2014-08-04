@@ -17,7 +17,7 @@
 ##' sampling blocks for stationary bootstrap scheme
 ##' @keywords internal
 tc_mfunc <- function(chrono, climate, boot, sb, start_last,
-                     win_size, win_offset, ci, method, p, check_ac) {
+                     win_size, win_offset, ci, method) {
 
   vnames <- climate$names
   pretty_names <- climate$pretty_names
@@ -38,9 +38,6 @@ tc_mfunc <- function(chrono, climate, boot, sb, start_last,
     result_matrix_ci_lower <- result_matrix_significant <-
       matrix(NA, ncol = win_num, nrow = dim(climate$aggregate)[2])
   
-  if (check_ac)
-    ac0_1 <- ac0_2 <- acb_1 <- acb_2 <- numeric(win_num)
-    
   if (sb)                            # initialize status bar (if TRUE)
     mpb <- txtProgressBar(min = 1,  max = win_num, style = 3)
 
@@ -67,12 +64,10 @@ tc_mfunc <- function(chrono, climate, boot, sb, start_last,
 
     if (method == "response") {
       window <- tc_response(chrono_win, climate_win_list,
-                            ci = ci, boot = boot, p = p,
-                            check_ac = check_ac)
+                            ci = ci, boot = boot)
     } else {
       window <- tc_correlation(chrono_win, climate_win_list,
-                               ci = ci, boot = boot, p = p,
-                               check_ac = check_ac)
+                               ci = ci, boot = boot)
     }
     
     result_matrix_coef[,k] <- window$result$coef
@@ -83,13 +78,6 @@ tc_mfunc <- function(chrono, climate, boot, sb, start_last,
                                  years[series_subset_index][win_size],
                                  sep = "-")
     
-    if (check_ac) {
-      ac0_1[k] <- window$ac$ac0[1]
-      ac0_2[k] <- window$ac$ac0[2]
-      acb_1[k] <- window$ac$acb$acb1[1]
-      acb_2[k] <- window$ac$acb$acb2[1]
-    }
-
     if (sb)                             # update status bar (if TRUE)
       setTxtProgressBar(mpb, k)
     
@@ -102,28 +90,10 @@ tc_mfunc <- function(chrono, climate, boot, sb, start_last,
   result_matrix_significant <- result_matrix_significant[,win_num:1]
   win_years_string <- win_years_string[win_num:1]
   
-  if (check_ac) {
-    ## calculate ac characteristics
-    rm_na <- function(x) {
-      if (is.na(x))
-        0
-      else
-        x
-    }
-    
-    ac0_1 <- sapply(ac0_1, rm_na)
-    ac0_2 <- sapply(ac0_2, rm_na)
-    acb_1 <- sapply(acb_1, rm_na)
-    acb_2 <- sapply(acb_2, rm_na)
-    ac <- list()
-  } else {
-    ac <- NULL
-  }
-
   out <- list(
-    result = list(),
-    ac = ac
+    result = list()
   )
+  
   out$result$coef <- data.frame(result_matrix_coef)
   colnames(out$result$coef) <- win_years_string
   rownames(out$result$coef) <- vnames
@@ -138,15 +108,6 @@ tc_mfunc <- function(chrono, climate, boot, sb, start_last,
   rownames(out$result$significant) <- vnames
   out$result$pretty_names <- pretty_names
   
-  if (check_ac) {
-    out$ac$ac0 <- list(
-      ac01 = c(mean = mean(ac0_1), sd = sd(ac0_1)),
-      ac02 = c(mean = mean(ac0_2), sd = sd(ac0_2)))
-    out$ac$acb <- list(
-      acb1 = c(mean = mean(acb_1), sd = sd(acb_1)),
-      acb2 = c(mean = mean(acb_2), sd = sd(acb_2)))
-  }
-    
   if (sb)                               # close status bar (if TRUE)
     close(mpb)
   class(out$result) <- c("tc_mcoef", "list")

@@ -3,7 +3,7 @@
 \alias{tc_correlation}
 \title{(bootstrapped) correlation function}
 \usage{
-tc_correlation(chrono, climate, ci, boot, p = p, check_ac)
+tc_correlation(chrono, climate, ci, boot)
 }
 \arguments{
 \item{chrono}{a tree-ring chronology}

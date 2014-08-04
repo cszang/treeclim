@@ -243,7 +243,7 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
   }
 
   chrono_boot <- init_boot_data(pmat, truncated_input$chrono, 1000,
-                                "exact", p = 0.5, check_ac = FALSE)$chrono
+                                "exact")$chrono
 
   results <- list()
   results$coef <- list()

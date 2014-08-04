@@ -60,12 +60,10 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
   .win_offset <- ifelse(is.null(x$call$win_offset), 1, x$call$win_offset)
   .start_last <- ifelse(is.null(x$call$start_last), TRUE, x$call$start_last)
   .boot <- ifelse(is.null(x$call$boot), "stationary", x$call$boot)
-  .p <- ifelse(is.null(x$call$p), 0.5, x$call$p)
-  .check_ac <- FALSE
   
   ## calculate null model with full data set to get coefficients
-  c0 <- tc_correlation(x$truncated$tree, x$design, ci = 0.05, boot = .boot,
-                       p = .p, check_ac = .check_ac)$result$coef
+  c0 <- tc_correlation(x$truncated$tree, x$design, ci = 0.05,
+                       boot = .boot)$result$coef
   n <- length(c0)
   m <- length(x$truncated$tree)
   
@@ -93,9 +91,7 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
                win_offset = .win_offset,
                boot = .boot,
                sb = FALSE,
-               ci = 0.05,
-               p = .p,
-               check_ac = FALSE)
+               ci = 0.05)
     })
     dur1000 <- ceiling(dur[3] * 1000 / 60)
     cat("Running this test with bootstrapping on the individual correlations enabled will take around", dur1000, "minutes.\n")
@@ -149,9 +145,7 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
                    win_offset = .win_offset,
                    boot = .boot,
                    sb = FALSE,
-                   ci = 0.05,
-                   p = .p,
-                   check_ac = .check_ac)$result$coef
+                   ci = 0.05)$result$coef
     
     sds[,i] <- apply(c1, 1, sd)
     
