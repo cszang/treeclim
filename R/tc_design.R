@@ -112,8 +112,10 @@ tc_design <- function(selection, climate) {
     mmatches <- !is.na((match(split, c("curr", "prev"))))
     fmatch <- which(mmatches)[1] - 1
     vars[i] <- paste(split[1:fmatch], collapse = ".")
+    fmonth_char <- split[which(mmatches)[1] + 1]
     if (sum(mmatches) > 1) {
-      .months[i] <- 25
+      .months[i] <- 25                  # 25: unique number for
+                                        # aggregates!
       ## long variable name
       season <- split[mmatches]
       smatches <- c(FALSE, mmatches[-length(mmatches)])
@@ -135,10 +137,10 @@ tc_design <- function(selection, climate) {
       }
       labels[i] <- paste(fmonth, "...", lmonth, sep = "")
     } else {
-      .months[i] <- get_month_numeric(split[3])
+      .months[i] <- get_month_numeric(fmonth_char)
       ## short variable name
       tseason <- split[mmatches]
-      tmonth <- split[fmatch + 2]
+      tmonth <- split[which(mmatches)[1] + 1]
       if (tseason == "prev") {
         labels[i] <- tolower(tmonth)
       } else {
