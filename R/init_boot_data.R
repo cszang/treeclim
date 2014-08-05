@@ -21,6 +21,9 @@ init_boot_data <- function(u, g, n, boot) {
   }
   
   if (boot == "stationary") {
+    if (length(g) < 18) {
+      stop("For stationary bootstrap, win_size has to be at least 18. Consider adapting win_size or changing the bootstrap procedure.")
+    }
     ## following Politis and Romano 1994, and especially the automatic
     ## calculation of the optimal block length
     out_u <- array(dim = c(m, k, n))
