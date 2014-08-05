@@ -143,7 +143,7 @@ skills <- function(object, formula, model = "ols",
       perc <- as.numeric(perc)/100
       if (length(grep("^-.*$", calibration)) == 1) {
         ## calibration starts from distant (older) end
-        cal_index <- floor(perc * m):m
+        cal_index <- (m - floor(perc * m)):m
         ver_index <- c(1:m)[-cal_index]
         cal_str <-
           gettextf("%d percent (= %d years) of data starting at older end",
@@ -156,6 +156,8 @@ skills <- function(object, formula, model = "ols",
           gettextf("%d percent (= %d years) of data starting at recent end",
                    perc * 100, length(cal_index))
       }
+    } else {
+      stop("Only percentage values can be supplied as character values to `calibration`, e.g. '66%' or '-45%'.")
     }
   } else {
     if (is.numeric(calibration)) {
