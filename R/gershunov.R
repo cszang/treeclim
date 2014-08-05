@@ -48,11 +48,11 @@
 g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
   if (!any(class(x) != "tc_dcc"))
     stop("Please provide output of function `dcc`.")
-  
-  if (x$call$moving == FALSE)
+
+  if (is.null(x$call$moving) || x$call$moving == FALSE)
     stop("Gershunov test can only be computed for moving correlations.")
   
-  if (is.na(pmatch(x$call$method, "correlation")))
+  if (length(pmatch(x$call$method, "correlation")) == 0)
     stop("Gershunov test is currently only implemented for running correlation functions, not for response function.")
   
   ## get parameters for moving correlation function from call
