@@ -14,3 +14,16 @@
 	* Version 1.0.2: small fix
 
 	* NAMESPACE: RcppArmadillo not imported anymore
+
+2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.3: small fix
+
+	* NAMESPACE: declare faux global vars in generics to make R CMD
+	check happy
+
+2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.4: small fix
+
+	* NAMESPACE: RcppArmadillo is imported again
