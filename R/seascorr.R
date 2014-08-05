@@ -121,7 +121,7 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
   if (!any(1:12 == complete))
     stop("`complete` must be an integer value between 1 and 12.")
 
-  if (!all(sapply(season_lengths, function(x) any(1:12, x))))
+  if (!all(sapply(season_lengths, function(x) any(1:12 == x))))
     stop("`season_lengths` must be a vector of integers between 1 and 12.")
 
   if (!any(c(0.01, 0.05, 0.1) == ci))
