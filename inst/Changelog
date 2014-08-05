@@ -1,0 +1,10 @@
+2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.0: first major release, submitted to CRAN
+
+2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.1: bug-fix release to make R CMD check --as-cran
+	happy
+
+	* DESCRIPTION: RcppArmadillo only in "LinkedTo", not in "Depends"
