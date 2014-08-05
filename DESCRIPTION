@@ -1,7 +1,7 @@
 Package: treeclim
 Type: Package
 Title: Numerical calibration of proxy-climate relationships
-Version: 1.0.1
+Version: 1.0.2
 Date: 2014-08-05
 Author: Christian Zang
 Maintainer: Christian Zang <christian.zang@wzw.tum.de>

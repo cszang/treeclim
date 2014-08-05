@@ -8,3 +8,9 @@
 	happy
 
 	* DESCRIPTION: RcppArmadillo only in "LinkedTo", not in "Depends"
+
+2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.2: small fix
+
+	* NAMESPACE: RcppArmadillo not imported anymore
