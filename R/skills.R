@@ -90,6 +90,8 @@
 ##' @export
 skills <- function(object, formula, model = "ols",
                    calibration = "50%", timespan = NULL) {
+
+  Method <- NULL                        # to keep R CMD check happy
   
   mf <- match.call()
   fo <- formula(mf$formula)

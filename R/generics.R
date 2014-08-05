@@ -124,6 +124,7 @@ print.tc_skills <- function(x, ...) {
 ##' @export plot tc_skills
 plot.tc_skills <- function(x, ...) {
   orig <- x
+  y <- prediction <- NULL               # to keep R CMD check happy
   d <- data.frame(x = orig$years,
                   y = orig$full$x)
   v <- data.frame(x = c(orig$cal.years, orig$ver.years),
@@ -190,6 +191,9 @@ plot.tc_dcc <- function(x, ...) {
   } else {
     boot <- x$call$boot
   }
+
+  y <- varname <- ci_lower <- ci_upper <- significant <- pid <- wid <-
+    vid <- NULL                         # to keep R CMD check happy
 
   if (any(class(data) == "tc_coef")) {
 
@@ -272,6 +276,9 @@ plot.tc_dcc <- function(x, ...) {
 
 
 plot.tc_seascorr <- function(x, ...) {
+
+  end_month_order <- value <- significant <- y <-
+    prediction <- NULL                  # to keep R CMD check happy
 
   ## how many season lengths do we consider?
   n <- length(x$coef)
