@@ -77,8 +77,8 @@ are then taken as calibration period; 2) as a single integer, if
 positive, this number of observations at the recent end of the
 data set is taken as calibration set, if negative, this number of
 oldest observations is taken; and 3) as a character string giving
-a percentage of values, e.g., "-40/%" would select the 40% oldest
-observations, while "55/%" would select the 55/% most recent ones.
+a percentage of values, e.g., "-40\%" would select the 40\% oldest
+observations, while "55\%" would select the 55\% most recent ones.
 
 The relationship between climate and tree-ring data is evaluated
 for the calibration period and the complete data set. Frequently
