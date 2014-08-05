@@ -1,4 +1,4 @@
-##' @S3method print tc_dcc
+##' @export print tc_dcc
 print.tc_dcc <- function(x, ...) {
   ci <- x$call$ci
   if (is.null(ci))
@@ -8,7 +8,7 @@ print.tc_dcc <- function(x, ...) {
   print(x$coef, ...)
 }
 
-##' @S3method print tc_seascorr
+##' @export print tc_seascorr
 print.tc_seascorr <- function(x, ...) {
   n <- length(x$coef)
   ## pretty season names
@@ -54,7 +54,7 @@ print.tc_seascorr <- function(x, ...) {
   }
 }
 
-##' @S3method print tc_coef
+##' @export print tc_coef
 print.tc_coef <- function(x, ...) {
   rownames(x) <- abbrev_name(rownames(x))
   x$coef <- round(x$coef, 3)
@@ -64,7 +64,7 @@ print.tc_coef <- function(x, ...) {
 }
 
 ##' @importFrom abind abind
-##' @S3method print tc_mcoef
+##' @export print tc_mcoef
 print.tc_mcoef <- function(x, ...) {
   mm <- abind(x$coef, x$significant, along = 3)
   ms <- apply(mm, c(1, 2), function(x) {
@@ -83,7 +83,7 @@ print.tc_mcoef <- function(x, ...) {
   print(ms, ...)
 }
 
-##' @S3method print tc_design
+##' @export print tc_design
 print.tc_design <- function(x, ...) {
   pr <- x$aggregate
   names(pr) <- abbrev_name(x$names)
@@ -95,7 +95,7 @@ print.tc_design <- function(x, ...) {
   cat("\n")
 }
 
-##' @S3method print tc_skills
+##' @export print tc_skills
 print.tc_skills <- function(x, ...) {
   cat("Call:\n", paste(deparse(x$call), sep = "\n",
                        collapse = "\n"), "\n\n", sep = "")
@@ -121,7 +121,7 @@ print.tc_skills <- function(x, ...) {
                 quote = FALSE, ...)
 }
 
-##' @S3method plot tc_skills
+##' @export plot tc_skills
 plot.tc_skills <- function(x, ...) {
   orig <- x
   d <- data.frame(x = orig$years,
@@ -138,22 +138,22 @@ plot.tc_skills <- function(x, ...) {
     xlab("years") + ylab("target")
 }
 
-##' @S3method coef tc_dcc
+##' @export coef tc_dcc
 coef.tc_dcc <- function(object, ...) {
   coef(object$coef, ...)
 }
 
-##' @S3method coef tc_coef
+##' @export coef tc_coef
 coef.tc_coef <- function(object, ...) {
   print(data.frame(object), ...)
 }
 
-##' @S3method coef tc_mcoef
+##' @export coef tc_mcoef
 coef.tc_mcoef <- function(object, ...) {
   print(data.frame(object$coef), ...)
 }
 
-##' @S3method summary tc_dcc
+##' @export summary tc_dcc
 summary.tc_dcc <- function(object, ...) {
   cat("Call:\n")
   print(object$call)
@@ -163,7 +163,7 @@ summary.tc_dcc <- function(object, ...) {
   print(object$coef, ...)
 }
 
-##' @S3method + tc_paramlist
+##' @export + tc_paramlist
 "+.tc_paramlist" <- function(p1, p2) {
   ## check if p1 already is _nested_ list
   if (is.list(p1[[1]])) {
@@ -182,7 +182,7 @@ summary.tc_dcc <- function(object, ...) {
 
 ##' @import ggplot2
 ##' @import plyr
-##' @S3method plot tc_dcc
+##' @export plot tc_dcc
 plot.tc_dcc <- function(x, ...) {
   data <- x$coef
   if (is.null(x$call$boot)) {

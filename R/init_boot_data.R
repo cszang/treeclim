@@ -7,8 +7,8 @@
 ##' @param g vector with tree-ring data
 ##' @param n times for resampling
 ##' @param boot one of c("stationary", "std", "exact", "none")
-##' @import np
-##' @import boot
+##' @importFrom np b.star
+##' @importFrom boot tsboot
 ##' @return a list
 ##' @keywords internal
 init_boot_data <- function(u, g, n, boot) {

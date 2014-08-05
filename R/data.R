@@ -214,8 +214,8 @@ NULL
 ##' 2014/07/03.
 ##' @docType data
 ##' @keywords datasets
-##' @name norway015
-##' @usage data(norway015)
+##' @name norw015
+##' @usage data(norw015)
 ##' @format A \code{data.frame} containing tree-ring indices and
 ##' replication depth with respective years as \code{rownames}.
 NULL

@@ -1,7 +1,7 @@
 Package: treeclim
 Type: Package
 Title: Modeling of tree/climate relationships
-Version: 0.9.1
+Version: 0.9.2
 Date: 2014-08-04
 Author: Christian Zang
 Maintainer: Christian Zang <christian.zang@wzw.tum.de>
@@ -9,9 +9,10 @@ Depends:
     base,
     stats,
     utils,
-    abind,
     Rcpp (>= 0.10.6),
-    RcppArmadillo (>= 0.4.000.2),
+    RcppArmadillo (>= 0.4.000.2)
+Imports:
+    abind,
     plyr,
     ggplot2,
     lmtest,
