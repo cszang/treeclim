@@ -27,3 +27,11 @@
 	* Version 1.0.4: small fix
 
 	* NAMESPACE: RcppArmadillo is imported again
+
+2014-08-06 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.5: small fix
+
+	* NAMESPACE: RcppArmadillo is not imported
+
+	* DESCRIPTION: require R (>= 3.0.2)

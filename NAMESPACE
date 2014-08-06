@@ -1,6 +1,5 @@
 useDynLib(treeclim)
 import(Rcpp)
-import(RcppArmadillo)
 S3method("+",tc_paramlist)
 S3method(coef,tc_coef)
 S3method(coef,tc_dcc)
