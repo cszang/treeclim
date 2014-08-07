@@ -45,10 +45,10 @@ print.tc_seascorr <- function(x, ...) {
     print(data.frame(
       month = used_months_ch,
       type = rep(c("primary", "secondary"), each = 14),
-      coef = c(x$coef[[i]]$primary$coef,
-        x$coef[[i]]$secondary$coef),
-      significant = c(x$coef[[i]]$primary$significant,
-        x$coef[[i]]$secondary$significant)
+      coef = c(rev(x$coef[[i]]$primary$coef),
+        rev(x$coef[[i]]$secondary$coef)),
+      significant = c(rev(x$coef[[i]]$primary$significant),
+        rev(x$coef[[i]]$secondary$significant))
       ))
     cat("\n")
   }
