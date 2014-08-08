@@ -36,8 +36,18 @@
 
 	* DESCRIPTION: require R (>= 3.0.2)
 
-2014-08-06 Christian Zang <christian.zang@wzw.tum.de>
+2014-08-07 Christian Zang <christian.zang@wzw.tum.de>
 
-	* Version 1.0.6: small fix
+	* Version 1.0.6: important bug fix (thanks to Alison Macalady)
 
-	* DESCRIPTION: updated author fields
+  * generics.R: printing a seascorr object had previously gotten the order of the variables wrong
+
+  * DESCRIPTION: updated author fields
+
+2014-08-07 Christian Zang <christian.zang@wzw.tum.de>
+
+  * Version 1.0.7: fixing Authors@R
+
+  * DESCRIPTION: updated author/maintainer fields
+
+
