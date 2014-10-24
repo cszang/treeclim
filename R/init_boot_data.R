@@ -31,6 +31,10 @@ init_boot_data <- function(u, g, n, boot) {
     ind <- 1:m
 
     b_star <- round(b.star(g)[1])
+    if (b_star == 0) {
+      b_star <- 1
+      warning("Optimal block length was estimated to be smaller than 1 and set to 1 by treeclim. Usage of standard, non-stationary bootstrap is recommended in that case.")
+    } 
     inx <- tsboot(tseries = ind, statistic = function(x) x,
                 R = n, sim = "geom", l = b_star, orig.t = TRUE)$t
 

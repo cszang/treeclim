@@ -75,7 +75,7 @@
 ##'   
 ##' 1000 bootstrap samples are taken from the original distributions
 ##' of climate and tree-ring data, either using the stationary
-##' bootstrap (Politis and Romano 1994, \code{boot = "std"}) or
+##' bootstrap (Politis and Romano 1994, \code{boot = "stationary"}) or
 ##' classical bootstrap (DENDROCLIM2002-style, \code{boot =
 ##' "std"}). The stationary bootstrap mimics the stationary properties
 ##' of the original time series in the resampled time series by

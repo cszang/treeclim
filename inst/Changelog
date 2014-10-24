@@ -40,14 +40,27 @@
 
 	* Version 1.0.6: important bug fix (thanks to Alison Macalady)
 
-  * generics.R: printing a seascorr object had previously gotten the order of the variables wrong
+	* generics.R: printing a seascorr object had previously gotten the
+	order of the variables wrong
 
-  * DESCRIPTION: updated author fields
+	* DESCRIPTION: updated author fields
 
 2014-08-07 Christian Zang <christian.zang@wzw.tum.de>
 
-  * Version 1.0.7: fixing Authors@R
+	* Version 1.0.7: fixing Authors@R
 
-  * DESCRIPTION: updated author/maintainer fields
+	* DESCRIPTION: updated author/maintainer fields
+
+2014-09-15 Christian Zang <christian.zang@wzw.tum.de>
+
+	* dcc.R: small doc fix (thanks Marieke)
+
+2014-10-23 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.8: bug fix
+
+	* init_boot_data.R: when b.star estimates (for short time-series)
+	are < 0.5, the value is adjusted to 1 and a warning is issued
+	(thanks Caterina)
 
 
