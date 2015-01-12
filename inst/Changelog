@@ -63,4 +63,6 @@
 	are < 0.5, the value is adjusted to 1 and a warning is issued
 	(thanks Caterina)
 
+2015-01-08 Christian Zang <christian.zang@wzw.tum.de>
 
+	* Version 1.0.9: CITATION file
