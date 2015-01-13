@@ -31,6 +31,7 @@ SEXP pcor(SEXP x1, SEXP x2, SEXP y, SEXP y0) {
   // initialize output matrices for primary and secondary variables
   mat cor_coef1(ncol, 1001);
   mat cor_coef2(ncol, 1001);
+  mat cor_coef2e(ncol, 1001);
 
   // there are 1000 bootstrap samples + 1 set of coefs for real data
   for(int q = 0; q < 1001; ++q) {
@@ -57,13 +58,28 @@ SEXP pcor(SEXP x1, SEXP x2, SEXP y, SEXP y0) {
       arma::Mat<double> cor_c2_1 = (cor_c2 - cor_12 * cor_c1)/
         (sqrt(1 - cor_12 * cor_12) * sqrt(1 - cor_c1 * cor_c1));
 
+      // simulated partial correlations for x2 are computed
+      // differently in original seascorr:
+      // we want an intercept!
+      arma::Mat<double> X1 = ones(nrow, 2);
+      for (int w = 0; w < nrow; w++) {
+        X1(w, 1) = thisx1(w);
+      }
+      arma::Mat<double> coef1 = arma::solve(X1, thisy);
+      arma::Mat<double> resid1 = thisy - X1 * coef1;
+      arma::Mat<double> coef2 = arma::solve(X1, thisx2);
+      arma::Mat<double> resid2 = thisx2 - X1 * coef2;
+      arma::Mat<double> cor_e2 = cor(resid1, resid2);
+          
       // write in output matrices
       cor_coef1(s, q) = cor_c1(0, 0);
       cor_coef2(s, q) = cor_c2_1(0, 0);
+      cor_coef2e(s, q) = cor_e2(0, 0);
     }
   }
   List res;
   res["primary"] = cor_coef1;
   res["secondary"] = cor_coef2;
+  res["exact"] = cor_coef2e;
   return res;
 }
