@@ -196,6 +196,11 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
                                     moving = FALSE)
   m <- length(truncated_input$chrono)
 
+  ## stop if less than 31 years (needed for exact bootstrapping to
+  ## work correctly)
+  if (m < 31)
+    stop("Seasonal correlation analysis needs at least 31 years of data overlap for proxy and climate data.")
+
   ## create raw parameter matrix
   pmat <- make_pmat(truncated_input$climate)
 
@@ -259,7 +264,7 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
     results$coef[[i]]$primary <- ptest(params$primary[,2:1001], ci,
                                        params$primary[,1],
                                        "weibull")[,1:2]
-    results$coef[[i]]$secondary <- ptest(params$secondary[,2:1001], ci,
+    results$coef[[i]]$secondary <- ptest(params$exact[,2:1001], ci,
                                          params$secondary[,1],
                                          "weibull")[,1:2]
   }
