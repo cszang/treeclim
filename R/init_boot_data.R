@@ -94,7 +94,8 @@ init_boot_data <- function(u, g, n, boot) {
     ## compute discrete fourier transform on tapered and padded series
     z <- fft(trp)
     
-    ## compute periodogram
+    ## compute periodogram; this differs from MATLAB version according
+    ## to a scaling factor of ~ 2
     Pyy  <- Re(z * Conj(z))/padlen
     
     ## sample Gaussian noise and compute mu for 1000 simulation runs
@@ -106,7 +107,7 @@ init_boot_data <- function(u, g, n, boot) {
     
     term1 <- matrix(complex(pow, Z[i1,], Z[i2,]), ncol = 500)
     term2 <- sqrt(Pyy/length(trp))
-    term2 <- matrix(rep(Pyy, 500), ncol = 500)
+    term2 <- matrix(rep(term2, 500), ncol = 500)
     mu <- term1 * term2
     
     V <- fft(mu)
