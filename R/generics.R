@@ -135,8 +135,8 @@ plot.tc_skills <- function(x, ...) {
   gg <- ggplot(data = d, aes(x = x, y = y))
   gg + geom_line(data = d, aes(x = x, y = y)) +
     geom_line(data = v, aes(x = x, y = y, color = prediction)) +
-    theme_minimal() +
-    xlab("years") + ylab("target")
+      theme_minimal() +
+        xlab("years") + ylab("target")
 }
 
 ##' @export coef tc_dcc
@@ -202,32 +202,44 @@ plot.tc_dcc <- function(x, ...) {
       y = rep(0, dim(data)[1] + 2)
       )
 
-    gg <- ggplot(data, aes(x = id, y = coef), ...) +
-      geom_line(data = line0, aes(x, y), color = "grey") +
-      scale_linetype_manual(values = c("dotted", "solid")) +
-      geom_point(aes(color = varname), size = 3) +
-      scale_x_continuous(breaks = data$id, labels = data$month) +
-      ylab("Coefficients") +
-      xlab("Months") +  
-      theme_minimal() +
-      theme(axis.title.x = element_blank())    
-    
     if (boot == "exact") {
-      gg
+      
+      gg <- ggplot(data, aes(x = id, y = coef), ...) +
+        geom_line(data = line0, aes(x, y), color = "grey") +
+        geom_point(aes(color = varname, pch = significant, size = significant)) +
+        scale_size_manual(values = c(2, 4)) +
+        scale_x_continuous(breaks = data$id, labels = data$month) +
+        ylab("Coefficients") +
+        xlab("Months") +  
+        theme_minimal() +
+        theme(axis.title.x = element_blank())    
+      
     } else {
-      gg + geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper, color =
-                             varname, lty = significant), size = 1)
+      
+      gg <- ggplot(data, aes(x = id, y = coef), ...) +
+        geom_line(data = line0, aes(x, y), color = "grey") +
+        scale_linetype_manual(values = c("dotted", "solid")) +
+        geom_point(aes(color = varname), size = 3) +
+        scale_x_continuous(breaks = data$id, labels = data$month) +
+        ylab("Coefficients") +
+        xlab("Months") +  
+        theme_minimal() +
+        theme(axis.title.x = element_blank()) +
+        geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper, color =
+                          varname, lty = significant), size = 1)
     }
+
+    gg
     
   } else {
 
-## mdcc case
+    ## mdcc case
 
     coef <- data$coef
     n <- dim(coef)[2]
     m <- dim(coef)[1]
 
-## reformat into ggplot compatible data.frame
+    ## reformat into ggplot compatible data.frame
 
     pdata <- data.frame(
       varname = abbrev_name(rep(rownames(coef), n)),
@@ -257,20 +269,20 @@ plot.tc_dcc <- function(x, ...) {
 
     gg <- ggplot(idpgrid, aes(x = window, y = varname), ...) +
       geom_polygon(aes(x, y, fill = coef, group = pid)) +
-      scale_fill_gradient2() +
-      theme_minimal() +
-      scale_x_continuous(breaks = seq(0.5, by = 1, length.out = n),
-                         labels = names(coef)) +
-      scale_y_continuous(breaks = seq(0.5, by = 1, length.out = m),
-                         labels = abbrev_name(rownames(coef))) +
-      theme(axis.text.x = element_text(angle = 90, vjust = 0),
-            axis.title.x = element_blank(),
-            axis.title.y = element_blank()) + 
-      geom_point(data = subset(pdata, significant),
-                 aes(x = wid - 0.5, y = vid - 0.5), pch = 8,
-                 color = "grey")
+        scale_fill_gradient2() +
+          theme_minimal() +
+            scale_x_continuous(breaks = seq(0.5, by = 1, length.out = n),
+                               labels = names(coef)) +
+                                 scale_y_continuous(breaks = seq(0.5, by = 1, length.out = m),
+                                                    labels = abbrev_name(rownames(coef))) +
+                                                      theme(axis.text.x = element_text(angle = 90, vjust = 0),
+                                                            axis.title.x = element_blank(),
+                                                            axis.title.y = element_blank()) + 
+                                                              geom_point(data = subset(pdata, significant),
+                                                                         aes(x = wid - 0.5, y = vid - 0.5), pch = 8,
+                                                                         color = "grey")
     
-      gg 
+    gg 
   }
 }
 
@@ -320,7 +332,7 @@ plot.tc_seascorr <- function(x, ...) {
       unlist(sapply(sapply(x$coef, "[", 2), "[", 1)))
     )
 
- 
+  
   
   ## draw plot
   gg <- ggplot(gd,
@@ -329,11 +341,11 @@ plot.tc_seascorr <- function(x, ...) {
 
   gg + facet_grid(type ~ season_length) +
     geom_bar(stat = "identity", position = "") +
-    scale_fill_manual(values = c("grey75", "grey50")) +
-    theme_minimal() +
-    scale_x_continuous(breaks = 1:14,
-                       labels = substr(used_months_ch, 1, 1)) +
-    xlab("Ending month") +
-    ylab("Correlation coefficient")
+      scale_fill_manual(values = c("grey75", "grey50")) +
+        theme_minimal() +
+          scale_x_continuous(breaks = 1:14,
+                             labels = substr(used_months_ch, 1, 1)) +
+                               xlab("Ending month") +
+                                 ylab("Correlation coefficient")
   
 }
