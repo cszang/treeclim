@@ -23,10 +23,10 @@ ptest <- function(bc, ci, c0 = NULL, method) {
     ps <- numeric(m)
 
     for (i in 1:m) {
-      if (c0[i] <= min(bc[,i])) {
+      if (c0[i] <= min(bc[i,])) {
         j1 <- 1
       } else {
-        if (c0[i] >= max(bc[,i])) {
+        if (c0[i] >= max(bc[i,])) {
           j1 <- 1000
         } else {
           ## interpolate rank if within range of monte-carlo simulations
