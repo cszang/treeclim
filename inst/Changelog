@@ -66,3 +66,8 @@
 2015-01-08 Christian Zang <christian.zang@wzw.tum.de>
 
 	* Version 1.0.9: CITATION file
+
+2015-01-16 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.10: fixed important bug in seasorr
+	* ptest.R: exceedance probability is now computed correctly for edge cases
