@@ -77,8 +77,6 @@
 ##' correlation in least squares regression. Biometrika 38:159-78.
 ##' @examples
 ##' \dontrun{
-##' data(muc_fake)
-##' data(muc_clim)
 ##' dc <- dcc(muc_fake, muc_clim, .mean(6:9, "temp") + .sum(6:9,
 ##' "prec"))
 ##' sk <- skills(dc)

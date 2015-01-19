@@ -199,8 +199,6 @@
 ##' 53-70.
 ##' @examples
 ##' \dontrun{
-##' data(muc_clim) # climatic data
-##' data(muc_spruce) # spruce data
 ##' dc_resp <- dcc(muc_spruce, muc_clim)
 ##' }
 ##' @author Christian Zang; the original MATLAB code for exact

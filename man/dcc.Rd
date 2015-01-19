@@ -200,8 +200,6 @@ response/correlation coefficients can be computed.
 }
 \examples{
 \dontrun{
-data(muc_clim) # climatic data
-data(muc_spruce) # spruce data
 dc_resp <- dcc(muc_spruce, muc_clim)
 }
 }

@@ -88,8 +88,6 @@ statistic (DW) (Cook et al. 1994, Durbin and Watson, 1951).
 }
 \examples{
 \dontrun{
-data(muc_fake)
-data(muc_clim)
 dc <- dcc(muc_fake, muc_clim, .mean(6:9, "temp") + .sum(6:9,
 "prec"))
 sk <- skills(dc)

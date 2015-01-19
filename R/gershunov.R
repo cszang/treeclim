@@ -38,8 +38,6 @@
 ##' 14:2486-2492.
 ##' @examples
 ##' \dontrun{
-##' data(muc_clim) # climatic data
-##' data(muc_pruce) # spruce data
 ##' dc_cor <- dcc(muc_spruce, muc_clim, 3:9, method = "cor", moving = TRUE)
 ##' g_test(dc_cor)
 ##' }
