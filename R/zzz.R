@@ -8,8 +8,8 @@
   afoolt <- ifelse(afool,
                    "You should not wear this shirt for work...\n", "")
   tips <- c(
-    "Need help? See the wiki at https://github.com/znag/treeclim/wiki",
-    paste("Coming from bootRes? See here for a list of changes and for how to adapt your code: https://github.com/znag/bootres2/wiki/Changes-from-bootRes-1.X"),
+    "Need help? See the wiki at https://github.com/cszang/treeclim/wiki",
+    paste("Coming from bootRes? See here for a list of changes and for how to adapt your code: https://github.com/cszang/treeclim/wiki/Changes-from-bootRes-1.X"),
     "See citation('treeclim') for information how to cite this package in your work." 
   )
   supp <- "(Use suppressPackageStartupMessages to eliminate package startup messages.)"
