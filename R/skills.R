@@ -240,8 +240,8 @@ skills <- function(object, formula, model = "ols",
   predict_cal <- intercept_cal + slope_cal * cal$y
   predict_ver <- intercept_cal + slope_cal * ver$y
   
-  RE <- reduction_of_error(cal$x, predict_cal, cal$x)
-  CE <- coefficient_of_efficiency(cal$x, predict_cal, ver$x)
+  RE <- reduction_of_error(ver$x, predict_ver, cal$x)
+  CE <- coefficient_of_efficiency(ver$x, predict_ver, ver$x)
   DW <- dwtest(cal$x ~ predict_cal)
   
   model_lm <- list(
