@@ -73,3 +73,6 @@
 	* ptest.R: exceedance probability is now computed correctly for edge cases
   * corfun_exact.cpp: partial regression algorithm now more similar to MATLAB version
   * *.Rd: examples respect lazy data now
+
+2015-02-10 Christian Zang <christian.zang@wzw.tum.de>
+  * Version 1.0.11: fixed calculation of RE and CE

@@ -1,8 +1,8 @@
 Package: treeclim
 Type: Package
 Title: Numerical Calibration of Proxy-Climate Relationships
-Version: 1.0.10
-Date: 2015-01-16
+Version: 1.0.11
+Date: 2015-02-10
 Authors@R: c(person("Christian", "Zang", role = c("aut", "cre", "cph", "trl"),
     email = "christian.zang@wzw.tum.de"), person("Franco", "Biondi", role =
     c("ctb", "cph")))
@@ -27,7 +27,7 @@ Suggests:
     testthat (>= 0.7.1.99)
 Description: Bootstrapped response and correlation functions,
     seasonal correlations and evaluation of reconstruction
-    skills for use in dendroclimatology and dendroecology
+    skills for use in dendroclimatology and dendroecology.
 NeedsCompilation: yes
 License: GPL-3
 LazyData: yes
