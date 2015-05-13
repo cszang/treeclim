@@ -19,12 +19,12 @@ SEXP respoexact(SEXP x, SEXP y, SEXP y0) {
   int nrow = xmat.n_rows, ncol = xmat.n_cols;
 
   // combine y and y0 to one matrix
-  arma::mat y0mat(nrow, 1001);
+  arma::mat y0mat(nrow, 10001);
   y0mat.col(0) = y0vec;
-  y0mat.cols(1, 1000) = ymat;
+  y0mat.cols(1, 10000) = ymat;
   
   // initialize output matrix
-  mat resp_coef(ncol, 1001);
+  mat resp_coef(ncol, 10001);
 
   // scale variable: xmat
   mat xscale(nrow, ncol);
@@ -36,8 +36,8 @@ SEXP respoexact(SEXP x, SEXP y, SEXP y0) {
     }
   }
   
-  // there are 1000 bootstrap samples + 1 original sample
-  for(int q = 0; q < 1001; ++q) {
+  // there are 10000 bootstrap samples + 1 original sample
+  for(int q = 0; q < 10001; ++q) {
     
     // select subview (only for y)
     colvec thisy = y0mat.col(q);

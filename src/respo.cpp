@@ -21,10 +21,10 @@ SEXP respo(SEXP x, SEXP y) {
   int nrow = arrayDims[0], ncol = arrayDims[1];
 
   // initialize output matrix
-  mat resp_coef(ncol, 1000);
+  mat resp_coef(ncol, 10000);
 
   // there are 1000 bootstrap samples
-  for(int q = 0; q < 1000; ++q) {
+  for(int q = 0; q < 10000; ++q) {
     
     // select subviews
     mat thisx = xcube.slice(q);

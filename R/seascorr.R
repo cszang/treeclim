@@ -245,7 +245,7 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
     }
   }
 
-  chrono_boot <- init_boot_data(pmat, truncated_input$chrono, 1000,
+  chrono_boot <- init_boot_data(pmat, truncated_input$chrono, 10000,
                                 "exact")$chrono
 
   results <- list()
@@ -259,10 +259,10 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
                     seasons1[[i]], seasons2[[i]],
                     chrono_boot, truncated_input$chrono)
 
-    results$coef[[i]]$primary <- ptest(params$primary[,2:1001], ci,
+    results$coef[[i]]$primary <- ptest(params$primary[,2:10001], ci,
                                        params$primary[,1],
                                        "weibull")[,1:2]
-    results$coef[[i]]$secondary <- ptest(params$exact[,2:1001], ci,
+    results$coef[[i]]$secondary <- ptest(params$exact[,2:10001], ci,
                                          params$secondary[,1],
                                          "weibull")[,1:2]
   }

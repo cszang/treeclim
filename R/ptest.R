@@ -9,16 +9,16 @@
 ##' @keywords internal
 ptest <- function(bc, ci, c0 = NULL, method) {
   limits <- switch(as.character(ci),
-                   "0.01" = c(5, 995),
-                   "0.05" = c(25, 975),
-                   "0.1" = c(50, 950))
+                   "0.01" = c(50, 9950),
+                   "0.05" = c(250, 9750),
+                   "0.1" = c(500, 9500))
   m <- dim(as.matrix(bc))[1]
   if (method == "weibull") {
     ## estimating p
     ## sorting values
     s <- t(apply(bc, 1, sort))
     ## matrix of ranks
-    j <- matrix(rep(1:1000, m), nrow = 1000)
+    j <- matrix(rep(1:10000, m), nrow = 10000)
 
     ps <- numeric(m)
 
@@ -27,16 +27,16 @@ ptest <- function(bc, ci, c0 = NULL, method) {
         j1 <- 1
       } else {
         if (c0[i] >= max(bc[i,])) {
-          j1 <- 1000
+          j1 <- 10000
         } else {
           ## interpolate rank if within range of monte-carlo simulations
           j1 <- approx(s[i,], j[,i], c0[i])$y
         }
       }
-      ## Weibull formula for n = 1000
-      ps[i] <- j1 / 1001
+      ## Weibull formula for n = 10000
+      ps[i] <- j1 / 10001
     }
-    is_sig <- ifelse(ps < limits[1]/1000 | ps > limits[2]/1000, TRUE,
+    is_sig <- ifelse(ps < limits[1]/10000 | ps > limits[2]/10000, TRUE,
                      FALSE)
     ci_lower <- NA
     ci_upper <- NA

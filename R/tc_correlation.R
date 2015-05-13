@@ -17,7 +17,7 @@ tc_correlation <- function(chrono, climate, ci, boot) {
   m <- dim(climate$aggregate)[2]
   
   boot_data <- init_boot_data(as.matrix(climate$aggregate),
-                              chrono, 1000, boot)
+                              chrono, 10000, boot)
   
   if (boot %in% c("stationary", "std", "dendroclim")) {
     param_matrix <- .Call("treeclim_corfun", boot_data$climate,
@@ -30,7 +30,7 @@ tc_correlation <- function(chrono, climate, ci, boot) {
     param_matrix <- .Call("treeclim_corfunexact", boot_data$climate,
                           boot_data$chrono, chrono, PACKAGE = "treeclim")$coef
     
-    out <- ptest(param_matrix[,2:1001], ci, param_matrix[,1], "weibull")
+    out <- ptest(param_matrix[,2:10001], ci, param_matrix[,1], "weibull")
   }
   
   if (boot == "none") {
