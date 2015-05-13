@@ -98,16 +98,22 @@ init_boot_data <- function(u, g, n, boot) {
     ## to a scaling factor of ~ 2
     Pyy  <- Re(z * Conj(z))/padlen
     
+    # adapt the number of bootstrap replicates from n
+    
+    roun <- function(x) x - (x %% 2)
+    .n <- roun(n)
+    .nh <- .n/2
+    
     ## sample Gaussian noise and compute mu for 1000 simulation runs
     M <- length(trp)/2
-    Z <- matrix(rnorm(500 * length(trp) * 2), ncol = 500)
+    Z <- matrix(rnorm(.nh * length(trp) * 2), ncol = .nh)
     k <- t(1:length(trp))
     i1 <- 2 * k - 1
     i2 <- 2 * k
     
-    term1 <- matrix(complex(pow, Z[i1,], Z[i2,]), ncol = 500)
+    term1 <- matrix(complex(pow, Z[i1,], Z[i2,]), ncol = .nh)
     term2 <- sqrt(Pyy/length(trp))
-    term2 <- matrix(rep(term2, 500), ncol = 500)
+    term2 <- matrix(rep(term2, .nh), ncol = .nh)
     mu <- term1 * term2
     
     V <- fft(mu)
@@ -117,13 +123,13 @@ init_boot_data <- function(u, g, n, boot) {
     D1 <- Vr[1:M,]
     D2 <- Vi[1:M,]
     D <- cbind(D1, D2)
-    D <- D[1:ll, 1:1000]
+    D <- D[1:ll, 1:.n]
     
     ## scale to original mean and variance
-    Dmean <- matrix(rep(colMeans(D), each = ll), ncol = 1000)
-    Dsd <- matrix(rep(apply(D, 2, sd), each = ll), ncol = 1000)
+    Dmean <- matrix(rep(colMeans(D), each = ll), ncol = .n)
+    Dsd <- matrix(rep(apply(D, 2, sd), each = ll), ncol = .n)
     Dz <- (D - Dmean) / Dsd
-    out_g <- Dz * matrix(xsd, nrow = ll, ncol = 1000) + mean(g)
+    out_g <- Dz * matrix(xsd, nrow = ll, ncol = .n) + mean(g)
     
   }
   
