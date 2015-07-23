@@ -1,0 +1,7 @@
+- [ ] more flexible design matrix for southern hemisphere data
+- [ ] more than 8 months windows in seascorr
+- [ ] make skills take lm object
+- [ ] make skills take "rescale" as modeling alternative
+- [ ] allow univariate models for correlation functions
+- [ ] skills should do inverse regression by default
+- [ ] make exact significance values user accessible
