@@ -205,19 +205,19 @@
 ##' bootstrapping was written by Dave Meko
 ##' @export
 dcc <- function(chrono,
-                climate,
-                selection = -6:9,
-                method = "response",
-                moving = FALSE,
-                win_size = 25,
-                win_offset = 1,
-                start_last = TRUE,
-                timespan = NULL,
-                var_names = NULL,
-                ci = 0.05,
-                boot = "stationary",
-                sb = TRUE
-                )
+               climate,
+               selection = -6:9,
+               method = "response",
+               moving = FALSE,
+               win_size = 25,
+               win_offset = 1,
+               start_last = TRUE,
+               timespan = NULL,
+               var_names = NULL,
+               ci = 0.05,
+               boot = "stationary",
+               sb = TRUE
+               )
 {
 
   ## climate data are correctly formatted
@@ -259,8 +259,8 @@ dcc <- function(chrono,
   ## truncate climate and tree-ring data to common or specified
   ## time span
   truncated_input <- truncate_input(chrono, climate,
-                                    timespan = timespan, minmonth,
-                                    moving)
+                                   timespan = timespan, minmonth,
+                                   moving)
 
   ## check if the timespan matches with win_size
   if (moving) {
@@ -301,14 +301,14 @@ dcc <- function(chrono,
   if (!moving) {
     if (.method == "response") {
       dc <- tc_response(truncated_input$chrono, design,
-                        ci = ci,
-                        boot = .boot)
+                       ci = ci,
+                       boot = .boot)
     }
     
     if (.method == "correlation") {
       dc <- tc_correlation(truncated_input$chrono, design,
-                           ci = ci,
-                           boot = .boot)
+                          ci = ci,
+                          boot = .boot)
     }
   }
   
@@ -316,13 +316,13 @@ dcc <- function(chrono,
 
   if (moving) {
     dc <- tc_mfunc(truncated_input$chrono, design,
-                   ci = ci,
-                   sb = sb,
-                   method = .method,
-                   start_last = start_last,
-                   win_size = win_size,
-                   win_offset = win_offset,
-                   boot = .boot)
+                  ci = ci,
+                  sb = sb,
+                  method = .method,
+                  start_last = start_last,
+                  win_size = win_size,
+                  win_offset = win_offset,
+                  boot = .boot)
   }
 
   ## return everything in a comprehensible manner
@@ -333,9 +333,9 @@ dcc <- function(chrono,
   dcc_out$ac <- dc$ac
   dcc_out$design <- design
   dcc_out$truncated <- list(tree = truncated_input$chrono,
-                            climate = truncated_input$climate)
+                           climate = truncated_input$climate)
   dcc_out$original <- list(tree = chrono,
-                           climate = climate)
+                          climate = climate)
 
   class(dcc_out) <- c("tc_dcc", "list")
 
