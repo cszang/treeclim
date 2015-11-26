@@ -1,8 +1,8 @@
 Package: treeclim
 Type: Package
 Title: Numerical Calibration of Proxy-Climate Relationships
-Version: 1.0.12
-Date: 2015-11-2
+Version: 1.0.13
+Date: 2015-11-26
 Authors@R: c(person("Christian", "Zang", role = c("aut", "cre", "cph", "trl"),
     email = "christian.zang@wzw.tum.de"), person("Franco", "Biondi", role =
     c("ctb", "cph")))
@@ -31,3 +31,4 @@ Description: Bootstrapped response and correlation functions,
 NeedsCompilation: yes
 License: GPL-3
 LazyData: yes
+RoxygenNote: 5.0.1

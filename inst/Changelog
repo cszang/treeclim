@@ -79,3 +79,7 @@
 
 2015-11-02 Christian Zang <christian.zang@wzw.tum.de>
 	* Version 1.0.12: doc updates, added Makefile
+
+2015-11-02 Christian Zang <christian.zang@wzw.tum.de>
+	* Version 1.0.13: fixed moving window number, citation update,
+	ggplot2-related changes
