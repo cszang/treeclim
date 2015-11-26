@@ -20,5 +20,8 @@ parameters)}
 \value{
 a logical vector indicating significance
 }
+\description{
+For internal use only.
+}
 \keyword{internal}
 

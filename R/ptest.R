@@ -1,4 +1,6 @@
-##' @title Significance test for bootstrapped coefficients
+##' Significance test for bootstrapped coefficients
+##'
+##' For internal use only.
 ##' @param bc the parameter matrix as returned from correlation of the
 ##' bootstapped samples (n * 1000 matrix, with n = number of
 ##' parameters)
