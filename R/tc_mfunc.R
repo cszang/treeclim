@@ -24,7 +24,7 @@ tc_mfunc <- function(chrono, climate, boot, sb, start_last,
   ## number of windows
   years <- as.numeric(rownames(climate$aggregate))
   nyears <- length(years)
-  win_num <- (length(chrono) - win_size) %/% win_offset
+  win_num <- (length(chrono) - win_size + 1) %/% win_offset + 1
   if (win_num < 2) {
     stop(paste("Less than 2 windows. Consider a timespan greater than ",
                nyears, " or a win_size smaller than ", win_size, ".",
