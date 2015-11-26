@@ -340,7 +340,7 @@ plot.tc_seascorr <- function(x, ...) {
                    fill = significant), ...)
 
   gg + facet_grid(type ~ season_length) +
-    geom_bar(stat = "identity", position = "") +
+    geom_bar(stat = "identity", position = "dodge") +
       scale_fill_manual(values = c("grey75", "grey50")) +
         theme_minimal() +
           scale_x_continuous(breaks = 1:14,
