@@ -11,7 +11,7 @@ attributes:
 	R -e "Rcpp::compileAttributes($(dir))"
 
 test: attributes
-	R -e "devtools::test($(dir))"
+	R -e "library(methods); devtools::test($(dir))"
 
 install: attributes
 	R CMD INSTALL --no-multiarch --with-keep.source $(dir)

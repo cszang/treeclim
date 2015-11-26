@@ -1,5 +1,3 @@
 Makefile
 README.org
 .git
-^.*\.Rproj$
-^\.Rproj\.user$
