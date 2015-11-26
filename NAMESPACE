@@ -30,3 +30,7 @@ import(plyr)
 importFrom(abind,abind)
 importFrom(boot,tsboot)
 importFrom(np,b.star)
+importFrom("stats", "approx", "coef", "fft", "median", "na.omit",
+           "rnorm", "sd", "shapiro.test", "spec.taper", "var",
+           "window")
+importFrom("utils", "setTxtProgressBar", "tail", "txtProgressBar")
