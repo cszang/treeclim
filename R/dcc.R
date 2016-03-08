@@ -273,7 +273,7 @@ dcc <- function(chrono,
   }
 
   ## generate matrix of climate data for further processing
-  climate_pmat <- make_pmat(truncated_input$climate)
+  climate_pmat <- make_pmat(truncated_input$climate, truncated_input$pad)
 
   ## generate design matrix for calibration by evaluating the selections
   design <- tc_design(selection, climate_pmat)
