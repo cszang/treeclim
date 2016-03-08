@@ -83,12 +83,14 @@ tc_mfunc <- function(chrono, climate, boot, sb, start_last,
     
   }
 
-  ## reorder output
-  result_matrix_coef <- result_matrix_coef[,win_num:1]
-  result_matrix_ci_upper <- result_matrix_ci_upper[,win_num:1]
-  result_matrix_ci_lower <- result_matrix_ci_lower[,win_num:1]
-  result_matrix_significant <- result_matrix_significant[,win_num:1]
-  win_years_string <- win_years_string[win_num:1]
+  ## reorder output if necessary
+  if (start_last) {
+    result_matrix_coef <- result_matrix_coef[,win_num:1]
+    result_matrix_ci_upper <- result_matrix_ci_upper[,win_num:1]
+    result_matrix_ci_lower <- result_matrix_ci_lower[,win_num:1]
+    result_matrix_significant <- result_matrix_significant[,win_num:1]
+    win_years_string <- win_years_string[win_num:1]
+  }
   
   out <- list(
     result = list()
