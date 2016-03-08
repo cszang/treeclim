@@ -269,18 +269,18 @@ plot.tc_dcc <- function(x, ...) {
 
     gg <- ggplot(idpgrid, aes(x = window, y = varname), ...) +
       geom_polygon(aes(x, y, fill = coef, group = pid)) +
-        scale_fill_gradient2() +
-          theme_minimal() +
-            scale_x_continuous(breaks = seq(0.5, by = 1, length.out = n),
-                               labels = names(coef)) +
-                                 scale_y_continuous(breaks = seq(0.5, by = 1, length.out = m),
-                                                    labels = abbrev_name(rownames(coef))) +
-                                                      theme(axis.text.x = element_text(angle = 90, vjust = 0),
-                                                            axis.title.x = element_blank(),
-                                                            axis.title.y = element_blank()) + 
-                                                              geom_point(data = subset(pdata, significant),
-                                                                         aes(x = wid - 0.5, y = vid - 0.5), pch = 8,
-                                                                         color = "grey")
+      scale_fill_gradient2() +
+      theme_minimal() +
+      scale_x_continuous(breaks = seq(0.5, by = 1, length.out = n),
+                         labels = names(coef)) +
+      scale_y_continuous(breaks = seq(0.5, by = 1, length.out = m),
+                         labels = abbrev_name(rownames(coef))) +
+      theme(axis.text.x = element_text(angle = 90, vjust = 0),
+            axis.title.x = element_blank(),
+            axis.title.y = element_blank()) + 
+      geom_point(data = subset(pdata, significant),
+                 aes(x = wid - 0.5, y = vid - 0.5), pch = 8,
+                 color = "grey")
     
     gg 
   }
