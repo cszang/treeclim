@@ -4,10 +4,14 @@
 \alias{make_pmat}
 \title{Make list of parameter matrices from climate input data}
 \usage{
-make_pmat(x)
+make_pmat(x, pad = FALSE)
 }
 \arguments{
 \item{x}{climate data as returned from as_tcclimate}
+
+\item{pad}{should the previous year be padded with NAs? This is useful when
+we want to use the full range of available data when all predictors derive
+from the current year}
 }
 \value{
 a list of matrices
@@ -16,10 +20,10 @@ a list of matrices
 Reformat climate input data into separate lists
 }
 \details{
-Make separate lists for each parameter in the climate data input,
-and make them accessible by the parameter names. The single lists
-correspond to the scheme years in rows, observations from previous
-december to current december in columns.
+Make separate lists for each parameter in the climate data input, and make
+them accessible by the parameter names. The single lists correspond to the
+scheme years in rows, observations from previous december to current
+december in columns.
 }
 \keyword{internal}
 \keyword{manip}
