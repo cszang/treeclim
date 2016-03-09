@@ -125,6 +125,7 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
     ## climate (gamma1) + error terms representing the variance
     ## unexplained by each parameter
     gamma1 <- matrix(rnorm(n * m, 0, 1), nrow = m)
+    rownames(gamma1) <- rownames(x$design$aggregate)
     gamma2 <- matrix(NA, ncol = n, nrow = m)
     for (j in 1:n) {
       gamma2[,j] <- c0[j] * gamma1[,j] + rnorm(m, 0, 1 - c0[j]^2)
@@ -132,8 +133,8 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
     gamma2 <- rowSums(gamma2)
     
     gamma1l <- list(aggregate = gamma1,
-                    names = x$design$names,
-                    pretty_names = x$design$pretty_names)
+                   names = x$design$names,
+                   pretty_names = x$design$pretty_names)
     
     ## throw data into the _same_ moving correlation function
     c1 <- tc_mfunc(gamma2, gamma1l,
