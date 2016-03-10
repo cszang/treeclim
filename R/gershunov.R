@@ -75,6 +75,9 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
                    "0.01" = c(5, 995),
                    "0.05" = c(25, 975),
                    "0.1" = c(50, 950))
+  ## get unexplained variance by model
+  prediction <- rowSums(t(t(scale(x$design$aggregate)) * c0))
+  unex <- 1 - var(prediction)
   
   ## overwrite .boot, if set to FALSE for g-test (default)
   if (!boot)
@@ -125,16 +128,12 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
 
   for (i in 1:niter) {
     ## model tree-ring series (gamma2) as linear combination of
-    ## climate (gamma1) + error terms representing the variance
-    ## unexplained by each parameter
+    ## climate (gamma1) + error term representing the variance
+      ## unexplained by original model
     gamma1 <- matrix(rnorm(n * m, 0, 1), nrow = m)
     rownames(gamma1) <- rownames(x$design$aggregate)
-    gamma2 <- matrix(NA, ncol = n, nrow = m)
-    for (j in 1:n) {
-      gamma2[,j] <- c0[j] * gamma1[,j] + rnorm(m, 0, 1 - c0[j]^2)
-    }
-    gamma2 <- rowSums(gamma2)
-    
+    gamma2 <- rowSums(t(t(gamma1) * c0)) + rnorm(m, 0, sd = sqrt(unex))
+      
     gamma1l <- list(aggregate = gamma1,
                    names = x$design$names,
                    pretty_names = x$design$pretty_names)
