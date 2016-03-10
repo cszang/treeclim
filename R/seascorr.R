@@ -199,15 +199,22 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
   truncated_input <- truncate_input(chrono, climate,
                                     timespan = timespan, 1,
                                     moving = FALSE)
-  m <- length(truncated_input$chrono)
 
+  ## create raw parameter matrix
+  if (truncated_input$pad) {
+    # we have no climate data for previous year, but use maximum overlap -> cut
+    # tree data accordingly
+    truncated_input$chrono <- truncated_input$chrono[-1]
+  }
+  
+  m <- length(truncated_input$chrono)
+  
   ## stop if less than 31 years (needed for exact bootstrapping to
   ## work correctly)
   if (m < 31)
     stop("Seasonal correlation analysis needs at least 31 years of data overlap for proxy and climate data.")
-
-  ## create raw parameter matrix
-  pmat <- make_pmat(truncated_input$climate, truncated_input$pad)
+  
+  pmat <- make_pmat(truncated_input$climate, pad = FALSE)
 
   ## create seasons, a list entry for each season_length
   seasons1 <- seasons2 <- list()
