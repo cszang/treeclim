@@ -10,15 +10,15 @@
 ##' first general climate/growth relations are explored, and then the
 ##' strongest ones are deployed for reconstruction purposes.
 ##'
-##' \code{formula} is a one-sided formula of the form \code{~
-##' selection}, where `selection` is an aggregation modifier (one of
+##' \code{target} is an aggregation modifier (one of
 ##' \code{\link{.mean}}, \code{\link{.sum}}, and
 ##' \code{\link{.range}}). The user should be aware of the fact that
 ##' in case the aggregation modifier evaluates to more than one
 ##' variable (e.g., summer means for both temperature and
 ##' precipiation), a warning message is issued, and only the first
 ##' variable is taken into consideration for evaluating the
-##' reconstruction skills.
+##' reconstruction skills. If not specified, the selection from the
+##' original call to \code{\link{dcc}} is used.
 ##'
 ##' The type of regression model (ordinary least squares or
 ##' errors-in-variables via reduced major axis regression) can be
@@ -39,8 +39,8 @@
 ##' (RE), coefficient of efficiency (CE), and the Durban-Watson
 ##' statistic (DW) (Cook et al. 1994, Durbin and Watson, 1951).
 ##' @param object an object of class "tc_dcc" or "tc_seascorr"
-##' @param formula a formula specifying the regressand, optionally
-##' ommitting the intercept, see details
+##' @param target a \link[dest=treeclim-modifiers]{treeclim selection modifier}
+##' specifying the climate target to be reconstructed
 ##' @param model one of "ols" or "rma"
 ##' @param calibration which part of the data shall be used as
 ##' calibration subset? Given as either a range of years, an integer
@@ -53,7 +53,8 @@
 ##' An object of class '"tc_skills"' is a list containing at least the
 ##' following components:
 ##' 
-##' \item{call}{the call made to function 'skills'}     
+##' \item{call}{the call made to function 'skills'}
+##' \item{target}{the target used for reconstruction}     
 ##' \item{r.cal}{the coefficient of correlation for the calibration
 ##' timespan}    
 ##' \item{r.full}{the coefficient of correlation for the complete data
@@ -86,14 +87,20 @@
 ##' @import lmtest
 ##' @import lmodel2
 ##' @export
-skills <- function(object, formula, model = "ols",
-                   calibration = "50%", timespan = NULL) {
+skills <- function(object, target = NULL, model = "ols",
+                  calibration = "50%", timespan = NULL) {
+
+  if (!any(c("tc_dcc", "tc_seascorr") == class(object)[1])) {
+    stop("`object` must be the result of functions `dcc` or `seascorr`.")
+  }
 
   Method <- NULL                        # to keep R CMD check happy
   
   mf <- match.call()
-  fo <- formula(mf$formula)
-  x_sel <- fo[[2]]
+  if (is.null(mf$target)) {
+      mf$target <- object$call$selection
+  }
+  x_sel <- mf$target
     
   monthcheck <- check_months(eval(x_sel))
   if (monthcheck$check == FALSE) {
@@ -101,27 +108,23 @@ skills <- function(object, formula, model = "ols",
   }
   minmonth <- monthcheck$minmonth
   
-  if (any(c("tc_dcc", "tc_seascorr") == class(object)[1])) {
-      truncated_data <-
-          truncate_input(object$original$tree,
-                         object$original$climate, timespan,
-                         minmonth, FALSE)
-      pad <- truncated_data$pad
-      climate <- truncated_data$climate
-      chrono <- truncated_data$chrono
-  } else {
-    stop("`object` must be the result of functions `dcc` or `seascorr`.")
-  }
+  truncated_data <-
+      truncate_input(object$original$tree,
+                     object$original$climate, timespan,
+                     minmonth, FALSE, TRUE)
+  pad <- truncated_data$pad
+  climate <- truncated_data$climate
+  chrono <- truncated_data$chrono
     
   pmat <- make_pmat(climate, pad)
-  
-  X <- eval_selection(pmat, eval(x_sel))
+      
+  X <- tc_design(eval(x_sel), pmat)
 
   all_years <- as.numeric(rownames(X$aggregate))
   m <- length(all_years)
   
   if (dim(X$aggregate)[2] > 1) {
-    warning("Reconstruction skills cannot be evaluated when using more than one independent variable. We use only the first variable.")
+    warning(paste0("Reconstruction skills cannot be evaluated when using more than one independent variable. We use only the first variable (by alphabet: ", X$names[1], ")."))
   }
 
   x <- X$aggregate[,1]
@@ -203,7 +206,6 @@ skills <- function(object, formula, model = "ols",
     )
   
   ## models
-
   lm_cal <- lmodel2(x ~ y, data = cal,
                     range.x = "interval",
                     range.y = "interval",
@@ -241,6 +243,7 @@ skills <- function(object, formula, model = "ols",
   
   model_lm <- list(
     call       = mf,
+    target     = X$names[1],
     r.cal      = r_cal,
     r.full     = r_full,
     coef.cal   = c(intercept = intercept_cal, slope = slope_cal),

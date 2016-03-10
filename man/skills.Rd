@@ -4,14 +4,14 @@
 \alias{skills}
 \title{Evaluate reconstruction skills using split-calibration}
 \usage{
-skills(object, formula, model = "ols", calibration = "50\%",
+skills(object, target = NULL, model = "ols", calibration = "50\%",
   timespan = NULL)
 }
 \arguments{
 \item{object}{an object of class "tc_dcc" or "tc_seascorr"}
 
-\item{formula}{a formula specifying the regressand, optionally
-ommitting the intercept, see details}
+\item{target}{a \link[dest=treeclim-modifiers]{treeclim selection modifier}
+specifying the climate target to be reconstructed}
 
 \item{model}{one of "ols" or "rma"}
 
@@ -29,7 +29,8 @@ data set to be used as calibration subset.}
 An object of class '"tc_skills"' is a list containing at least the
 following components:
 
-\item{call}{the call made to function 'skills'}     
+\item{call}{the call made to function 'skills'}
+\item{target}{the target used for reconstruction}     
 \item{r.cal}{the coefficient of correlation for the calibration
 timespan}    
 \item{r.full}{the coefficient of correlation for the complete data
@@ -58,15 +59,15 @@ done for by the user. This reflects the flow of analysis, where
 first general climate/growth relations are explored, and then the
 strongest ones are deployed for reconstruction purposes.
 
-\code{formula} is a one-sided formula of the form \code{~
-selection}, where `selection` is an aggregation modifier (one of
+\code{target} is an aggregation modifier (one of
 \code{\link{.mean}}, \code{\link{.sum}}, and
 \code{\link{.range}}). The user should be aware of the fact that
 in case the aggregation modifier evaluates to more than one
 variable (e.g., summer means for both temperature and
 precipiation), a warning message is issued, and only the first
 variable is taken into consideration for evaluating the
-reconstruction skills.
+reconstruction skills. If not specified, the selection from the
+original call to \code{\link{dcc}} is used.
 
 The type of regression model (ordinary least squares or
 errors-in-variables via reduced major axis regression) can be

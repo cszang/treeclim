@@ -99,7 +99,7 @@ print.tc_design <- function(x, ...) {
 print.tc_skills <- function(x, ...) {
   cat("Call:\n", paste(deparse(x$call), sep = "\n",
                        collapse = "\n"), "\n\n", sep = "")
-  cat("Calibration model with", x$cal.str,
+  cat("Using climate target", x$target, "and calibration model with", x$cal.str,
       "as calibration period:\n\n")
   print.default(format(c(r = x$r.cal, "p-value" = x$p.cal)),
                 print.gap = 2L, quote = FALSE)
