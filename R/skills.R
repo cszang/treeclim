@@ -152,14 +152,14 @@ skills <- function(object, target = NULL, model = "ols",
       perc <- as.numeric(perc)/100
       if (length(grep("^-.*$", calibration)) == 1) {
         ## calibration starts from distant (older) end
-        cal_index <- (m - floor(perc * m)):m
+        cal_index <- 1:ceiling(perc * m)
         ver_index <- c(1:m)[-cal_index]
         cal_str <-
           gettextf("%d percent (= %d years) of data starting at older end",
                    perc * 100, length(cal_index))
       } else {
         ## calibration starts from recent end
-        cal_index <- 1:ceiling(perc * m)
+        cal_index <- (m - floor(perc * m)):m
         ver_index <- c(1:m)[-cal_index]
         cal_str <-
           gettextf("%d percent (= %d years) of data starting at recent end",
@@ -172,17 +172,17 @@ skills <- function(object, target = NULL, model = "ols",
     if (is.numeric(calibration)) {
       if (length(calibration) == 1) {
         if (calibration < m) {
-          if (sign(calibration) == 1) {
-            ## calibration starts x years from recent end
-            cal_index <- 1:calibration
-            ver_index <- c(1:m)[-cal_index]
-            cal_str <- gettextf("%d most recent observations", calibration)
-          } else {
+          if (sign(calibration) == -1) {
             ## calibration starts x years from older end
             calibration <- abs(calibration)
+            cal_index <- 1:calibration
+            ver_index <- c(1:m)[-cal_index]
+            cal_str <- gettextf("%d least recent observations", calibration)
+          } else {
+            ## calibration starts x years from younger end
             cal_index <- (m - calibration + 1):m
             ver_index <- c(1:m)[-cal_index]
-            cal_str <- gettextf("%d oldest observations", calibration)
+            cal_str <- gettextf("%d most recent observations", calibration)
           }
         } else {
           stop(gettextf("The provided data has only %d years - consider adapting `calibration` accordingly.", m))
