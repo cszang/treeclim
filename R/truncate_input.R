@@ -13,7 +13,7 @@
 ##' @return a list of truncated data.frames for climate and tree data
 ##' @keywords manip internal
 truncate_input <- function(chrono, climate, timespan = NULL, minmonth,
-                           moving) {
+                           moving, silent = FALSE) {
 
   ## get time spans of both input data
   chrono_years <- as.numeric(row.names(chrono))
@@ -90,7 +90,7 @@ truncate_input <- function(chrono, climate, timespan = NULL, minmonth,
   
   ## report time span used
   ## calculate timespan for analysis for reporting
-  if (!moving) {
+  if (!moving & !silent) {
     run_years <- chrono_years[a]
     cat("Running for timespan ", run_years[1], " - ", tail(run_years, 1), "...\n",
         sep = "")
