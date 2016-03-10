@@ -88,3 +88,8 @@
 	* Version 1.0.14: fixed moving window number regression and its reflectance into g_test
 	* treeclim now pads nonexistent previous year for creating
 	parameter set when only current year variables are selected
+
+2016-03-10 Christian Zang <christian.zang@wzw.tum.de>
+	* Version 1.0.15
+	* g_test: adjusted computation of variance for simulated sets, reports exact p-values now
+	* skills: takes `target` argument (selector) instead of formula now
