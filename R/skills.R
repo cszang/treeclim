@@ -102,23 +102,18 @@ skills <- function(object, formula, model = "ols",
   minmonth <- monthcheck$minmonth
   
   if (any(c("tc_dcc", "tc_seascorr") == class(object)[1])) {
-    if (is.null(timespan)) {
-      climate <- object$truncated$climate
-      chrono <- object$truncated$tree
-    } else {
-      
       truncated_data <-
-        truncate_input(object$original$tree,
-                       object$original$climate, timespan,
-                       minmonth, FALSE)
+          truncate_input(object$original$tree,
+                         object$original$climate, timespan,
+                         minmonth, FALSE)
+      pad <- truncated_data$pad
       climate <- truncated_data$climate
       chrono <- truncated_data$chrono
-    }
   } else {
     stop("`object` must be the result of functions `dcc` or `seascorr`.")
   }
-
-  pmat <- make_pmat(climate)
+    
+  pmat <- make_pmat(climate, pad)
   
   X <- eval_selection(pmat, eval(x_sel))
 
