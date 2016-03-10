@@ -39,14 +39,15 @@
 ##' (RE), coefficient of efficiency (CE), and the Durban-Watson
 ##' statistic (DW) (Cook et al. 1994, Durbin and Watson, 1951).
 ##' @param object an object of class "tc_dcc" or "tc_seascorr"
-##' @param target a \link[dest=treeclim-modifiers]{treeclim selection modifier}
-##' specifying the climate target to be reconstructed
+##' @param target a treeclim selection modifier specifying the climate
+##'     target to be reconstructed, see below for details
 ##' @param model one of "ols" or "rma"
 ##' @param calibration which part of the data shall be used as
-##' calibration subset? Given as either a range of years, an integer
-##' corresponding to the first or last number of observations, or a
-##' percentage as character string corresponding to the part of the
-##' data set to be used as calibration subset.
+##'     calibration subset? Given as either a range of years, an
+##'     integer corresponding to the first or last number of
+##'     observations, or a percentage as character string
+##'     corresponding to the part of the data set to be used as
+##'     calibration subset.
 ##' @param timespan timespan to be used to truncate the data
 ##' @return 'skills' returns an 'object' of class '"tc_skills"'.
 ##' 

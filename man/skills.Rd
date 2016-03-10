@@ -10,16 +10,17 @@ skills(object, target = NULL, model = "ols", calibration = "50\%",
 \arguments{
 \item{object}{an object of class "tc_dcc" or "tc_seascorr"}
 
-\item{target}{a \link[dest=treeclim-modifiers]{treeclim selection modifier}
-specifying the climate target to be reconstructed}
+\item{target}{a treeclim selection modifier specifying the climate
+target to be reconstructed, see below for details}
 
 \item{model}{one of "ols" or "rma"}
 
 \item{calibration}{which part of the data shall be used as
-calibration subset? Given as either a range of years, an integer
-corresponding to the first or last number of observations, or a
-percentage as character string corresponding to the part of the
-data set to be used as calibration subset.}
+calibration subset? Given as either a range of years, an
+integer corresponding to the first or last number of
+observations, or a percentage as character string
+corresponding to the part of the data set to be used as
+calibration subset.}
 
 \item{timespan}{timespan to be used to truncate the data}
 }
