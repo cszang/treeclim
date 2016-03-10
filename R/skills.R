@@ -99,8 +99,19 @@ skills <- function(object, target = NULL, model = "ols",
   mf <- match.call()
   if (is.null(mf$target)) {
       mf$target <- object$call$selection
+      if (is.null(mf$target)) {
+        mf$target <- -6:9
+      }
   }
-  x_sel <- mf$target
+  x_sel <- eval(mf$target)
+  if (is.numeric(x_sel)) {
+    x_sel <- eval(
+      substitute(
+        .range(.months = sel, .variables = NULL),
+        list(sel = x_sel)
+      )
+    )
+  }
     
   monthcheck <- check_months(eval(x_sel))
   if (monthcheck$check == FALSE) {
