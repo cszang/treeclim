@@ -14,9 +14,8 @@ test_that("climate and tree data are correctly truncated to common timespan", {
   expect_that(truncate_input(chrono, climate,
                              NULL, 1, FALSE)$climate$year,
               equals(rep(1950:2000, each = 12)))
-  expect_that(truncate_input(chrono, climate,
-                             NULL, -1, FALSE),
-              gives_warning())
+  expect_message(truncate_input(chrono, climate,
+                                NULL, -1, FALSE))
 })
 
 test_that("climate and tree data are correctly truncated to user supplied specs", {
@@ -42,7 +41,6 @@ test_that("climate and tree data are correctly truncated to user supplied specs"
                              c(1955, 2005), -1, FALSE),
               throws_error("for start dates in previous year"))
   
-  expect_that(truncate_input(chrono, climate,
-                             c(1950, 1998), -1, FALSE),
-              gives_warning())
+  expect_message(truncate_input(chrono, climate,
+                             c(1950, 1998), -1, FALSE))
 })
