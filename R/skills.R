@@ -129,7 +129,7 @@ skills <- function(object, target = NULL, model = "ols",
     
   pmat <- make_pmat(climate, pad)
       
-  X <- tc_design(eval(x_sel), pmat)
+  X <- tc_design(eval(x_sel), pmat, check_2 = FALSE)
 
   all_years <- as.numeric(rownames(X$aggregate))
   m <- length(all_years)

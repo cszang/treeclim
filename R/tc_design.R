@@ -11,7 +11,7 @@
 ##' @param selection the list structure to specify the month selection
 ##' @param climate the climate data as returned by make_pmat
 ##' @return a data.frame
-tc_design <- function(selection, climate) {
+tc_design <- function(selection, climate, check_2 = TRUE) {
   ## is it a list?
   if (!is.list(selection)) {
     stop("Please supply information about independent variables as list.")
@@ -80,7 +80,7 @@ tc_design <- function(selection, climate) {
 
   ## throw error when we have only one variable left; point the user to using
   ## lm() instead
-  if (dim(out$aggregate)[2] < 2)
+  if (dim(out$aggregate)[2] < 2 & check_2)
     stop("You supplied only one climate variable for calibration. treeclim needs at least two. Consider using lm() in this case. Thanks.")
 
   ## reorder and add pretty names for plotting required: months as numeric values
@@ -158,7 +158,9 @@ tc_design <- function(selection, climate) {
 
   pretty_order <- with(pretty_names, order(varname, month_no))
   
-  out$aggregate <- out$aggregate[,pretty_order]
+  if (dim(out$aggregate)[2] > 1) {
+    out$aggregate <- out$aggregate[,pretty_order]
+  }
   names(out$aggregate) <- paste("X", 1:dim(out$aggregate)[2],
                                 sep = "")
   
