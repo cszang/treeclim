@@ -10,6 +10,8 @@
 ##' list(list(...), list(...), ...)
 ##' @param selection the list structure to specify the month selection
 ##' @param climate the climate data as returned by make_pmat
+##' @param check_2 should there be a check for less than 2 variables
+##' in the design matrix?
 ##' @return a data.frame
 tc_design <- function(selection, climate, check_2 = TRUE) {
   ## is it a list?
