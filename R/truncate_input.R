@@ -59,15 +59,17 @@ truncate_input <- function(chrono, climate, timespan = NULL, minmonth,
   ## set start_year + 1
   if (minmonth < 0 && !((start_year - 1) %in% climate_years)) { 
     offset <- 1
-    if (is.null(timespan)) {
+    if (is.null(timespan) & !silent) {
       message(paste("treeclim tries to use the maximum overlap in timespan for chronology and climate data. The overlap starts in ",
                     start_year,
                     ", but to be able to use climate data from the previous year (as you chose by setting 'selection' accordingly), the analysis starts in ",
                     start_year + 1, ".", sep = ""))
     } else {
-      message(paste("`start_year` is set from", start_year, "to",
-                    start_year + 1,
-                    "to be able to use climate data from the previous year."))
+        if (!silent) {
+            message(paste("`start_year` is set from", start_year, "to",
+                          start_year + 1,
+                          "to be able to use climate data from the previous year."))
+        }
     }
     
   } else {
