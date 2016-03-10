@@ -51,8 +51,11 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
     stop("Gershunov test can only be computed for moving correlations.")
   
   if (length(pmatch(x$call$method, "correlation")) == 0)
-    stop("Gershunov test is currently only implemented for running correlation functions, not for response function.")
-  
+      stop("Gershunov test is currently only implemented for running correlation functions, not for response function.")
+
+  ## number of bootstrap resamples
+  niter <- 500
+
   ## get parameters for moving correlation function from call
   .win_size <- ifelse(is.null(x$call$win_size), 25, x$call$win_size)
   .win_offset <- ifelse(is.null(x$call$win_offset), 1, x$call$win_offset)
@@ -91,7 +94,7 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
                sb = FALSE,
                ci = 0.05)
     })
-    dur1000 <- ceiling(dur[3] * 1000 / 60)
+    dur1000 <- ceiling(dur[3] * niter / 60)
     cat("Running this test with bootstrapping on the individual correlations enabled will take around", dur1000, "minutes.\n")
     ans <- readline("Do you really want to run this? [Y/n]\n")
     if (ans != "Y")
@@ -114,13 +117,13 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
   ## get sd of parameters for original run
   sd0 <- apply(x$coef$coef, 1, sd)
   
-  ## for each c0, simulate 1000 pairs of random time series
-  sds <- matrix(NA, ncol = 1000, nrow = n)
+  ## for each c0, simulate niter pairs of random time series
+  sds <- matrix(NA, ncol = niter, nrow = n)
   
   if (sb)                            # initialize status bar (if TRUE)
-    mpb <- txtProgressBar(min = 1,  max = 1000, style = 3)
-  
-  for (i in 1:1000) {
+      mpb <- txtProgressBar(min = 1,  max = niter, style = 3)
+
+  for (i in 1:niter) {
     ## model tree-ring series (gamma2) as linear combination of
     ## climate (gamma1) + error terms representing the variance
     ## unexplained by each parameter
