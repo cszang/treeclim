@@ -43,7 +43,7 @@
 ##' }
 ##' @keywords test
 ##' @export
-g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
+g_test <- function(x, boot = FALSE, sb = TRUE) {
   if (!any(class(x) != "tc_dcc"))
     stop("Please provide output of function `dcc`.")
 
@@ -68,13 +68,6 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
   n <- length(c0)
   m <- length(x$truncated$tree)
   
-  ## get ci limits
-  if (!any(ci == c(0.01, 0.05, 0.1)))
-    stop("`ci` has to be one of 0.01, 0.05, or 0.1.")
-  limits <- switch(as.character(ci),
-                   "0.01" = c(5, 995),
-                   "0.05" = c(25, 975),
-                   "0.1" = c(50, 950))
   ## get unexplained variance by model
   prediction <- rowSums(t(t(scale(x$design$aggregate)) * c0))
   unex <- 1 - var(prediction)
@@ -154,22 +147,17 @@ g_test <- function(x, boot = FALSE, ci = 0.05, sb = TRUE) {
       setTxtProgressBar(mpb, i)
   }  
   
-  ## calculate CIs for sd of correlation coefficients
-  ci_lower <- apply(sds, 1, function(x) sort(x)[limits[1]])
-  ci_upper <- apply(sds, 1, function(x) sort(x)[limits[2]])
-  
-  ## significantly different fluctuation?
-  sig_fluc_higher <- sd0 > ci_upper
-  sig_fluc_lower <- sd0 < ci_lower
-  sig_fluc_none <- sd0 <= ci_upper & sd0 >= ci_lower
+  ## calculate p values from cumulative density function
+  ps <- numeric(n)
+  for (i in 1:n) {
+      ps[i] <- ecdf(sds[i,])(sd0[i])
+  }
   
   ## prepare output
   out <- data.frame(
     varname = x$design$pretty_names$varname,
     month = x$design$pretty_names$month_label,
-    higher = sig_fluc_higher,
-    lower = sig_fluc_lower,
-    noise = sig_fluc_none
+    p = 1 - ps
     )
   
   if (sb)                               # close status bar (if TRUE)
