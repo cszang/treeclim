@@ -152,9 +152,9 @@ g_test <- function(x, boot = FALSE, sb = TRUE) {
   
   ## prepare output
   out <- data.frame(
-    varname = x$design$pretty_names$varname,
-    month = x$design$pretty_names$month_label,
-    p = 1 - ps
+    varname = rev(x$design$pretty_names$varname),
+    month = rev(x$design$pretty_names$month_label),
+    p = rev(1 - ps)
     )
   
   if (sb)                               # close status bar (if TRUE)
