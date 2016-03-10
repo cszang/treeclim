@@ -4,7 +4,7 @@
 \alias{tc_design}
 \title{Deparse list structure from month specification and return parameter set}
 \usage{
-tc_design(selection, climate)
+tc_design(selection, climate, check_2 = TRUE)
 }
 \arguments{
 \item{selection}{the list structure to specify the month selection}
