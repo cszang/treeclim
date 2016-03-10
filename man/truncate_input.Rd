@@ -4,7 +4,8 @@
 \alias{truncate_input}
 \title{Truncate climate and tree data to common interval}
 \usage{
-truncate_input(chrono, climate, timespan = NULL, minmonth, moving)
+truncate_input(chrono, climate, timespan = NULL, minmonth, moving,
+  silent = FALSE)
 }
 \arguments{
 \item{chrono}{a tree-ring chronology}
