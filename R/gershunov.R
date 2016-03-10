@@ -21,21 +21,18 @@
 ##' deviation of the simulated data to test for significantly higher
 ##' or lower low-frequency modulations.
 ##' @param x an object of class '"tc_dcc"' as returned from a call to
-##' \code{\link{dcc}} with moving correlations enabled
+##'     \code{\link{dcc}} with moving correlations enabled
 ##' @param boot \code{logical} shall the individual correlation be
-##' bootstrapped?  (see details)
-##' @param ci Significance level for testing, one of \code{c(0.01,
-##' 0.05, 0.1)}
+##'     bootstrapped?  (see details)
 ##' @param sb \code{logical} shall a status bar be drawn?
-##' @return a \code{data.frame} with columns for variable
-##' identification and logical flags for whether the low-frequency
-##' modulation of the correlation of this variable with tree-growth is
-##' higher than expected by chance, lower than expected by chance, or
-##' can be considered as noise.
+##' @return a \code{data.frame} with p values for the testing the null
+##'     hypothesis that the low-frequency modulation of the
+##'     correlations of the variables with tree-growth can be
+##'     considered as noise.
 ##' @references Gershunov, A., N. Schneider, and
-##' T. Barnett. 2001. Low-frequency modulation of the ENSO-Indian
-##' Monsoon rainfall relationship: Signal or noise? Journal of Climate
-##' 14:2486-2492.
+##'     T. Barnett. 2001. Low-frequency modulation of the ENSO-Indian
+##'     Monsoon rainfall relationship: Signal or noise? Journal of
+##'     Climate 14:2486-2492.
 ##' @examples
 ##' \dontrun{
 ##' dc_cor <- dcc(muc_spruce, muc_clim, 3:9, method = "cor", moving = TRUE)

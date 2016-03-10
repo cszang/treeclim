@@ -4,7 +4,7 @@
 \alias{g_test}
 \title{Gershunov test for spurious low-frequency modulations}
 \usage{
-g_test(x, boot = FALSE, ci = 0.05, sb = TRUE)
+g_test(x, boot = FALSE, sb = TRUE)
 }
 \arguments{
 \item{x}{an object of class '"tc_dcc"' as returned from a call to
@@ -13,17 +13,13 @@ g_test(x, boot = FALSE, ci = 0.05, sb = TRUE)
 \item{boot}{\code{logical} shall the individual correlation be
 bootstrapped?  (see details)}
 
-\item{ci}{Significance level for testing, one of \code{c(0.01,
-0.05, 0.1)}}
-
 \item{sb}{\code{logical} shall a status bar be drawn?}
 }
 \value{
-a \code{data.frame} with columns for variable
-identification and logical flags for whether the low-frequency
-modulation of the correlation of this variable with tree-growth is
-higher than expected by chance, lower than expected by chance, or
-can be considered as noise.
+a \code{data.frame} with p values for the testing the null
+    hypothesis that the low-frequency modulation of the
+    correlations of the variables with tree-growth can be
+    considered as noise.
 }
 \description{
 This function provides a test to decide whether low-frequency
@@ -57,9 +53,9 @@ g_test(dc_cor)
 }
 \references{
 Gershunov, A., N. Schneider, and
-T. Barnett. 2001. Low-frequency modulation of the ENSO-Indian
-Monsoon rainfall relationship: Signal or noise? Journal of Climate
-14:2486-2492.
+    T. Barnett. 2001. Low-frequency modulation of the ENSO-Indian
+    Monsoon rainfall relationship: Signal or noise? Journal of
+    Climate 14:2486-2492.
 }
 \keyword{test}
 
