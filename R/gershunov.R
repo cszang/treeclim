@@ -68,6 +68,9 @@ g_test <- function(x, boot = FALSE, sb = TRUE) {
   ## get unexplained variance by model
   prediction <- rowSums(t(t(scale(x$design$aggregate)) * c0))
   unex <- 1 - var(prediction)
+  if (unex < 0) {
+    unex <- 0
+  }
   
   ## overwrite .boot, if set to FALSE for g-test (default)
   if (!boot)

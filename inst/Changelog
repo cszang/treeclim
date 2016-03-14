@@ -93,3 +93,7 @@
 	* Version 1.0.15
 	* g_test: adjusted computation of variance for simulated sets, reports exact p-values now
 	* skills: takes `target` argument (selector) instead of formula now
+	
+2016-03-14 Christian Zang <christian.zang@wzw.tum.de>
+	* Version 1.0.16
+	* g_test: bug fix: when prediction variance for original model is > 1, do not add noise to sampled composite series
