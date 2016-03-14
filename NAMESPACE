@@ -32,5 +32,5 @@ importFrom(boot,tsboot)
 importFrom(np,b.star)
 importFrom("stats", "approx", "coef", "fft", "median", "na.omit",
            "rnorm", "sd", "shapiro.test", "spec.taper", "var",
-           "window")
+           "window", "ecdf")
 importFrom("utils", "setTxtProgressBar", "tail", "txtProgressBar")
