@@ -6,7 +6,7 @@
 ##' @param boot which bootstrapping method should be used? (or "none")
 ##' @param sb logical: draw statusbar or not?
 ##' @param start_last logical: start with last (oldest) window?
-##' @param win_size numeric: size of the moving in years
+##' @param win_size numeric: size of the moving windows in years
 ##' @param win_offset numeric: size of offset between moving windows
 ##' in years
 ##' @param ci numeric: p-level for confidence interval (must be in

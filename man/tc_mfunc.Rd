@@ -18,7 +18,7 @@ tc_mfunc(chrono, climate, boot, sb, start_last, win_size, win_offset, ci,
 
 \item{start_last}{logical: start with last (oldest) window?}
 
-\item{win_size}{numeric: size of the moving in years}
+\item{win_size}{numeric: size of the moving windows in years}
 
 \item{win_offset}{numeric: size of offset between moving windows
 in years}
