@@ -5,7 +5,7 @@
 \title{Response and correlation function analysis}
 \usage{
 dcc(chrono, climate, selection = -6:9, method = "response",
-  moving = FALSE, win_size = 25, win_offset = 1, start_last = TRUE,
+  dynamic = "static", win_size = 25, win_offset = 1, start_last = TRUE,
   timespan = NULL, var_names = NULL, ci = 0.05, boot = "stationary",
   sb = TRUE)
 }
@@ -28,11 +28,13 @@ Details).}
 method.  Possible values are \dQuote{response} and
 \dQuote{correlation}. Partial strings are ok.}
 
-\item{moving}{\code{logical}; should the analyis be carried out in
-moving windows. Defaults to \code{FALSE}.}
+\item{dynamic}{\code{character}; should the analyis be carried out in
+a static, moving, or evolving fashion. One of \code{c("static", "moving", "evolving")}.
+Defaults to \code{"static"}.}
 
 \item{win_size}{integer giving the window size for each
-recalculation in years.}
+recalculation in years for a moving analysis, and the initial window size
+for an evolving analysis.}
 
 \item{win_offset}{integer giving the number of years between each
 window start in years.}
@@ -90,7 +92,7 @@ or the specified timespan}
 being recast into a single data.frame}
 }
 \description{
-This function calculates (potentially moving) response and
+This function calculates (potentially moving or evolving) response and
 correlation functions from tree-ring chronologies and monthly
 climatic data. For the moving case, the calculation is performed
 repeatedly for consecutive time windows. Function parameters may
