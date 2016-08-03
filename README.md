@@ -1,4 +1,8 @@
-[![Build Status](https://travis-ci.org/cszang/treeclim.png?branch=master)](https://travis-ci.org/cszang/treeclim) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/treeclim)](http://cran.r-project.org/package=treeclim) [![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/grand-total/treeclim)](http://www.r-pkg.org/pkg/treeclim) [![Coverage Status](https://img.shields.io/codecov/c/github/cszang/treeclim/master.svg)](https://codecov.io/github/cszang/treeclim?branch=master)
+[![Build Status](https://travis-ci.org/cszang/treeclim.png?branch=master)](https://travis-ci.org/cszang/treeclim)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/treeclim)](http://cran.r-project.org/package=treeclim)
+[![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/grand-total/treeclim)](http://www.r-pkg.org/pkg/treeclim)
+[![Coverage Status](https://img.shields.io/codecov/c/github/cszang/treeclim/master.svg)](https://codecov.io/github/cszang/treeclim?branch=master)
+[![MIT licensed](https://img.shields.io/badge/license-GPL%20%3E%3D%203-yellowgreen.svg)](./DESCRIPTION)
 
 # treeclim
 
@@ -11,18 +15,3 @@ see the [https://github.com/cszang/treeclim/wiki](Wiki) for details.
 ## Citation
 
 Zang, C., and F. Biondi. 2015. treeclim: an R package for the numerical calibration of proxy-climate relationships. Ecography 38:431–436.
-
-## License
-
-This program is free software: you can redistribute it and/or
-modify it under the terms of the GNU General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but
-WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
