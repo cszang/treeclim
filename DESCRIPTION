@@ -23,7 +23,6 @@ Imports:
 LinkingTo: Rcpp,
     RcppArmadillo (>= 0.4.000.2)
 Suggests:
-    dplR,
     testthat (>= 0.7.1.99)
 Description: Bootstrapped response and correlation functions,
     seasonal correlations and evaluation of reconstruction
