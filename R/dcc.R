@@ -1,6 +1,6 @@
 ##' Response and correlation function analysis
 ##' 
-##' This function calculates (potentially moving) response and
+##' This function calculates (potentially moving or evolving) response and
 ##' correlation functions from tree-ring chronologies and monthly
 ##' climatic data. For the moving case, the calculation is performed
 ##' repeatedly for consecutive time windows. Function parameters may
@@ -120,10 +120,12 @@
 ##' @param method \code{character} string specifying the calculation
 ##' method.  Possible values are \dQuote{response} and
 ##' \dQuote{correlation}. Partial strings are ok.
-##' @param moving \code{logical}; should the analyis be carried out in
-##' moving windows. Defaults to \code{FALSE}.
+##' @param dynamic \code{character}; should the analyis be carried out in
+##' a static, moving, or evolving fashion. One of \code{c("static", "moving", "evolving")}.
+##' Defaults to \code{"static"}.
 ##' @param win_size integer giving the window size for each
-##' recalculation in years.
+##' recalculation in years for a moving analysis, and the initial window size
+##' for an evolving analysis.
 ##' @param win_offset integer giving the number of years between each
 ##' window start in years.
 ##' @param start_last \code{logical} flag indicating whether the first
@@ -208,7 +210,7 @@ dcc <- function(chrono,
                climate,
                selection = -6:9,
                method = "response",
-               moving = FALSE,
+               dynamic = "static",
                win_size = 25,
                win_offset = 1,
                start_last = TRUE,
@@ -219,6 +221,10 @@ dcc <- function(chrono,
                sb = TRUE
                )
 {
+  
+  .method <- match.arg(method, c("response", "correlation"))
+  .boot <- match.arg(boot, c("stationary", "std", "exact"))
+  .dynamic <- match.arg(dynamic, c("static", "moving", "evolving"))
 
   ## climate data are correctly formatted
   climate <- as_tcclimate(climate)
@@ -260,14 +266,14 @@ dcc <- function(chrono,
   ## time span
   truncated_input <- truncate_input(chrono, climate,
                                    timespan = timespan, minmonth,
-                                   moving)
+                                   .dynamic)
 
-  if (moving & truncated_input$missing) {
+  if (dynamic == "static" & truncated_input$missing) {
     stop("Missing data in proxy series, moving functions are not computed.\n")
   }
 
   ## check if the timespan matches with win_size
-  if (moving) {
+  if (.dynamic %in% c("moving", "evolving")) {
     time_length <- dim(truncated_input$climate)[1]
     if (time_length <= win_size) {
       stop(paste("timespan is shorter than win_size. Consider adapting timespan to at least ",
@@ -284,7 +290,7 @@ dcc <- function(chrono,
 
   ## check if number of parameters is smaller than number of observations
   n_params <- dim(design$aggregate)[2]
-  if (moving) {
+  if (.dynamic %in% c("moving", "evolving")) {
     n_obs <- win_size
   } else {
     n_obs <- dim(design$aggregate)[1]  
@@ -296,13 +302,10 @@ dcc <- function(chrono,
   }
 
   ## pass chrono and design matrix to the respective analysis functions
-
-  .method <- match.arg(method, c("response", "correlation"))
-  .boot <- match.arg(boot, c("stationary", "std", "exact"))
   
   ## static functions
 
-  if (!moving) {
+  if (.dynamic == "static") {
     if (.method == "response") {
       dc <- tc_response(truncated_input$chrono, design,
                        ci = ci,
@@ -318,7 +321,7 @@ dcc <- function(chrono,
   
   ## moving functions
 
-  if (moving) {
+  if (.dynamic == "moving") {
     dc <- tc_mfunc(truncated_input$chrono, design,
                   ci = ci,
                   sb = sb,
@@ -327,6 +330,16 @@ dcc <- function(chrono,
                   win_size = win_size,
                   win_offset = win_offset,
                   boot = .boot)
+  }
+  
+  if (.dynamic == "evolving") {
+    dc <- tc_efunc(truncated_input$chrono, design,
+                   ci = ci,
+                   sb = sb,
+                   method = .method,
+                   start_last = start_last,
+                   win_size = win_size,
+                   boot = .boot)
   }
 
   ## return everything in a comprehensible manner
