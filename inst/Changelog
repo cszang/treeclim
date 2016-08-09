@@ -70,8 +70,10 @@
 2015-01-16 Christian Zang <christian.zang@wzw.tum.de>
 
 	* Version 1.0.10: fixed important bug in seasorr
-	* ptest.R: exceedance probability is now computed correctly for edge cases
-	* corfun_exact.cpp: partial regression algorithm now more similar to MATLAB version
+	* ptest.R: exceedance probability is now computed correctly for
+	edge cases
+	* corfun_exact.cpp: partial regression algorithm now more similar
+	to MATLAB version
 	* *.Rd: examples respect lazy data now
 
 2015-02-10 Christian Zang <christian.zang@wzw.tum.de>
@@ -85,15 +87,23 @@
 	ggplot2-related changes
 
 2016-03-09 Christian Zang <christian.zang@wzw.tum.de>
-	* Version 1.0.14: fixed moving window number regression and its reflectance into g_test
+	* Version 1.0.14: fixed moving window number regression and its
+	reflectance into g_test
 	* treeclim now pads nonexistent previous year for creating
 	parameter set when only current year variables are selected
 
 2016-03-10 Christian Zang <christian.zang@wzw.tum.de>
 	* Version 1.0.15
-	* g_test: adjusted computation of variance for simulated sets, reports exact p-values now
+	* g_test: adjusted computation of variance for simulated sets,
+	reports exact p-values now
 	* skills: takes `target` argument (selector) instead of formula now
-	
+
 2016-03-14 Christian Zang <christian.zang@wzw.tum.de>
 	* Version 1.0.16
-	* g_test: bug fix: when prediction variance for original model is > 1, do not add noise to sampled composite series
+	* g_test: bug fix: when prediction variance for original model is
+	> 1, do not add noise to sampled composite series
+
+2016-08-9 Christian Zang <christian.zang@wzw.tum.de>
+	* Version 2.0.0
+	* missing values in tree-ring series are now allowed, but work
+	only for static functions

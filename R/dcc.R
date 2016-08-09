@@ -262,6 +262,10 @@ dcc <- function(chrono,
                                    timespan = timespan, minmonth,
                                    moving)
 
+  if (moving & truncated_input$missing) {
+    stop("Missing data in proxy series, moving functions are not computed.\n")
+  }
+
   ## check if the timespan matches with win_size
   if (moving) {
     time_length <- dim(truncated_input$climate)[1]
