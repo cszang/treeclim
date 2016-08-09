@@ -107,3 +107,5 @@
 	* Version 2.0.0
 	* missing values in tree-ring series are now allowed, but work
 	only for static functions
+	* evolving functions are alive: API changes (moving > dynamic),
+	new plot option traceplot for evolving function
