@@ -198,7 +198,7 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
   ## time span
   truncated_input <- truncate_input(chrono, climate,
                                     timespan = timespan, 1,
-                                    moving = FALSE)
+                                    dynamic = "static")
 
   ## create raw parameter matrix
   if (truncated_input$pad) {
