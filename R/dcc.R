@@ -268,8 +268,8 @@ dcc <- function(chrono,
                                    timespan = timespan, minmonth,
                                    .dynamic)
 
-  if (dynamic == "static" & truncated_input$missing) {
-    stop("Missing data in proxy series, moving functions are not computed.\n")
+  if (dynamic != "static" & truncated_input$missing) {
+    stop("Missing data in proxy series, moving or evolving functions are not computed.\n")
   }
 
   ## check if the timespan matches with win_size
