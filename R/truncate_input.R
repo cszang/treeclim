@@ -118,7 +118,6 @@ truncate_input <- function(chrono, climate, timespan = NULL, minmonth,
       }
     }
     chrono_trunc <- chrono_trunc[-missing_tree]
-    missing_rows_climate <- climate_trunc$year %in% missing_years
     climate_trunc <- climate_trunc[!(missing_rows_climate), ]
   }
   
