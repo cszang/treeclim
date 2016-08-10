@@ -115,9 +115,11 @@ truncate_input <- function(chrono, climate, timespan = NULL, minmonth,
                   collapse = ", "), ox_comma, paste0(" and ", tail(missing_years, 1)),
             ".\n", sep = "")  
       } else {
+        cat("Missing proxy data for ", missing_years, ".\n", sep = "")
       }
     }
     chrono_trunc <- chrono_trunc[-missing_tree]
+    missing_rows_climate <- climate_trunc[,1] %in% missing_years
     climate_trunc <- climate_trunc[!(missing_rows_climate), ]
   }
   
