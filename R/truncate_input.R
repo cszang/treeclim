@@ -123,6 +123,11 @@ truncate_input <- function(chrono, climate, timespan = NULL, minmonth,
     climate_trunc <- climate_trunc[!(missing_rows_climate), ]
   }
   
+  ## throw error if climate data contains missing values
+  if (any(is.na(climate_trunc))) {
+    stop("Climate data for considered time span contains missing values.\n")
+  }
+  
   ## report time span used
   if (dynamic == "static" & !silent) {
     cat("Running for timespan ", run_years[1], " - ", tail(run_years, 1), "...\n",
