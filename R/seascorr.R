@@ -201,10 +201,14 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
                                     dynamic = "static")
 
   ## create raw parameter matrix
-  if (truncated_input$pad) {
+  if (truncated_input$pad == 1) {
     # we have no climate data for previous year, but use maximum overlap -> cut
     # tree data accordingly
     truncated_input$chrono <- truncated_input$chrono[-1]
+  }
+  if (truncated_input$pad == 2) {
+    # similar for padding of two years
+    truncated_input$chrono <- truncated_input$chrono[-c(1, 2)]
   }
   
   m <- length(truncated_input$chrono)
@@ -229,7 +233,7 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
                maxval, ".", sep = ""))
   }
 
-  lmonths <- c(-1:-12, 1:12)
+  lmonths <- c(-13:-24, -1:-12, 1:12)
   last_month_index <- which(lmonths == last_month)
 
   for (i in 1:n) {
