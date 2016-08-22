@@ -55,36 +55,43 @@ truncate_input <- function(chrono, climate, timespan = NULL, minmonth,
     }
   }
   
-  ## check if a previous year is available in climatic data; otherwise
-  ## set start_year + 1
-  if (minmonth < 0 && !((start_year - 1) %in% climate_years)) { 
+  ## check if previous years are available in climatic data
+  offset <- 0
+  if (minmonth < 0 & minmonth > -13 && !((start_year - 1) %in% climate_years)) { 
     offset <- 1
+  }
+  if (minmonth < -12 && !((start_year - 2) %in% climate_years)) { 
+    offset <- 2
+  }
+  
+  if (offset != 0) {
     if (is.null(timespan) & !silent) {
       message(paste("treeclim tries to use the maximum overlap in timespan for chronology and climate data. The overlap starts in ",
                     start_year,
-                    ", but to be able to use climate data from the previous year (as you chose by setting 'selection' accordingly), the analysis starts in ",
-                    start_year + 1, ".", sep = ""))
+                    ", but to be able to use climate data from the previous year(s) (as you chose by setting 'selection' accordingly), the analysis starts in ",
+                    start_year + offset, ".", sep = ""))
     } else {
-        if (!silent) {
-            message(paste("`start_year` is set from", start_year, "to",
-                          start_year + 1,
-                          "to be able to use climate data from the previous year."))
-        }
+      if (!silent) {
+        message(paste("`start_year` is set from", start_year, "to",
+                      start_year + offset,
+                      "to be able to use climate data from the previous year(s)."))
+      }
     }
-    
-  } else {
-    offset <- 0
   }
-
+  
+  interval_chrono <- (start_year + offset):end_year
   ## make sure that data get truncated properly	
   if (minmonth < 0) { 
-    interval_climate <- (start_year - 1 + offset):end_year
-    interval_chrono <- (start_year + offset):end_year
-    pad <- FALSE
+    if (minmonth > -13) {
+      interval_climate <- (start_year - 1 + offset):end_year
+      pad <- 1
+    } else {
+      interval_climate <- (start_year - 2 + offset):end_year
+      pad <- 0
+    }
   } else {
     interval_climate <- (start_year + offset):end_year
-    interval_chrono <- (start_year + offset):end_year
-    pad <- TRUE
+    pad <- 2
   }
 
   a <- chrono_years %in% interval_chrono

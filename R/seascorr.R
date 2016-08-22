@@ -214,7 +214,7 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
   if (m < 31)
     stop("Seasonal correlation analysis needs at least 31 years of data overlap for proxy and climate data.")
   
-  pmat <- make_pmat(truncated_input$climate, pad = FALSE)
+  pmat <- make_pmat(truncated_input$climate, pad = 0)
 
   ## create seasons, a list entry for each season_length
   seasons1 <- seasons2 <- list()

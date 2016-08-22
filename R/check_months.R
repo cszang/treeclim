@@ -1,8 +1,8 @@
-##' Check if all months are between -12 and 12 (previous and current december)
+##' Check if all months are between -24 and 12 (previous and current december)
 ##' 
 ##' Make sure that all the months specified in the (probably complex)
 ##' month specification to dcc are correct months, in the sense that
-##' they range between -12 and 12. Further, return the earliest month
+##' they range between -24 and 12. Further, return the earliest month
 ##' in the complete selection to decide if we need previous year
 ##' climate later on.
 ##' @param selection the month selection as vector, list, or nested
@@ -34,11 +34,15 @@ check_months <- function(selection) {
     
     .months <- na.omit(.months)
     if (any(.months < 0)) {
-      out$minmonth <- max(.months[which(.months < 0)])
+      if (min(.months > -13)) {
+        out$minmonth <- max(.months[which(.months < 0)])
+      } else {
+        out$minmonth <- max(.months[which(.months < -12)])
+      }
     } else {
       out$minmonth <- min(.months)
     }
-    if (!any(.months < -12) & !any(.months > 12)) {
+    if (!any(.months < -24) & !any(.months > 12)) {
       out$check <- TRUE
     } else {
       out$check <- FALSE

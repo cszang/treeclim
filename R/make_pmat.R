@@ -6,12 +6,12 @@
 ##' december in columns.
 ##' @title Make list of parameter matrices from climate input data
 ##' @param x climate data as returned from as_tcclimate
-##' @param pad should the previous year be padded with NAs? This is useful when
+##' @param pad how many previous years should be padded with NAs? This is useful when
 ##'   we want to use the full range of available data when all predictors derive
-##'   from the current year
+##'   from the current year (pad = 2, or current and previous, for pad = 1)
 ##' @return a list of matrices
 ##' @keywords manip internal
-make_pmat <- function(x, pad = FALSE) {
+make_pmat <- function(x, pad = 0) {
   if (any(names(x) == "year")) {
     years <- x$year
   } else {
@@ -21,36 +21,40 @@ make_pmat <- function(x, pad = FALSE) {
   no.vars <- dim(x)[2] - 2
   .names <- names(x)[-c(1:2)]
 
-  ## create a full matrix from -1 to 12 for every parameter, names are
+  ## create a full matrix from -13 to 12 for every parameter, names are
   ## not needed for this step
 
   m <- list()
   
-  if (pad) {
-    npad <- n + 1
-    padyears <- c(min(years) - 1, unique(years))
-    x <- rbind(x[1:12,], x)
-    x[1:12, 1] <- x[1:12, 1] - 1
-    x[1:12, 3:(2 + no.vars)] <- NA
-    years <- x[,1]
-  } else {
+  if (pad == 0) {
     npad <- n 
     padyears <- unique(years)
+  } else {
+    npad <- n + pad
+    padyears <- c((min(years) - pad):min(years), unique(years)[-1])
+    years <- x[,1]
+    for (p in 1:pad) {
+      x <- rbind(x[1:12,], x)
+      x[1:12, 1] <- x[1:12, 1] - pad
+      x[1:12, 3:(2 + no.vars)] <- NA
+      years <- c(rep(min(years) - 1, 12), years)
+    }
+    x$year <- years
   }
 
   for (k in 1:no.vars) {
-    m_k <- matrix(NA, nrow = 24, ncol = npad - 1)
-    colnames(m_k) <- padyears[-1]
-    for (i in 2:npad) {
-      start_with <- which(years == padyears[i - 1])[1] # previous january
-      for (j in 1:24) {                 # loop through months
-        m_k[j, (i - 1)] <- x[(start_with + j - 1), 2 + k]
+    m_k <- matrix(NA, nrow = 36, ncol = npad - 2)
+    colnames(m_k) <- padyears[-c(1:2)]
+    for (i in 3:npad) { # loop through years
+      start_with <- which(years == padyears[i - 2])[1] # january of year before previous
+      for (j in 1:36) {                 # loop through months
+        m_k[j, (i - 2)] <- x[(start_with + j - 1), 2 + k]
       }
     }
     m[[k]] <- t(m_k)
   }
 
   names(m) <- .names
-  class(m) <- list("ctpmat", "list")
+  class(m) <- list("tc_pmat", "list")
   m
 }

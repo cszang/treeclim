@@ -111,7 +111,7 @@ tc_design <- function(selection, climate, check_2 = TRUE) {
   n <- length(out$names)
   for (i in 1:n) {
     split <- strsplit(out$names[i], "\\.")[[1]]
-    mmatches <- !is.na((match(split, c("curr", "prev"))))
+    mmatches <- !is.na((match(split, c("curr", "prev", "bepr"))))
     fmatch <- which(mmatches)[1] - 1
     vars[i] <- paste(split[1:fmatch], collapse = ".")
     fmonth_char <- split[which(mmatches)[1] + 1]
@@ -143,11 +143,16 @@ tc_design <- function(selection, climate, check_2 = TRUE) {
       ## short variable name
       tseason <- split[mmatches]
       tmonth <- split[which(mmatches)[1] + 1]
-      if (tseason == "prev") {
+      if (tseason == "bepr") {
         labels[i] <- tolower(tmonth)
-      } else {
-        labels[i] <- toupper(tmonth)
+      }
+      if (tseason == "prev") {
+        labels[i] <- tcase(tmonth)
         .months[i] <- .months[i] + 12
+      }
+      if (tseason == "curr") {
+        labels[i] <- toupper(tmonth)
+        .months[i] <- .months[i] + 24
       }
     }
   }

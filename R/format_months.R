@@ -22,26 +22,28 @@ format_month <- function(month) {
   }
   
   ## month ids and names
-  month_ids <- c(-1:-12, 1:12)
-  ## check if months are between -1 and 12
+  month_ids <- c(-13:-24, -1:-12, 1:12)
+  ## check if months are between -13 and 12
   if (any(!is.element(month, month_ids))) {
-    stop("Month specification must be within previous january (-1) and current december (12).")
+    stop("Month specification must be within january of the year before previous year (-13, `..jan()`, or `shift(1, -2)`) and current december (12, `dec()`, or `shift(12)`).")
   }
 
   mmonth <- c("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug",
               "sep", "oct", "nov", "dec")
+  pmonth <- tcase(mmonth)
   ucmonth <- toupper(mmonth)
   
-  two_years <- paste(
+  three_years <- paste(
     c(
+      rep("bepr.", 12),
       rep("prev.", 12),
       rep("curr.", 12)),
     rep(mmonth,
         2), sep = "")
-  single <- c(mmonth, ucmonth)
+  single <- c(mmonth, pmonth, ucmonth)
   .month <- list()
   .month$match <- match(month, month_ids)
-  .month$names <- two_years[.month$match]
-  .month$single <- single[.month$match]
+  .month$names <- three_years[.month$match]
+  .month$single <- unname(single[.month$match])
   .month
 }
