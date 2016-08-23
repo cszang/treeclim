@@ -1,4 +1,4 @@
-shift <- function(month, by = 0) {
+shift_year <- function(month, by = 0) {
   if (!(by %in% 0:-2)) {
     stop("`by` must be one of 0, -1, and -2")
   }
@@ -25,9 +25,9 @@ shift <- function(month, by = 0) {
 }
 
 . <- function(x) {
-  shift(x, -1)
+  shift_year(x, -1)
 }
 
 .. <- function(x) {
-  shift(x, -2)
+  shift_year(x, -2)
 }
