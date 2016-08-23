@@ -116,7 +116,7 @@
 ##' sc
 ##' plot(sc)
 ##' @author Christian Zang; the procedure incl. exact bootstrapping
-##' was was implemented first by Dave Meko in MA
+##' was implemented first by Dave Meko in MATLAB
 ##' @export
 seascorr <- function(chrono, climate, var_names = NULL, timespan =
                      NULL, complete = 9, season_lengths = c(1, 3, 6),
@@ -126,8 +126,8 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
   if (!any(1:12 == complete))
     stop("`complete` must be an integer value between 1 and 12.")
 
-  if (!all(sapply(season_lengths, function(x) any(1:12 == x))))
-    stop("`season_lengths` must be a vector of integers between 1 and 12.")
+  if (!all(sapply(season_lengths, function(x) any(1:24 == x))))
+    stop("`season_lengths` must be a vector of integers between 1 and 24.")
 
   if (!any(c(0.01, 0.05, 0.1) == ci))
     stop("`ci` must be any of 0.01, 0.05, or 0.1.")
@@ -225,16 +225,16 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
   n <- length(season_lengths)
   first_month <- -1 * complete + 1
   last_month <- complete
-
-  ## check if largest season spec is feasible
-  if (first_month + max(season_lengths) > 0) {
-    maxval <- abs(first_month)
-    stop(paste("Largest season length is too long. Maximum value is ",
-               maxval, ".", sep = ""))
-  }
-
+  
   lmonths <- c(-13:-24, -1:-12, 1:12)
   last_month_index <- which(lmonths == last_month)
+
+  ## check if largest season spec is feasible is not necessary anymore,
+  ## we just limit it to 21
+  
+  if (max(season_lengths) > 21) {
+    stop("The maximum season length is 21 months.")
+  }
 
   for (i in 1:n) {
     .season_length <- season_lengths[i]
