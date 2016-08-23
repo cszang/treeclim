@@ -342,10 +342,12 @@ plot.tc_seascorr <- function(x, ...) {
     significant = c(unlist(sapply(sapply(x$coef, "[", 1), "[", 2)),
       unlist(sapply(sapply(x$coef, "[", 2), "[", 2))),
     value = c(unlist(sapply(sapply(x$coef, "[", 1), "[", 1)),
-      unlist(sapply(sapply(x$coef, "[", 2), "[", 1)))
+      unlist(sapply(sapply(x$coef, "[", 2), "[", 1))),
+    stringsAsFactors = FALSE
     )
-
   
+  gd$season_length <- factor(gd$season_length, levels = sl_levels)
+  gd$type <- factor(gd$type, levels = c("primary", "secondary"))
   
   ## draw plot
   gg <- ggplot(gd,
