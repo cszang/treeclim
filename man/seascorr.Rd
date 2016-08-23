@@ -120,7 +120,7 @@ plot(sc)
 }
 \author{
 Christian Zang; the procedure incl. exact bootstrapping
-was was implemented first by Dave Meko in MA
+was implemented first by Dave Meko in MATLAB
 }
 \references{
 Meko DM, Touchan R, Anchukaitis KJ (2011) Seascorr: A MATLAB

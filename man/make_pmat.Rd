@@ -4,14 +4,14 @@
 \alias{make_pmat}
 \title{Make list of parameter matrices from climate input data}
 \usage{
-make_pmat(x, pad = FALSE)
+make_pmat(x, pad = 0)
 }
 \arguments{
 \item{x}{climate data as returned from as_tcclimate}
 
-\item{pad}{should the previous year be padded with NAs? This is useful when
+\item{pad}{how many previous years should be padded with NAs? This is useful when
 we want to use the full range of available data when all predictors derive
-from the current year}
+from the current year (pad = 2, or current and previous, for pad = 1)}
 }
 \value{
 a list of matrices

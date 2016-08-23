@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_months.R
 \name{check_months}
 \alias{check_months}
-\title{Check if all months are between -12 and 12 (previous and current december)}
+\title{Check if all months are between -24 and 12 (previous and current december)}
 \usage{
 check_months(selection)
 }
@@ -17,7 +17,7 @@ a list with the earliest month and the result of the check
 \description{
 Make sure that all the months specified in the (probably complex)
 month specification to dcc are correct months, in the sense that
-they range between -12 and 12. Further, return the earliest month
+they range between -24 and 12. Further, return the earliest month
 in the complete selection to decide if we need previous year
 climate later on.
 }

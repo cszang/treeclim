@@ -28,7 +28,7 @@ matching is allowed.
 \examples{
 \dontrun{
 dc_resp <- dcc(muc_spruce, muc_clim, 4:9, dynamic = "evolving")
-traceplot(dc_resp, c("prec.curr.may" "prec.curr.jun"))
+traceplot(dc_resp, c("prec.curr.may", "prec.curr.jun"))
 }
 }
 
