@@ -5,7 +5,7 @@
 #'
 #' @return the (potentially renamed) climate data
 #'
-#' @keyword internal
+#' @keywords internal
 apply_var_names <- function(climate, var_names) {
   if (!is.null(var_names)) {
     varno <- dim(climate)[2] - 2

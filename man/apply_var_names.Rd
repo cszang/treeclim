@@ -17,4 +17,5 @@ the (potentially renamed) climate data
 \description{
 (re)name climate variable
 }
+\keyword{internal}
 
