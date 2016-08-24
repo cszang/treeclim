@@ -2,9 +2,12 @@
 % Please edit documentation in R/shift_year.R
 \name{.}
 \alias{.}
+\alias{..}
 \title{Shift months one or two years back}
 \usage{
 .(x)
+
+..(x)
 }
 \arguments{
 \item{x}{numeric identifiers for the months (1 for January, ..., 12 for

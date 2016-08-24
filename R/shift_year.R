@@ -43,7 +43,7 @@ shift_year <- function(month, by = 0) {
   shift_year(x, -1)
 }
 
-##' @rdname treeclim-modifiers
+##' @rdname treeclim-shifters
 ##' @export
 .. <- function(x) {
   shift_year(x, -2)
