@@ -200,7 +200,7 @@ skills <- function(object, target = NULL, model = "ols",
       } else {
         if (!all(calibration %in% all_years)) {
           stop("Given years do not correspond to available years in the supplied data.")
-        } else {µ
+        } else {
           # calibration is given as range of years
           cal_index <- c(1:m)[all_years %in% calibration]
           ver_index <- c(1:m)[-cal_index]
