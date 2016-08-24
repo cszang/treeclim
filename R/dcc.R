@@ -239,7 +239,7 @@ dcc <- function(chrono,
   ## preevaluate month specification for correct data truncation
   monthcheck <- check_months(selection)
   if (monthcheck$check == FALSE) {
-    stop("Please specify months with numbers from -12 (previous december) to 12 (current december).")
+    stop("Please specify months with numbers from -24 or `..(12)` (december of year before last year) to 12 (current december).")
   }
   minmonth <- monthcheck$minmonth
 
