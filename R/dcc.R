@@ -226,17 +226,8 @@ dcc <- function(chrono,
   .boot <- match.arg(boot, c("stationary", "std", "exact"))
   .dynamic <- match.arg(dynamic, c("static", "moving", "evolving"))
 
-  ## climate data are correctly formatted
-  climate <- as_tcclimate(climate)
-  ## when var_names are supplied, apply appropriately
-  if (!is.null(var_names)) {
-    varno <- dim(climate)[2] - 2
-    if (length(var_names) != varno) {
-      stop("Count of supplied variable names does not match count of variables in climate data.")
-    } else {
-      names(climate)[3:(dim(climate)[2])] <- var_names
-    }
-  }
+  ## climate data are correctly formatted and potentially (re)named
+  climate <- apply_var_names(as_tcclimate(climate), var_names)
 
   ## check the ci
   if (!any(ci == c(0.1, 0.05, 0.01)))
