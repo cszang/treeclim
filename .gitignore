@@ -4,5 +4,4 @@ src/*.o
 src/*.so
 src/*.dll
 R/RcppExports.R
-/TAGS
 .Rproj.user
