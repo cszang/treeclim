@@ -60,8 +60,8 @@ test_that("months are correctly formatted", {
 })
 
 test_that("months are correctly shifted", {
-  expect_that(shift(1), equals(1))
-  expect_that(shift(5, -2), equals(-17))
+  expect_that(shift_year(1), equals(1))
+  expect_that(shift_year(5, -2), equals(-17))
   expect_that(.(1), equals(-1))
   expect_that(..(1), equals(-13))
   expect_that(..(5), equals(-17))

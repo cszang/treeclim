@@ -11,7 +11,7 @@ test_that("a single list of parameter specification is evaluated correctly", {
     chrono <- data.frame(rnorm(100))
     rownames(chrono) <- 1901:2000
     truncated_input <- truncate_input(chrono, climate, NULL, 1, FALSE)
-    pmat <- make_pmat(truncated_input$climate)
+    pmat <- make_pmat(truncated_input$climate, pad = 1)
 
     expect_that(eval_selection(pmat, 1:2)$month$single,
                 equals(c("JAN", "FEB")))
@@ -21,7 +21,7 @@ test_that("a single list of parameter specification is evaluated correctly", {
                       3),
                 equals(rep(-0.909, 50)))
     expect_that(eval_selection(pmat, .sum(-11:3))$month$single,
-                equals(c("nov", "dec", "JAN", "FEB", "MAR")))
+                equals(c("Nov", "Dec", "JAN", "FEB", "MAR")))
 })
 
 test_that("the design matrix is constructed correctly", {
@@ -35,7 +35,7 @@ test_that("the design matrix is constructed correctly", {
   chrono <- data.frame(rnorm(100))
   rownames(chrono) <- 1901:2000
   truncated_input <- truncate_input(chrono, climate, NULL, 1, FALSE)
-  pmat <- make_pmat(truncated_input$climate)
+  pmat <- make_pmat(truncated_input$climate, pad = 1)
   
   test_that(tc_design(.range(1:3), pmat)$aggregate[,4],
             equals(rep(-10, 50)))
