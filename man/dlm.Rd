@@ -28,6 +28,9 @@ possible interval.}
 \item{var_names}{\code{character} vector with variable names. Defaults to 
 corresponding column names of \code{data.frame} clim.}
 
+\item{param_names}{\code{character} vector with parameter names. Defaults to 
+auto-generated (potentially compound) names.}
+
 \item{intercept}{\code{logical}: should intercept be included in model?}
 
 \item{scale}{\code{logical}: should data be scaled prior to computing model? 

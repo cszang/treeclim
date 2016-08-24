@@ -73,6 +73,8 @@
 #'   possible interval.
 #' @param var_names \code{character} vector with variable names. Defaults to 
 #'   corresponding column names of \code{data.frame} clim.
+#' @param param_names \code{character} vector with parameter names. Defaults to 
+#'   auto-generated (potentially compound) names.
 #' @param intercept \code{logical}: should intercept be included in model?
 #' @param scale \code{logical}: should data be scaled prior to computing model? 
 #'   If \code{TRUE}, \code{intercept} will be set to \code{FALSE}.
