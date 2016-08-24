@@ -5,9 +5,9 @@
 \title{Response and correlation function analysis}
 \usage{
 dcc(chrono, climate, selection = -6:9, method = "response",
-  dynamic = "static", win_size = 25, win_offset = 1, start_last = TRUE,
-  timespan = NULL, var_names = NULL, ci = 0.05, boot = "stationary",
-  sb = TRUE)
+  dynamic = "static", moving, win_size = 25, win_offset = 1,
+  start_last = TRUE, timespan = NULL, var_names = NULL, ci = 0.05,
+  boot = "stationary", sb = TRUE)
 }
 \arguments{
 \item{chrono}{\code{data.frame} containing a tree-ring
@@ -31,6 +31,8 @@ method.  Possible values are \dQuote{response} and
 \item{dynamic}{\code{character}; should the analyis be carried out in
 a static, moving, or evolving fashion. One of \code{c("static", "moving", "evolving")}.
 Defaults to \code{"static"}.}
+
+\item{moving}{deprecated, use \code{dynamic} instead.}
 
 \item{win_size}{integer giving the window size for each
 recalculation in years for a moving analysis, and the initial window size

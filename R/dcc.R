@@ -222,6 +222,16 @@ dcc <- function(chrono,
                )
 {
   
+  # check for deprecated parameter
+  if (!missing(moving)) {
+    if (moving) {
+      dynamic <- "moving"
+    } else {
+      dynamic <- "static"
+    }
+    message("Parameter `moving` is deprecated, use `dynamic` instead.")
+  }
+  
   .method <- match.arg(method, c("response", "correlation"))
   .boot <- match.arg(boot, c("stationary", "std", "exact"))
   .dynamic <- match.arg(dynamic, c("static", "moving", "evolving"))
