@@ -233,17 +233,7 @@ dcc <- function(chrono,
   if (!any(ci == c(0.1, 0.05, 0.01)))
     stop("'ci' has to be one of [0.1, 0.05, 0.01].")
 
-
-  ## check the month selection
-  ## when numeric vector = "classic" (bR 1.X) parameter selection
-  if (is.numeric(selection)) {
-    selection <- eval(
-      substitute(
-        .range(.months = sel, .variables = NULL),
-        list(sel = selection)
-        )
-      )
-  }
+  selection <- unify_selection(selection)
   
   ## check, if we have months in the correct numerical representation, and
   ## preevaluate month specification for correct data truncation
