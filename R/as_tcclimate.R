@@ -114,7 +114,7 @@ as_tcclimate <- function(x, varnames = NULL) {
     if (length(varnames) == dim(output[2])) {
       colnames(output)[-c(1,2)] <- varnames
     } else {
-      stop("`varnames` has to be of the same length as the number of parameters.")
+      stop("`var_names` has to be of the same length as the number of parameters.")
     }
   }
   
