@@ -183,11 +183,27 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
   if (primary_name == secondary_name) {
     stop("Primary and secondary variable are identical.")
   }
+  
+  ## get minimum month from start month and seasons
+  if (complete > 2) {
+    startmonth <- -1 * complete + 2
+  } else {
+    startmonth <- complete - 15
+  }
+  
+  ## no more precision needed for truncating input
+  if (startmonth + max(season_lengths) < 0) {
+    minmonth <- -1
+  } else {
+    minmonth <- -13
+  }
+  
 
   ## truncate climate and tree-ring data to common or specified
   ## time span
   truncated_input <- truncate_input(chrono, climate,
-                                    timespan = timespan, 1,
+                                    timespan = timespan,
+                                    minmonth = minmonth,
                                     dynamic = "static")
 
   ## create raw parameter matrix
