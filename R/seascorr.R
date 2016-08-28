@@ -129,8 +129,7 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
   if (!all(sapply(season_lengths, function(x) any(1:24 == x))))
     stop("`season_lengths` must be a vector of integers between 1 and 24.")
 
-  if (!any(c(0.01, 0.05, 0.1) == ci))
-    stop("`ci` must be any of 0.01, 0.05, or 0.1.")
+  check_ci(ci)
   
   climate <- as_tcclimate(climate)
   ## when var_names are supplied, apply appropriately

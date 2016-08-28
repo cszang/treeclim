@@ -224,9 +224,7 @@ dcc <- function(chrono,
   # climate data are correctly formatted and potentially (re)named
   climate <- apply_var_names(as_tcclimate(climate), var_names)
 
-  # check the ci
-  if (!any(ci == c(0.1, 0.05, 0.01)))
-    stop("'ci' has to be one of [0.1, 0.05, 0.01].")
+  check_ci(ci)
 
   selection <- unify_selection(selection)
   
