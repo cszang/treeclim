@@ -14,11 +14,11 @@ dcc(chrono, climate, selection = -6:9, method = "response",
 obtained by \code{chron} of package dplR.}
 
 \item{climate}{either a \code{data.frame} or \code{matrix} with climatic data
-in monthly resolution, with year, month and climate parameters in columns
-(all columns except year and month will be recognized as parameters for
-response or correlation function), or a single \code{data.frame} or
-\code{matrix} in 13-column format (see below), or list of several of the
-latter.}
+in monthly resolution, with year, month and climate parameters in columns 
+(all columns except year and month will be recognized as parameters for 
+response or correlation functions), or a single \code{data.frame} or 
+\code{matrix} in 13-column format (see below), or a (potentially named) 
+list of one or several of the latter.}
 
 \item{selection}{either a numeric vector, a modifier, or a chain of modifiers
 specifying the parameter selection for the model (see Details).}
@@ -29,7 +29,7 @@ strings are ok.}
 
 \item{dynamic}{\code{character}; should the analyis be carried out in a 
 static, moving, or evolving fashion. One of \code{c("static", "moving", 
-"evolving")}. Defaults to \code{"static"}.}
+"evolving")}. Defaults to \code{"static"}. Partial strings are ok.}
 
 \item{moving}{deprecated, use \code{dynamic} instead.}
 
@@ -74,10 +74,10 @@ Sweave files.}
   \item{call}{the call made to function 'dcc'}
   
   \item{coef}{the coefficients, themselves being an object of class 'tc_coef'
-  for the static case, and of class 'tc_mcoef' for the moving case. Objects
-  of class 'tc_coef' are single data.frames, while objects of class
-  'tc_mcoef' are lists of seperate data.frames for the coefficients ($coef),
-  upper and lower confidence interval ($ci_upper and $ci_lower), and
+  for the static case, and of class 'tc_mcoef' for the moving case. Objects 
+  of class 'tc_coef' are single data.frames, while objects of class 
+  'tc_mcoef' are lists of seperate data.frames for the coefficients ($coef), 
+  upper and lower confidence interval ($ci_upper and $ci_lower), and 
   significance flags ($significant)}
   
   \item{design}{the design matrix on which this call to 'dcc' operates}
@@ -97,11 +97,11 @@ significance and confidence intervals.
 }
 \details{
 This function builds upon and extents the functionality of programme
-  DENDROCLIM2002 (Biondi and Waikul, 2004), and will calculate bootstrapped
+  DENDROCLIM2002 (Biondi and Waikul, 2004), and will calculate bootstrapped 
   (and non-bootstrapped) moving and static response and correlation functions
-  in a similar fashion as described in the above mentioned paper. Important
-  extensions include a very flexible parameter selection model (see below),
-  the possibility to use an unlimited number of climate parameters, and the
+  in a similar fashion as described in the above mentioned paper. Important 
+  extensions include a very flexible parameter selection model (see below), 
+  the possibility to use an unlimited number of climate parameters, and the 
   option to use exact bootstrapping.
   
   Input chronology data can be a \code{data.frame} such as produced by 
@@ -116,11 +116,13 @@ This function builds upon and extents the functionality of programme
   \code{data.frame} or \code{matrix} in the style of the original 
   DENDROCLIM2002 input data, i.e. one parameter with 12 months in one row, 
   where the first column represents the year. Or thirdly, input climatic data
-  can be a list of several of the latter described \code{data.frame} or 
-  \code{matrices}. As an internal format dispatcher checks the format 
-  automatically, it is absolutely necessary that in all three cases, only 
-  complete years (months 1-12) are provided. It is not possible to mix 
-  different formats in one go.
+  can be a (potentially named) list of one or several of the latter described
+  \code{data.frame} or \code{matrices}. If named list is provided,
+  potentially provided variable names through argument \code{var_names} are
+  ignored. As an internal format dispatcher checks the format automatically,
+  it is absolutely necessary that in all three cases, only complete years
+  (months 1-12) are provided. It is not possible to mix different formats in
+  one go.
   
   Parameters can be selected with the 'selection' parameter in two different 
   ways. The default value is -6:9. This is equivalent to the standard 
@@ -134,9 +136,9 @@ This function builds upon and extents the functionality of programme
   provided in treeclim: \code{.range}, \code{.mean}, and \code{.sum}. 
   \code{.range} corresponds the example above, where all specified months are
   used, while \code{.sum} and \code{.mean} will use the sums and means of the
-  specified months. These modifiers also allow to select specific climatic
-  variables, addressed by name. Thus, \code{.mean(4:8, "temp")} will select
-  the mean for climate parameter "temp" for the months April to August. Not
+  specified months. These modifiers also allow to select specific climatic 
+  variables, addressed by name. Thus, \code{.mean(4:8, "temp")} will select 
+  the mean for climate parameter "temp" for the months April to August. Not 
   only ranges, but also individual vectors can be used for month 
   specification, like e.g., \code{.range(c(1, 3, 4, 5)}.
   
@@ -150,15 +152,15 @@ This function builds upon and extents the functionality of programme
   
   For the exclusion of months, the convenience function \code{excludefrom()} 
   (or short \code{exfr()}) is provided. E.g., \code{.range(excludefrom(-6:10,
-  -11:3))} will yield the monthly values of all parameters for the months
+  -11:3))} will yield the monthly values of all parameters for the months 
   previous June (-6) to current October (10), but without the months previous
-  November (-11) to current March (3) in between. While it is also possible
-  to supply arbitrary vectors as month specification, and not only ranges as
-  shown in most of the examples here, this way of excluding e.g. the dormant
+  November (-11) to current March (3) in between. While it is also possible 
+  to supply arbitrary vectors as month specification, and not only ranges as 
+  shown in most of the examples here, this way of excluding e.g. the dormant 
   season is far more convenient.
   
   1000 bootstrap samples are taken from the original distributions of climate
-  and tree-ring data, either using the stationary bootstrap (Politis and
+  and tree-ring data, either using the stationary bootstrap (Politis and 
   Romano 1994, \code{boot = "stationary"}) or classical bootstrap 
   (DENDROCLIM2002-style, \code{boot = "std"}). The stationary bootstrap 
   mimics the stationary properties of the original time series in the 
@@ -179,12 +181,12 @@ This function builds upon and extents the functionality of programme
   
   There is also the option to use exact bootstrapping like implemented in 
   seascorr (Meko et al. 2011, \code{boot = "exact"}). In this case, circulant
-  embedding is used to simulate the tree-ring data 1000 times as time series
-  with the same frequency characteristics like the original time-series
-  (Percival & Constantine, 2006). Empirical non-exceedence probabilities are
+  embedding is used to simulate the tree-ring data 1000 times as time series 
+  with the same frequency characteristics like the original time-series 
+  (Percival & Constantine, 2006). Empirical non-exceedence probabilities are 
   used to test the coefficients of the response/correlation function with the
-  original data for significance. For the exact bootstrapping case, no
-  confidence intervals for the response/correlation coefficients can be
+  original data for significance. For the exact bootstrapping case, no 
+  confidence intervals for the response/correlation coefficients can be 
   computed.
 }
 \examples{

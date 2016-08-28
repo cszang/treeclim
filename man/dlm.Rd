@@ -14,9 +14,9 @@ obtained by \code{chron} of package dplR.}
 \item{climate}{either a \code{data.frame} or \code{matrix} with climatic data
 in monthly resolution, with year, month and climate parameters in columns 
 (all columns except year and month will be recognized as parameters for 
-response or correlation function), or a single \code{data.frame} or 
-\code{matrix} in 13-column format (see below), or list of several of the 
-latter.}
+response or correlation functions), or a single \code{data.frame} or 
+\code{matrix} in 13-column format (see below), or a (potentially named) 
+list of one or several of the latter.}
 
 \item{selection}{selection either a numeric vector, a modifier, or a chain of
 modifiers specifying the parameter selection for the model (see Details).}
@@ -66,11 +66,13 @@ Input chronology data can be a \code{data.frame} such as produced by
   \code{data.frame} or \code{matrix} in the style of the original 
   DENDROCLIM2002 input data, i.e. one parameter with 12 months in one row, 
   where the first column represents the year. Or thirdly, input climatic data
-  can be a list of several of the latter described \code{data.frame} or 
-  \code{matrices}. As an internal format dispatcher checks the format 
-  automatically, it is absolutely necessary that in all three cases, only 
-  complete years (months 1-12) are provided. It is not possible to mix 
-  different formats in one go.
+  can be a (potentially named) list of one or several of the latter described
+  \code{data.frame} or \code{matrices}. If named list is provided, 
+  potentially provided variable names through argument \code{var_names} are 
+  ignored. As an internal format dispatcher checks the format automatically, 
+  it is absolutely necessary that in all three cases, only complete years 
+  (months 1-12) are provided. It is not possible to mix different formats in 
+  one go.
   
   Parameters can be selected with the 'selection' parameter in two different 
   ways. In 'dlm', there is no default selection, in contrast to 'dcc'. As an 
