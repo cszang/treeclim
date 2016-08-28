@@ -7,6 +7,15 @@ test_that("Numerical results are identical to benchmark version", {
              -0.229822307076872, 0.289828779248469, -0.0464073967781443, -0.201352877557232)
   set.seed(42)
   scoef1 <- seascorr(muc_spruce, muc_clim)$coef[[1]]$primary$coef
-  expect_lt(sqrt(mean((comp1 - scoef1)^2)), 0.1)
+  expect_equal(comp1 - scoef1)
+  
+  comp2 <- c(0.109833429255861, 0.312270211373605, 0.393589780553808, 0.231152894922053, 
+             0.293391207793243, -0.0712287240964869, 0.0410126162146031, 0.235344375702773, 
+             0.0341647590313166, 0.155910021340724, -0.0227302514037442, 0.00844103256114878, 
+             0.0280374094995005, 0.24346935442002)
+  set.seed(42)
+  scoef2 <- seascorr(rt_spruce, list(rt_prec, rt_temp),
+                     season_lengths = c(1, 2, 5, 7, 8))$coef[[1]]$primary$coef
+  expect_equal(comp2 - scoef2)
 }
 )
