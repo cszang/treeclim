@@ -1,0 +1,19 @@
+#TOC {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  width: 200px;
+  height: 100%;
+  overflow:auto;
+}
+
+#TOC::before {
+  content: "treeclim";
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  margin-left:230px;
+  line-height: 20px;
+}
