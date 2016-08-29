@@ -16,26 +16,43 @@ exclude_from <- function(month, exclude = NULL) {
   ## check if exclude is given
   if (is.null(exclude))
     return(month)
-
-  ## check if exclude is supplied as a range
-  if (is_continuous(exclude)) {
-    exclude <- correct_continuous(exclude)
-  } else {
-    if (any(exclude == 0)) {
-      stop("It is not possible to mix ranges through zero with other specifications.")
-    }
-  }
   
-  ## month must be supplied as a range!
+  ## month must first be supplied as a range!
   if (!is_continuous(month)) {
     stop("`month` has to be a continuous range.")
-  } else {
-    month <- correct_continuous(month)
-    ## exclude all excluded months (if available)
+  }
+  month <- correct_continuous(month)
+  
+  ## check if exclude is supplied as a range
+  correct_exclude <- function(exclude) {
+    if (is_continuous(exclude)) {
+      exclude <- correct_continuous(exclude)
+    } else {
+      if (any(exclude == 0)) {
+        stop("It is not possible to mix ranges through zero with other specifications.")
+      }
+    }
+    exclude
+  }
+  
+  ## do exclusion
+  do_exclude <- function(month, exclude) {
     matching <- na.omit(match(exclude, month))
     if (length(matching) > 0) {
       month <- month[-na.omit(matching)]
-    } 
+    }
+    month
+  }
+
+  if (is.list(exclude)) {
+    n <- length(exclude)
+    for (i in 1:n) {
+      .exclude <- correct_exclude(exclude[[i]])
+       month <- do_exclude(month, .exclude)
+    }
+  } else {
+    .exclude <- correct_exclude(exclude)
+    month <- do_exclude(month, .exclude)
   }
   month
 }
