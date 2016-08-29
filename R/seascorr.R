@@ -197,7 +197,6 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
   } else {
     minmonth <- -13
   }
-  
 
   ## truncate climate and tree-ring data to common or specified
   ## time span
@@ -205,17 +204,6 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
                                     timespan = timespan,
                                     minmonth = minmonth,
                                     dynamic = "static")
-
-  ## create raw parameter matrix
-  if (truncated_input$pad == 1) {
-    # we have no climate data for previous year, but use maximum overlap -> cut
-    # tree data accordingly
-    truncated_input$chrono <- truncated_input$chrono[-1]
-  }
-  if (truncated_input$pad == 2) {
-    # similar for padding of two years
-    truncated_input$chrono <- truncated_input$chrono[-c(1, 2)]
-  }
   
   m <- length(truncated_input$chrono)
   
@@ -224,7 +212,7 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
   if (m < 31)
     stop("Seasonal correlation analysis needs at least 31 years of data overlap for proxy and climate data.")
   
-  pmat <- make_pmat(truncated_input$climate, pad = 0)
+  pmat <- make_pmat(truncated_input$climate, pad = truncated_input$pad)
 
   ## create seasons, a list entry for each season_length
   seasons1 <- seasons2 <- list()
