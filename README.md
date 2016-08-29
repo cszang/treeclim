@@ -10,7 +10,7 @@ An R package for modeling tree/climate relationships.
 
 ## Usage
 
-See the [Vignette](http://czang.org/treeclim.html) and the [Wiki](https://github.com/cszang/treeclim/wiki) for details.
+See the [Vignette](http://cszang.github.com/treeclim) and the [Wiki](https://github.com/cszang/treeclim/wiki) for details.
 
 ## Citation
 
