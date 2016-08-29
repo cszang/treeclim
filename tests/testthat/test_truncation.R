@@ -43,4 +43,12 @@ test_that("climate and tree data are correctly truncated to user supplied specs"
   
   expect_message(truncate_input(chrono, climate,
                              c(1950, 1998), -1, FALSE))
+  
+  proxy <- muc_spruce
+  proxy$mucstd[c(5, 9, 22, 52)] <- NA
+  expect_output(dcc(proxy, muc_clim, 1:2), "Missing proxy data for")
+  
+  climate2 <- muc_clim
+  climate2$temp[c(40, 50, 60)] <- NA
+  expect_error(dcc(proxy, climate2, 1:2), "Climate data")
 })

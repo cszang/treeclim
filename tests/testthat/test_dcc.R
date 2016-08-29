@@ -41,4 +41,11 @@ test_that("Numerical results are identical to benchmark version", {
   set.seed(42)
   coefs5 <- dcc(rt_spruce, rt_prec, 4:9, method = "corr", moving = TRUE, win_size = 40)$coef$coef[,3]
   expect_equal(coefs5, comp5)
+  
+  comp6 <- c(0.155383432630196, 0.0918951748072474, -0.0638265717811419, 
+             0.0710423074449692, 0.188587446576691, 0.0226450705463124, -0.0174483181998573
+  )
+  set.seed(42)
+  coefs6 <- dcc(rt_spruce, rt_prec, -4:-10, boot = "exact")$coef$coef
+  expect_equal(coefs6, comp6)
 })
