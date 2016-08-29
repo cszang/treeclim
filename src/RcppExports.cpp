@@ -6,6 +6,18 @@
 
 using namespace Rcpp;
 
+// corfun
+SEXP corfun(SEXP x, SEXP y);
+RcppExport SEXP treeclim_corfun(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
+    __result = Rcpp::wrap(corfun(x, y));
+    return __result;
+END_RCPP
+}
 // corfunexact
 SEXP corfunexact(SEXP x, SEXP y, SEXP y0);
 RcppExport SEXP treeclim_corfunexact(SEXP xSEXP, SEXP ySEXP, SEXP y0SEXP) {
@@ -31,18 +43,6 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// corfun
-SEXP corfun(SEXP x, SEXP y);
-RcppExport SEXP treeclim_corfun(SEXP xSEXP, SEXP ySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
-    __result = Rcpp::wrap(corfun(x, y));
-    return __result;
-END_RCPP
-}
 // pcor
 SEXP pcor(SEXP x1, SEXP x2, SEXP y, SEXP y0);
 RcppExport SEXP treeclim_pcor(SEXP x1SEXP, SEXP x2SEXP, SEXP ySEXP, SEXP y0SEXP) {
@@ -57,6 +57,18 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// respo
+SEXP respo(SEXP x, SEXP y);
+RcppExport SEXP treeclim_respo(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
+    __result = Rcpp::wrap(respo(x, y));
+    return __result;
+END_RCPP
+}
 // respoexact
 SEXP respoexact(SEXP x, SEXP y, SEXP y0);
 RcppExport SEXP treeclim_respoexact(SEXP xSEXP, SEXP ySEXP, SEXP y0SEXP) {
@@ -67,18 +79,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
     Rcpp::traits::input_parameter< SEXP >::type y0(y0SEXP);
     __result = Rcpp::wrap(respoexact(x, y, y0));
-    return __result;
-END_RCPP
-}
-// respo
-SEXP respo(SEXP x, SEXP y);
-RcppExport SEXP treeclim_respo(SEXP xSEXP, SEXP ySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
-    __result = Rcpp::wrap(respo(x, y));
     return __result;
 END_RCPP
 }
