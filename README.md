@@ -10,8 +10,11 @@ An R package for modeling tree/climate relationships.
 
 ## Usage
 
-See the [Vignette](http://cszang.github.com/treeclim) and the [Wiki](https://github.com/cszang/treeclim/wiki) for details.
+See the [Vignette](http://cszang.github.com/treeclim) and the
+[Wiki](https://github.com/cszang/treeclim/wiki) for details.
 
 ## Citation
 
-Zang, C., and F. Biondi. 2015. treeclim: an R package for the numerical calibration of proxy-climate relationships. Ecography 38:431–436.
+Zang, C., and F. Biondi. 2015. treeclim: an R package for the
+numerical calibration of proxy-climate relationships. Ecography
+38:431–436.
