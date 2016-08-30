@@ -68,4 +68,10 @@ test_that("months are correctly shifted", {
   expect_that(..(-19), equals(-19))
   expect_that(..(-25), throws_error("can only use months"))
   expect_that(.(3.2), throws_error("can only shift months"))
+  expect_error(dcc(muc_spruce, muc_clim, ..(12:-5)),
+               "must be integer vector of length 1")
+  expect_error(dcc(muc_spruce, muc_clim, ..(5.2)),
+               "must be integer vector of length 1")
+  expect_error(dcc(muc_spruce, muc_clim, ..(.mean(2:4))),
+               "must be integer vector of length 1")
 })

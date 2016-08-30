@@ -10,13 +10,13 @@
 ..(x)
 }
 \arguments{
-\item{x}{numeric identifiers for the months (1 for January, ..., 12 for
-December)}
+\item{x}{numeric identifier (of length 1) for the months (1 for
+January, ..., 12 for December)}
 }
 \description{
-These functions are used to specify months from previous years for the
-design matrix. \code{.(1)} is the same as \code{-1}, and specifies previous
-year's January, whereas \code{..(1)} signifies January of the year prior to
-the last year.
+These functions are used to specify months from previous years for
+the design matrix. \code{.(1)} is the same as \code{-1}, and
+specifies previous year's January, whereas \code{..(1)} signifies
+January of the year prior to the last year.
 }
 
