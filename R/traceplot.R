@@ -23,6 +23,7 @@ traceplot <- function(x, variables = NULL, facet = FALSE) {
   if (!any(class(x$coef) %in% c("tc_mcof", "tc_ecoef"))) {
     stop("`traceplot` requires the output of a call to `dcc` with 'dynamic' set to either 'moving' or 'evolving'.")
   }
+  variable <- winid <- significant <- NULL # to keep R CMD check happy
   coefs <- x$coef$coef
   sigs <- x$coef$significant
   var_names <- x$design$names

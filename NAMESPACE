@@ -41,3 +41,4 @@ importFrom("stats", "approx", "coef", "fft", "median", "na.omit",
            "rnorm", "sd", "shapiro.test", "spec.taper", "var",
            "window", "ecdf")
 importFrom("utils", "setTxtProgressBar", "tail", "txtProgressBar")
+importFrom("stats", "lm")
