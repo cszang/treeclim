@@ -49,6 +49,8 @@ corresponding to the part of the data set to be used as calibration subset.}
   \item{CE}{coefficient of efficiency statistic}
   
   \item{DW}{Durbin-Watson statistic}
+
+  \item{RMSE}{The root mean squared error for the prediction interval}
   
   \item{cal.model}{the complete calibration model (an object of class
   'lmodel2')}
