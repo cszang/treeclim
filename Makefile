@@ -13,7 +13,10 @@ attributes:
 test: attributes
 	R -e "library(methods); devtools::test($(dir))"
 
-install: attributes
+docs: document
+	R -e "staticdocs::build_site($(dir))"
+
+install: document attributes
 	R CMD INSTALL --no-multiarch --with-keep.source $(dir)
 
 cleanrebuild: attributes
