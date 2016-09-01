@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>treeclim-modifiers. treeclim 2.0.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">treeclim 2.0.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Modifiers for climate parameter selection</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='treeclim-modifiers.html'>.range</a></span><span class="keyword">(</span><span class="argument">.months</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">.variables</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='treeclim-modifiers.html'>.mean</a></span><span class="keyword">(</span><span class="argument">.months</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">.variables</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='treeclim-modifiers.html'>.sum</a></span><span class="keyword">(</span><span class="argument">.months</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">.variables</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>.months</dt>
+      <dd>numeric identifiers for the months (-1 for previous
+January until 12 for current December, with -6 for previous
+June, etc.)</dd>
+      <dt>.variables</dt>
+      <dd>names of the variables the modifier shall be
+applied to</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>These modifiers are used to select specific months from specific
+climate parameters, and potentially transform the selections into
+their respective sums or means. The modifiers can be chained
+together using &#39;+&#39;.
+<code>.range</code> corresponds to using all specified months
+separately, while <code>.sum</code> and <code>.mean</code> will use the sums
+and means of the specified months. These modifiers also allow to
+select specific climatic variables, addressed by name. Thus,
+<code>.mean(4:8, &quot;temp&quot;)</code> will select the mean for climate
+parameter &quot;temp&quot; for the months April to August. Not only ranges,
+but also individual vectors can be used for month specification,
+like e.g., <code>.range(c(1, 3, 4, 5)</code>.</p>
+
+      <p>The modifiers can be chained together using the &#39;+&#39; symbol, which
+makes it possible to create arbitrarily complex selections of
+climate parameters for calibration.  E.g., <code>.mean(2:5,
+&quot;temp&quot;) + .sum(2:5, &quot;prec&quot;)</code> will yield the February-to-May mean
+for the variable &quot;temp&quot; and the sum of the variable &quot;prec&quot; for the
+same time. While there is no limitation for number of lists that
+can be chained together, &#39;dcc&#39; will not check for meaningful
+specifications. Testing smart hypotheses is up the researcher.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># my_calib &lt;- dcc(rt_spruce, list(prec = rt_prec, temp = rt_temp),</span>
+<span class="comment">#   .range(4:9, "temp") + .mean(-5:-9, "temp") + .sum(3:10, "prec"))</span>
+<span class="comment"># plot(my_calib)</span>
+<span class="comment">## ---------------------------------------------</span></div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>.mean</li><li>.range</li><li>.sum</li><li>treeclim-modifiers</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

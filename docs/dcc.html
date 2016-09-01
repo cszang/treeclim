@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>dcc. treeclim 2.0.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Christian Zang; the original MATLAB code for exact
+  bootstrapping was written by Dave Meko
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">treeclim 2.0.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Response and correlation function analysis</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='dcc.html'>dcc</a></span><span class="keyword">(</span><span class="symbol">chrono</span><span class="keyword">,</span> <span class="symbol">climate</span><span class="keyword">,</span> <span class="argument">selection</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="keyword">-</span><span class="number">6</span><span class="keyword">:</span><span class="number">9</span><span class="keyword">,</span> <span class="argument">method</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"response"</span><span class="keyword">,</span>
+  <span class="argument">dynamic</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"static"</span><span class="keyword">,</span> <span class="symbol">moving</span><span class="keyword">,</span> <span class="argument">win_size</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">25</span><span class="keyword">,</span> <span class="argument">win_offset</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span>
+  <span class="argument">start_last</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">timespan</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">var_names</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">ci</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.05</span><span class="keyword">,</span>
+  <span class="argument">boot</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"stationary"</span><span class="keyword">,</span> <span class="argument">sb</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>chrono</dt>
+      <dd><code>data.frame</code> containing a tree-ring
+chronologies, e.g. as obtained by <code>chron</code> of package dplR.</dd>
+      <dt>climate</dt>
+      <dd>either a <code>data.frame</code> or <code>matrix</code> with
+climatic data in monthly resolution, with year, month and
+climate parameters in columns (all columns except year and month
+will be recognized as parameters for response or correlation
+functions), or a single <code>data.frame</code> or <code>matrix</code> in
+13-column format (see below), or a (potentially named) list of
+one or several of the latter.</dd>
+      <dt>selection</dt>
+      <dd>either a numeric vector, a modifier, or a chain
+of modifiers specifying the parameter selection for the model
+(see Details).</dd>
+      <dt>method</dt>
+      <dd><code>character</code> string specifying the calculation
+method.  Possible values are &#147;response&#148; and
+&#147;correlation&#148;. Partial strings are ok.</dd>
+      <dt>dynamic</dt>
+      <dd><code>character</code>; should the analyis be carried out
+in a static, moving, or evolving fashion. One of
+<code>c(&quot;static&quot;, &quot;moving&quot;, &quot;evolving&quot;)</code>. Defaults to
+<code>&quot;static&quot;</code>. Partial strings are ok.</dd>
+      <dt>moving</dt>
+      <dd>deprecated, use <code>dynamic</code> instead.</dd>
+      <dt>win_size</dt>
+      <dd>integer giving the window size for each
+recalculation in years for a moving analysis, and the initial
+window size for an evolving analysis.</dd>
+      <dt>win_offset</dt>
+      <dd>integer giving the number of years between each
+window start in years.</dd>
+      <dt>start_last</dt>
+      <dd><code>logical</code> flag indicating whether the first
+window should start at the rear end (youngest part of the
+series) or not.</dd>
+      <dt>timespan</dt>
+      <dd><code>integer</code> vector of length 2 specifying the
+time interval (in years) to be considered for analysis. Defaults
+to the maximum possible interval.</dd>
+      <dt>var_names</dt>
+      <dd><code>character</code> vector with variable
+names. Defaults to corresponding column names of
+<code>data.frame</code> clim.</dd>
+      <dt>ci</dt>
+      <dd><code>numerical</code> value to set the test level for
+significance test (values 0.01, 0.05 and 0.1 are allowed); the
+confidence intervals are adapted accordingly.</dd>
+      <dt>boot</dt>
+      <dd><code>character</code> indicating which bootstrap method
+should be used, one of <code>c(&quot;stationary&quot;, &quot;std&quot;, &quot;exact&quot;)</code></dd>
+      <dt>sb</dt>
+      <dd><code>logical</code> flag indicating whether textual status
+bar for moving case should be suppressed. Suppression is
+recommended for e.g.  Sweave files.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+&#39;dcc&#39; returns an &#39;object&#39; of class &#39;&quot;tc_dcc&quot;&#39;.</p>
+
+      <p>The functions &#39;summary&#39; and &#39;plot&#39; are used to obtain and print
+  a summary of the results, and to create a plot. The function
+  &#39;coef&#39; can be used to extract the coefficients.</p>
+
+      <p>An object of class &#39;&quot;tc_dcc&quot;&#39; is a list containing at least the
+  following components:</p>
+
+      <p><dt>call</dt><dd>the call made to function &#39;dcc&#39;</dd></p>
+
+      <p><dt>coef</dt><dd>the coefficients, themselves being an object of
+  class &#39;tc_coef&#39; for the static case, and of class &#39;tc_mcoef&#39; for
+  the moving case. Objects of class &#39;tc_coef&#39; are single
+  data.frames, while objects of class &#39;tc_mcoef&#39; are lists of
+  seperate data.frames for the coefficients ($coef), upper and
+  lower confidence interval ($ci_upper and $ci_lower), and
+  significance flags ($significant)</dd></p>
+
+      <p><dt>design</dt><dd>the design matrix on which this call to &#39;dcc&#39;
+  operates</dd></p>
+
+      <p><dt>truncated</dt><dd>the input data truncated to the common timespan
+  or the specified timespan</dd></p>
+
+      <p><dt>original</dt><dd>the original input data, with the climate data
+  being recast into a single data.frame</dd></p>
+
+      <p></dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function calculates (potentially moving or evolving) response
+and correlation functions from tree-ring chronologies and monthly
+climatic data.  For the moving case, the calculation is performed
+repeatedly for consecutive time windows. Function parameters may
+be bootstrapped to calculate their significance and confidence
+intervals.</p>
+
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>This function builds upon and extents the functionality of
+programme DENDROCLIM2002 (Biondi and Waikul, 2004), and will
+calculate bootstrapped (and non-bootstrapped) moving and static
+response and correlation functions in a similar fashion as
+described in the above mentioned paper. Important extensions
+include a very flexible parameter selection model (see below), the
+possibility to use an unlimited number of climate parameters, and
+the option to use exact bootstrapping.</p>
+
+      <p>Input chronology data can be a <code>data.frame</code> such as produced
+by function <code>chron</code> of package dplR. It has to be a
+<code>data.frame</code> with at least one column containing the
+tree-ring indices, and the corresponding years as <code>rownames</code>.</p>
+
+      <p>For climatic input data, there are three possibilities: Firstly,
+input climatic data can be a <code>data.frame</code> or <code>matrix</code>
+consisting of at least 3 rows for years, months and at least one
+climate parameter in the given order. Secondly, input climatic
+data can be a single <code>data.frame</code> or <code>matrix</code> in the
+style of the original DENDROCLIM2002 input data, i.e. one
+parameter with 12 months in one row, where the first column
+represents the year. Or thirdly, input climatic data can be a
+(potentially named) list of one or several of the latter described
+<code>data.frame</code> or <code>matrices</code>. If named list is provided,
+potentially provided variable names through argument
+<code>var_names</code> are ignored. As an internal format dispatcher
+checks the format automatically, it is absolutely necessary that
+in all three cases, only complete years (months 1-12) are
+provided. It is not possible to mix different formats in one go.</p>
+
+      <p>Parameters can be selected with the &#39;selection&#39; parameter in two
+different ways:</p>
+
+      <p><ul>
+<li> simple selections: as an example -6:9 selects from all
+  climate variables all months from previous year&#39;s June (-6,
+  previous year&#39;s months are specified as negative integers) to
+  current years September (9, months of the current year are
+  specified as positive integers) as model parameters. Months from
+  the previous year and the year before that can be selected using
+  <a href='treeclim-shifters.html'>treeclim-shifters</a> like <code>..(6)</code> to refer to July of
+  the year before the previous year.</p>
+
+      <p></li>
+<li> using <em>modifiers</em>: More complex parameter selections
+  can be obtained by the <em>modifiers</em> provided in treeclim:
+  <code>.range</code>, <code>.mean</code>, and <code>.sum</code>. These modifiers
+  can also be chained to create complex selections. See
+  <a href='treeclim-modifiers.html'>treeclim-modifiers</a> for details.
+</li>
+</ul></p>
+
+      <p>For the exclusion of months, the convenience function
+<code><a href='exclude_from.html'>exclude_from</a></code> (or short <code><a href='exclude_from.html'>exfr</a></code>) is
+provided.</p>
+
+      <p>1000 bootstrap samples are taken from the original distributions
+of climate and tree-ring data, either using the stationary
+bootstrap (Politis and Romano 1994, <code>boot = &quot;stationary&quot;</code>) or
+classical bootstrap (DENDROCLIM2002-style, <code>boot =
+&quot;std&quot;</code>). The stationary bootstrap mimics the stationary properties
+of the original time series in the resampled time series by
+resampling within blocks. Within each block, the number of
+observations is random and has a geometric distribution.
+Consequently, the choice of the distribution parameter will affect
+the autocorrelation structure of the resampled time
+series. Optimal (expected) block length is chosen according to
+Politis and White (2004). In the case of response function
+analysis, an eigen decomposition of the standardized predictor
+matrix is performed. Nonrelevant eigenvectors are removed using
+the PVP criterion (Guiot, 1990), principal component scores are
+then calculated from the matrices of reduced eigenvectors and
+standardized climatic predictors. Response coefficients are found
+via singular value decomposition, and tested for significance
+using the 95% percentile range method (Dixon, 2001). In case of
+correlation function analysis, the coefficients are Pearson&#39;s
+correlation coefficients. The same method for significance testing
+is applied.</p>
+
+      <p>There is also the option to use exact bootstrapping like
+implemented in seascorr (Meko et al. 2011, <code>boot =
+&quot;exact&quot;</code>). In this case, circulant embedding is used to simulate
+the tree-ring data 1000 times as time series with the same
+frequency characteristics like the original time-series (Percival
+&amp; Constantine, 2006). Empirical non-exceedence probabilities are
+used to test the coefficients of the response/correlation function
+with the original data for significance. For the exact
+bootstrapping case, no confidence intervals for the
+response/correlation coefficients can be computed.</p>
+
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+
+      <p>Biondi, F &amp; Waikul, K (2004) DENDROCLIM2002: A C++
+  program for statistical calibration of climate signals in
+  tree-ring chronologies.  <em>Computers &amp; Geosciences</em>
+  30:303-311</p>
+
+      <p>Dixon, PM (2001) Bootstrap resampling. In: El-Shaarawi, AH,
+  Piegorsch, WW (Eds.), <em>The Encyclopedia of
+  Environmetrics</em>. Wiley, New York.</p>
+
+      <p>Guiot, J (1991) The boostrapped response
+  function. <em>Tree-Ring Bulletin</em> 51:39-41</p>
+
+      <p>Meko DM, Touchan R, Anchukaitis KJ (2011) Seascorr: A MATLAB
+  program for identifying the seasonal climate signal in an annual
+  tree-ring time series.  <em>Computers \&amp; Geosciences</em>
+  37:1234-241</p>
+
+      <p>Percival DB, Constantine WLB (2006) Exact simulation of Gaussian Time 
+  Series from Nonparametric Spectral Estimates with Application to 
+  Bootstrapping. <em>Statistics and Computing</em> 16:25-35</p>
+
+      <p>Patton, A. and D.N. Politis and H. White (2009),
+  &quot;CORRECTION TO &#39;Automatic block-length selection for the dependent bootstrap&#39; by D. Politis and H.  White&quot;,
+  Econometric Reviews 28(4), 372-375.</p>
+
+      <p>Politis, D.N. and H. White (2004), Automatic block-length
+  selection for the dependent bootstrap, Econometric Reviews
+  23(1), 53-70.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># dc_resp &lt;- dcc(muc_spruce, muc_clim)</span>
+<span class="comment">## ---------------------------------------------</span></div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>dcc</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+    <h2>Author</h2>
+    
+Christian Zang; the original MATLAB code for exact
+  bootstrapping was written by Dave Meko
+
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

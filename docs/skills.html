@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>skills. treeclim 2.0.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">treeclim 2.0.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Evaluate reconstruction skills using split-calibration</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='skills.html'>skills</a></span><span class="keyword">(</span><span class="symbol">object</span><span class="keyword">,</span> <span class="argument">target</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">model</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"ols"</span><span class="keyword">,</span> <span class="argument">calibration</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"50%"</span><span class="keyword">,</span>
+  <span class="argument">timespan</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>object</dt>
+      <dd>an object of class &quot;tc_dcc&quot;, &quot;tc_dlm&quot;, or
+&quot;tc_seascorr&quot;</dd>
+      <dt>target</dt>
+      <dd>a treeclim selection modifier specifying the climate
+target to be reconstructed, see below for details</dd>
+      <dt>model</dt>
+      <dd>one of &quot;ols&quot; or &quot;rma&quot;</dd>
+      <dt>calibration</dt>
+      <dd>which part of the data shall be used as
+calibration subset? Given as either a range of years, an integer
+corresponding to the first or last number of observations, or a
+percentage as character string corresponding to the part of the
+data set to be used as calibration subset.</dd>
+      <dt>timespan</dt>
+      <dd>timespan to be used to truncate the data</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+&#39;skills&#39; returns an &#39;object&#39; of class &#39;&quot;tc_skills&quot;&#39;.</p>
+
+      <p>An object of class &#39;&quot;tc_skills&quot;&#39; is a list containing at least
+  the following components:</p>
+
+      <p><dt>call</dt><dd>the call made to function &#39;skills&#39;</dd></p>
+
+      <p><dt>target</dt><dd>the target used for reconstruction</dd></p>
+
+      <p><dt>r.cal</dt><dd>the coefficient of correlation for the calibration
+  timespan</dd></p>
+
+      <p><dt>r.full</dt><dd>the coefficient of correlation for the complete
+  data set</dd></p>
+
+      <p><dt>coef.cal</dt><dd>regression coefficients for the calibration
+  model</dd></p>
+
+      <p><dt>coef.full</dt><dd>regression coefficients for the full model</dd></p>
+
+      <p><dt>p.cal</dt><dd>significance for the calibration model</dd></p>
+
+      <p><dt>p.full</dt><dd>significance for the full model</dd></p>
+
+      <p><dt>RE</dt><dd>reduction of error statistic</dd></p>
+
+      <p><dt>CE</dt><dd>coefficient of efficiency statistic</dd></p>
+
+      <p><dt>DW</dt><dd>Durbin-Watson statistic</dd></p>
+
+      <p><dt>RMSE</dt><dd>The root mean squared error for the prediction
+  interval</dd></p>
+
+      <p><dt>cal.model</dt><dd>the complete calibration model (an object of
+  class &#39;lmodel2&#39;)</dd></p>
+
+      <p><dt>full.mode</dt><dd>the complete full model (an object of class
+  &#39;lmodel2&#39;)</dd></p>
+
+      <p></dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function allows to evaluate the reconstruction skills for a
+given proxy time series in split-calibration approach.</p>
+
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>The result of a call to <code><a href='dcc.html'>dcc</a></code>, <code><a href='dlm.html'>dlm</a></code>, or
+<code><a href='seascorr.html'>seascorr</a></code> can be used as <code>object</code> for the
+function. The required data is then taken from this object and no
+further processing of the tree and climate variables has to be
+done for by the user. This reflects the flow of analysis, where
+first general climate/growth relations are explored, and then the
+strongest ones are deployed for reconstruction purposes.</p>
+
+      <p><code>target</code> is an aggregation modifier (one of
+<code><a href='treeclim-modifiers.html'>.mean</a></code>, <code><a href='treeclim-modifiers.html'>.sum</a></code>, and
+<code><a href='treeclim-modifiers.html'>.range</a></code>). The user should be aware of the fact that
+in case the aggregation modifier evaluates to more than one
+variable (e.g., summer means for both temperature and
+precipiation), a warning message is issued, and only the first
+variable is taken into consideration for evaluating the
+reconstruction skills. If not specified, the selection from the
+original call to <code><a href='dcc.html'>dcc</a></code>, <code><a href='seascorr.html'>seascorr</a></code>, or
+<code><a href='dlm.html'>dlm</a></code> is used.</p>
+
+      <p>The type of regression model (ordinary least squares or
+errors-in-variables via reduced major axis regression) can be
+selected.</p>
+
+      <p>The part of the data to be used as a calibration subset can be
+specified in three different ways: 1) as a range of years, these
+are then taken as calibration period; 2) as a single integer, if
+positive, this number of observations at the recent end of the
+data set is taken as calibration set, if negative, this number of
+oldest observations is taken; and 3) as a character string giving
+a percentage of values, e.g., &quot;-40%&quot; would select the 40% oldest
+observations, while &quot;55%&quot; would select the 55% most recent ones.</p>
+
+      <p>The relationship between climate and tree-ring data is evaluated
+for the calibration period and the complete data set. Frequently
+used verification statistics are computed: reduction of error
+(RE), coefficient of efficiency (CE), and the Durban-Watson
+statistic (DW) (Cook et al. 1994, Durbin and Watson, 1951).</p>
+
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+
+      <p>Cook E, Briffa K, Jones P (1994) Spatial regression
+  methods in dendroclimatology: A review and comparison of two
+  techniques. International Journal of Climatology, 14, 379-402.</p>
+
+      <p>Durbin, J, Watson, GS (1951) Testing for serial correlation in
+  least squares regression. Biometrika 38:159-78.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># dc &lt;- dcc(muc_fake, muc_clim, .mean(6:9, "temp") + .sum(6:9,</span>
+<span class="comment"># "prec"))</span>
+<span class="comment"># sk &lt;- skills(dc)</span>
+<span class="comment"># sk</span>
+<span class="comment"># plot(sk)</span>
+<span class="comment">## ---------------------------------------------</span></div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>skills</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

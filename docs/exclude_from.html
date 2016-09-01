@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>exclude_from. treeclim 2.0.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">treeclim 2.0.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Exclude months from analysis</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='exclude_from.html'>exclude_from</a></span><span class="keyword">(</span><span class="symbol">month</span><span class="keyword">,</span> <span class="argument">exclude</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='exclude_from.html'>exfr</a></span><span class="keyword">(</span><span class="symbol">month</span><span class="keyword">,</span> <span class="argument">exclude</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>month</dt>
+      <dd>range of numeric month ids</dd>
+      <dt>exclude</dt>
+      <dd>range or set of months to exclude</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+a reduced set of numeric month ids
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Single months or ranges of months can be excluded from
+analysis. This is helpful for e.g. excluding winter months without
+cambial activity.</p>
+
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>These convenience function is provided for the exclusion
+  of months. E.g., <code>.range(exclude_from(-6:10, -11:3))</code> will
+  yield the monthly values of all parameters for the months
+  previous June (-6) to current October (10), but without the
+  months previous November (-11) to current March (3) in
+  between. While it is also possible to supply arbitrary vectors
+  as month specification, and not only ranges as shown in most of
+  the examples here, this way of excluding e.g. the dormant season
+  is far more convenient.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="functioncall"><a href='exclude_from.html'>exfr</a></span><span class="keyword">(</span><span class="keyword">-</span><span class="number">5</span><span class="keyword">:</span><span class="number">10</span><span class="keyword">,</span> <span class="keyword">-</span><span class="number">10</span><span class="keyword">:</span><span class="number">3</span><span class="keyword">)</span></div>
+<div class='output'> [1] -5 -6 -7 -8 -9  4  5  6  7  8  9 10
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>exclude_from</li><li>exfr</li>
+    </ul>
+    <ul>
+      <li>manip</li>
+    </ul> -->
+
+    <h2>See also</h2>
+      <p><code>link{.range}</code>, <code>link{.mean}</code>,
+<code>link{.sum}</code></p>
+
+    
+
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

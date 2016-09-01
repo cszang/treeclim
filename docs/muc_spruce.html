@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>muc_spruce. treeclim 2.0.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">treeclim 2.0.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Tree-Ring Chronology of a Spruce Population near Munich</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='http://www.rdocumentation.org/packages/utils/topics/data'>data</a></span><span class="keyword">(</span><span class="symbol">muc_spruce</span><span class="keyword">)</span></pre>
+        
+    <div class="Format">
+      <h2>Format</h2>
+
+      <p>A <code>data.frame</code> containing tree-ring indices and
+replication depth with respective years as <code>rownames</code>.</p>
+
+    </div>
+
+    <div class="Source">
+      <h2>Source</h2>
+
+      <p>Zang C, Pretzsch H, Rothe A (2012) Size-dependent
+responses to summer drought in Scots pine, Norway spruce and
+common oak. Trees - Structure and Function, 26, 557-569.</p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This dataset gives the tree-ring indices for <em>Picea abies</em> at
+Forstenrieder Park, Munich, Bavaria, Germany. The chronology
+represents 20 cores from 10 trees. The series were read in using
+<code><a href='http://www.rdocumentation.org/packages/dplR/topics/read.rwl'>read.rwl</a></code> from package <code>dplR</code>, detrended
+using a 60a spline with 50% frequency cutoff (function
+<code><a href='http://www.rdocumentation.org/packages/dplR/topics/detrend'>detrend</a></code>), and averaged to a chronology using a
+robust mean <code><a href='http://www.rdocumentation.org/packages/dplR/topics/chron'>chron</a></code>.</p>
+
+    </div>
+      </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>muc_spruce</li>
+    </ul>
+    <ul>
+      <li>datasets</li>
+    </ul> -->
+
+
+
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

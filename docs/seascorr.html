@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>seascorr. treeclim 2.0.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Christian Zang; the procedure incl. exact bootstrapping
+was implemented first by Dave Meko in MATLAB
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">treeclim 2.0.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Seasonal (partial) correlation analysis</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='seascorr.html'>seascorr</a></span><span class="keyword">(</span><span class="symbol">chrono</span><span class="keyword">,</span> <span class="symbol">climate</span><span class="keyword">,</span> <span class="argument">var_names</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">timespan</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">complete</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">9</span><span class="keyword">,</span>
+  <span class="argument">season_lengths</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span> <span class="number">3</span><span class="keyword">,</span> <span class="number">6</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">primary</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span> <span class="argument">secondary</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">2</span><span class="keyword">,</span> <span class="argument">ci</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.05</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>chrono</dt>
+      <dd><code>data.frame</code> containing a tree-ring
+chronologies, e.g. as obtained by <code>chron</code> of package dplR.</dd>
+      <dt>climate</dt>
+      <dd>either a <code>data.frame</code> or <code>matrix</code> with
+climatic data in monthly resolution, with year, month and
+climate parameters in columns (all columns except year and month
+will be recognized as parameters for response or correlation
+functions), or a single <code>data.frame</code> or <code>matrix</code> in
+13-column format (see below), or a (potentially named) list of
+one or several of the latter.</dd>
+      <dt>var_names</dt>
+      <dd><code>character</code> vector with variable
+names. Defaults to corresponding column names of
+<code>data.frame</code> clim.</dd>
+      <dt>timespan</dt>
+      <dd><code>integer</code> vector of length 2 specifying the
+time interval (in years) to be considered for analysis. Defaults
+to the maximum possible interval.</dd>
+      <dt>complete</dt>
+      <dd><code>integer</code> scalar, month when tree-ring growth
+is expected to have finished.</dd>
+      <dt>season_lengths</dt>
+      <dd><code>numeric</code> vector giving the lengths of
+the seasons for variable grouping</dd>
+      <dt>primary</dt>
+      <dd>position <code>numeric</code> or name <code>character</code> of
+primary climate variable</dd>
+      <dt>secondary</dt>
+      <dd>position <code>numeric</code> or name <code>character</code>
+of secondary climate variable</dd>
+      <dt>ci</dt>
+      <dd><code>numerical</code> value to set the test level for
+significance test (values 0.01, 0.05 and 0.1 are allowed); the
+confidence intervals are adapted accordingly.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+&#39;seascorr&#39; returns an &#39;object&#39; of class &#39;&quot;tc_seascorr&quot;&#39;.</p>
+
+      <p>The &#39;plot&#39; function is used to obtain a plot of the results.</p>
+
+      <p>An object of class &#39;&quot;tc_seascorr&quot;&#39; is a list containing at least
+  the following components:</p>
+
+      <p><dt>call</dt><dd>the call made to &#39;seascorr&#39;</dd></p>
+
+      <p><dt>seasons</dt><dd>a list of length n, where n is the number of season
+  lengths provided; each list element consists of a data.frame
+  with end month, correlation coefficient and significance flag</dd></p>
+
+      <p><dt>truncated</dt><dd>the input data truncated to the common timespan
+  or the specified timespan</dd></p>
+
+      <p><dt>original</dt><dd>the original input data, with the climate data
+  being recast into a single data.frame</dd></p>
+
+      <p></dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Calculate seasonal correlation with primary and secondary climate
+variables and tree-ring data, similar to the seascorr function for
+MATLAB.</p>
+
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>This function mimicks the behaviour of the MATLAB function
+seascorr (Meko et al. 2011), which calculates partial correlations
+of tree-ring data with a primary and a secondary climatic variable
+for seasons of different lengths.</p>
+
+      <p>Input chronology data can be a <code>data.frame</code> such as produced
+by function <code>chron</code> of package dplR. It has to be a
+<code>data.frame</code> with at least one column containing the
+tree-ring indices, and the corresponding years as <code>rownames</code>.</p>
+
+      <p>For climatic input data, there are three possibilities: Firstly,
+input climatic data can be a <code>data.frame</code> or <code>matrix</code>
+consisting of at least 3 rows for years, months and at least one
+climate parameter in the given order. Secondly, input climatic
+data can be a single <code>data.frame</code> or <code>matrix</code> in the
+style of the original DENDROCLIM2002 input data, i.e. one
+parameter with 12 months in one row, where the first column
+represents the year. Or thirdly, input climatic data can be a list
+of several of the latter described <code>data.frame</code> or
+<code>matrices</code>. As an internal format dispatcher checks the
+format automatically, it is absolutely necessary that in all three
+cases, only complete years (months 1-12) are provided. It is not
+possible to mix different formats in one go.</p>
+
+      <p>The `complete` parameter specifies the months of the current year
+in which tree-growth is assumed to finish. This month marks the
+last month of the first season, and starting from here, 14
+different seasons are computed for each specified season length in
+one-month steps. E.g., for a starting value of 9 (current
+September) and season length of 3 months, the first season
+comprises current July to current September, the second season
+comprises current June to current August, and the last season
+comprises previous June to previous August. This results in 14
+seasons for a given season length. An arbitrary number of season
+lengths can be specified.</p>
+
+      <p>The choice for primary vs. secondary variable can be made either
+via numeric selection (the integer value 1 stands for the first
+variable in the supplied climate data set), or by name (&quot;temp&quot;,
+when one of the variables is named &quot;temp&quot;). The correlation of the
+primary variable with tree-growth is computed as the simple
+(Pearson) correlation coefficient, while the influence of the
+secondary variable on tree-growth is computed with the influence
+of the primary variable on tree-growth removed.</p>
+
+      <p>Like in the original seascorr program, the significance of each
+(partial) correlation is evaluated using exact bootstrapping by
+circulant embedding of the tree-ring data (Percival \&amp;
+Constantine, 2006).</p>
+
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+
+      <p>Meko DM, Touchan R, Anchukaitis KJ (2011) Seascorr: A MATLAB
+  program for identifying the seasonal climate signal in an annual
+  tree-ring time series. Computers &amp; Geosciences, 37, 1234-1241.</p>
+
+      <p>Percival DB, Constantine WLB (2006) Exact simulation of Gaussian
+  Time Series from Nonparametric Spectral Estimates with
+  Application to Bootstrapping. Statistics and Computing 16:25-35</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="symbol">sc</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='seascorr.html'>seascorr</a></span><span class="keyword">(</span><span class="symbol">muc_fake</span><span class="keyword">,</span> <span class="symbol">muc_clim</span><span class="keyword">)</span></div>
+<div class='output'>Running for timespan 1950 - 2007...
+</div>
+<div class='input'><span class="symbol">sc</span></div>
+<div class='output'>Results for a season length of 1 month:
+   month      type        coef significant
+1    Aug   primary -0.52315707        TRUE
+2    Sep   primary -0.13106200       FALSE
+3    Oct   primary  0.16032485       FALSE
+4    Nov   primary -0.23014606       FALSE
+5    Dec   primary  0.02495031       FALSE
+6    JAN   primary  0.17341295       FALSE
+7    FEB   primary  0.45037057        TRUE
+8    MAR   primary  0.36968951        TRUE
+9    APR   primary -0.02386727       FALSE
+10   MAY   primary -0.16053042       FALSE
+11   JUN   primary -0.12820088       FALSE
+12   JUL   primary -0.46359592        TRUE
+13   AUG   primary -0.31719590       FALSE
+14   SEP   primary -0.04488525       FALSE
+15   Aug secondary -0.27582238        TRUE
+16   Sep secondary  0.06979801       FALSE
+17   Oct secondary -0.03462244       FALSE
+18   Nov secondary -0.06800642       FALSE
+19   Dec secondary  0.03601494       FALSE
+20   JAN secondary -0.05971148       FALSE
+21   FEB secondary  0.24420694       FALSE
+22   MAR secondary -0.02486455       FALSE
+23   APR secondary  0.07099030       FALSE
+24   MAY secondary -0.07426713       FALSE
+25   JUN secondary -0.05046446       FALSE
+26   JUL secondary  0.36076160        TRUE
+27   AUG secondary  0.31129036        TRUE
+28   SEP secondary  0.16688381       FALSE
+
+Results for a season length of 3 months:
+   month      type         coef significant
+1    Aug   primary -0.519372934        TRUE
+2    Sep   primary -0.472046433        TRUE
+3    Oct   primary -0.269621872       FALSE
+4    Nov   primary -0.103296203       FALSE
+5    Dec   primary -0.018873918       FALSE
+6    JAN   primary  0.027481833       FALSE
+7    FEB   primary  0.358586564        TRUE
+8    MAR   primary  0.459598073        TRUE
+9    APR   primary  0.443071976        TRUE
+10   MAY   primary  0.151850972       FALSE
+11   JUN   primary -0.153003958       FALSE
+12   JUL   primary -0.338164752        TRUE
+13   AUG   primary -0.410667091        TRUE
+14   SEP   primary -0.434304128        TRUE
+15   Aug secondary -0.038775439       FALSE
+16   Sep secondary -0.013844737       FALSE
+17   Oct secondary -0.010596375       FALSE
+18   Nov secondary -0.026705049       FALSE
+19   Dec secondary -0.055449827       FALSE
+20   JAN secondary -0.053018617       FALSE
+21   FEB secondary  0.176630042       FALSE
+22   MAR secondary  0.167696805       FALSE
+23   APR secondary  0.191680777       FALSE
+24   MAY secondary  0.007175124       FALSE
+25   JUN secondary -0.038708343       FALSE
+26   JUL secondary  0.209051084       FALSE
+27   AUG secondary  0.493436042        TRUE
+28   SEP secondary  0.548339230        TRUE
+
+Results for a season length of 6 months:
+   month      type        coef significant
+1    Aug   primary -0.38053064        TRUE
+2    Sep   primary -0.42438246        TRUE
+3    Oct   primary -0.35668326        TRUE
+4    Nov   primary -0.43122888        TRUE
+5    Dec   primary -0.33982524        TRUE
+6    JAN   primary -0.11427049       FALSE
+7    FEB   primary  0.25403078       FALSE
+8    MAR   primary  0.36958577        TRUE
+9    APR   primary  0.31492586        TRUE
+10   MAY   primary  0.31197301        TRUE
+11   JUN   primary  0.30125518        TRUE
+12   JUL   primary  0.13418402       FALSE
+13   AUG   primary -0.17200464       FALSE
+14   SEP   primary -0.34877616        TRUE
+15   Aug secondary  0.13398881       FALSE
+16   Sep secondary  0.14112114       FALSE
+17   Oct secondary  0.08526974       FALSE
+18   Nov secondary  0.03537528       FALSE
+19   Dec secondary  0.09463696       FALSE
+20   JAN secondary -0.01895588       FALSE
+21   FEB secondary  0.11413440       FALSE
+22   MAR secondary  0.03430415       FALSE
+23   APR secondary  0.13810680       FALSE
+24   MAY secondary  0.13548750       FALSE
+25   JUN secondary  0.15877314       FALSE
+26   JUL secondary  0.39691162        TRUE
+27   AUG secondary  0.41362134        TRUE
+28   SEP secondary  0.42946252        TRUE
+
+</div>
+<div class='input'><span class="functioncall"><a href='http://www.rdocumentation.org/packages/git2r/topics/plot-methods'>plot</a></span><span class="keyword">(</span><span class="symbol">sc</span><span class="keyword">)</span></div>
+<p><img src='seascorr-6.png' alt='' width='540' height='400' /></p></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>seascorr</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+    <h2>Author</h2>
+    
+Christian Zang; the procedure incl. exact bootstrapping
+was implemented first by Dave Meko in MATLAB
+
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

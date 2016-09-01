@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>Home. treeclim 2.0.0</title>
+<title>check_months. treeclim 2.0.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -49,37 +49,52 @@
         
       </header>
       
-      <div class="row">
+      <h1>Check if all months are between -24 and 12 (previous and current december)</h1>
+
+<div class="row">
   <div class="span8">
-    <p><a href="https://travis-ci.org/cszang/treeclim"><img src="https://travis-ci.org/cszang/treeclim.svg?branch=master" alt="Build Status"/></a>
-<a href="http://cran.r-project.org/package=treeclim"><img src="http://www.r-pkg.org/badges/version/treeclim" alt="CRAN\_Status\_Badge"/></a>
-<a href="http://www.r-pkg.org/pkg/treeclim"><img src="http://cranlogs.r-pkg.org/badges/grand-total/treeclim" alt="CRAN\_Download\_Badge"/></a>
-<a href="https://codecov.io/github/cszang/treeclim?branch=master"><img src="https://img.shields.io/codecov/c/github/cszang/treeclim/master.svg" alt="Coverage Status"/></a>
-[<img src="https://img.shields.io/badge/license-GPL%20%3E%3D%203-yellowgreen.svg" alt="MIT licensed"/>](./DESCRIPTION)</p>
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='check_months.html'>check_months</a></span><span class="keyword">(</span><span class="symbol">selection</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>selection</dt>
+      <dd>the month selection as vector, list, or nested
+list</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
 
-<h1>treeclim</h1>
+      <p><dl>
+a list with the earliest month and the result of the check
+(logical)
+</dl></p>
 
-<p>An R package for modeling tree/climate relationships.</p>
+    </div>
 
-<h2>Usage</h2>
+    <div class="Description">
+      <h2>Description</h2>
 
-<p>See the <a href="http://cszang.github.com/treeclim">Vignette</a> and the
-<a href="https://github.com/cszang/treeclim/wiki">Wiki</a> for details.</p>
+      <p>Make sure that all the months specified in the (probably complex)
+month specification to dcc are correct months, in the sense that
+they range between -24 and 12. Further, return the earliest month
+in the complete selection to decide if we need previous year
+climate later on.</p>
 
-<h2>Citation</h2>
-
-<p>Zang, C., and F. Biondi. 2015. treeclim: an R package for the
-numerical calibration of proxy-climate relationships. Ecography
-38:431<e2><80><93>436.</p>
-
-  </div>
-
-  <div class="span3 offset1 sidebar">
-        <h2>Authors</h2>
-    <ul>
-      <li><a href='mailto:christian.zang@wzw.tum.de'>Christian Zang</a> [aut, cre, cph, trl]</li>
-      <li>Franco Biondi [ctb, cph]</li>
+    </div>
+      </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>check_months</li>
     </ul>
+    <ul>
+      <li>internal</li>
+    </ul> -->
+
+
+
+
   </div>
 </div>
       

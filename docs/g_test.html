@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>g_test. treeclim 2.0.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">treeclim 2.0.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Gershunov test for spurious low-frequency modulations</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='g_test.html'>g_test</a></span><span class="keyword">(</span><span class="symbol">x</span><span class="keyword">,</span> <span class="argument">boot</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">sb</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>x</dt>
+      <dd>an object of class &#39;&quot;tc_dcc&quot;&#39; as returned from a call to
+<code><a href='dcc.html'>dcc</a></code> with moving correlations enabled</dd>
+      <dt>boot</dt>
+      <dd><code>logical</code> shall the individual correlation be
+bootstrapped?  (see details)</dd>
+      <dt>sb</dt>
+      <dd><code>logical</code> shall a status bar be drawn?</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+a <code>data.frame</code> with p values for the testing the null
+    hypothesis that the low-frequency modulation of the
+    correlations of the variables with tree-growth can be
+    considered as noise.
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>This function provides a test to decide whether low-frequency
+modulations in the relationship between climate and tree-growth
+are significantly stronger or weaker than could be expected by
+chance.</p>
+
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>This function is a multivariate extension of the test for
+spurious low-frequency modulations for moving correlations of time
+series as proposed by Gershunov et al. (2001). In short, 1000
+simulations of random data sets are generated, where the climate
+data is simulated as Gaussian noise, and the tree-data as linear
+combinations of the climate parameters using the original
+coefficients of the correlation function, and an error component
+with a variance equal to the variance unexplained by the
+individual parameters.</p>
+
+      <p>For each iteration, a moving correlation function is calculated
+with exactly the same settings as the original model. The standard
+deviation over the individual windows for each parameter is then
+compared to the bootstrapped distribution of the standard
+deviation of the simulated data to test for significantly higher
+or lower low-frequency modulations.</p>
+
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+
+      <p>Gershunov, A., N. Schneider, and
+    T. Barnett. 2001. Low-frequency modulation of the ENSO-Indian
+    Monsoon rainfall relationship: Signal or noise? Journal of
+    Climate 14:2486-2492.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
+<span class="comment"># dc_cor &lt;- dcc(muc_spruce, muc_clim, 3:9, method = "cor", moving = TRUE)</span>
+<span class="comment"># g_test(dc_cor)</span>
+<span class="comment">## ---------------------------------------------</span></div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>g_test</li>
+    </ul>
+    <ul>
+      <li>test</li>
+    </ul> -->
+
+
+
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
