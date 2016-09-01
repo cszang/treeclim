@@ -1,6 +1,6 @@
 Makefile
 README.org
 .git
-^.*\.Rproj$
-^\.Rproj\.user$
 docs/*
+codecov.yml
+.travis.yml
