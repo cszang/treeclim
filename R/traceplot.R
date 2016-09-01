@@ -35,7 +35,8 @@ traceplot <- function(x, variables = NULL, facet = FALSE) {
     var_index <- pmatch(variables, var_names)
     if (anyNA(var_index)) {
       var_na <- which(is.na(var_index))
-      stop(paste0("Variable ", variables[var_na], " not found.\n"), "Available variabes are:\n", var_names)
+      var_names_print <- paste(var_names, collapse = "\n")
+      stop(paste0("Variable ", variables[var_na], " not found.\n"), "Available variabes are:\n", var_names_print)
     } else {
       variables <- var_names[var_index]
     }
