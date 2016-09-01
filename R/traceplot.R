@@ -20,7 +20,7 @@
 ##' @import ggplot2
 ##' @export
 traceplot <- function(x, variables = NULL, facet = FALSE) {
-  if (!any(class(x$coef) %in% c("tc_mcof", "tc_ecoef"))) {
+  if (!any(class(x$coef) %in% c("tc_mcoef", "tc_ecoef"))) {
     stop("`traceplot` requires the output of a call to `dcc` with 'dynamic' set to either 'moving' or 'evolving'.")
   }
   variable <- winid <- significant <- NULL # to keep R CMD check happy
