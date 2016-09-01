@@ -54,8 +54,8 @@ make_range_list <- function(call, method) {
 ##' \dontrun{
 ##' my_calib <- dcc(rt_spruce, list(prec = rt_prec, temp = rt_temp),
 ##'   .range(4:9, "temp") + .mean(-5:-9, "temp") + .sum(3:10, "prec"))
-##' }
 ##' plot(my_calib)
+##' }
 NULL
 
 ##' @rdname treeclim-modifiers
