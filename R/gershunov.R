@@ -4,7 +4,8 @@
 ##' modulations in the relationship between climate and tree-growth
 ##' are significantly stronger or weaker than could be expected by
 ##' chance.
-##' @details This function is a multivariate extension of the test for
+##'
+##' This function is a multivariate extension of the test for
 ##' spurious low-frequency modulations for moving correlations of time
 ##' series as proposed by Gershunov et al. (2001). In short, 1000
 ##' simulations of random data sets are generated, where the climate
@@ -20,6 +21,7 @@
 ##' compared to the bootstrapped distribution of the standard
 ##' deviation of the simulated data to test for significantly higher
 ##' or lower low-frequency modulations.
+##'
 ##' @param x an object of class '"tc_dcc"' as returned from a call to
 ##'     \code{\link{dcc}} with moving correlations enabled
 ##' @param boot \code{logical} shall the individual correlation be

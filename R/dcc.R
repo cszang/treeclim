@@ -6,112 +6,95 @@
 ##' repeatedly for consecutive time windows. Function parameters may
 ##' be bootstrapped to calculate their significance and confidence
 ##' intervals.
-##' @details This function builds upon and extents the functionality
-##'   of programme DENDROCLIM2002 (Biondi and Waikul, 2004), and will
-##'   calculate bootstrapped (and non-bootstrapped) moving and static
-##'   response and correlation functions in a similar fashion as
-##'   described in the above mentioned paper. Important extensions
-##'   include a very flexible parameter selection model (see below),
-##'   the possibility to use an unlimited number of climate
-##'   parameters, and the option to use exact bootstrapping.
+##'
+##' This function builds upon and extents the functionality of
+##' programme DENDROCLIM2002 (Biondi and Waikul, 2004), and will
+##' calculate bootstrapped (and non-bootstrapped) moving and static
+##' response and correlation functions in a similar fashion as
+##' described in the above mentioned paper. Important extensions
+##' include a very flexible parameter selection model (see below), the
+##' possibility to use an unlimited number of climate parameters, and
+##' the option to use exact bootstrapping.
 ##'   
-##'   Input chronology data can be a \code{data.frame} such as
-##'   produced by function \code{chron} of package dplR. It has to be
-##'   a \code{data.frame} with at least one column containing the
-##'   tree-ring indices, and the corresponding years as
-##'   \code{rownames}.
+##' Input chronology data can be a \code{data.frame} such as produced
+##' by function \code{chron} of package dplR. It has to be a
+##' \code{data.frame} with at least one column containing the
+##' tree-ring indices, and the corresponding years as \code{rownames}.
 ##'   
-##'   For climatic input data, there are three possibilities: Firstly,
-##'   input climatic data can be a \code{data.frame} or \code{matrix}
-##'   consisting of at least 3 rows for years, months and at least one
-##'   climate parameter in the given order. Secondly, input climatic
-##'   data can be a single \code{data.frame} or \code{matrix} in the
-##'   style of the original DENDROCLIM2002 input data, i.e. one
-##'   parameter with 12 months in one row, where the first column
-##'   represents the year. Or thirdly, input climatic data can be a
-##'   (potentially named) list of one or several of the latter
-##'   described \code{data.frame} or \code{matrices}. If named list is
-##'   provided, potentially provided variable names through argument
-##'   \code{var_names} are ignored. As an internal format dispatcher
-##'   checks the format automatically, it is absolutely necessary that
-##'   in all three cases, only complete years (months 1-12) are
-##'   provided. It is not possible to mix different formats in one go.
+##' For climatic input data, there are three possibilities: Firstly,
+##' input climatic data can be a \code{data.frame} or \code{matrix}
+##' consisting of at least 3 rows for years, months and at least one
+##' climate parameter in the given order. Secondly, input climatic
+##' data can be a single \code{data.frame} or \code{matrix} in the
+##' style of the original DENDROCLIM2002 input data, i.e. one
+##' parameter with 12 months in one row, where the first column
+##' represents the year. Or thirdly, input climatic data can be a
+##' (potentially named) list of one or several of the latter described
+##' \code{data.frame} or \code{matrices}. If named list is provided,
+##' potentially provided variable names through argument
+##' \code{var_names} are ignored. As an internal format dispatcher
+##' checks the format automatically, it is absolutely necessary that
+##' in all three cases, only complete years (months 1-12) are
+##' provided. It is not possible to mix different formats in one go.
 ##'   
-##'   Parameters can be selected with the 'selection' parameter in two
-##'   different ways. The default value is -6:9. This is equivalent to
-##'   the standard settings in DENDROCLIM2002 and bootRes, and selects
-##'   from all climate variables all months from previous year's June
-##'   (-6, previous year's months are specified as negative integers)
-##'   to current years September (9, months of the current year are
-##'   specified as positive integers) as model parameters.
+##' Parameters can be selected with the 'selection' parameter in two
+##' different ways:
+##'
+##' \itemize{
+##' \item simple selections: as an example -6:9 selects from all
+##'   climate variables all months from previous year's June (-6,
+##'   previous year's months are specified as negative integers) to
+##'   current years September (9, months of the current year are
+##'   specified as positive integers) as model parameters. Months from
+##'   the previous year and the year before that can be selected using
+##'   \link{treeclim-shifters} like \code{..(6)} to refer to July of
+##'   the year before the previous year.
+##'
+##' \item using \emph{modifiers}: More complex parameter selections
+##'   can be obtained by the \emph{modifiers} provided in treeclim:
+##'   \code{.range}, \code{.mean}, and \code{.sum}. These modifiers
+##'   can also be chained to create complex selections. See
+##'   \link{treeclim-modifiers} for details.
+##' }
+##'
+##' For the exclusion of months, the convenience function
+##' \code{\link{exclude_from}} (or short \code{\link{exfr}}) is
+##' provided.
 ##'   
-##'   More complex parameter selections can be obtained by the
-##'   \emph{modifiers} provided in treeclim: \code{.range},
-##'   \code{.mean}, and \code{.sum}.  \code{.range} corresponds the
-##'   example above, where all specified months are used, while
-##'   \code{.sum} and \code{.mean} will use the sums and means of the
-##'   specified months. These modifiers also allow to select specific
-##'   climatic variables, addressed by name. Thus, \code{.mean(4:8,
-##'   "temp")} will select the mean for climate parameter "temp" for
-##'   the months April to August. Not only ranges, but also individual
-##'   vectors can be used for month specification, like e.g.,
-##'   \code{.range(c(1, 3, 4, 5)}.
+##' 1000 bootstrap samples are taken from the original distributions
+##' of climate and tree-ring data, either using the stationary
+##' bootstrap (Politis and Romano 1994, \code{boot = "stationary"}) or
+##' classical bootstrap (DENDROCLIM2002-style, \code{boot =
+##' "std"}). The stationary bootstrap mimics the stationary properties
+##' of the original time series in the resampled time series by
+##' resampling within blocks. Within each block, the number of
+##' observations is random and has a geometric distribution.
+##' Consequently, the choice of the distribution parameter will affect
+##' the autocorrelation structure of the resampled time
+##' series. Optimal (expected) block length is chosen according to
+##' Politis and White (2004). In the case of response function
+##' analysis, an eigen decomposition of the standardized predictor
+##' matrix is performed. Nonrelevant eigenvectors are removed using
+##' the PVP criterion (Guiot, 1990), principal component scores are
+##' then calculated from the matrices of reduced eigenvectors and
+##' standardized climatic predictors. Response coefficients are found
+##' via singular value decomposition, and tested for significance
+##' using the 95\% percentile range method (Dixon, 2001). In case of
+##' correlation function analysis, the coefficients are Pearson's
+##' correlation coefficients. The same method for significance testing
+##' is applied.
 ##'   
-##'   The modifiers can be chained together using the '+' symbol,
-##'   which makes it possible to create arbitrarily complex selections
-##'   of climate parameters for calibration.  E.g., \code{.mean(2:5,
-##'   "temp") + .sum(2:5, "prec")} will yield the February-to-May mean
-##'   for the variable "temp" and the sum of the variable "prec" for
-##'   the same time. While there is no limitation for number of lists
-##'   that can be chained together, 'dcc' will not check for
-##'   meaningful specifications. Testing smart hypotheses is up the
-##'   researcher.
-##'   
-##'   For the exclusion of months, the convenience function
-##'   \code{excludefrom()} (or short \code{exfr()}) is provided. E.g.,
-##'   \code{.range(excludefrom(-6:10, -11:3))} will yield the monthly
-##'   values of all parameters for the months previous June (-6) to
-##'   current October (10), but without the months previous November
-##'   (-11) to current March (3) in between. While it is also possible
-##'   to supply arbitrary vectors as month specification, and not only
-##'   ranges as shown in most of the examples here, this way of
-##'   excluding e.g. the dormant season is far more convenient.
-##'   
-##'   1000 bootstrap samples are taken from the original distributions
-##'   of climate and tree-ring data, either using the stationary
-##'   bootstrap (Politis and Romano 1994, \code{boot = "stationary"})
-##'   or classical bootstrap (DENDROCLIM2002-style, \code{boot =
-##'   "std"}). The stationary bootstrap mimics the stationary
-##'   properties of the original time series in the resampled time
-##'   series by resampling within blocks. Within each block, the
-##'   number of observations is random and has a geometric
-##'   distribution.  Consequently, the choice of the distribution
-##'   parameter will affect the autocorrelation structure of the
-##'   resampled time series. Optimal (expected) block length is chosen
-##'   according to Politis and White (2004). In the case of response
-##'   function analysis, an eigen decomposition of the standardized
-##'   predictor matrix is performed. Nonrelevant eigenvectors are
-##'   removed using the PVP criterion (Guiot, 1990), principal
-##'   component scores are then calculated from the matrices of
-##'   reduced eigenvectors and standardized climatic
-##'   predictors. Response coefficients are found via singular value
-##'   decomposition, and tested for significance using the 95\%
-##'   percentile range method (Dixon, 2001). In case of correlation
-##'   function analysis, the coefficients are Pearson's correlation
-##'   coefficients. The same method for significance testing is
-##'   applied.
-##'   
-##'   There is also the option to use exact bootstrapping like
-##'   implemented in seascorr (Meko et al. 2011, \code{boot =
-##'   "exact"}). In this case, circulant embedding is used to simulate
-##'   the tree-ring data 1000 times as time series with the same
-##'   frequency characteristics like the original time-series
-##'   (Percival & Constantine, 2006). Empirical non-exceedence
-##'   probabilities are used to test the coefficients of the
-##'   response/correlation function with the original data for
-##'   significance. For the exact bootstrapping case, no confidence
-##'   intervals for the response/correlation coefficients can be
-##'   computed.
+##' There is also the option to use exact bootstrapping like
+##' implemented in seascorr (Meko et al. 2011, \code{boot =
+##' "exact"}). In this case, circulant embedding is used to simulate
+##' the tree-ring data 1000 times as time series with the same
+##' frequency characteristics like the original time-series (Percival
+##' & Constantine, 2006). Empirical non-exceedence probabilities are
+##' used to test the coefficients of the response/correlation function
+##' with the original data for significance. For the exact
+##' bootstrapping case, no confidence intervals for the
+##' response/correlation coefficients can be computed.
+##'
 ##' @param chrono \code{data.frame} containing a tree-ring
 ##'   chronologies, e.g. as obtained by \code{chron} of package dplR.
 ##' @param climate either a \code{data.frame} or \code{matrix} with

@@ -51,9 +51,13 @@ shift_year <- function(month, by = 0) {
 ##' the design matrix. \code{.(1)} is the same as \code{-1}, and
 ##' specifies previous year's January, whereas \code{..(1)} signifies
 ##' January of the year prior to the last year.
+##' @name treeclim-shifters
 ##' @rdname treeclim-shifters
 ##' @param x numeric identifier (of length 1) for the months (1 for
 ##'   January, ..., 12 for December)
+NULL
+
+##' @rdname treeclim-shifters
 ##' @export
 . <- function(x) {
   shift_year(x, -1)

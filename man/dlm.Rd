@@ -19,9 +19,9 @@ functions), or a single \code{data.frame} or \code{matrix} in
 13-column format (see below), or a (potentially named) list of
 one or several of the latter.}
 
-\item{selection}{selection either a numeric vector, a modifier, or
-a chain of modifiers specifying the parameter selection for the
-model (see Details).}
+\item{selection}{either a numeric vector, a modifier, or a chain
+of modifiers specifying the parameter selection for the model
+(see Details).}
 
 \item{timespan}{\code{integer} vector of length 2 specifying the
 time interval (in years) to be considered for analysis. Defaults
@@ -47,6 +47,7 @@ to \code{FALSE}.}
   standard 'lm' objects:
   
   \item{call_dlm}{the call made to function 'dlm'}
+
   \item{design}{the design matrix on which this call to 'dcc'
   operates}
   
@@ -61,71 +62,57 @@ This is a wrapper around \code{\link{lm}} for working with the
 same data structures and modifiers as with \code{\link{dcc}}.
 }
 \details{
-Input chronology data can be a \code{data.frame} such as
-  produced by function \code{chron} of package dplR. It has to be
-  a \code{data.frame} with at least one column containing the
-  tree-ring indices, and the corresponding years as
-  \code{rownames}.
+Input chronology data can be a \code{data.frame} such as produced
+by function \code{chron} of package dplR. It has to be a
+\code{data.frame} with at least one column containing the
+tree-ring indices, and the corresponding years as \code{rownames}.
   
-  For climatic input data, there are three possibilities: Firstly,
-  input climatic data can be a \code{data.frame} or \code{matrix}
-  consisting of at least 3 rows for years, months and at least one
-  climate parameter in the given order. Secondly, input climatic
-  data can be a single \code{data.frame} or \code{matrix} in the
-  style of the original DENDROCLIM2002 input data, i.e. one
-  parameter with 12 months in one row, where the first column
-  represents the year. Or thirdly, input climatic data can be a
-  (potentially named) list of one or several of the latter
-  described \code{data.frame} or \code{matrices}. If named list is
-  provided, potentially provided variable names through argument
-  \code{var_names} are ignored. As an internal format dispatcher
-  checks the format automatically, it is absolutely necessary that
-  in all three cases, only complete years (months 1-12) are
-  provided. It is not possible to mix different formats in one go.
+For climatic input data, there are three possibilities: Firstly,
+input climatic data can be a \code{data.frame} or \code{matrix}
+consisting of at least 3 rows for years, months and at least one
+climate parameter in the given order. Secondly, input climatic
+data can be a single \code{data.frame} or \code{matrix} in the
+style of the original DENDROCLIM2002 input data, i.e. one
+parameter with 12 months in one row, where the first column
+represents the year. Or thirdly, input climatic data can be a
+(potentially named) list of one or several of the latter described
+\code{data.frame} or \code{matrices}. If named list is provided,
+potentially provided variable names through argument
+\code{var_names} are ignored. As an internal format dispatcher
+checks the format automatically, it is absolutely necessary that
+in all three cases, only complete years (months 1-12) are
+provided. It is not possible to mix different formats in one go.
   
-  Parameters can be selected with the 'selection' parameter in two
-  different ways. In 'dlm', there is no default selection, in
-  contrast to 'dcc'. As an example -6:9 selects from all climate
-  variables all months from previous year's June (-6, previous
-  year's months are specified as negative integers) to current
-  years September (9, months of the current year are specified as
-  positive integers) as model parameters. With 'dlm' one would
-  usually try to keep the number of predictors low.
-  
-  More complex parameter selections can be obtained by the
-  \emph{modifiers} provided in treeclim: \code{.range},
-  \code{.mean}, and \code{.sum}.  \code{.range} corresponds the
-  example above, where all specified months are used, while
-  \code{.sum} and \code{.mean} will use the sums and means of the
-  specified months. These modifiers also allow to select specific
-  climatic variables, addressed by name. Thus, \code{.mean(4:8,
-  "temp")} will select the mean for climate parameter "temp" for
-  the months April to August. Not only ranges, but also individual
-  vectors can be used for month specification, like e.g.,
-  \code{.range(c(1, 3, 4, 5)}.
-  
-  The modifiers can be chained together using the '+' symbol,
-  which makes it possible to create arbitrarily complex selections
-  of climate parameters for calibration.  E.g., \code{.mean(2:5,
-  "temp") + .sum(2:5, "prec")} will yield the February-to-May mean
-  for the variable "temp" and the sum of the variable "prec" for
-  the same time. While there is no limitation for number of lists
-  that can be chained together, 'dcc' will not check for
-  meaningful specifications. Testing smart hypotheses is up the
-  researcher.
-  
-  For the exclusion of months, the convenience function
-  \code{excludefrom()} (or short \code{exfr()}) is provided. E.g.,
-  \code{.range(excludefrom(-6:10, -11:3))} will yield the monthly
-  values of all parameters for the months previous June (-6) to
-  current October (10), but without the months previous November
-  (-11) to current March (3) in between. While it is also possible
-  to supply arbitrary vectors as month specification, and not only
-  ranges as shown in most of the examples here, this way of
-  excluding e.g. the dormant season is far more convenient.
-  
-  For pretty output of the resulting linear model, parameters can
-  be renamed, to e.g. reflect the season they represent.
+In 'dlm', there is no default parameter selection, in contrast to
+'dcc'. Parameters can be selected with the 'selection' parameter
+in two different ways:
+
+\itemize{
+\item simple selections: as an example -6:9 selects from all
+  climate variables all months from previous year's June (-6,
+  previous year's months are specified as negative integers) to
+  current years September (9, months of the current year are
+  specified as positive integers) as model parameters. Months from
+  the previous year and the year before that can be selected using
+  \link{treeclim-shifters} like \code{..(6)} to refer to July of
+  the year before the previous year.
+
+\item using \emph{modifiers}: More complex parameter selections
+  can be obtained by the \emph{modifiers} provided in treeclim:
+  \code{.range}, \code{.mean}, and \code{.sum}. These modifiers
+  can also be chained to create complex selections. See
+  \link{treeclim-modifiers} for details.
+}
+
+For the exclusion of months, the convenience function
+\code{\link{exclude_from}} (or short \code{\link{exfr}}) is
+provided.
+
+With 'dlm' one would usually try to keep the number of predictors
+low.
+
+For pretty output of the resulting linear model, parameters can be
+renamed, to e.g. reflect the season they represent.
 }
 \examples{
 dlm1 <- dlm(rt_spruce, rt_prec, .sum(6:8), param_names = "summer_prec")

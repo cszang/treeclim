@@ -8,35 +8,40 @@ skills(object, target = NULL, model = "ols", calibration = "50\%",
   timespan = NULL)
 }
 \arguments{
-\item{object}{an object of class "tc_dcc", "tc_dlm", or "tc_seascorr"}
+\item{object}{an object of class "tc_dcc", "tc_dlm", or
+"tc_seascorr"}
 
-\item{target}{a treeclim selection modifier specifying the climate target to 
-be reconstructed, see below for details}
+\item{target}{a treeclim selection modifier specifying the climate
+target to be reconstructed, see below for details}
 
 \item{model}{one of "ols" or "rma"}
 
-\item{calibration}{which part of the data shall be used as calibration 
-subset? Given as either a range of years, an integer corresponding to the 
-first or last number of observations, or a percentage as character string 
-corresponding to the part of the data set to be used as calibration subset.}
+\item{calibration}{which part of the data shall be used as
+calibration subset? Given as either a range of years, an integer
+corresponding to the first or last number of observations, or a
+percentage as character string corresponding to the part of the
+data set to be used as calibration subset.}
 
 \item{timespan}{timespan to be used to truncate the data}
 }
 \value{
 'skills' returns an 'object' of class '"tc_skills"'.
   
-  An object of class '"tc_skills"' is a list containing at least the 
-  following components:
+  An object of class '"tc_skills"' is a list containing at least
+  the following components:
   
   \item{call}{the call made to function 'skills'}
   
   \item{target}{the target used for reconstruction}
   
-  \item{r.cal}{the coefficient of correlation for the calibration timespan}
+  \item{r.cal}{the coefficient of correlation for the calibration
+  timespan}
   
-  \item{r.full}{the coefficient of correlation for the complete data set}
+  \item{r.full}{the coefficient of correlation for the complete
+  data set}
   
-  \item{coef.cal}{regression coefficients for the calibration model}
+  \item{coef.cal}{regression coefficients for the calibration
+  model}
   
   \item{coef.full}{regression coefficients for the full model}
   
@@ -50,52 +55,57 @@ corresponding to the part of the data set to be used as calibration subset.}
   
   \item{DW}{Durbin-Watson statistic}
 
-  \item{RMSE}{The root mean squared error for the prediction interval}
+  \item{RMSE}{The root mean squared error for the prediction
+  interval}
   
-  \item{cal.model}{the complete calibration model (an object of class
+  \item{cal.model}{the complete calibration model (an object of
+  class 'lmodel2')}
+  
+  \item{full.mode}{the complete full model (an object of class
   'lmodel2')}
-  
-  \item{full.mode}{the complete full model (an object of class 'lmodel2')}
 }
 \description{
-This function allows to evaluate the reconstruction skills for a given proxy 
-time series in split-calibration approach.
+This function allows to evaluate the reconstruction skills for a
+given proxy time series in split-calibration approach.
 }
 \details{
 The result of a call to \code{\link{dcc}}, \code{\link{dlm}}, or
-  \code{\link{seascorr}} can be used as \code{object} for the function. The
-  required data is then taken from this object and no further processing of
-  the tree and climate variables has to be done for by the user. This
-  reflects the flow of analysis, where first general climate/growth relations
-  are explored, and then the strongest ones are deployed for reconstruction
-  purposes.
+\code{\link{seascorr}} can be used as \code{object} for the
+function. The required data is then taken from this object and no
+further processing of the tree and climate variables has to be
+done for by the user. This reflects the flow of analysis, where
+first general climate/growth relations are explored, and then the
+strongest ones are deployed for reconstruction purposes.
   
-  \code{target} is an aggregation modifier (one of \code{\link{.mean}}, 
-  \code{\link{.sum}}, and \code{\link{.range}}). The user should be aware of 
-  the fact that in case the aggregation modifier evaluates to more than one 
-  variable (e.g., summer means for both temperature and precipiation), a 
-  warning message is issued, and only the first variable is taken into 
-  consideration for evaluating the reconstruction skills. If not specified, 
-  the selection from the original call to \code{\link{dcc}}, 
-  \code{\link{seascorr}}, or \code{\link{dlm}} is used.
+\code{target} is an aggregation modifier (one of
+\code{\link{.mean}}, \code{\link{.sum}}, and
+\code{\link{.range}}). The user should be aware of the fact that
+in case the aggregation modifier evaluates to more than one
+variable (e.g., summer means for both temperature and
+precipiation), a warning message is issued, and only the first
+variable is taken into consideration for evaluating the
+reconstruction skills. If not specified, the selection from the
+original call to \code{\link{dcc}}, \code{\link{seascorr}}, or
+\code{\link{dlm}} is used.
   
-  The type of regression model (ordinary least squares or errors-in-variables
-  via reduced major axis regression) can be selected.
+The type of regression model (ordinary least squares or
+errors-in-variables via reduced major axis regression) can be
+selected.
   
-  The part of the data to be used as a calibration subset can be specified in
-  three different ways: 1) as a range of years, these are then taken as 
-  calibration period; 2) as a single integer, if positive, this number of 
-  observations at the recent end of the data set is taken as calibration set,
-  if negative, this number of oldest observations is taken; and 3) as a 
-  character string giving a percentage of values, e.g., "-40\%" would select 
-  the 40\% oldest observations, while "55\%" would select the 55\% most 
-  recent ones.
+The part of the data to be used as a calibration subset can be
+specified in three different ways: 1) as a range of years, these
+are then taken as calibration period; 2) as a single integer, if
+positive, this number of observations at the recent end of the
+data set is taken as calibration set, if negative, this number of
+oldest observations is taken; and 3) as a character string giving
+a percentage of values, e.g., "-40\%" would select the 40\% oldest
+observations, while "55\%" would select the 55\% most recent ones.
   
-  The relationship between climate and tree-ring data is evaluated for the 
-  calibration period and the complete data set. Frequently used verification 
-  statistics are computed: reduction of error (RE), coefficient of efficiency
-  (CE), and the Durban-Watson statistic (DW) (Cook et al. 1994, Durbin and 
-  Watson, 1951).
+The relationship between climate and tree-ring data is evaluated
+for the calibration period and the complete data set. Frequently
+used verification statistics are computed: reduction of error
+(RE), coefficient of efficiency (CE), and the Durban-Watson
+statistic (DW) (Cook et al. 1994, Durbin and Watson, 1951).
 }
 \examples{
 \dontrun{
@@ -107,11 +117,11 @@ plot(sk)
 }
 }
 \references{
-Cook E, Briffa K, Jones P (1994) Spatial regression methods in 
-  dendroclimatology: A review and comparison of two techniques. International
-  Journal of Climatology, 14, 379-402.
+Cook E, Briffa K, Jones P (1994) Spatial regression
+  methods in dendroclimatology: A review and comparison of two
+  techniques. International Journal of Climatology, 14, 379-402.
   
-  Durbin, J, Watson, GS (1951) Testing for serial correlation in least 
-  squares regression. Biometrika 38:159-78.
+  Durbin, J, Watson, GS (1951) Testing for serial correlation in
+  least squares regression. Biometrika 38:159-78.
 }
 

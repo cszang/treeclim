@@ -22,6 +22,17 @@ Single months or ranges of months can be excluded from
 analysis. This is helpful for e.g. excluding winter months without
 cambial activity.
 }
+\details{
+These convenience function is provided for the exclusion
+  of months. E.g., \code{.range(exclude_from(-6:10, -11:3))} will
+  yield the monthly values of all parameters for the months
+  previous June (-6) to current October (10), but without the
+  months previous November (-11) to current March (3) in
+  between. While it is also possible to supply arbitrary vectors
+  as month specification, and not only ranges as shown in most of
+  the examples here, this way of excluding e.g. the dormant season
+  is far more convenient.
+}
 \examples{
 exfr(-5:10, -10:3)
 }
