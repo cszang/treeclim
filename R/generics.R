@@ -113,11 +113,12 @@ print.tc_skills <- function(x, ...) {
   print.default(format(x$coef.cal), print.gap = 2L,
                 quote = FALSE, ...)
   cat("\nVerification statistics:\n")
-  verstat <- c("Red. of Error (RE)" = round(x$RE, 3),
-               "Coeff. of Efficiency (CE)" = round(x$CE, 3))
+  verstat <- c("RE" = round(x$RE, 3),
+              "CE" = round(x$CE, 3),
+              "prediction RMSE" = round(x$RMSE, 3))
   print.default(format(verstat), print.gap = 2L,
                 quote = FALSE, ...)
-  cat("\nDurbin-Watson Test (DW):\t", round(x$DW$statistic, 3), " (p = ",
+  cat("\nDurbin-Watson Test:\t", round(x$DW$statistic, 3), " (p = ",
       x$DW$p.value, ")\n\n", sep = "")
   cat("Model for whole period:\n\n")
   print.default(format(c(r = x$r.full, "p-value" = x$p.full)),

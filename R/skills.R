@@ -71,6 +71,8 @@
 #'   \item{CE}{coefficient of efficiency statistic}
 #'   
 #'   \item{DW}{Durbin-Watson statistic}
+#'
+#'   \item{RMSE}{The root mean squared error for the prediction interval}
 #'   
 #'   \item{cal.model}{the complete calibration model (an object of class
 #'   'lmodel2')}
@@ -261,6 +263,7 @@ skills <- function(object, target = NULL, model = "ols",
   RE <- reduction_of_error(ver$x, predict_ver, cal$x)
   CE <- coefficient_of_efficiency(ver$x, predict_ver, ver$x)
   DW <- dwtest(cal$x ~ predict_cal)
+  RMSE <- sqrt(mean(ver$x - predict_ver)^2)
   
   model_lm <- list(
     call       = mf,
@@ -274,6 +277,7 @@ skills <- function(object, target = NULL, model = "ols",
     RE         = RE,
     CE         = CE,
     DW         = DW,
+    RMSE       = RMSE,
     cal.model  = lm_cal,
     full.model = lm_full,
     cal.str    = cal_str,
