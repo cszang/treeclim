@@ -346,6 +346,8 @@ dcc <- function(chrono,
   
   dcc_out <- list()
   dcc_out$call <- match.call()
+  dcc_out$call$method <- .method
+  dcc_out$call$dynamic <- .dynamic
   dcc_out$coef <- dc$result
   dcc_out$ac <- dc$ac
   dcc_out$design <- design
