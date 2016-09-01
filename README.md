@@ -2,16 +2,31 @@
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/treeclim)](http://cran.r-project.org/package=treeclim)
 [![CRAN\_Download\_Badge](http://cranlogs.r-pkg.org/badges/grand-total/treeclim)](http://www.r-pkg.org/pkg/treeclim)
 [![Coverage Status](https://img.shields.io/codecov/c/github/cszang/treeclim/master.svg)](https://codecov.io/github/cszang/treeclim?branch=master)
-[![MIT licensed](https://img.shields.io/badge/license-GPL%20%3E%3D%203-yellowgreen.svg)](./DESCRIPTION)
+[![MIT licensed](https://img.shields.io/badge/license-GPL%20%3E%3D%203-yellowgreen.svg)](https://github.com/cszang/treeclim/blob/master/DESCRIPTION)
 
 # treeclim
 
-An R package for modeling tree/climate relationships.
+An R package for modelling tree/climate relationships. The package
+features:
+
+- static, moving, and evolving response and correlation functions
+- seasonal correlations
+- a "dendro-flavoured" linear model
+- evaluation of reconstruction skills
+- a test for spurious moving correlations
+- nice default plots
 
 ## Usage
 
-See the [Vignette](http://cszang.github.com/treeclim) and the
-[Wiki](https://github.com/cszang/treeclim/wiki) for details.
+```R
+library(treeclim)
+munich_spruce_calib <- dcc(muc_spruce, muc_clim)
+plot(munich_spruce_calib)
+skills(munich_spruce_calib)
+```
+
+See the [docs](http://cszang.github.com/treeclim) and the
+[wiki](https://github.com/cszang/treeclim/wiki) for details.
 
 ## Citation
 
