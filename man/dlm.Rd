@@ -48,7 +48,7 @@ to \code{FALSE}.}
   
   \item{call_dlm}{the call made to function 'dlm'}
 
-  \item{design}{the design matrix on which this call to 'dcc'
+  \item{design}{the design matrix on which this call to 'dlm'
   operates}
   
   \item{truncated}{the input data truncated to the common timespan
@@ -59,7 +59,7 @@ to \code{FALSE}.}
 }
 \description{
 This is a wrapper around \code{\link{lm}} for working with the
-same data structures and modifiers as with \code{\link{dcc}}.
+same data structures and modifiers as \code{\link{dcc}} does.
 }
 \details{
 Input chronology data can be a \code{data.frame} such as produced

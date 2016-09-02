@@ -24,7 +24,7 @@
 ##'
 ##' @param x an object of class '"tc_dcc"' as returned from a call to
 ##'     \code{\link{dcc}} with moving correlations enabled
-##' @param boot \code{logical} shall the individual correlation be
+##' @param boot \code{logical} shall the individual correlations be
 ##'     bootstrapped?  (see details)
 ##' @param sb \code{logical} shall a status bar be drawn?
 ##' @return a \code{data.frame} with p values for the testing the null

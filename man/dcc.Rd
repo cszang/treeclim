@@ -82,9 +82,9 @@ recommended for e.g.  Sweave files.}
   class 'tc_coef' for the static case, and of class 'tc_mcoef' for
   the moving case. Objects of class 'tc_coef' are single
   data.frames, while objects of class 'tc_mcoef' are lists of
-  seperate data.frames for the coefficients ($coef), upper and
-  lower confidence interval ($ci_upper and $ci_lower), and
-  significance flags ($significant)}
+  seperate data.frames for the coefficients (element 'coef'), upper and
+  lower confidence interval (elements 'ci_upper' and 'ci_lower'), and
+  significance flags (element 'significant')}
   
   \item{design}{the design matrix on which this call to 'dcc'
   operates}

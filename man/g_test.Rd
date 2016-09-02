@@ -10,7 +10,7 @@ g_test(x, boot = FALSE, sb = TRUE)
 \item{x}{an object of class '"tc_dcc"' as returned from a call to
 \code{\link{dcc}} with moving correlations enabled}
 
-\item{boot}{\code{logical} shall the individual correlation be
+\item{boot}{\code{logical} shall the individual correlations be
 bootstrapped?  (see details)}
 
 \item{sb}{\code{logical} shall a status bar be drawn?}
