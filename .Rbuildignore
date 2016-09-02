@@ -4,5 +4,3 @@ README.org
 docs/*
 codecov.yml
 .travis.yml
-^.*\.Rproj$
-^\.Rproj\.user$
