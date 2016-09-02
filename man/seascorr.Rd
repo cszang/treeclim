@@ -20,8 +20,8 @@ functions), or a single \code{data.frame} or \code{matrix} in
 one or several of the latter.}
 
 \item{var_names}{\code{character} vector with variable
-names. Defaults to corresponding column names of
-\code{data.frame} clim.}
+names. Defaults to corresponding column names of parameter \code{climate} if
+given as \code{data.frame}, or its names if given as \code{list}.}
 
 \item{timespan}{\code{integer} vector of length 2 specifying the
 time interval (in years) to be considered for analysis. Defaults

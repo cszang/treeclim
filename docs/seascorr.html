@@ -75,8 +75,8 @@ functions), or a single <code>data.frame</code> or <code>matrix</code> in
 one or several of the latter.</dd>
       <dt>var_names</dt>
       <dd><code>character</code> vector with variable
-names. Defaults to corresponding column names of
-<code>data.frame</code> clim.</dd>
+names. Defaults to corresponding column names of parameter <code>climate</code> if
+given as <code>data.frame</code>, or its names if given as <code>list</code>.</dd>
       <dt>timespan</dt>
       <dd><code>integer</code> vector of length 2 specifying the
 time interval (in years) to be considered for analysis. Defaults
@@ -302,7 +302,7 @@ Results for a season length of 6 months:
 28   SEP secondary  0.42946252        TRUE
 
 </div>
-<div class='input'><span class="functioncall"><a href='http://www.rdocumentation.org/packages/git2r/topics/plot-methods'>plot</a></span><span class="keyword">(</span><span class="symbol">sc</span><span class="keyword">)</span></div>
+<div class='input'><span class="functioncall"><a href='http://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span><span class="keyword">(</span><span class="symbol">sc</span><span class="keyword">)</span></div>
 <p><img src='seascorr-6.png' alt='' width='540' height='400' /></p></pre>
   </div>
   <div class="span4 sidebar">

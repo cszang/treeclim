@@ -28,8 +28,8 @@ time interval (in years) to be considered for analysis. Defaults
 to the maximum possible interval.}
 
 \item{var_names}{\code{character} vector with variable
-names. Defaults to corresponding column names of
-\code{data.frame} clim.}
+names. Defaults to corresponding column names of parameter \code{climate} if
+given as \code{data.frame}, or its names if given as \code{list}.}
 
 \item{param_names}{\code{character} vector with parameter
 names. Defaults to auto-generated (potentially compound) names.}

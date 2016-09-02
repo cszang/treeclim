@@ -127,8 +127,8 @@
 ##'   time interval (in years) to be considered for analysis. Defaults
 ##'   to the maximum possible interval.
 ##' @param var_names \code{character} vector with variable
-##'   names. Defaults to corresponding column names of
-##'   \code{data.frame} clim.
+##'   names. Defaults to corresponding column names of parameter \code{climate} if
+##'   given as \code{data.frame}, or its names if given as \code{list}.
 ##' @param ci \code{numerical} value to set the test level for
 ##'   significance test (values 0.01, 0.05 and 0.1 are allowed); the
 ##'   confidence intervals are adapted accordingly.
