@@ -1,114 +1,9 @@
-2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
-
-	* Version 1.0.0: first major release, submitted to CRAN
-
-2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
-
-	* Version 1.0.1: bug-fix release to make R CMD check --as-cran
-	happy
-
-	* DESCRIPTION: RcppArmadillo only in "LinkedTo", not in "Depends"
-
-2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
-
-	* Version 1.0.2: small fix
-
-	* NAMESPACE: RcppArmadillo not imported anymore
-
-2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
-
-	* Version 1.0.3: small fix
-
-	* NAMESPACE: declare faux global vars in generics to make R CMD
-	check happy
-
-2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
-
-	* Version 1.0.4: small fix
-
-	* NAMESPACE: RcppArmadillo is imported again
-
-2014-08-06 Christian Zang <christian.zang@wzw.tum.de>
-
-	* Version 1.0.5: small fix
-
-	* NAMESPACE: RcppArmadillo is not imported
-
-	* DESCRIPTION: require R (>= 3.0.2)
-
-2014-08-07 Christian Zang <christian.zang@wzw.tum.de>
-
-	* Version 1.0.6: important bug fix (thanks to Alison Macalady)
-
-	* generics.R: printing a seascorr object had previously gotten the
-	order of the variables wrong
-
-	* DESCRIPTION: updated author fields
-
-2014-08-07 Christian Zang <christian.zang@wzw.tum.de>
-
-	* Version 1.0.7: fixing Authors@R
-
-	* DESCRIPTION: updated author/maintainer fields
-
-2014-09-15 Christian Zang <christian.zang@wzw.tum.de>
-
-	* dcc.R: small doc fix (thanks Marieke)
-
-2014-10-23 Christian Zang <christian.zang@wzw.tum.de>
-
-	* Version 1.0.8: bug fix
-
-	* init_boot_data.R: when b.star estimates (for short time-series)
-	are < 0.5, the value is adjusted to 1 and a warning is issued
-	(thanks Caterina)
-
-2015-01-08 Christian Zang <christian.zang@wzw.tum.de>
-
-	* Version 1.0.9: CITATION file
-
-2015-01-16 Christian Zang <christian.zang@wzw.tum.de>
-
-	* Version 1.0.10: fixed important bug in seasorr
-	* ptest.R: exceedance probability is now computed correctly for
-	edge cases
-	* corfun_exact.cpp: partial regression algorithm now more similar
-	to MATLAB version
-	* *.Rd: examples respect lazy data now
-
-2015-02-10 Christian Zang <christian.zang@wzw.tum.de>
-	* Version 1.0.11: fixed calculation of RE and CE
-
-2015-11-02 Christian Zang <christian.zang@wzw.tum.de>
-	* Version 1.0.12: doc updates, added Makefile
-
-2015-11-02 Christian Zang <christian.zang@wzw.tum.de>
-	* Version 1.0.13: fixed moving window number, citation update,
-	ggplot2-related changes
-
-2016-03-09 Christian Zang <christian.zang@wzw.tum.de>
-	* Version 1.0.14: fixed moving window number regression and its
-	reflectance into g_test
-	* treeclim now pads nonexistent previous year for creating
-	parameter set when only current year variables are selected
-
-2016-03-10 Christian Zang <christian.zang@wzw.tum.de>
-	* Version 1.0.15
-	* g_test: adjusted computation of variance for simulated sets,
-	reports exact p-values now
-	* skills: takes `target` argument (selector) instead of formula now
-
-2016-03-14 Christian Zang <christian.zang@wzw.tum.de>
-	* Version 1.0.16
-	* g_test: bug fix: when prediction variance for original model is
-	> 1, do not add noise to sampled composite series
-
 2016-09-01 Christian Zang <christian.zang@wzw.tum.de>
 	* Version 2.0.0
-	* dcc: functions are alive: API changes (moving > dynamic), new
-	plot option traceplot for non-static functions; thanks to Henri
-	Grissino-Mayer and his team for early specifying features and beta
-	testing
+	* dcc: evolving functions are alive: API changes (moving >
+	dynamic), new plot option traceplot for non-static functions;
+	thanks to Henri Grissino-Mayer and his team for early specifying
+	features and beta testing
 	* dcc: for the southern hemisphere: months from the year previous
 	to the last can now be selected with new shifting functions
 	* seascorr: longer seasons possible
@@ -120,3 +15,108 @@
 	* dcc, seascorr: missing values in tree-ring series are now
 	allowed, but work only for static functions
 
+2016-03-14 Christian Zang <christian.zang@wzw.tum.de>
+	* Version 1.0.16
+	* g_test: bug fix: when prediction variance for original model is
+	> 1, do not add noise to sampled composite series
+
+2016-03-10 Christian Zang <christian.zang@wzw.tum.de>
+	* Version 1.0.15
+	* g_test: adjusted computation of variance for simulated sets,
+	reports exact p-values now
+	* skills: takes `target` argument (selector) instead of formula now
+
+2016-03-09 Christian Zang <christian.zang@wzw.tum.de>
+	* Version 1.0.14: fixed moving window number regression and its
+	reflectance into g_test
+	* treeclim now pads nonexistent previous year for creating
+	parameter set when only current year variables are selected
+
+2015-11-02 Christian Zang <christian.zang@wzw.tum.de>
+	* Version 1.0.13: fixed moving window number, citation update,
+	ggplot2-related changes
+
+2015-11-02 Christian Zang <christian.zang@wzw.tum.de>
+	* Version 1.0.12: doc updates, added Makefile
+
+2015-02-10 Christian Zang <christian.zang@wzw.tum.de>
+	* Version 1.0.11: fixed calculation of RE and CE
+
+2015-01-16 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.10: fixed important bug in seasorr
+	* ptest.R: exceedance probability is now computed correctly for
+	edge cases
+	* corfun_exact.cpp: partial regression algorithm now more similar
+	to MATLAB version
+	* *.Rd: examples respect lazy data now
+
+2015-01-08 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.9: CITATION file
+
+2014-10-23 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.8: bug fix
+
+	* init_boot_data.R: when b.star estimates (for short time-series)
+	are < 0.5, the value is adjusted to 1 and a warning is issued
+	(thanks Caterina)
+
+2014-09-15 Christian Zang <christian.zang@wzw.tum.de>
+
+	* dcc.R: small doc fix (thanks Marieke)
+
+2014-08-07 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.7: fixing Authors@R
+
+	* DESCRIPTION: updated author/maintainer fields
+
+2014-08-07 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.6: important bug fix (thanks to Alison Macalady)
+
+	* generics.R: printing a seascorr object had previously gotten the
+	order of the variables wrong
+
+	* DESCRIPTION: updated author fields
+
+2014-08-06 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.5: small fix
+
+	* NAMESPACE: RcppArmadillo is not imported
+
+	* DESCRIPTION: require R (>= 3.0.2)
+
+2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.4: small fix
+
+	* NAMESPACE: RcppArmadillo is imported again
+
+2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.3: small fix
+
+	* NAMESPACE: declare faux global vars in generics to make R CMD
+	check happy
+
+2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.2: small fix
+
+	* NAMESPACE: RcppArmadillo not imported anymore
+
+2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.1: bug-fix release to make R CMD check --as-cran
+	happy
+
+	* DESCRIPTION: RcppArmadillo only in "LinkedTo", not in "Depends"
+
+2014-08-05 Christian Zang <christian.zang@wzw.tum.de>
+
+	* Version 1.0.0: first major release, submitted to CRAN
+	
