@@ -19,14 +19,14 @@ tc_response <- function(chrono, climate, ci, boot) {
                               chrono, 1000, boot)
   
   if (boot %in% c("stationary", "std", "dendroclim")) {
-    param_matrix <- .Call("treeclim_respo", boot_data$climate,
-                          boot_data$chrono, PACKAGE = "treeclim")$coef
+    param_matrix <- respo(boot_data$climate,
+                          boot_data$chrono)$coef
     
     out <- ptest(param_matrix, ci, NULL, "range")
   } else {
     if (boot == "exact") {
-      param_matrix <- .Call("treeclim_respoexact", boot_data$climate,
-                            boot_data$chrono, chrono, PACKAGE = "treeclim")$coef
+      param_matrix <- respoexact(boot_data$climate,
+                                 boot_data$chrono, chrono)$coef
       
       out <- ptest(param_matrix[,2:1001], ci, param_matrix[,1], "weibull")
     }

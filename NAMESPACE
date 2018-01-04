@@ -1,4 +1,4 @@
-useDynLib(treeclim)
+useDynLib(treeclim, .registration = TRUE)
 import(Rcpp)
 S3method("+",tc_paramlist)
 S3method(coef,tc_coef)

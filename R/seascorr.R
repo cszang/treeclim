@@ -253,9 +253,8 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
 
     results$coef[[i]] <- list()
     
-    params <- .Call("treeclim_pcor", PACKAGE = 'treeclim',
-                    seasons1[[i]], seasons2[[i]],
-                    chrono_boot, truncated_input$chrono)
+    params <- pcor(seasons1[[i]], seasons2[[i]],
+                   chrono_boot, truncated_input$chrono)
 
     results$coef[[i]]$primary <- ptest(params$primary[,2:1001], ci,
                                        params$primary[,1],
