@@ -127,4 +127,3 @@ anova(dlm1, dlm2)
 \author{
 Christian Zang
 }
-

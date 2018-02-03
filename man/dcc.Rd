@@ -197,10 +197,6 @@ response/correlation coefficients can be computed.
 dc_resp <- dcc(muc_spruce, muc_clim)
 }
 }
-\author{
-Christian Zang; the original MATLAB code for exact
-  bootstrapping was written by Dave Meko
-}
 \references{
 Biondi, F & Waikul, K (2004) DENDROCLIM2002: A C++
   program for statistical calibration of climate signals in
@@ -231,4 +227,7 @@ Biondi, F & Waikul, K (2004) DENDROCLIM2002: A C++
   selection for the dependent bootstrap, Econometric Reviews
   23(1), 53-70.
 }
-
+\author{
+Christian Zang; the original MATLAB code for exact
+  bootstrapping was written by Dave Meko
+}

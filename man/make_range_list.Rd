@@ -11,4 +11,3 @@ deconstructs the call to a modifier into a list for further
 processing with the list-based parameter selection functions
 }
 \keyword{internal}
-

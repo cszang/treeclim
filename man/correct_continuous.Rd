@@ -18,4 +18,3 @@ it contains 0. E.g., -5:8 must be translated to c(-5:-12, 1:8).
 }
 \keyword{internal}
 \keyword{manip}
-

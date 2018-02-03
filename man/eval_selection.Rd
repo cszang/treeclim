@@ -21,4 +21,3 @@ to the correct month subset.
 }
 \keyword{internal}
 \keyword{manip}
-

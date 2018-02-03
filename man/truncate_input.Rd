@@ -30,4 +30,3 @@ data, if data from the previous year should be used.
 }
 \keyword{internal}
 \keyword{manip}
-

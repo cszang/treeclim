@@ -19,4 +19,3 @@ previous and current year.
 }
 \keyword{internal}
 \keyword{manip}
-

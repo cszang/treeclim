@@ -20,4 +20,3 @@ This dataset gives the monthly temperature means at Rothenburg ob der Tauber,
 Bavaria, Germany in a decadal (DENDROCLIM2002-style) format)
 }
 \keyword{datasets}
-

@@ -124,10 +124,6 @@ sc <- seascorr(muc_fake, muc_clim)
 sc
 plot(sc)
 }
-\author{
-Christian Zang; the procedure incl. exact bootstrapping
-was implemented first by Dave Meko in MATLAB
-}
 \references{
 Meko DM, Touchan R, Anchukaitis KJ (2011) Seascorr: A MATLAB
   program for identifying the seasonal climate signal in an annual
@@ -137,4 +133,7 @@ Percival DB, Constantine WLB (2006) Exact simulation of Gaussian
   Time Series from Nonparametric Spectral Estimates with
   Application to Bootstrapping. Statistics and Computing 16:25-35
 }
-
+\author{
+Christian Zang; the procedure incl. exact bootstrapping
+was implemented first by Dave Meko in MATLAB
+}

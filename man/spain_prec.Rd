@@ -22,4 +22,3 @@ level for Spain in a decadal (DENDROCLIM2002-style) format from
 the TYN CY 1.1 data set.
 }
 \keyword{datasets}
-

@@ -22,4 +22,3 @@ further usage into the internal format.
 }
 \keyword{internal}
 \keyword{manip,}
-

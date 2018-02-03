@@ -58,4 +58,3 @@ Gershunov, A., N. Schneider, and
     Climate 14:2486-2492.
 }
 \keyword{test}
-

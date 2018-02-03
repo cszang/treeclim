@@ -20,4 +20,3 @@ This dataset gives the monthly precipitation sum at Rothenburg ob der Tauber,
 Bavaria, Germany in a decadal (DENDROCLIM2002-style) format)
 }
 \keyword{datasets}
-

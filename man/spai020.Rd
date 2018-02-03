@@ -24,4 +24,3 @@ read in using \code{\link[dplR]{read.crn}} from package
 \code{dplR}.
 }
 \keyword{datasets}
-

@@ -18,4 +18,3 @@ the (potentially renamed) climate data
 (re)name climate variable
 }
 \keyword{internal}
-

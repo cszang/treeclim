@@ -11,4 +11,3 @@ there is no intuitive way to signify months from the year previous to the
 last one...
 }
 \keyword{internal}
-

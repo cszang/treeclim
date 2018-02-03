@@ -27,4 +27,3 @@ december in columns.
 }
 \keyword{internal}
 \keyword{manip}
-

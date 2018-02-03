@@ -22,4 +22,3 @@ in the complete selection to decide if we need previous year
 climate later on.
 }
 \keyword{internal}
-

@@ -124,4 +124,3 @@ Cook E, Briffa K, Jones P (1994) Spatial regression
   Durbin, J, Watson, GS (1951) Testing for serial correlation in
   least squares regression. Biometrika 38:159-78.
 }
-

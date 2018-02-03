@@ -23,4 +23,3 @@ and March, and high precipitation amounts in current July and
 August.
 }
 \keyword{datasets}
-

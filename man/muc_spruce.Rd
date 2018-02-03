@@ -24,4 +24,3 @@ using a 60a spline with 50\% frequency cutoff (function
 robust mean \code{\link[dplR]{chron}}.
 }
 \keyword{datasets}
-

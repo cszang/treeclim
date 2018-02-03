@@ -24,4 +24,3 @@ package \code{dplR}, detrended using a 60a spline with 50\% frequency cutoff
 robust mean \code{\link[dplR]{chron}}.
 }
 \keyword{datasets}
-

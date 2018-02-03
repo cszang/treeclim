@@ -24,4 +24,3 @@ matrix for the tree-ring data, holding the randomly resampled data
 for bootstrapping
 }
 \keyword{internal}
-

@@ -20,4 +20,3 @@ This dataset gives the monthly mean temperature and total
 precipitation at Forstenrieder Park, Munich, Bavaria, Germany.
 }
 \keyword{datasets}
-

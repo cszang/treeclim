@@ -23,4 +23,3 @@ sampling blocks for stationary bootstrap scheme}
 See documentation of dcc for details.
 }
 \keyword{internal}
-

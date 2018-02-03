@@ -24,4 +24,3 @@ a logical vector indicating significance
 For internal use only.
 }
 \keyword{internal}
-

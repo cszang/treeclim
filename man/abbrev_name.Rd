@@ -18,4 +18,3 @@ the first and last 20 characters with "...".
 }
 \keyword{internal}
 \keyword{manip,}
-

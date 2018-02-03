@@ -26,4 +26,3 @@ averaged using \code{\link[dplR]{read.rwl}},
 package \code{dplR}.
 }
 \keyword{datasets}
-

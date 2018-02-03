@@ -41,4 +41,3 @@ exfr(-5:10, -10:3)
 \code{link{.sum}}
 }
 \keyword{manip}
-

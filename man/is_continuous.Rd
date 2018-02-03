@@ -18,4 +18,3 @@ TRUE, and FALSE if not.
 }
 \keyword{internal}
 \keyword{manip}
-

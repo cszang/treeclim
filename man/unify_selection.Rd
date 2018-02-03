@@ -16,4 +16,3 @@ unified (list-style) selection
 unify selections to handle "classic" (bootRes-style) selections
 }
 \keyword{internal}
-
