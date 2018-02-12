@@ -1,4 +1,0 @@
-- [ ] compute RE/CE with LOOCV
-- [ ] allow different bootstrapping schemes for `seascorr()`
-- [ ] make `skills()` take lm/glm objects
-- [ ] add scaling method (Esper et al. 2005) to `dcc()`
