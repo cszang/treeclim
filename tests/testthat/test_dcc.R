@@ -10,12 +10,14 @@ test_that("Numerical results are identical to benchmark version", {
              0.162539320482292, -0.0697467501498377, 0.133838281266717, 0.0172432788721393, 
              -0.153880361590093, 0.0267077261032693, -0.0277458214452862, 
              0.0444361269039689, -0.0856123210130883, 0.00357826949941429)
+  suppressWarnings(RNGversion("3.5.0"))
   set.seed(42)
   coefs1 <- dcc(muc_spruce, muc_clim)$coef$coef
   expect_equal(coefs1, comp1)
   
   comp2 <- c(0.170430144507268, 0.117823349437864, -0.0537256677482294, 
              0.0661736844657929, 0.173529481497743, 0.0201817119502813, 0.0115497558775984)
+  suppressWarnings(RNGversion("3.5.0"))
   set.seed(42)
   coefs2 <- dcc(rt_spruce, rt_prec, -4:-10)$coef$coef
   expect_equal(coefs2, comp2)
@@ -24,6 +26,7 @@ test_that("Numerical results are identical to benchmark version", {
              0.27766596206149, 0.259019290655206, 0.0842051584401493, 0.050908429942875, 
              -0.0249212641727796, -0.0657761954984126, -0.00751655658592378, 
              -0.0108474705692184, 0.0820489154839614)
+  suppressWarnings(RNGversion("3.5.0"))
   set.seed(42)
   coefs3 <- dcc(rt_spruce, list(rt_prec, rt_temp), 4:9)$coef$coef
   expect_equal(coefs3, comp3)
@@ -32,12 +35,14 @@ test_that("Numerical results are identical to benchmark version", {
              0.369095273782355, 0.322312316185609, 0.124873739494498, 0.104793303567892, 
              -0.161605524443024, -0.174182562843724, -0.120592709112331, -0.14912796836124, 
              -0.0137164108335051)
+  suppressWarnings(RNGversion("3.5.0"))
   set.seed(42)
   coefs4 <- dcc(rt_spruce, list(rt_prec, rt_temp), 4:9, method = "corr")$coef$coef
   expect_equal(coefs4, comp4)
   
   comp5 <- c(0.00616579407523024, 0.231072175537679, 0.245951917973043, 
              0.277349266793129, 0.343623537731027, 0.172419985883527)
+  suppressWarnings(RNGversion("3.5.0"))
   set.seed(42)
   coefs5 <- dcc(rt_spruce, rt_prec, 4:9, method = "corr", moving = TRUE, win_size = 40)$coef$coef[,3]
   expect_equal(coefs5, comp5)

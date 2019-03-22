@@ -11,6 +11,7 @@ output:
 
 ```{r, echo = FALSE, message = FALSE}
 library(treeclim)
+suppressWarnings(RNGversion("3.5.0"))
 set.seed(42)
 ```
 
