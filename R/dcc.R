@@ -198,6 +198,8 @@
 ##' }
 ##' @author Christian Zang; the original MATLAB code for exact
 ##'   bootstrapping was written by Dave Meko
+##' @import stats utils Rcpp
+##' @useDynLib treeclim, .registration = TRUE
 ##' @export
 dcc <- function(chrono,
                climate,

@@ -1,4 +1,5 @@
-##' @export print tc_dcc
+##' @method print tc_dcc
+##' @export
 print.tc_dcc <- function(x, ...) {
   ci <- x$call$ci
   if (is.null(ci))
@@ -8,7 +9,8 @@ print.tc_dcc <- function(x, ...) {
   print(x$coef, ...)
 }
 
-##' @export print tc_seascorr
+##' @method print tc_seascorr
+##' @export
 print.tc_seascorr <- function(x, ...) {
   n <- length(x$coef)
   ## pretty season names
@@ -54,7 +56,8 @@ print.tc_seascorr <- function(x, ...) {
   }
 }
 
-##' @export print tc_coef
+##' @method print tc_coef
+##' @export
 print.tc_coef <- function(x, ...) {
   rownames(x) <- abbrev_name(rownames(x))
   x$coef <- round(x$coef, 3)
@@ -64,7 +67,8 @@ print.tc_coef <- function(x, ...) {
 }
 
 ##' @importFrom abind abind
-##' @export print tc_mcoef
+##' @method print tc_mcoef
+##' @export
 print.tc_mcoef <- function(x, ...) {
   mm <- abind(x$coef, x$significant, along = 3)
   ms <- apply(mm, c(1, 2), function(x) {
@@ -84,12 +88,14 @@ print.tc_mcoef <- function(x, ...) {
 }
 
 ##' @importFrom abind abind
-##' @export print tc_ecoef
+##' @method print tc_ecoef
+##' @export
 print.tc_ecoef <- function(x, ...) {
   print.tc_mcoef(x, ...)
 }
 
-##' @export print tc_design
+##' @method print tc_design
+##' @export
 print.tc_design <- function(x, ...) {
   pr <- x$aggregate
   names(pr) <- abbrev_name(x$names)
@@ -101,7 +107,8 @@ print.tc_design <- function(x, ...) {
   cat("\n")
 }
 
-##' @export print tc_skills
+##' @method print tc_skills
+##' @export
 print.tc_skills <- function(x, ...) {
   cat("Call:\n", paste(deparse(x$call), sep = "\n",
                        collapse = "\n"), "\n\n", sep = "")
@@ -128,7 +135,8 @@ print.tc_skills <- function(x, ...) {
                 quote = FALSE, ...)
 }
 
-##' @export plot tc_skills
+##' @method plot tc_skills
+##' @export
 plot.tc_skills <- function(x, ...) {
   orig <- x
   y <- prediction <- NULL               # to keep R CMD check happy
@@ -146,27 +154,32 @@ plot.tc_skills <- function(x, ...) {
         xlab("years") + ylab("target")
 }
 
-##' @export coef tc_dcc
+##' @method coef tc_dcc
+##' @export
 coef.tc_dcc <- function(object, ...) {
   coef(object$coef, ...)
 }
 
-##' @export coef tc_coef
+##' @method coef tc_coef
+##' @export
 coef.tc_coef <- function(object, ...) {
   print(data.frame(object), ...)
 }
 
-##' @export coef tc_mcoef
+##' @method coef tc_mcoef
+##' @export
 coef.tc_mcoef <- function(object, ...) {
   print(data.frame(object$coef), ...)
 }
 
-##' @export coef tc_ecoef
+##' @method coef tc_ecoef
+##' @export
 coef.tc_ecoef <- function(object, ...) {
   print(data.frame(object$coef), ...)
 }
 
-##' @export summary tc_dcc
+##' @method summary tc_dcc
+##' @export
 summary.tc_dcc <- function(object, ...) {
   cat("Call:\n")
   print(object$call)
@@ -176,7 +189,8 @@ summary.tc_dcc <- function(object, ...) {
   print(object$coef, ...)
 }
 
-##' @export + tc_paramlist
+##' @method + tc_paramlist
+##' @export
 "+.tc_paramlist" <- function(p1, p2) {
   ## check if p1 already is _nested_ list
   if (is.list(p1[[1]])) {
@@ -195,7 +209,8 @@ summary.tc_dcc <- function(object, ...) {
 
 ##' @import ggplot2
 ##' @import plyr
-##' @export plot tc_dcc
+##' @method plot tc_dcc
+##' @export
 plot.tc_dcc <- function(x, ...) {
   data <- x$coef
   if (is.null(x$call$boot)) {
@@ -301,6 +316,8 @@ plot.tc_dcc <- function(x, ...) {
   }
 }  
 
+##' @method plot tc_seascorr
+##' @export
 plot.tc_seascorr <- function(x, ...) {
 
   end_month_order <- value <- significant <- y <-
