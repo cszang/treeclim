@@ -198,7 +198,9 @@
 ##' }
 ##' @author Christian Zang; the original MATLAB code for exact
 ##'   bootstrapping was written by Dave Meko
-##' @import stats utils Rcpp
+##' @import Rcpp
+##' @importFrom stats approx coef fft median na.omit rnorm sd shapiro.test spec.taper var window ecdf lm
+##' @importFrom utils setTxtProgressBar tail txtProgressBar
 ##' @useDynLib treeclim, .registration = TRUE
 ##' @export
 dcc <- function(chrono,

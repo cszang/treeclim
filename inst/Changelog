@@ -1,6 +1,7 @@
 2019-03-22 Christian Zang <christian.zang@wzw.tum.de>
   * Version 2.0.3
   * NAMESPACE written by roxygen2
+  * NOTE: roxygen doc for dcc takes care of @importFrom etc.
   * added `suppressWarnings(RNGversion("3.5.0"))` to all uses of `set.seed`     as per CRAN advice to keep checks happy for upcoming R 3.6.X
 
 2016-09-01 Christian Zang <christian.zang@wzw.tum.de>
