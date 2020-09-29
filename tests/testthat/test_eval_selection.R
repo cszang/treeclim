@@ -37,8 +37,8 @@ test_that("the design matrix is constructed correctly", {
   truncated_input <- truncate_input(chrono, climate, NULL, 1, FALSE)
   pmat <- make_pmat(truncated_input$climate, pad = 1)
   
-  test_that(tc_design(.range(1:3), pmat)$aggregate[,4],
-            equals(rep(-10, 50)))
-  test_that(tc_design(.mean(1:3), pmat)$names[1],
-            equals("prec.curr.jan"))
+  expect_that(tc_design(.range(1:3), pmat)$aggregate[,4],
+              equals(rep(-10, 50)))
+  expect_that(tc_design(.mean(1:3), pmat)$names[1],
+              equals("prec.mean.curr.jan.curr.feb.curr.mar"))
 })

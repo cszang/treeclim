@@ -1,13 +1,13 @@
 context("Month processing")
 
 test_that("continuity in month sequences is recognized correctly", {
-  expect_that(is_continuous(1:10), is_true())
-  expect_that(is_continuous(-1:10), is_true())
-  expect_that(is_continuous(c(2, 4)), is_false())
-  expect_that(is_continuous(-10:-2), is_true())
-  expect_that(is_continuous(-2:10), is_true())
-  expect_that(is_continuous(-22:10), is_true())
-  expect_that(is_continuous(-22:-10), is_true())
+  expect_true(is_continuous(1:10))
+  expect_true(is_continuous(-1:10))
+  expect_false(is_continuous(c(2, 4)))
+  expect_true(is_continuous(-10:-2))
+  expect_true(is_continuous(-2:10))
+  expect_true(is_continuous(-22:10))
+  expect_true(is_continuous(-22:-10))
 })
 
 test_that("the correct continuity in month sequences is generated", {
@@ -19,13 +19,13 @@ test_that("the correct continuity in month sequences is generated", {
 })
 
 test_that("’check_months’ correctly identifies wrong month specs", {
-  expect_that(check_months(-6:9)$check, is_true())
-  expect_that(check_months(.mean(1:10))$check, is_true())
-  expect_that(check_months(.mean(1:19))$check, is_false())
-  expect_that(check_months(.mean(2:10, "temp"))$check, is_true())
-  expect_that(check_months(.mean(2:10) + .sum(3:9))$check, is_true())
-  expect_that(check_months(.mean(2:10) + .sum(-13:9))$check, is_true())
-  expect_that(check_months(.mean(2:10) + .sum(-25:9))$check, is_false())
+  expect_true(check_months(-6:9)$check)
+  expect_true(check_months(.mean(1:10))$check)
+  expect_false(check_months(.mean(1:19))$check)
+  expect_true(check_months(.mean(2:10, "temp"))$check)
+  expect_true(check_months(.mean(2:10) + .sum(3:9))$check)
+  expect_true(check_months(.mean(2:10) + .sum(-13:9))$check)
+  expect_false(check_months(.mean(2:10) + .sum(-25:9))$check)
 })
 
 test_that("’check_months’ correctly returns earliest month", {
