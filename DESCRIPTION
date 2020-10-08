@@ -27,7 +27,7 @@ Suggests:
 Description: Bootstrapped response and correlation functions,
     seasonal correlations and evaluation of reconstruction
     skills for use in dendroclimatology and dendroecology,
-    see Zang and Biondi (2015) <doi:10.1111/ecog.01335>
+    see Zang and Biondi (2015) <doi:10.1111/ecog.01335>.
 NeedsCompilation: yes
 License: GPL-3
 LazyData: yes
