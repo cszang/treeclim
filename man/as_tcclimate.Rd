@@ -21,4 +21,4 @@ data.frame, or a list of data.frames. Reformat the data for
 further usage into the internal format.
 }
 \keyword{internal}
-\keyword{manip,}
+\keyword{manip}

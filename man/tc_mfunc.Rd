@@ -4,8 +4,17 @@
 \alias{tc_mfunc}
 \title{moving response and correlation function}
 \usage{
-tc_mfunc(chrono, climate, boot, sb, start_last, win_size, win_offset, ci,
-  method)
+tc_mfunc(
+  chrono,
+  climate,
+  boot,
+  sb,
+  start_last,
+  win_size,
+  win_offset,
+  ci,
+  method
+)
 }
 \arguments{
 \item{chrono}{tree-ring chronology}

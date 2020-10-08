@@ -4,8 +4,10 @@
 \name{norw015}
 \alias{norw015}
 \title{Tree-Ring Chronology of a Pine Population at Visdalen, Norway}
-\format{A \code{data.frame} containing tree-ring indices and
-replication depth with respective years as \code{rownames}.}
+\format{
+A \code{data.frame} containing tree-ring indices and
+replication depth with respective years as \code{rownames}.
+}
 \source{
 Briffa K. Briffa - Visdalen - PISY - ITRDB
 NORW015. http://hurricane.ncdc.noaa.gov/pls/paleox/f?p=519:1:::::P1_STUDY_ID:2861. Accessed

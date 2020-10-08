@@ -4,8 +4,10 @@
 \name{spai020}
 \alias{spai020}
 \title{Tree-Ring Chronology of a Pine Population at Penota, Spain}
-\format{A \code{data.frame} containing tree-ring indices and
-replication depth with respective years as \code{rownames}.}
+\format{
+A \code{data.frame} containing tree-ring indices and
+replication depth with respective years as \code{rownames}.
+}
 \source{
 Fernandez-Cancio A, Genova Fuster M: Fernandez-Cancio -
 Penota - PISY - ITRDB SPAI020,

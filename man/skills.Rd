@@ -4,8 +4,13 @@
 \alias{skills}
 \title{Evaluate reconstruction skills using split-calibration}
 \usage{
-skills(object, target = NULL, model = "ols", calibration = "50\%",
-  timespan = NULL)
+skills(
+  object,
+  target = NULL,
+  model = "ols",
+  calibration = "50\%",
+  timespan = NULL
+)
 }
 \arguments{
 \item{object}{an object of class "tc_dcc", "tc_dlm", or

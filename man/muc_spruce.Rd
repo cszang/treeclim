@@ -4,8 +4,10 @@
 \name{muc_spruce}
 \alias{muc_spruce}
 \title{Tree-Ring Chronology of a Spruce Population near Munich}
-\format{A \code{data.frame} containing tree-ring indices and
-replication depth with respective years as \code{rownames}.}
+\format{
+A \code{data.frame} containing tree-ring indices and
+replication depth with respective years as \code{rownames}.
+}
 \source{
 Zang C, Pretzsch H, Rothe A (2012) Size-dependent
 responses to summer drought in Scots pine, Norway spruce and

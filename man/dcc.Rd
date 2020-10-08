@@ -4,10 +4,22 @@
 \alias{dcc}
 \title{Response and correlation function analysis}
 \usage{
-dcc(chrono, climate, selection = -6:9, method = "response",
-  dynamic = "static", moving, win_size = 25, win_offset = 1,
-  start_last = TRUE, timespan = NULL, var_names = NULL, ci = 0.05,
-  boot = "stationary", sb = TRUE)
+dcc(
+  chrono,
+  climate,
+  selection = -6:9,
+  method = "response",
+  dynamic = "static",
+  moving,
+  win_size = 25,
+  win_offset = 1,
+  start_last = TRUE,
+  timespan = NULL,
+  var_names = NULL,
+  ci = 0.05,
+  boot = "stationary",
+  sb = TRUE
+)
 }
 \arguments{
 \item{chrono}{\code{data.frame} containing a tree-ring

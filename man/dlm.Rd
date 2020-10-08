@@ -4,8 +4,16 @@
 \alias{dlm}
 \title{Dendro-flavoured linear model}
 \usage{
-dlm(chrono, climate, selection, timespan = NULL, var_names = NULL,
-  param_names = NULL, intercept = TRUE, scale = FALSE)
+dlm(
+  chrono,
+  climate,
+  selection,
+  timespan = NULL,
+  var_names = NULL,
+  param_names = NULL,
+  intercept = TRUE,
+  scale = FALSE
+)
 }
 \arguments{
 \item{chrono}{\code{data.frame} containing a tree-ring

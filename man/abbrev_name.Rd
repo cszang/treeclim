@@ -17,4 +17,4 @@ Shorten month names that are longer than 43 characters by joining
 the first and last 20 characters with "...".
 }
 \keyword{internal}
-\keyword{manip,}
+\keyword{manip}

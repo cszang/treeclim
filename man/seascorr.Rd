@@ -4,9 +4,17 @@
 \alias{seascorr}
 \title{Seasonal (partial) correlation analysis}
 \usage{
-seascorr(chrono, climate, var_names = NULL, timespan = NULL,
-  complete = 9, season_lengths = c(1, 3, 6), primary = 1,
-  secondary = 2, ci = 0.05)
+seascorr(
+  chrono,
+  climate,
+  var_names = NULL,
+  timespan = NULL,
+  complete = 9,
+  season_lengths = c(1, 3, 6),
+  primary = 1,
+  secondary = 2,
+  ci = 0.05
+)
 }
 \arguments{
 \item{chrono}{\code{data.frame} containing a tree-ring

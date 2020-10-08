@@ -4,8 +4,10 @@
 \name{norway_prec}
 \alias{norway_prec}
 \title{Monthly Precipitation Sums for Norway}
-\format{A \code{data.frame} containing thirteen columns with year
-and twelve months of temperature data in degree Celsius.}
+\format{
+A \code{data.frame} containing thirteen columns with year
+and twelve months of temperature data in degree Celsius.
+}
 \source{
 Mitchell TD, Carter TR, Jones PD, Hulme M, New M, et
 al. (2004) A comprehensive set of high-resolution grids of monthly
