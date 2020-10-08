@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/cszang/treeclim.svg?branch=master)](https://travis-ci.org/cszang/treeclim)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/treeclim)](https://cran.r-project.org/package=treeclim)
-[![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/grand-total/treeclim)](https://www.r-pkg.org/pkg/treeclim/)
+[![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/grand-total/treeclim)](https://www.r-pkg.org/pkg/treeclim)
 [![Coverage Status](https://img.shields.io/codecov/c/github/cszang/treeclim/master.svg)](https://codecov.io/github/cszang/treeclim?branch=master)
 [![MIT licensed](https://img.shields.io/badge/license-GPL%20%3E%3D%203-yellowgreen.svg)](https://github.com/cszang/treeclim/blob/master/DESCRIPTION)
 
