@@ -4,7 +4,7 @@
 ##' the first and last 20 characters with "...".
 ##' @param x a vector of month names as returned by format_month()
 ##' @return a vector of month names shortened to 43 characters
-##' @keywords manip, internal
+##' @keywords manip internal
 abbrev_name <- function(x) {
   .x <- x
   n <- length(x)

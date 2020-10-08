@@ -7,7 +7,7 @@
 ##' @param varnames optionally supplied variable names
 ##' @return a data.frame with years in rows and monthly observations
 ##' in columns
-##' @keywords manip, internal
+##' @keywords manip internal
 as_tcclimate <- function(x, varnames = NULL) {
   
   msg1 <- "Format of climate data was not recognized. It is absolutely necessary that only complete years (months 1-12) are provided."
