@@ -11,6 +11,7 @@
 as_tcclimate <- function(x, varnames = NULL) {
   
   msg1 <- "Format of climate data was not recognized. It is absolutely necessary that only complete years (months 1-12) are provided."
+  msg2 <- "Format of climate data was not recognized. It is absolutely necessary that only complete years (months 1-12) are provided, and months are ordered sequentially (from 1 to 12)."
   
   ## is it a list?
   if (any(class(x) == "list")) {       
@@ -54,7 +55,7 @@ as_tcclimate <- function(x, varnames = NULL) {
         }                               
       }
     }
-
+    
     ## handle non-list case
   } else {
     ## should have 12 months columns and one year column
@@ -94,11 +95,14 @@ as_tcclimate <- function(x, varnames = NULL) {
       if (!any(x[,1] == perf_seq)) {
         stop(msg1)
       } else {
-        if (!(any(x[,2] == rep(1:12, length(unique(x[,1])))))) {
-          ## check if the second column is perfect sequence of 1:12 as often as
+        ## make sure, months and years are ordered perfectly (but still check
+        ## sequence afterwards in case of missing individual months)
+        x <- x[order(x[,1], x[,2], decreasing = FALSE), ]
+        if (!(all(x[,2] == rep(1:12, length(unique(x[,1])))))) {
+          ## check if the second column is a perfect sequence of 1:12 as often as
           ## there are individual years in column 1. if expression evaluates to
           ## FALSE, then this is the case, else stop.
-          stop(msg1)
+          stop(msg2)
         } else {
           ## pass data on directly
           output_matrix <- x
@@ -106,7 +110,7 @@ as_tcclimate <- function(x, varnames = NULL) {
       }
     } 
   }
-
+  
   output <- data.frame(output_matrix)
   
   ## do we have names?
@@ -121,7 +125,7 @@ as_tcclimate <- function(x, varnames = NULL) {
   if (is.null(varnames) & !is.null(names(x)) & (class(x) == "list")) {
     colnames(output)[-c(1,2)] <- names(x)
   }
-
+  
   class(output) <- c("tc_climate", "data.frame")
   output
 }
