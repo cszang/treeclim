@@ -122,7 +122,7 @@ as_tcclimate <- function(x, varnames = NULL) {
     }
   }
   
-  if (is.null(varnames) & !is.null(names(x)) & (class(x) == "list")) {
+  if (is.null(varnames) & !is.null(names(x)) & inherits(x, "list")) {
     colnames(output)[-c(1,2)] <- names(x)
   }
   
