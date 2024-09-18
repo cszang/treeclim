@@ -37,9 +37,6 @@ c(0.1, 0.05, 0.01)}
 
 \item{method}{character: method to be used (one of "response" or
 "correlation")}
-
-\item{p}{probability for rgeom, that determines distribution of
-sampling blocks for stationary bootstrap scheme}
 }
 \description{
 see doc for dcc for details.

@@ -16,9 +16,6 @@ c(0.1, 0.05, 0.01)}
 
 \item{boot}{character, which bootstrapping method should be used
 (or "none")}
-
-\item{p}{probability for rgeom, that determines distribution of
-sampling blocks for stationary bootstrap scheme}
 }
 \description{
 See documentation of dcc for details.

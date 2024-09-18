@@ -15,9 +15,6 @@ tc_response(chrono, climate, ci, boot)
 c(0.1, 0.05, 0.01)}
 
 \item{boot}{string: which bootstrapping method?}
-
-\item{p}{probability for rgeom, that determines distribution of
-sampling blocks for stationary bootstrap scheme}
 }
 \description{
 See documentation of dcc for details.

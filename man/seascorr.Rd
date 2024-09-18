@@ -125,7 +125,7 @@ of the primary variable on tree-growth removed.
   
 Like in the original seascorr program, the significance of each
 (partial) correlation is evaluated using exact bootstrapping by
-circulant embedding of the tree-ring data (Percival \&
+circulant embedding of the tree-ring data (Percival &
 Constantine, 2006).
 }
 \examples{

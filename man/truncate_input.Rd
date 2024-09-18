@@ -23,7 +23,7 @@ truncate_input(
 \item{minmonth}{the earliest month used for the calibration, as
 returned by check_months}
 
-\item{moving}{moving or not? (logical)}
+\item{dynamic}{type of dynamic behaviour}
 }
 \value{
 a list of truncated data.frames for climate and tree data

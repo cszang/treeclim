@@ -7,7 +7,7 @@
 correct_continuous(month)
 }
 \arguments{
-\item{x}{a numeric month id specification}
+\item{month}{a numeric month id specification}
 }
 \value{
 a numeric vector with the corrected month id specification
