@@ -7,8 +7,6 @@
 ##' c(0.1, 0.05, 0.01)
 ##' @param boot character, which bootstrapping method should be used
 ##' (or "none")
-##' @param p probability for rgeom, that determines distribution of
-##' sampling blocks for stationary bootstrap scheme
 ##' @keywords internal
 tc_correlation <- function(chrono, climate, ci, boot) {
 

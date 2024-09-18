@@ -6,8 +6,6 @@
 ##' @param ci numeric: p-level for confidence interval (must be in
 ##' c(0.1, 0.05, 0.01)
 ##' @param boot string: which bootstrapping method?
-##' @param p probability for rgeom, that determines distribution of
-##' sampling blocks for stationary bootstrap scheme
 ##' @keywords internal
 tc_response <- function(chrono, climate, ci, boot) {
   

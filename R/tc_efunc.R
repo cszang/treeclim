@@ -11,8 +11,6 @@
 ##' c(0.1, 0.05, 0.01)
 ##' @param method character: method to be used (one of "response" or
 ##' "correlation")
-##' @param p probability for rgeom, that determines distribution of
-##' sampling blocks for stationary bootstrap scheme
 ##' @keywords internal
 tc_efunc <- function(chrono, climate, boot, sb, start_last,
                      win_size, ci, method) {

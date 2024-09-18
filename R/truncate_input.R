@@ -9,7 +9,7 @@
 ##' @param timespan the timespan for truncating as vector with min and max year
 ##' @param minmonth the earliest month used for the calibration, as
 ##' returned by check_months
-##' @param moving moving or not? (logical)
+##' @param dynamic type of dynamic behaviour
 ##' @return a list of truncated data.frames for climate and tree data
 ##' @keywords manip internal
 truncate_input <- function(chrono, climate, timespan = NULL, minmonth,

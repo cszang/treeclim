@@ -2,7 +2,7 @@
 ##' 
 ##' If month specification is continuous, it must be interpreted differently if
 ##' it contains 0. E.g., -5:8 must be translated to c(-5:-12, 1:8).
-##' @param x a numeric month id specification
+##' @param month a numeric month id specification
 ##' @return a numeric vector with the corrected month id specification
 ##' @keywords manip internal
 correct_continuous <- function(month) {
