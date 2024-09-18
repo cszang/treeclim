@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/cszang/treeclim.svg?branch=master)](https://travis-ci.org/cszang/treeclim)
+[![R-CMD-check](https://github.com/cszang/treeclim/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cszang/treeclim/actions/workflows/R-CMD-check.yaml)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/treeclim)](https://cran.r-project.org/package=treeclim)
 [![CRAN\_Download\_Badge](https://cranlogs.r-pkg.org/badges/grand-total/treeclim)](https://www.r-pkg.org/pkg/treeclim)
 [![Codecov test coverage](https://codecov.io/gh/cszang/treeclim/graph/badge.svg)](https://app.codecov.io/gh/cszang/treeclim)
