@@ -178,7 +178,7 @@
 ##'   
 ##'   Meko DM, Touchan R, Anchukaitis KJ (2011) Seascorr: A MATLAB
 ##'   program for identifying the seasonal climate signal in an annual
-##'   tree-ring time series.  \emph{Computers \& Geosciences}
+##'   tree-ring time series.  \emph{Computers & Geosciences}
 ##'   37:1234-241
 ##'   
 ##'   Percival DB, Constantine WLB (2006) Exact simulation of Gaussian Time 
