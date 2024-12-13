@@ -12,7 +12,8 @@ dlm(
   var_names = NULL,
   param_names = NULL,
   intercept = TRUE,
-  scale = FALSE
+  scale = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -48,6 +49,9 @@ model?}
 \item{scale}{\code{logical}: should data be scaled prior to
 computing model?  If \code{TRUE}, \code{intercept} will be set
 to \code{FALSE}.}
+
+\item{verbose}{\code{logical} flag indicating if informative messages should
+be written to the console (default is `TRUE`).}
 }
 \value{
 'dlm' returns an 'object' of class '"tc_dlm"', which is a

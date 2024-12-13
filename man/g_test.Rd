@@ -4,7 +4,7 @@
 \alias{g_test}
 \title{Gershunov test for spurious low-frequency modulations}
 \usage{
-g_test(x, boot = FALSE, sb = TRUE)
+g_test(x, boot = FALSE, sb = TRUE, check_duration = TRUE)
 }
 \arguments{
 \item{x}{an object of class '"tc_dcc"' as returned from a call to
@@ -14,6 +14,11 @@ g_test(x, boot = FALSE, sb = TRUE)
 bootstrapped?  (see details)}
 
 \item{sb}{\code{logical} shall a status bar be drawn?}
+
+\item{check_duration}{\code{logical} should the duration be checked before 
+running with individually boostrapped correlations? The default is `TRUE`, 
+set to `FALSE` to suppress interactive selections and messages to the
+console.}
 }
 \value{
 a \code{data.frame} with p values for the testing the null
@@ -46,7 +51,7 @@ deviation of the simulated data to test for significantly higher
 or lower low-frequency modulations.
 }
 \examples{
-\dontrun{
+\donttest{
 dc_cor <- dcc(muc_spruce, muc_clim, 3:9, method = "cor", moving = TRUE)
 g_test(dc_cor)
 }

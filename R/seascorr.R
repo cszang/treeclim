@@ -67,6 +67,9 @@
 ##' 
 ##' @param secondary position \code{numeric} or name \code{character}
 ##'   of secondary climate variable
+##'   
+##' @param verbose \code{logical} flag indicating if informative messages should
+##'   be written to the console (default is `TRUE`).
 ##' 
 ##' @return 'seascorr' returns an 'object' of class '"tc_seascorr"'.
 ##'
@@ -106,7 +109,7 @@
 ##' @export
 seascorr <- function(chrono, climate, var_names = NULL, timespan =
                      NULL, complete = 9, season_lengths = c(1, 3, 6),
-                     primary = 1, secondary = 2, ci = 0.05) {
+                     primary = 1, secondary = 2, ci = 0.05, verbose = TRUE) {
 
   ## check input
   if (!any(1:12 == complete))
@@ -189,7 +192,8 @@ seascorr <- function(chrono, climate, var_names = NULL, timespan =
   truncated_input <- truncate_input(chrono, climate,
                                     timespan = timespan,
                                     minmonth = minmonth,
-                                    dynamic = "static")
+                                    dynamic = "static",
+                                    silent = !verbose)
   
   m <- length(truncated_input$chrono)
   

@@ -18,7 +18,8 @@ dcc(
   var_names = NULL,
   ci = 0.05,
   boot = "stationary",
-  sb = TRUE
+  sb = TRUE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -77,6 +78,9 @@ should be used, one of \code{c("stationary", "std", "exact")}}
 \item{sb}{\code{logical} flag indicating whether textual status
 bar for moving case should be suppressed. Suppression is
 recommended for e.g.  Sweave files.}
+
+\item{verbose}{\code{logical} flag indicating if informative messages should
+be written to the console (default is `TRUE`).}
 }
 \value{
 'dcc' returns an 'object' of class '"tc_dcc"'.
@@ -205,9 +209,7 @@ bootstrapping case, no confidence intervals for the
 response/correlation coefficients can be computed.
 }
 \examples{
-\dontrun{
 dc_resp <- dcc(muc_spruce, muc_clim)
-}
 }
 \references{
 Biondi, F & Waikul, K (2004) DENDROCLIM2002: A C++

@@ -27,6 +27,10 @@
 ##' @param boot \code{logical} shall the individual correlations be
 ##'     bootstrapped?  (see details)
 ##' @param sb \code{logical} shall a status bar be drawn?
+##' @param check_duration \code{logical} should the duration be checked before 
+##'     running with individually boostrapped correlations? The default is `TRUE`, 
+##'     set to `FALSE` to suppress interactive selections and messages to the
+##'     console.
 ##' @return a \code{data.frame} with p values for the testing the null
 ##'     hypothesis that the low-frequency modulation of the
 ##'     correlations of the variables with tree-growth can be
@@ -36,13 +40,13 @@
 ##'     Monsoon rainfall relationship: Signal or noise? Journal of
 ##'     Climate 14:2486-2492.
 ##' @examples
-##' \dontrun{
+##' \donttest{
 ##' dc_cor <- dcc(muc_spruce, muc_clim, 3:9, method = "cor", moving = TRUE)
 ##' g_test(dc_cor)
 ##' }
 ##' @keywords test
 ##' @export
-g_test <- function(x, boot = FALSE, sb = TRUE) {
+g_test <- function(x, boot = FALSE, sb = TRUE, check_duration = TRUE) {
   if (!any(class(x) != "tc_dcc"))
     stop("Please provide output of function `dcc`.")
 
@@ -80,26 +84,28 @@ g_test <- function(x, boot = FALSE, sb = TRUE) {
   
   ## if boot is TRUE, warn because of long calculation, and give the
   ## option to cancel
-  if (boot) {
-    cat("Checking duration...\n")
-    dur <- system.time({
-      tc_mfunc(x$truncated$tree, x$design,
-               method = "correlation",
-               start_last = .start_last,
-               win_size = .win_size,
-               win_offset = .win_offset,
-               boot = .boot,
-               sb = FALSE,
-               ci = 0.05)
-    })
-    dur1000 <- ceiling(dur[3] * niter / 60)
-    cat("Running this test with bootstrapping on the individual correlations enabled will take around", dur1000, "minutes.\n")
-    ans <- readline("Do you really want to run this? [Y/n]\n")
-    if (ans != "Y")
-      stop("Execution interrupted by user.")
-    cat("Ok then. Maybe time to grab a sandwich?\n")
-  } else {
-    cat("Performing test without bootstrapping individual correlations.\n")
+  if (check_duration) {
+    if (boot) {
+      cat("Checking duration...\n")
+      dur <- system.time({
+        tc_mfunc(x$truncated$tree, x$design,
+                 method = "correlation",
+                 start_last = .start_last,
+                 win_size = .win_size,
+                 win_offset = .win_offset,
+                 boot = .boot,
+                 sb = FALSE,
+                 ci = 0.05)
+      })
+      dur1000 <- ceiling(dur[3] * niter / 60)
+      cat("Running this test with bootstrapping on the individual correlations enabled will take around", dur1000, "minutes.\n")
+      ans <- readline("Do you really want to run this? [Y/n]\n")
+      if (ans != "Y")
+        stop("Execution interrupted by user.")
+      cat("Ok then. Maybe time to grab a sandwich?\n")
+    } else {
+      cat("Performing test without bootstrapping individual correlations.\n")
+    }
   }
   
   ## test tree-ring data and the columns of the design matrix for normality

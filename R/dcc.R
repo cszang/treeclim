@@ -137,6 +137,8 @@
 ##' @param sb \code{logical} flag indicating whether textual status
 ##'   bar for moving case should be suppressed. Suppression is
 ##'   recommended for e.g.  Sweave files.
+##' @param verbose \code{logical} flag indicating if informative messages should
+##'   be written to the console (default is `TRUE`).
 ##' @return 'dcc' returns an 'object' of class '"tc_dcc"'.
 ##'   
 ##'   The functions 'summary' and 'plot' are used to obtain and print
@@ -193,9 +195,7 @@
 ##'   selection for the dependent bootstrap, Econometric Reviews
 ##'   23(1), 53-70.
 ##' @examples
-##' \dontrun{
 ##' dc_resp <- dcc(muc_spruce, muc_clim)
-##' }
 ##' @author Christian Zang; the original MATLAB code for exact
 ##'   bootstrapping was written by Dave Meko
 ##' @import Rcpp
@@ -216,7 +216,8 @@ dcc <- function(chrono,
                var_names = NULL,
                ci = 0.05,
                boot = "stationary",
-               sb = TRUE
+               sb = TRUE,
+               verbose = TRUE
                )
 {
   
@@ -253,7 +254,8 @@ dcc <- function(chrono,
   ## time span
   truncated_input <- truncate_input(chrono, climate,
                                    timespan = timespan, minmonth,
-                                   .dynamic)
+                                   .dynamic,
+                                   silent = !verbose)
 
   if (dynamic != "static" & truncated_input$missing) {
     stop("Missing data in proxy series, moving or evolving functions are not computed.\n")

@@ -13,7 +13,8 @@ seascorr(
   season_lengths = c(1, 3, 6),
   primary = 1,
   secondary = 2,
-  ci = 0.05
+  ci = 0.05,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -51,6 +52,9 @@ of secondary climate variable}
 \item{ci}{\code{numerical} value to set the test level for
 significance test (values 0.01, 0.05 and 0.1 are allowed); the
 confidence intervals are adapted accordingly.}
+
+\item{verbose}{\code{logical} flag indicating if informative messages should
+be written to the console (default is `TRUE`).}
 }
 \value{
 'seascorr' returns an 'object' of class '"tc_seascorr"'.

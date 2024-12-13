@@ -98,7 +98,8 @@ dlm <- function(chrono,
                 var_names = NULL,
                 param_names = NULL,
                 intercept = TRUE,
-                scale = FALSE) {
+                scale = FALSE,
+                verbose = TRUE) {
   
   climate <- apply_var_names(as_tcclimate(climate), var_names)
   selection <- unify_selection(selection)
@@ -115,7 +116,8 @@ dlm <- function(chrono,
   ## time span
   truncated_input <- truncate_input(chrono, climate,
                                     timespan = timespan, minmonth,
-                                    dynamic = "static")
+                                    dynamic = "static",
+                                    silent = !verbose)
   
   climate_pmat <- make_pmat(truncated_input$climate, truncated_input$pad)
   
