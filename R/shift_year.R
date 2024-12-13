@@ -55,6 +55,7 @@ shift_year <- function(month, by = 0) {
 ##' @rdname treeclim-shifters
 ##' @param x numeric identifier (of length 1) for the months (1 for
 ##'   January, ..., 12 for December)
+##' @return an integer value specifying the month for selection
 NULL
 
 ##' @rdname treeclim-shifters

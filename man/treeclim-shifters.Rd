@@ -14,6 +14,9 @@
 \item{x}{numeric identifier (of length 1) for the months (1 for
 January, ..., 12 for December)}
 }
+\value{
+an integer value specifying the month for selection
+}
 \description{
 These functions are used to specify months from previous years for
 the design matrix. \code{.(1)} is the same as \code{-1}, and

@@ -21,6 +21,11 @@ June, etc.)}
 \item{.variables}{names of the variables the modifier shall be
 applied to}
 }
+\value{
+An object of class `tc_paramlist` defining a list of climate variables 
+for further processing, consisting of specifications for the time frame (months)
+and the selected variables.
+}
 \description{
 These modifiers are used to select specific months from specific
 climate parameters, and potentially transform the selections into
@@ -45,9 +50,7 @@ can be chained together, 'dcc' will not check for meaningful
 specifications. Testing smart hypotheses is up the researcher.
 }
 \examples{
-\dontrun{
 my_calib <- dcc(rt_spruce, list(prec = rt_prec, temp = rt_temp),
   .range(4:9, "temp") + .mean(-5:-9, "temp") + .sum(3:10, "prec"))
 plot(my_calib)
-}
 }
