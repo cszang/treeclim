@@ -98,13 +98,11 @@
 ##'   Durbin, J, Watson, GS (1951) Testing for serial correlation in
 ##'   least squares regression. Biometrika 38:159-78.
 ##' @examples
-##' \dontrun{
 ##' dc <- dcc(muc_fake, muc_clim, .mean(6:9, "temp") + .sum(6:9,
 ##' "prec"))
 ##' sk <- skills(dc)
 ##' sk
 ##' plot(sk)
-##' }
 ##' @import lmtest
 ##' @import lmodel2
 ##' @export

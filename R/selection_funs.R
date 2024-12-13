@@ -51,11 +51,12 @@ make_range_list <- function(call, method) {
 ##' @param .variables names of the variables the modifier shall be
 ##'   applied to
 ##' @examples
-##' \dontrun{
 ##' my_calib <- dcc(rt_spruce, list(prec = rt_prec, temp = rt_temp),
 ##'   .range(4:9, "temp") + .mean(-5:-9, "temp") + .sum(3:10, "prec"))
 ##' plot(my_calib)
-##' }
+##' @return An object of class `tc_paramlist` defining a list of climate variables 
+##' for further processing, consisting of specifications for the time frame (months)
+##' and the selected variables.
 NULL
 
 ##' @rdname treeclim-modifiers

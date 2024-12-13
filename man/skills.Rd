@@ -113,13 +113,11 @@ used verification statistics are computed: reduction of error
 statistic (DW) (Cook et al. 1994, Durbin and Watson, 1951).
 }
 \examples{
-\dontrun{
 dc <- dcc(muc_fake, muc_clim, .mean(6:9, "temp") + .sum(6:9,
 "prec"))
 sk <- skills(dc)
 sk
 plot(sk)
-}
 }
 \references{
 Cook E, Briffa K, Jones P (1994) Spatial regression
