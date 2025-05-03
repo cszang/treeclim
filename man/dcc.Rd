@@ -143,7 +143,7 @@ style of the original DENDROCLIM2002 input data, i.e. one
 parameter with 12 months in one row, where the first column
 represents the year. Or thirdly, input climatic data can be a
 (potentially named) list of one or several of the latter described
-\code{data.frame} or \code{matrices}. If named list is provided,
+\code{data.frame} or \code{matrices}. If a named list is provided,
 potentially provided variable names through argument
 \code{var_names} are ignored. As an internal format dispatcher
 checks the format automatically, it is absolutely necessary that

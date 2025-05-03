@@ -30,7 +30,7 @@
 ##' parameter with 12 months in one row, where the first column
 ##' represents the year. Or thirdly, input climatic data can be a
 ##' (potentially named) list of one or several of the latter described
-##' \code{data.frame} or \code{matrices}. If named list is provided,
+##' \code{data.frame} or \code{matrices}. If a named list is provided,
 ##' potentially provided variable names through argument
 ##' \code{var_names} are ignored. As an internal format dispatcher
 ##' checks the format automatically, it is absolutely necessary that
@@ -234,6 +234,12 @@ dcc <- function(chrono,
   .method <- match.arg(method, c("response", "correlation"))
   .boot <- match.arg(boot, c("stationary", "std", "exact"))
   .dynamic <- match.arg(dynamic, c("static", "moving", "evolving"))
+  
+  ## climate data have names or var_names is provided
+  if (is.null(names(climate)) & is.null(var_names)) {
+    stop("No climate variable names provided: either provide a named list,
+         or the argument `var_names`.")
+  }
 
   ## climate data are correctly formatted and potentially (re)named
   climate <- apply_var_names(as_tcclimate(climate), var_names)
