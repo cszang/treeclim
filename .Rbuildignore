@@ -6,3 +6,5 @@ codecov.yml
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.github$
+^\.positai$
+^\.claude$
