@@ -18,13 +18,13 @@ SEXP respoexact(SEXP x, SEXP y, SEXP y0) {
   // get some dimension information
   int nrow = xmat.n_rows, ncol = xmat.n_cols;
 
-  // combine y and y0 to one matrix
-  arma::mat y0mat(nrow, 1001);
+  // fill::none: cols are overwritten immediately below
+  arma::mat y0mat(nrow, 1001, fill::none);
   y0mat.col(0) = y0vec;
   y0mat.cols(1, 1000) = ymat;
   
-  // initialize output matrix
-  mat resp_coef(ncol, 1001);
+  // fill::none: written col-by-col in the loop below
+  mat resp_coef(ncol, 1001, fill::none);
 
   // scale variable: xmat
   mat xscale(nrow, ncol);

@@ -23,15 +23,17 @@ SEXP pcor(SEXP x1, SEXP x2, SEXP y, SEXP y0) {
   // get some dimension information
   int nrow = xmat1.n_rows, ncol = xmat1.n_cols;
   
-  // combine y and y0 to one matrix
-  arma::mat y0mat(nrow, 1001);
+  // combine y and y0 to one matrix (fill::none: cols are overwritten immediately)
+  arma::mat y0mat(nrow, 1001, fill::none);
   y0mat.col(0) = y0vec;
   y0mat.cols(1, 1000) = ymat;
 
-  // initialize output matrices for primary and secondary variables
-  mat cor_coef1(ncol, 1001);
-  mat cor_coef2(ncol, 1001);
-  mat cor_coef2e(ncol, 1001);
+  // fill::none: output matrices are written cell-by-cell in the loop below,
+  // so zero-initialisation would be wasted work (and avoids a GCC 16
+  // false-positive -Warray-bounds on the default fill::zeros memset)
+  mat cor_coef1(ncol, 1001, fill::none);
+  mat cor_coef2(ncol, 1001, fill::none);
+  mat cor_coef2e(ncol, 1001, fill::none);
 
   // there are 1000 bootstrap samples + 1 set of coefs for real data
   for(int q = 0; q < 1001; ++q) {
