@@ -1,5 +1,3 @@
-context("Numerical accuracy of dcc")
-
 test_that("Numerical results are identical to benchmark version", {
   comp1 <- c(0.0138505849308184, -0.0322058662502632, -0.036688436243551, 
              0.049636664738515, 0.085956929428506, -0.0324165586695125, 0.14297109135422, 
@@ -28,7 +26,7 @@ test_that("Numerical results are identical to benchmark version", {
              -0.0108474705692184, 0.0820489154839614)
   suppressWarnings(RNGversion("3.5.0"))
   set.seed(42)
-  coefs3 <- dcc(rt_spruce, list(rt_prec, rt_temp), 4:9)$coef$coef
+  coefs3 <- dcc(rt_spruce, list(prec = rt_prec, temp = rt_temp), 4:9)$coef$coef
   expect_equal(coefs3, comp3)
   
   comp4 <- c(-0.0691539573105679, 0.295869404817051, 0.221174417023458, 
@@ -37,14 +35,14 @@ test_that("Numerical results are identical to benchmark version", {
              -0.0137164108335051)
   suppressWarnings(RNGversion("3.5.0"))
   set.seed(42)
-  coefs4 <- dcc(rt_spruce, list(rt_prec, rt_temp), 4:9, method = "corr")$coef$coef
+  coefs4 <- dcc(rt_spruce, list(prec = rt_prec, temp = rt_temp), 4:9, method = "corr")$coef$coef
   expect_equal(coefs4, comp4)
   
   comp5 <- c(0.00616579407523024, 0.231072175537679, 0.245951917973043, 
              0.277349266793129, 0.343623537731027, 0.172419985883527)
   suppressWarnings(RNGversion("3.5.0"))
   set.seed(42)
-  coefs5 <- dcc(rt_spruce, rt_prec, 4:9, method = "corr", moving = TRUE, win_size = 40)$coef$coef[,3]
+  coefs5 <- dcc(rt_spruce, rt_prec, 4:9, method = "corr", dynamic = "moving", win_size = 40)$coef$coef[,3]
   expect_equal(coefs5, comp5)
   
   comp6 <- c(0.155383432630196, 0.0918951748072474, -0.0638265717811419, 
