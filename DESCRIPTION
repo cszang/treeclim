@@ -1,18 +1,15 @@
 Package: treeclim
 Type: Package
 Title: Numerical Calibration of Proxy-Climate Relationships
-Version: 2.0.7.1
-Date: 2024-12-13
+Version: 2.0.8.0
+Date: 2026-06-04
 Authors@R: c(person("Christian", "Zang", role = c("aut", "cre", "cph", "trl"),
     email = "christian.zang@hswt.de"), person("Franco", "Biondi", role =
     c("ctb", "cph")))
 Depends:
-    R (>= 3.0.2),
-    base,
-    stats,
-    utils,
-    Rcpp (>= 0.10.6)
+    R (>= 4.0)
 Imports:
+    Rcpp,
     abind,
     plyr,
     ggplot2,
@@ -21,7 +18,7 @@ Imports:
     np,
     boot
 LinkingTo: Rcpp,
-    RcppArmadillo (>= 0.4.000.2)
+    RcppArmadillo
 Suggests:
     testthat (>= 2.99.0.9000)
 Description: Bootstrapped response and correlation functions,
