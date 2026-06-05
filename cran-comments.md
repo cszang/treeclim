@@ -10,6 +10,6 @@ Rcpp:::LdFlags() / RcppArmadillo:::RcppLdFlags() in src/Makevars.
    
 ## Test environments
    
-* local: R 4.5.2 on macOS
+* local: R 4.6.0 on macOS
 * R-hub2: linux (debian-gcc-devel), macos, windows
 * win-builder: R-devel
